@@ -13,7 +13,7 @@ class Engine {
   }
 
   /// Generates a list of changes following the provided action.
-  static List<StateChange> processAction(GameState state, Action action) {
+  static StateChange processAction(GameState state, Action action) {
     // Check that action is valid
     if (!validate(state, action)) {
       throw ArgumentError('Provided action is not valid.');
