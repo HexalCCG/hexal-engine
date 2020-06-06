@@ -1,3 +1,5 @@
+import 'package:hexal_engine/model/game_state.dart';
+
 class Engine {
   /// Is the action valid?
   bool actionAllowed(GameState state, Action action) {
