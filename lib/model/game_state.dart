@@ -20,13 +20,12 @@ class GameState {
   PlayerObject get notActivePlayer =>
       (activePlayer == gameInfo.player1) ? gameInfo.player2 : gameInfo.player1;
 
-  GameState({
+  const GameState({
     @required this.gameInfo,
-    @required Iterable<CardObject> cards,
-    @required Iterable<CardObject> stack,
+    @required this.cards,
+    @required this.stack,
     @required this.activePlayer,
     @required this.priorityPlayer,
     @required this.turnPhase,
-  })  : cards = List<CardObject>.unmodifiable(cards),
-        stack = List<CardObject>.unmodifiable(stack);
+  });
 }
