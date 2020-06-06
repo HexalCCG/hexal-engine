@@ -22,7 +22,6 @@ void main() {
       priorityPlayer: p1,
       turnPhase: TurnPhase.start,
     );
-    var result = Engine.actionAllowed(startingState, PassAction());
-    expect(result, true);
+    expect(Engine.validate(startingState, PassAction()), true);
   });
 }
