@@ -1,0 +1,3 @@
+class StateChange {
+  const StateChange();
+}

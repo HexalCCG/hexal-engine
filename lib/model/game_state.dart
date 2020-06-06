@@ -9,8 +9,8 @@ import 'turn_phase.dart';
 @immutable
 class GameState {
   final GameInfo gameInfo;
-  final UnmodifiableListView<CardObject> cards;
-  final UnmodifiableListView<CardObject> stack;
+  final List<CardObject> cards;
+  final List<CardObject> stack;
   final PlayerObject activePlayer;
   final PlayerObject priorityPlayer;
   final TurnPhase turnPhase;

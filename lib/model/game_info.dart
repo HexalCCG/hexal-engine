@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'objects/player_object.dart';
 
 class GameInfo {
@@ -5,7 +6,7 @@ class GameInfo {
   final PlayerObject player2;
 
   const GameInfo({
-    this.player1,
-    this.player2,
+    @required this.player1,
+    @required this.player2,
   });
 }
