@@ -14,6 +14,12 @@ class GameState {
   final PlayerObject priorityPlayer;
   final TurnPhase turnPhase;
 
+  PlayerObject get notPriorityPlayer => (priorityPlayer == gameInfo.player1)
+      ? gameInfo.player2
+      : gameInfo.player1;
+  PlayerObject get notActivePlayer =>
+      (activePlayer == gameInfo.player1) ? gameInfo.player2 : gameInfo.player1;
+
   GameState({
     @required this.gameInfo,
     @required Iterable<CardObject> cards,

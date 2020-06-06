@@ -1,6 +1,7 @@
 import 'package:hexal_engine/model/actions/action.dart';
 import 'package:hexal_engine/model/actions/pass_action.dart';
 import 'package:hexal_engine/model/game_state.dart';
+import 'package:hexal_engine/model/state_change/priority_state_change.dart';
 import 'package:hexal_engine/model/state_change/state_change.dart';
 
 class Engine {
@@ -20,7 +21,13 @@ class Engine {
     }
 
     // Handle pass action
-    if (action is PassAction) {}
+    if (action is PassAction) {
+      if (state.priorityPlayer == state.activePlayer) {
+        return PriorityStateChange(player: state.notPriorityPlayer);
+      } else {
+        // TODO
+      }
+    }
 
     // Unhandled action types error
     throw UnimplementedError();

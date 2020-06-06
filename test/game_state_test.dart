@@ -8,8 +8,8 @@ import 'package:test/test.dart';
 
 void main() {
   group('GameState creation', () {
-    final p1 = PlayerObject();
-    final p2 = PlayerObject();
+    const p1 = PlayerObject(name: 'Alice');
+    const p2 = PlayerObject(name: 'Bob');
     final state = GameState(
       gameInfo: GameInfo(
         player1: p1,

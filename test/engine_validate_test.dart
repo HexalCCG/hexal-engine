@@ -8,8 +8,8 @@ import 'package:hexal_engine/model/turn_phase.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final p1 = PlayerObject();
-  final p2 = PlayerObject();
+  const p1 = PlayerObject(name: 'Alice');
+  const p2 = PlayerObject(name: 'Bob');
   test('Pass action is allowed.', () {
     final startingState = GameState(
       gameInfo: GameInfo(
@@ -22,6 +22,6 @@ void main() {
       priorityPlayer: p1,
       turnPhase: TurnPhase.start,
     );
-    expect(Engine.validate(startingState, PassAction()), true);
+    expect(Engine.validate(startingState, const PassAction()), true);
   });
 }
