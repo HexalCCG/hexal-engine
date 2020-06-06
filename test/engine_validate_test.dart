@@ -8,10 +8,10 @@ import 'package:hexal_engine/model/turn_phase.dart';
 import 'package:test/test.dart';
 
 void main() {
-  var p1 = PlayerObject();
-  var p2 = PlayerObject();
+  final p1 = PlayerObject();
+  final p2 = PlayerObject();
   test('Pass action is allowed.', () {
-    var startingState = GameState(
+    final startingState = GameState(
       gameInfo: GameInfo(
         player1: p1,
         player2: p2,

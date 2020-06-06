@@ -8,35 +8,32 @@ import 'package:test/test.dart';
 
 void main() {
   group('GameState creation', () {
-    var state;
-    setUp(() {
-      var p1 = PlayerObject();
-      var p2 = PlayerObject();
-      state = GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
+    final p1 = PlayerObject();
+    final p2 = PlayerObject();
+    final state = GameState(
+      gameInfo: GameInfo(
+        player1: p1,
+        player2: p2,
+      ),
+      cards: <CardObject>[
+        CardObject(
+          owner: p1,
+          controller: p1,
+          enteredBattlefieldThisTurn: false,
+          location: Location.deck,
         ),
-        cards: <CardObject>[
-          CardObject(
-            owner: p1,
-            controller: p1,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-          CardObject(
-            owner: p2,
-            controller: p2,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-        ],
-        stack: <CardObject>[],
-        activePlayer: p1,
-        priorityPlayer: p2,
-        turnPhase: TurnPhase.start,
-      );
-    });
+        CardObject(
+          owner: p2,
+          controller: p2,
+          enteredBattlefieldThisTurn: false,
+          location: Location.deck,
+        ),
+      ],
+      stack: <CardObject>[],
+      activePlayer: p1,
+      priorityPlayer: p2,
+      turnPhase: TurnPhase.start,
+    );
     test('records players.', () {
       expect(state.gameInfo.player1, isNotNull);
       expect(state.gameInfo.player2, isNotNull);
