@@ -1,10 +1,14 @@
 import 'package:hexal_engine/model/actions/action.dart';
+import 'package:hexal_engine/model/actions/pass_action.dart';
 import 'package:hexal_engine/model/game_state.dart';
 import 'package:hexal_engine/model/state_change.dart';
 
 class Engine {
   /// Is the action valid?
   static bool actionAllowed(GameState state, Action action) {
+    if (action is PassAction) {
+      return true;
+    }
     throw UnimplementedError();
   }
 
