@@ -1,19 +1,22 @@
 import 'dart:collection';
 import 'package:meta/meta.dart';
 
-import 'card_object.dart';
-import 'player.dart';
+import 'game_info.dart';
+import 'objects/card_object.dart';
+import 'objects/player_object.dart';
 import 'turn_phase.dart';
 
 @immutable
 class GameState {
+  final GameInfo gameInfo;
   final UnmodifiableListView<CardObject> cards;
   final UnmodifiableListView<CardObject> stack;
-  final Player activePlayer;
-  final Player priorityPlayer;
+  final PlayerObject activePlayer;
+  final PlayerObject priorityPlayer;
   final TurnPhase turnPhase;
 
   GameState({
+    @required this.gameInfo,
     @required Iterable<CardObject> cards,
     @required Iterable<CardObject> stack,
     @required this.activePlayer,
