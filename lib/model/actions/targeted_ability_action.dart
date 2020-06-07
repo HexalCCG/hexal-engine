@@ -12,4 +12,7 @@ class TargetedAbilityAction extends Action {
     @required this.ability,
     @required this.subject,
   });
+
+  @override
+  List<Object> get props => [object, ability, subject];
 }

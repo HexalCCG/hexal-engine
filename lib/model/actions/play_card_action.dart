@@ -6,4 +6,7 @@ class PlayCardAction extends Action {
   final ITargetable object;
 
   const PlayCardAction({@required this.object});
+
+  @override
+  List<Object> get props => [object];
 }

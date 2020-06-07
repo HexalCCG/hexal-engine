@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import 'game_info.dart';
@@ -5,8 +6,7 @@ import 'objects/card_object.dart';
 import 'objects/player_object.dart';
 import 'turn_phase.dart';
 
-@immutable
-class GameState {
+class GameState extends Equatable {
   final GameInfo gameInfo;
   final List<CardObject> cards;
   final List<CardObject> stack;
@@ -20,6 +20,7 @@ class GameState {
   PlayerObject get notActivePlayer =>
       (activePlayer == gameInfo.player1) ? gameInfo.player2 : gameInfo.player1;
 
+  @literal
   const GameState({
     @required this.gameInfo,
     @required this.cards,
@@ -28,4 +29,8 @@ class GameState {
     @required this.priorityPlayer,
     @required this.turnPhase,
   });
+
+  @override
+  List<Object> get props =>
+      [gameInfo, cards, stack, activePlayer, priorityPlayer, turnPhase];
 }

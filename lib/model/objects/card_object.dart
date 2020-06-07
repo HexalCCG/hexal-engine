@@ -1,11 +1,12 @@
 import 'package:meta/meta.dart';
 
 import '../location.dart';
+import 'game_object.dart';
 import 'i_targetable.dart';
 import 'player_object.dart';
 
 @immutable
-class CardObject implements ITargetable {
+class CardObject extends GameObject implements ITargetable {
   final PlayerObject owner;
   final PlayerObject controller;
   final Location location;
@@ -17,4 +18,8 @@ class CardObject implements ITargetable {
     @required this.location,
     @required this.enteredBattlefieldThisTurn,
   });
+
+  @override
+  List<Object> get props =>
+      [owner, controller, location, enteredBattlefieldThisTurn];
 }
