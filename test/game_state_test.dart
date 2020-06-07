@@ -10,7 +10,7 @@ void main() {
   group('GameState creation', () {
     const p1 = PlayerObject(name: 'Alice');
     const p2 = PlayerObject(name: 'Bob');
-    final state = GameState(
+    final state = const GameState(
       gameInfo: GameInfo(
         player1: p1,
         player2: p2,

@@ -1,3 +1,4 @@
+import 'package:hexal_engine/model/state_change/phase_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/engine/engine.dart';
 import 'package:hexal_engine/model/actions/pass_action.dart';
@@ -13,7 +14,7 @@ void main() {
     const p1 = PlayerObject(name: 'Alice');
     const p2 = PlayerObject(name: 'Bob');
     test('passes priority when used by the active player. ', () {
-      final state = GameState(
+      final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,
           player2: p2,
@@ -27,7 +28,28 @@ void main() {
       const action = PassAction();
       final change = Engine.processAction(state, action);
 
-      expect(change, const PriorityStateChange(player: p2));
+      expect(change, const [PriorityStateChange(player: p2)]);
+    });
+
+    test('moves phase on when used by the non-priority player. ', () {
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        cards: <CardObject>[],
+        stack: <CardObject>[],
+        activePlayer: p1,
+        priorityPlayer: p2,
+        turnPhase: TurnPhase.start,
+      );
+      const action = PassAction();
+      final change = Engine.processAction(state, action);
+
+      expect(change, const [
+        PhaseStateChange(phase: TurnPhase.draw),
+        PriorityStateChange(player: p1),
+      ]);
     });
   });
 }

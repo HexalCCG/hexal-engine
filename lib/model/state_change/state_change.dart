@@ -5,4 +5,7 @@ abstract class StateChange extends Equatable {
 
   @override
   List<Object> get props;
+
+  @override
+  bool get stringify => true;
 }
