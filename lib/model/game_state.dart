@@ -33,4 +33,22 @@ class GameState extends Equatable {
   @override
   List<Object> get props =>
       [gameInfo, cards, stack, activePlayer, priorityPlayer, turnPhase];
+
+  GameState copyWith({
+    GameInfo gameInfo,
+    List<CardObject> cards,
+    List<CardObject> stack,
+    PlayerObject activePlayer,
+    PlayerObject priorityPlayer,
+    TurnPhase turnPhase,
+  }) {
+    return GameState(
+      gameInfo: gameInfo ?? this.gameInfo,
+      cards: cards ?? this.cards,
+      stack: stack ?? this.stack,
+      activePlayer: activePlayer ?? this.activePlayer,
+      priorityPlayer: priorityPlayer ?? this.priorityPlayer,
+      turnPhase: turnPhase ?? this.turnPhase,
+    );
+  }
 }
