@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:hexal_engine/model/objects/game_object.dart';
 import 'package:meta/meta.dart';
 import 'i_targetable.dart';
