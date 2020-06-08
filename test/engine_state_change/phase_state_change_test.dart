@@ -86,25 +86,7 @@ void main() {
     });
   });
   group('Phase state change doesn\'t change', () {
-    test('gameInfo.', () {
-      final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
-        cards: <CardObject>[],
-        stack: <CardObject>[],
-        activePlayer: p1,
-        priorityPlayer: p2,
-        turnPhase: TurnPhase.start,
-      );
-      final stateChange = PhaseStateChange(phase: TurnPhase.draw);
-      expect(
-        Engine.processStateChange(state, [stateChange]).gameInfo,
-        GameInfo(player1: p1, player2: p2),
-      );
-    });
-    test('cards.', () {
+    test('anything except phase.', () {
       final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,
@@ -124,37 +106,6 @@ void main() {
             location: Location.deck,
           ),
         ],
-        stack: <CardObject>[],
-        activePlayer: p1,
-        priorityPlayer: p2,
-        turnPhase: TurnPhase.start,
-      );
-      final stateChange = PhaseStateChange(phase: TurnPhase.draw);
-      expect(
-        Engine.processStateChange(state, [stateChange]).cards,
-        <CardObject>[
-          CardObject(
-            owner: p1,
-            controller: p1,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-          CardObject(
-            owner: p2,
-            controller: p2,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-        ],
-      );
-    });
-    test('stack.', () {
-      final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
-        cards: <CardObject>[],
         stack: <CardObject>[
           CardObject(
             owner: p1,
@@ -175,60 +126,47 @@ void main() {
       );
       final stateChange = PhaseStateChange(phase: TurnPhase.draw);
       expect(
-        Engine.processStateChange(state, [stateChange]).stack,
-        <CardObject>[
-          CardObject(
-            owner: p1,
-            controller: p1,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
+        Engine.processStateChange(state, [stateChange]),
+        const GameState(
+          gameInfo: GameInfo(
+            player1: p1,
+            player2: p2,
           ),
-          CardObject(
-            owner: p2,
-            controller: p2,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-        ],
-      );
-    });
-    test('activePlayer.', () {
-      final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
+          cards: <CardObject>[
+            CardObject(
+              owner: p1,
+              controller: p1,
+              enteredBattlefieldThisTurn: false,
+              location: Location.deck,
+            ),
+            CardObject(
+              owner: p2,
+              controller: p2,
+              enteredBattlefieldThisTurn: false,
+              location: Location.deck,
+            ),
+          ],
+          stack: <CardObject>[
+            CardObject(
+              owner: p1,
+              controller: p1,
+              enteredBattlefieldThisTurn: false,
+              location: Location.deck,
+            ),
+            CardObject(
+              owner: p2,
+              controller: p2,
+              enteredBattlefieldThisTurn: false,
+              location: Location.deck,
+            ),
+          ],
+          activePlayer: p1,
+          priorityPlayer: p2,
+          turnPhase: TurnPhase.draw,
         ),
-        cards: <CardObject>[],
-        stack: <CardObject>[],
-        activePlayer: p1,
-        priorityPlayer: p2,
-        turnPhase: TurnPhase.start,
-      );
-      final stateChange = PhaseStateChange(phase: TurnPhase.draw);
-      expect(
-        Engine.processStateChange(state, [stateChange]).activePlayer,
-        p1,
       );
     });
     test('activePlayer when moving from end to start phase.', () {
-      final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
-        cards: <CardObject>[],
-        stack: <CardObject>[],
-        activePlayer: p1,
-        priorityPlayer: p2,
-        turnPhase: TurnPhase.end,
-      );
-      final stateChange = PhaseStateChange(phase: TurnPhase.start);
-      expect(
-        Engine.processStateChange(state, [stateChange]).activePlayer,
-        p1,
-      );
-    });
-    test('priorityPlayer.', () {
       final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,
