@@ -13,7 +13,7 @@ GameState processStateChange(GameState state, StateChange change) {
     return state.copyWith(turnPhase: change.phase);
   }
   if (change is PriorityStateChange) {
-    //
+    return state.copyWith(priorityPlayer: change.player);
   }
   // Unhandled state changes error
   throw UnimplementedError();
