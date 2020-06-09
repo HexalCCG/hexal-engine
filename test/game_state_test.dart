@@ -1,9 +1,9 @@
-import 'package:hexal_engine/model/game_info.dart';
-import 'package:hexal_engine/model/game_state.dart';
-import 'package:hexal_engine/model/location.dart';
-import 'package:hexal_engine/model/objects/card_object.dart';
-import 'package:hexal_engine/model/objects/player_object.dart';
-import 'package:hexal_engine/model/turn_phase.dart';
+import 'package:hexal_engine/game_info.dart';
+import 'package:hexal_engine/game_state.dart';
+import 'package:hexal_engine/location.dart';
+import 'package:hexal_engine/objects/card_object.dart';
+import 'package:hexal_engine/objects/player_object.dart';
+import 'package:hexal_engine/turn_phase.dart';
 import 'package:test/test.dart';
 
 void main() {
