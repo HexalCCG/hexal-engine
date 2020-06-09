@@ -10,8 +10,7 @@ class ActivePlayerStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    // TODO: implement apply
-    throw UnimplementedError();
+    return state.copyWith(activePlayer: player);
   }
 
   @override
