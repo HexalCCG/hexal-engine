@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/active_player_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/engine.dart';
@@ -28,7 +29,7 @@ void main() {
       const action = PassAction();
       final change = Engine.processAction(state, action);
 
-      expect(change, const [PriorityStateChange(player: p2)]);
+      expect(change, unorderedEquals(const [PriorityStateChange(player: p2)]));
     });
 
     test('moves phase on when used by the non-priority player. ', () {
@@ -46,10 +47,35 @@ void main() {
       const action = PassAction();
       final change = Engine.processAction(state, action);
 
-      expect(change, const [
-        PhaseStateChange(phase: TurnPhase.draw),
-        PriorityStateChange(player: p1),
-      ]);
+      expect(
+          change,
+          unorderedEquals(const [
+            PhaseStateChange(phase: TurnPhase.draw),
+            PriorityStateChange(player: p1),
+          ]));
+    });
+    test('changes active player when used in the end phase.', () {
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        cards: <CardObject>[],
+        stack: <CardObject>[],
+        activePlayer: p1,
+        priorityPlayer: p2,
+        turnPhase: TurnPhase.end,
+      );
+      const action = PassAction();
+      final change = Engine.processAction(state, action);
+
+      expect(
+          change,
+          unorderedEquals(const [
+            PhaseStateChange(phase: TurnPhase.start),
+            ActivePlayerStateChange(player: p2),
+            PriorityStateChange(player: p2),
+          ]));
     });
   });
 }

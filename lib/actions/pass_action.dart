@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/active_player_state_change.dart';
 import 'package:hexal_engine/state_change/phase_state_change.dart';
 import 'package:hexal_engine/state_change/priority_state_change.dart';
 
@@ -24,12 +25,11 @@ class PassAction extends Action {
         PriorityStateChange(player: state.activePlayer)
       ];
     } else {
-      throw UnimplementedError();
       // Move on to the next turn
       return [
-        // TODO add active player change
-        PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
-        PriorityStateChange(player: state.activePlayer)
+        ActivePlayerStateChange(player: state.notActivePlayer),
+        PhaseStateChange(phase: TurnPhase.start),
+        PriorityStateChange(player: state.notActivePlayer)
       ];
     }
   }
