@@ -1,6 +1,6 @@
-import 'package:hexal_engine/objects/player_object.dart';
 import 'package:meta/meta.dart';
 
+import '../objects/player_object.dart';
 import '../game_state.dart';
 import 'state_change.dart';
 

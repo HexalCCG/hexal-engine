@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+
 import 'game_object.dart';
 import 'i_targetable.dart';
 

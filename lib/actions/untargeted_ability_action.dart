@@ -1,6 +1,6 @@
-import 'package:hexal_engine/objects/i_targetable.dart';
 import 'package:meta/meta.dart';
 
+import '../objects/i_targetable.dart';
 import 'action.dart';
 
 class UntargetedAbilityAction extends Action {

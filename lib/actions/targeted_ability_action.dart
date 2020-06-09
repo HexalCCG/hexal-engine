@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
-import 'package:hexal_engine/objects/i_targetable.dart';
+
+import '../objects/i_targetable.dart';
 import 'action.dart';
 
 class TargetedAbilityAction extends Action {

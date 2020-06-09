@@ -1,1 +1,7 @@
-enum Location { deck, hand, mana, battlefield, exile }
+enum Location {
+  deck,
+  hand,
+  mana,
+  battlefield,
+  exile,
+}
