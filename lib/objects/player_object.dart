@@ -1,5 +1,5 @@
-import 'package:hexal_engine/model/objects/game_object.dart';
 import 'package:meta/meta.dart';
+import 'game_object.dart';
 import 'i_targetable.dart';
 
 class PlayerObject extends GameObject implements ITargetable {

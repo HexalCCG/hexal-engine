@@ -1,13 +1,13 @@
-import 'package:hexal_engine/model/actions/action.dart';
-import 'package:hexal_engine/model/objects/i_targetable.dart';
 import 'package:meta/meta.dart';
+import 'package:hexal_engine/objects/i_targetable.dart';
+import 'action.dart';
 
-class UntargetedAbilityAction extends Action {
+class TargetedAbilityAction extends Action {
   final ITargetable object;
   final int ability;
   final ITargetable subject;
 
-  const UntargetedAbilityAction({
+  const TargetedAbilityAction({
     @required this.object,
     @required this.ability,
     @required this.subject,

@@ -1,8 +1,8 @@
-import 'package:hexal_engine/model/objects/player_object.dart';
+import 'package:hexal_engine/objects/player_object.dart';
 import 'package:meta/meta.dart';
-import 'package:hexal_engine/model/state_change/state_change.dart';
 
 import '../game_state.dart';
+import 'state_change.dart';
 
 class PriorityStateChange extends StateChange {
   final PlayerObject player;

@@ -1,7 +1,7 @@
-import 'package:hexal_engine/model/game_state.dart';
 import 'package:meta/meta.dart';
-import 'package:hexal_engine/model/state_change/state_change.dart';
+import '../game_state.dart';
 import '../turn_phase.dart';
+import 'state_change.dart';
 
 class PhaseStateChange extends StateChange {
   final TurnPhase phase;
