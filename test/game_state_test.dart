@@ -1,4 +1,5 @@
 import 'package:hexal_engine/game_info.dart';
+import 'package:hexal_engine/game_over_state.dart';
 import 'package:hexal_engine/game_state.dart';
 import 'package:hexal_engine/location.dart';
 import 'package:hexal_engine/objects/card_object.dart';
@@ -15,6 +16,7 @@ void main() {
         player1: p1,
         player2: p2,
       ),
+      gameOverState: GameOverState.playing,
       cards: <CardObject>[
         CardObject(
           owner: p1,

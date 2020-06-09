@@ -1,3 +1,4 @@
+import 'package:hexal_engine/game_over_state.dart';
 import 'package:hexal_engine/location.dart';
 import 'package:hexal_engine/state_change/active_player_state_change.dart';
 import 'package:test/test.dart';
@@ -18,6 +19,7 @@ void main() {
           player1: p1,
           player2: p2,
         ),
+        gameOverState: GameOverState.playing,
         cards: <CardObject>[],
         stack: <CardObject>[],
         activePlayer: p1,
@@ -36,6 +38,7 @@ void main() {
           player1: p1,
           player2: p2,
         ),
+        gameOverState: GameOverState.playing,
         cards: <CardObject>[],
         stack: <CardObject>[],
         activePlayer: p1,
@@ -56,6 +59,7 @@ void main() {
         player1: p1,
         player2: p2,
       ),
+      gameOverState: GameOverState.playing,
       cards: <CardObject>[
         CardObject(
           owner: p1,
@@ -90,6 +94,7 @@ void main() {
           player1: p1,
           player2: p2,
         ),
+        gameOverState: GameOverState.playing,
         cards: <CardObject>[
           CardObject(
             owner: p1,

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/game_over_state.dart';
 import 'package:meta/meta.dart';
 
 import 'game_info.dart';
@@ -8,6 +9,7 @@ import 'turn_phase.dart';
 
 class GameState extends Equatable {
   final GameInfo gameInfo;
+  final GameOverState gameOverState;
   final List<CardObject> cards;
   final List<CardObject> stack;
   final PlayerObject activePlayer;
@@ -23,6 +25,7 @@ class GameState extends Equatable {
   @literal
   const GameState({
     @required this.gameInfo,
+    @required this.gameOverState,
     @required this.cards,
     @required this.stack,
     @required this.activePlayer,
@@ -30,12 +33,9 @@ class GameState extends Equatable {
     @required this.turnPhase,
   });
 
-  @override
-  List<Object> get props =>
-      [gameInfo, cards, stack, activePlayer, priorityPlayer, turnPhase];
-
   GameState copyWith({
     GameInfo gameInfo,
+    GameOverState gameOverState,
     List<CardObject> cards,
     List<CardObject> stack,
     PlayerObject activePlayer,
@@ -44,6 +44,7 @@ class GameState extends Equatable {
   }) {
     return GameState(
       gameInfo: gameInfo ?? this.gameInfo,
+      gameOverState: gameOverState ?? this.gameOverState,
       cards: cards ?? this.cards,
       stack: stack ?? this.stack,
       activePlayer: activePlayer ?? this.activePlayer,
@@ -51,4 +52,15 @@ class GameState extends Equatable {
       turnPhase: turnPhase ?? this.turnPhase,
     );
   }
+
+  @override
+  List<Object> get props => [
+        gameInfo,
+        gameOverState,
+        cards,
+        stack,
+        activePlayer,
+        priorityPlayer,
+        turnPhase
+      ];
 }
