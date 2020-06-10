@@ -1,11 +1,10 @@
 import 'package:meta/meta.dart';
 import '../location.dart';
 import 'game_object.dart';
-import 'i_targetable.dart';
 import 'player_object.dart';
 
 @immutable
-class CardObject extends GameObject implements ITargetable {
+class CardObject extends GameObject {
   final PlayerObject owner;
   final PlayerObject controller;
   final Location location;
