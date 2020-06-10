@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/game_over_state.dart';
 import 'package:meta/meta.dart';
 
+import '../objects/card_object.dart';
+import '../objects/player_object.dart';
 import 'game_info.dart';
-import 'objects/card_object.dart';
-import 'objects/player_object.dart';
+import 'game_over_state.dart';
 import 'turn_phase.dart';
 
 class GameState extends Equatable {
@@ -22,7 +22,6 @@ class GameState extends Equatable {
   PlayerObject get notActivePlayer =>
       (activePlayer == gameInfo.player1) ? gameInfo.player2 : gameInfo.player1;
 
-  @literal
   const GameState({
     @required this.gameInfo,
     @required this.gameOverState,

@@ -1,6 +1,7 @@
-import 'package:hexal_engine/game_over_state.dart';
 import 'package:meta/meta.dart';
-import '../game_state.dart';
+
+import '../game_state/game_over_state.dart';
+import '../game_state/game_state.dart';
 import '../state_change/state_change.dart';
 
 class GameOverStateChange extends StateChange {

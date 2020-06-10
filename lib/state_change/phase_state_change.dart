@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
-import '../game_state.dart';
-import '../turn_phase.dart';
+import '../game_state/game_state.dart';
+import '../game_state/turn_phase.dart';
 import 'state_change.dart';
 
 class PhaseStateChange extends StateChange {

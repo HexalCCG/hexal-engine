@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
+import '../game_state/game_state.dart';
 import '../objects/player_object.dart';
-import '../game_state.dart';
 import 'state_change.dart';
 
 class PriorityStateChange extends StateChange {

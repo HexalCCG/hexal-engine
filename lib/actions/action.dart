@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import '../state_change/state_change.dart';
 import 'package:meta/meta.dart';
 
-import '../game_state.dart';
+import '../game_state/game_state.dart';
+import '../state_change/state_change.dart';
 
 @immutable
 abstract class Action extends Equatable {

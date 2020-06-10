@@ -1,5 +1,5 @@
 import 'actions/action.dart';
-import 'game_state.dart';
+import 'game_state/game_state.dart';
 import 'state_change/state_change.dart';
 
 class Engine {

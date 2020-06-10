@@ -1,13 +1,14 @@
+import 'package:test/test.dart';
+
 import 'package:hexal_engine/engine.dart';
-import 'package:hexal_engine/game_info.dart';
-import 'package:hexal_engine/game_over_state.dart';
-import 'package:hexal_engine/game_state.dart';
-import 'package:hexal_engine/location.dart';
+import 'package:hexal_engine/game_state/game_info.dart';
+import 'package:hexal_engine/game_state/game_over_state.dart';
+import 'package:hexal_engine/game_state/game_state.dart';
+import 'package:hexal_engine/game_state/location.dart';
+import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/priority_state_change.dart';
-import 'package:hexal_engine/turn_phase.dart';
-import 'package:test/test.dart';
 
 void main() {
   const p1 = PlayerObject(name: 'Alice');

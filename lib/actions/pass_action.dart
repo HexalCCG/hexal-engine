@@ -1,10 +1,9 @@
-import 'package:hexal_engine/state_change/active_player_state_change.dart';
-import 'package:hexal_engine/state_change/phase_state_change.dart';
-import 'package:hexal_engine/state_change/priority_state_change.dart';
-
+import '../game_state/game_state.dart';
+import '../game_state/turn_phase.dart';
+import '../state_change/active_player_state_change.dart';
+import '../state_change/phase_state_change.dart';
+import '../state_change/priority_state_change.dart';
 import '../state_change/state_change.dart';
-import '../game_state.dart';
-import '../turn_phase.dart';
 import 'action.dart';
 
 class PassAction extends Action {

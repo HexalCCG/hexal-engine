@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'objects/player_object.dart';
+import '../objects/player_object.dart';
 
 class GameInfo extends Equatable {
   final PlayerObject player1;

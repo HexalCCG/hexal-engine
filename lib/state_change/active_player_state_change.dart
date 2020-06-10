@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
-import '../game_state.dart';
+
+import '../game_state/game_state.dart';
 import '../objects/player_object.dart';
 import '../state_change/state_change.dart';
 

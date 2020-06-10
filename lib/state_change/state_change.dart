@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../game_state.dart';
+import '../game_state/game_state.dart';
 
 abstract class StateChange extends Equatable {
   const StateChange();

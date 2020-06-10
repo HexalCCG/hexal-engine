@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
-import '../location.dart';
+
+import '../game_state/location.dart';
 import 'game_object.dart';
 import 'player_object.dart';
 
