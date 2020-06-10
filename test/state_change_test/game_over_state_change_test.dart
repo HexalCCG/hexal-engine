@@ -1,6 +1,7 @@
 import 'package:hexal_engine/game_over_state.dart';
 import 'package:hexal_engine/location.dart';
 import 'package:hexal_engine/state_change/active_player_state_change.dart';
+import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/game_info.dart';
@@ -26,10 +27,51 @@ void main() {
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,
       );
-      final stateChange = ActivePlayerStateChange(player: p2);
+      final stateChange =
+          GameOverStateChange(gameOverState: GameOverState.player1Win);
       expect(
-        Engine.processStateChange(state, [stateChange]).activePlayer,
-        p2,
+        Engine.processStateChange(state, [stateChange]).gameOverState,
+        GameOverState.player1Win,
+      );
+    });
+    test('playing to player 1 wins.', () {
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        gameOverState: GameOverState.playing,
+        cards: <CardObject>[],
+        stack: <CardObject>[],
+        activePlayer: p1,
+        priorityPlayer: p1,
+        turnPhase: TurnPhase.start,
+      );
+      final stateChange =
+          GameOverStateChange(gameOverState: GameOverState.player2Win);
+      expect(
+        Engine.processStateChange(state, [stateChange]).gameOverState,
+        GameOverState.player2Win,
+      );
+    });
+    test('playing to draw.', () {
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        gameOverState: GameOverState.playing,
+        cards: <CardObject>[],
+        stack: <CardObject>[],
+        activePlayer: p1,
+        priorityPlayer: p1,
+        turnPhase: TurnPhase.start,
+      );
+      final stateChange =
+          GameOverStateChange(gameOverState: GameOverState.draw);
+      expect(
+        Engine.processStateChange(state, [stateChange]).gameOverState,
+        GameOverState.draw,
       );
     });
   });
@@ -66,7 +108,7 @@ void main() {
       priorityPlayer: p1,
       turnPhase: TurnPhase.start,
     );
-    final stateChange = ActivePlayerStateChange(player: p2);
+    final stateChange = GameOverStateChange(gameOverState: GameOverState.draw);
     expect(
       Engine.processStateChange(state, [stateChange]),
       const GameState(
@@ -74,7 +116,7 @@ void main() {
           player1: p1,
           player2: p2,
         ),
-        gameOverState: GameOverState.playing,
+        gameOverState: GameOverState.draw,
         cards: <CardObject>[
           CardObject(
             owner: p1,
@@ -97,7 +139,7 @@ void main() {
             location: Location.deck,
           ),
         ],
-        activePlayer: p2,
+        activePlayer: p1,
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,
       ),
