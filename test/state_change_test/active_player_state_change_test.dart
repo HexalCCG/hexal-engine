@@ -30,7 +30,7 @@ void main() {
       final stateChange = ActivePlayerStateChange(player: Player.one);
       expect(
         state.applyStateChanges([stateChange]).activePlayer,
-        p2,
+        Player.one,
       );
     });
     test('player 1 to player 2.', () {
@@ -51,7 +51,7 @@ void main() {
       final stateChange = ActivePlayerStateChange(player: Player.two);
       expect(
         state.applyStateChanges([stateChange]).activePlayer,
-        p2,
+        Player.two,
       );
     });
   });

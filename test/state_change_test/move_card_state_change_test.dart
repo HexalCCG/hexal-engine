@@ -60,7 +60,7 @@ void main() {
           activePlayer: Player.one,
           priorityPlayer: Player.one,
           turnPhase: TurnPhase.start,
-          p1DeckOrder: [],
+          p1DeckOrder: [card],
           p2DeckOrder: [],
         ),
       );

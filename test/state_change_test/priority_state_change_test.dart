@@ -30,7 +30,7 @@ void main() {
       final stateChange = PriorityStateChange(player: Player.two);
       expect(
         state.applyStateChanges([stateChange]).priorityPlayer,
-        p2,
+        Player.two,
       );
     });
     test('player 1 to player 2.', () {
@@ -51,7 +51,7 @@ void main() {
       final stateChange = PriorityStateChange(player: Player.two);
       expect(
         state.applyStateChanges([stateChange]).priorityPlayer,
-        p2,
+        Player.two,
       );
     });
   });

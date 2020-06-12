@@ -45,8 +45,8 @@ void main() {
       expect(state.gameInfo.player2, isNot(equals(state.gameInfo.player1)));
     });
     test('records active and priority player.', () {
-      expect(state.activePlayer, state.gameInfo.player1);
-      expect(state.priorityPlayer, state.gameInfo.player2);
+      expect(state.activePlayer, Player.one);
+      expect(state.priorityPlayer, Player.two);
     });
     test('records passed card list.', () {
       expect(state.cards.length, 2);

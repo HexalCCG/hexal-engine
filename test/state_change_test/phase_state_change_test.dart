@@ -52,7 +52,7 @@ void main() {
     final stateChange = PhaseStateChange(phase: TurnPhase.draw);
     expect(
       state.applyStateChanges([stateChange]).priorityPlayer,
-      p2,
+      Player.two,
     );
   });
 }
