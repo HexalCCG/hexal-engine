@@ -21,8 +21,8 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: <CardObject>[],
-        stack: <CardObject>[],
+        cards: [],
+        stack: [],
         activePlayer: p1,
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,
@@ -40,8 +40,8 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: <CardObject>[],
-        stack: <CardObject>[],
+        cards: [],
+        stack: [],
         activePlayer: p1,
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,
@@ -60,7 +60,7 @@ void main() {
         player2: p2,
       ),
       gameOverState: GameOverState.playing,
-      cards: <CardObject>[
+      cards: [
         CardObject(
           owner: p1,
           controller: p1,
@@ -74,14 +74,7 @@ void main() {
           location: Location.deck,
         ),
       ],
-      stack: <CardObject>[
-        CardObject(
-          owner: p2,
-          controller: p2,
-          enteredBattlefieldThisTurn: false,
-          location: Location.deck,
-        ),
-      ],
+      stack: [],
       activePlayer: p1,
       priorityPlayer: p2,
       turnPhase: TurnPhase.start,
@@ -95,7 +88,7 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: <CardObject>[
+        cards: [
           CardObject(
             owner: p1,
             controller: p1,
@@ -109,14 +102,7 @@ void main() {
             location: Location.deck,
           ),
         ],
-        stack: <CardObject>[
-          CardObject(
-            owner: p2,
-            controller: p2,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-        ],
+        stack: [],
         activePlayer: p1,
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,

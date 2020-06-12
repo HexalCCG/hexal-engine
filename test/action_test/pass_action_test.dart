@@ -7,7 +7,6 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/state_change/active_player_state_change.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/engine.dart';
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/phase_state_change.dart';
 import 'package:hexal_engine/state_change/priority_state_change.dart';
@@ -23,8 +22,8 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: <CardObject>[],
-        stack: <CardObject>[],
+        cards: [],
+        stack: [],
         activePlayer: p1,
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,
@@ -42,8 +41,8 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: <CardObject>[],
-        stack: <CardObject>[],
+        cards: [],
+        stack: [],
         activePlayer: p1,
         priorityPlayer: p2,
         turnPhase: TurnPhase.start,
@@ -65,8 +64,8 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: <CardObject>[],
-        stack: <CardObject>[],
+        cards: [],
+        stack: [],
         activePlayer: p1,
         priorityPlayer: p2,
         turnPhase: TurnPhase.end,

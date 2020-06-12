@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/event/event.dart';
 import 'package:meta/meta.dart';
 
 import '../objects/card_object.dart';
@@ -11,7 +12,7 @@ class GameState extends Equatable {
   final GameInfo gameInfo;
   final GameOverState gameOverState;
   final List<CardObject> cards;
-  final List<CardObject> stack;
+  final List<Event> stack;
   final PlayerObject activePlayer;
   final PlayerObject priorityPlayer;
   final TurnPhase turnPhase;
@@ -36,7 +37,7 @@ class GameState extends Equatable {
     GameInfo gameInfo,
     GameOverState gameOverState,
     List<CardObject> cards,
-    List<CardObject> stack,
+    List<Event> stack,
     PlayerObject activePlayer,
     PlayerObject priorityPlayer,
     TurnPhase turnPhase,

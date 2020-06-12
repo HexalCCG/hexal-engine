@@ -27,10 +27,10 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: <CardObject>[
+        cards: [
           card,
         ],
-        stack: <CardObject>[],
+        stack: [],
         activePlayer: p1,
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,
@@ -45,7 +45,7 @@ void main() {
             player2: p2,
           ),
           gameOverState: GameOverState.playing,
-          cards: <CardObject>[
+          cards: [
             CardObject(
               owner: p1,
               controller: p1,
@@ -53,7 +53,7 @@ void main() {
               enteredBattlefieldThisTurn: false,
             ),
           ],
-          stack: <CardObject>[],
+          stack: [],
           activePlayer: p1,
           priorityPlayer: p1,
           turnPhase: TurnPhase.start,

@@ -1,9 +1,10 @@
-import 'package:hexal_engine/exceptions/state_change_exception.dart';
 import 'package:meta/meta.dart';
-import 'package:hexal_engine/game_state/game_state.dart';
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/objects/card_object.dart';
-import 'package:hexal_engine/state_change/state_change.dart';
+
+import '../exceptions/state_change_exception.dart';
+import '../game_state/game_state.dart';
+import '../game_state/location.dart';
+import '../objects/card_object.dart';
+import 'state_change.dart';
 
 class MoveCardStateChange extends StateChange {
   final CardObject card;
