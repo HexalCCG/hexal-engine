@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/actions/action.dart';
 import 'package:hexal_engine/event/event.dart';
+import 'package:hexal_engine/state_change/state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../objects/card_object.dart';
@@ -32,6 +34,13 @@ class GameState extends Equatable {
     @required this.priorityPlayer,
     @required this.turnPhase,
   });
+
+  List<StateChange> applyAction(Action action) => action.apply(this);
+
+  GameState applyStateChanges(List<StateChange> changes) =>
+      changes.fold(this, (currentState, change) => change.apply(currentState));
+
+  List<StateChange> resolveTopStackEvent() => throw UnimplementedError();
 
   GameState copyWith({
     GameInfo gameInfo,

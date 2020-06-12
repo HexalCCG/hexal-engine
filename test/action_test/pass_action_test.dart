@@ -6,7 +6,6 @@ import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/state_change/active_player_state_change.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/phase_state_change.dart';
 import 'package:hexal_engine/state_change/priority_state_change.dart';
@@ -29,7 +28,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       const action = PassAction();
-      final change = Engine.processAction(state, action);
+      final change = state.applyAction(action);
 
       expect(change, unorderedEquals(const [PriorityStateChange(player: p2)]));
     });
@@ -48,7 +47,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       const action = PassAction();
-      final change = Engine.processAction(state, action);
+      final change = state.applyAction(action);
 
       expect(
           change,
@@ -71,7 +70,7 @@ void main() {
         turnPhase: TurnPhase.end,
       );
       const action = PassAction();
-      final change = Engine.processAction(state, action);
+      final change = state.applyAction(action);
 
       expect(
           change,

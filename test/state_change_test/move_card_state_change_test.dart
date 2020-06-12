@@ -6,7 +6,6 @@ import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
@@ -38,7 +37,7 @@ void main() {
       final stateChange =
           MoveCardStateChange(card: card, location: Location.hand);
       expect(
-        Engine.processStateChange(state, [stateChange]),
+        state.applyStateChanges([stateChange]),
         const GameState(
           gameInfo: GameInfo(
             player1: p1,

@@ -5,7 +5,6 @@ import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/phase_state_change.dart';
@@ -29,7 +28,7 @@ void main() {
       );
       final stateChange = PhaseStateChange(phase: TurnPhase.draw);
       expect(
-        Engine.processStateChange(state, [stateChange]).turnPhase,
+        state.applyStateChanges([stateChange]).turnPhase,
         TurnPhase.draw,
       );
     });
@@ -48,7 +47,7 @@ void main() {
       );
       final stateChange = PhaseStateChange(phase: TurnPhase.battle);
       expect(
-        Engine.processStateChange(state, [stateChange]).turnPhase,
+        state.applyStateChanges([stateChange]).turnPhase,
         TurnPhase.battle,
       );
     });
@@ -67,7 +66,7 @@ void main() {
       );
       final stateChange = PhaseStateChange(phase: TurnPhase.start);
       expect(
-        Engine.processStateChange(state, [stateChange]).turnPhase,
+        state.applyStateChanges([stateChange]).turnPhase,
         TurnPhase.start,
       );
     });
@@ -86,7 +85,7 @@ void main() {
       );
       final stateChange = PhaseStateChange(phase: TurnPhase.main2);
       expect(
-        Engine.processStateChange(state, [stateChange]).turnPhase,
+        state.applyStateChanges([stateChange]).turnPhase,
         TurnPhase.main2,
       );
     });
@@ -120,7 +119,7 @@ void main() {
       );
       final stateChange = PhaseStateChange(phase: TurnPhase.draw);
       expect(
-        Engine.processStateChange(state, [stateChange]),
+        state.applyStateChanges([stateChange]),
         const GameState(
           gameInfo: GameInfo(
             player1: p1,
@@ -163,7 +162,7 @@ void main() {
       );
       final stateChange = PhaseStateChange(phase: TurnPhase.draw);
       expect(
-        Engine.processStateChange(state, [stateChange]).priorityPlayer,
+        state.applyStateChanges([stateChange]).priorityPlayer,
         p2,
       );
     });

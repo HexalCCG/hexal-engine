@@ -5,9 +5,7 @@ import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/objects/player_object.dart';
-import 'package:hexal_engine/state_change/priority_state_change.dart';
 
 void main() {
   group('Draw card event', () {
@@ -26,8 +24,8 @@ void main() {
         priorityPlayer: p1,
         turnPhase: TurnPhase.start,
       );
-      //const action = PassAction();
-      //final change = Engine.processAction(state, action);
+      const action = PassAction();
+      final change = state.applyAction(action);
 
       //expect(change, unorderedEquals(const [PriorityStateChange(player: p2)]));
     });

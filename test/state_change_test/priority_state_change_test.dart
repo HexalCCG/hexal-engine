@@ -1,6 +1,5 @@
 import 'package:test/test.dart';
 
-import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
@@ -29,7 +28,7 @@ void main() {
       );
       final stateChange = PriorityStateChange(player: p2);
       expect(
-        Engine.processStateChange(state, [stateChange]).priorityPlayer,
+        state.applyStateChanges([stateChange]).priorityPlayer,
         p2,
       );
     });
@@ -48,7 +47,7 @@ void main() {
       );
       final stateChange = PriorityStateChange(player: p2);
       expect(
-        Engine.processStateChange(state, [stateChange]).priorityPlayer,
+        state.applyStateChanges([stateChange]).priorityPlayer,
         p2,
       );
     });
@@ -81,7 +80,7 @@ void main() {
     );
     final stateChange = PriorityStateChange(player: p1);
     expect(
-      Engine.processStateChange(state, [stateChange]),
+      state.applyStateChanges([stateChange]),
       const GameState(
         gameInfo: GameInfo(
           player1: p1,

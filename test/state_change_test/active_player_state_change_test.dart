@@ -6,7 +6,6 @@ import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/state_change/active_player_state_change.dart';
-import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
@@ -29,7 +28,7 @@ void main() {
       );
       final stateChange = ActivePlayerStateChange(player: p2);
       expect(
-        Engine.processStateChange(state, [stateChange]).activePlayer,
+        state.applyStateChanges([stateChange]).activePlayer,
         p2,
       );
     });
@@ -48,7 +47,7 @@ void main() {
       );
       final stateChange = ActivePlayerStateChange(player: p2);
       expect(
-        Engine.processStateChange(state, [stateChange]).activePlayer,
+        state.applyStateChanges([stateChange]).activePlayer,
         p2,
       );
     });
@@ -82,7 +81,7 @@ void main() {
     );
     final stateChange = ActivePlayerStateChange(player: p2);
     expect(
-      Engine.processStateChange(state, [stateChange]),
+      state.applyStateChanges([stateChange]),
       const GameState(
         gameInfo: GameInfo(
           player1: p1,

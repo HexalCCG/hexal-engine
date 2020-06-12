@@ -6,7 +6,6 @@ import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/state_change/game_over_state_change.dart';
-import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
@@ -30,7 +29,7 @@ void main() {
       final stateChange =
           GameOverStateChange(gameOverState: GameOverState.player1Win);
       expect(
-        Engine.processStateChange(state, [stateChange]).gameOverState,
+        state.applyStateChanges([stateChange]).gameOverState,
         GameOverState.player1Win,
       );
     });
@@ -50,7 +49,7 @@ void main() {
       final stateChange =
           GameOverStateChange(gameOverState: GameOverState.player2Win);
       expect(
-        Engine.processStateChange(state, [stateChange]).gameOverState,
+        state.applyStateChanges([stateChange]).gameOverState,
         GameOverState.player2Win,
       );
     });
@@ -70,7 +69,7 @@ void main() {
       final stateChange =
           GameOverStateChange(gameOverState: GameOverState.draw);
       expect(
-        Engine.processStateChange(state, [stateChange]).gameOverState,
+        state.applyStateChanges([stateChange]).gameOverState,
         GameOverState.draw,
       );
     });
@@ -103,7 +102,7 @@ void main() {
     );
     final stateChange = GameOverStateChange(gameOverState: GameOverState.draw);
     expect(
-      Engine.processStateChange(state, [stateChange]),
+      state.applyStateChanges([stateChange]),
       const GameState(
         gameInfo: GameInfo(
           player1: p1,
