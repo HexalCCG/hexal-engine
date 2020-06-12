@@ -11,8 +11,7 @@ class AddStackEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    // TODO: implement apply
-    throw UnimplementedError();
+    return state.copyWith(stack: state.stack.toList()..add(event));
   }
 
   @override

@@ -17,6 +17,5 @@ class DrawCardEvent extends Event {
   }
 
   @override
-  // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [player];
 }
