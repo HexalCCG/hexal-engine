@@ -6,7 +6,6 @@ import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/state_change/active_player_state_change.dart';
 import 'package:hexal_engine/engine.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
@@ -39,8 +38,26 @@ void main() {
       final stateChange =
           MoveCardStateChange(card: card, location: Location.hand);
       expect(
-        Engine.processStateChange(state, [stateChange]).activePlayer,
-        p2,
+        Engine.processStateChange(state, [stateChange]),
+        const GameState(
+          gameInfo: GameInfo(
+            player1: p1,
+            player2: p2,
+          ),
+          gameOverState: GameOverState.playing,
+          cards: <CardObject>[
+            CardObject(
+              owner: p1,
+              controller: p1,
+              location: Location.hand,
+              enteredBattlefieldThisTurn: false,
+            ),
+          ],
+          stack: <CardObject>[],
+          activePlayer: p1,
+          priorityPlayer: p1,
+          turnPhase: TurnPhase.start,
+        ),
       );
     });
   });
