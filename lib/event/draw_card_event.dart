@@ -1,12 +1,12 @@
 import 'package:meta/meta.dart';
 
 import '../game_state/game_state.dart';
-import '../objects/player_object.dart';
+import '../game_state/player.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 
 class DrawCardEvent extends Event {
-  final PlayerObject player;
+  final Player player;
 
   const DrawCardEvent({@required this.player});
 

@@ -1,16 +1,16 @@
+import 'package:hexal_engine/game_state/player.dart';
+import 'package:test/test.dart';
+
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:hexal_engine/state_change/move_card_state_change.dart';
 import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
-import 'package:test/test.dart';
-
 import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
@@ -19,8 +19,8 @@ void main() {
     const p2 = PlayerObject(name: 'Bob');
     test('returns the correct move card state change. ', () {
       const card = CardObject(
-        controller: p1,
-        owner: p1,
+        controller: Player.one,
+        owner: Player.one,
         enteredBattlefieldThisTurn: false,
         location: Location.deck,
       );
@@ -32,11 +32,13 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DrawCardEvent(player: p1),
+          DrawCardEvent(player: Player.one),
         ],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
+        p1DeckOrder: [card],
+        p2DeckOrder: [],
       );
       final changes = state.resolveTopStackEvent();
 
@@ -44,7 +46,7 @@ void main() {
           contains(MoveCardStateChange(card: card, location: Location.hand)));
     });
     test('returns a remove stack event state change', () {
-      const event = DrawCardEvent(player: p1);
+      const event = DrawCardEvent(player: Player.one);
       final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,
@@ -53,16 +55,18 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [
           CardObject(
-            controller: p1,
-            owner: p1,
+            controller: Player.one,
+            owner: Player.one,
             enteredBattlefieldThisTurn: false,
             location: Location.deck,
           )
         ],
         stack: [event],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       final changes = state.resolveTopStackEvent();
 
@@ -76,10 +80,12 @@ void main() {
         ),
         gameOverState: GameOverState.playing,
         cards: [],
-        stack: [DrawCardEvent(player: p1)],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        stack: [DrawCardEvent(player: Player.one)],
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       final changes = state.resolveTopStackEvent();
 

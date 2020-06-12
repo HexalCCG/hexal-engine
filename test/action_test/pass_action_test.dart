@@ -1,3 +1,4 @@
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/game_info.dart';
@@ -23,14 +24,17 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       const action = PassAction();
       final change = state.applyAction(action);
 
-      expect(change, unorderedEquals(const [PriorityStateChange(player: p2)]));
+      expect(change,
+          unorderedEquals(const [PriorityStateChange(player: Player.two)]));
     });
 
     test('moves phase on when used by the non-priority player. ', () {
@@ -42,9 +46,11 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p2,
+        activePlayer: Player.one,
+        priorityPlayer: Player.two,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       const action = PassAction();
       final change = state.applyAction(action);
@@ -53,7 +59,7 @@ void main() {
           change,
           unorderedEquals(const [
             PhaseStateChange(phase: TurnPhase.draw),
-            PriorityStateChange(player: p1),
+            PriorityStateChange(player: Player.one),
           ]));
     });
     test('changes active player when used in the end phase.', () {
@@ -65,9 +71,11 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p2,
+        activePlayer: Player.one,
+        priorityPlayer: Player.two,
         turnPhase: TurnPhase.end,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       const action = PassAction();
       final change = state.applyAction(action);
@@ -76,8 +84,8 @@ void main() {
           change,
           unorderedEquals(const [
             PhaseStateChange(phase: TurnPhase.start),
-            ActivePlayerStateChange(player: p2),
-            PriorityStateChange(player: p2),
+            ActivePlayerStateChange(player: Player.two),
+            PriorityStateChange(player: Player.two),
           ]));
     });
   });

@@ -1,4 +1,5 @@
 import 'package:hexal_engine/exceptions/state_change_exception.dart';
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/state_change/move_card_state_change.dart';
 import 'package:test/test.dart';
 
@@ -16,8 +17,8 @@ void main() {
   group('Move card state change', () {
     test('moves card from deck to hand.', () {
       const card = CardObject(
-        owner: p1,
-        controller: p1,
+        owner: Player.one,
+        controller: Player.one,
         location: Location.deck,
         enteredBattlefieldThisTurn: false,
       );
@@ -31,9 +32,11 @@ void main() {
           card,
         ],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [card],
+        p2DeckOrder: [],
       );
       final stateChange =
           MoveCardStateChange(card: card, location: Location.hand);
@@ -47,16 +50,18 @@ void main() {
           gameOverState: GameOverState.playing,
           cards: [
             CardObject(
-              owner: p1,
-              controller: p1,
+              owner: Player.one,
+              controller: Player.one,
               location: Location.hand,
               enteredBattlefieldThisTurn: false,
             ),
           ],
           stack: [],
-          activePlayer: p1,
-          priorityPlayer: p1,
+          activePlayer: Player.one,
+          priorityPlayer: Player.one,
           turnPhase: TurnPhase.start,
+          p1DeckOrder: [],
+          p2DeckOrder: [],
         ),
       );
     });
@@ -69,18 +74,20 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       expect(
           () => state.applyStateChanges([
                 MoveCardStateChange(
                     card: CardObject(
-                        controller: p1,
+                        controller: Player.one,
                         location: Location.deck,
                         enteredBattlefieldThisTurn: false,
-                        owner: p1),
+                        owner: Player.one),
                     location: Location.hand)
               ]),
           throwsA(isA<StateChangeException>()));

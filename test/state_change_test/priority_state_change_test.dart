@@ -1,11 +1,10 @@
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
-import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/priority_state_change.dart';
 
@@ -22,11 +21,13 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
-      final stateChange = PriorityStateChange(player: p2);
+      final stateChange = PriorityStateChange(player: Player.two);
       expect(
         state.applyStateChanges([stateChange]).priorityPlayer,
         p2,
@@ -41,11 +42,13 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
-      final stateChange = PriorityStateChange(player: p2);
+      final stateChange = PriorityStateChange(player: Player.two);
       expect(
         state.applyStateChanges([stateChange]).priorityPlayer,
         p2,
@@ -59,26 +62,15 @@ void main() {
         player2: p2,
       ),
       gameOverState: GameOverState.playing,
-      cards: [
-        CardObject(
-          owner: p1,
-          controller: p1,
-          enteredBattlefieldThisTurn: false,
-          location: Location.deck,
-        ),
-        CardObject(
-          owner: p2,
-          controller: p2,
-          enteredBattlefieldThisTurn: false,
-          location: Location.deck,
-        ),
-      ],
+      cards: [],
       stack: [],
-      activePlayer: p1,
-      priorityPlayer: p2,
+      activePlayer: Player.one,
+      priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
+      p1DeckOrder: [],
+      p2DeckOrder: [],
     );
-    final stateChange = PriorityStateChange(player: p1);
+    final stateChange = PriorityStateChange(player: Player.one);
     expect(
       state.applyStateChanges([stateChange]),
       const GameState(
@@ -87,24 +79,13 @@ void main() {
           player2: p2,
         ),
         gameOverState: GameOverState.playing,
-        cards: [
-          CardObject(
-            owner: p1,
-            controller: p1,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-          CardObject(
-            owner: p2,
-            controller: p2,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          ),
-        ],
+        cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       ),
     );
   });

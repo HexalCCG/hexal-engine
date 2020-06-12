@@ -1,13 +1,12 @@
 import 'package:meta/meta.dart';
 
 import '../game_state/location.dart';
+import '../game_state/player.dart';
 import 'game_object.dart';
-import 'player_object.dart';
 
-@immutable
 class CardObject extends GameObject {
-  final PlayerObject owner;
-  final PlayerObject controller;
+  final Player owner;
+  final Player controller;
   final Location location;
   final bool enteredBattlefieldThisTurn;
 
@@ -19,8 +18,8 @@ class CardObject extends GameObject {
   });
 
   CardObject copyWith({
-    PlayerObject owner,
-    PlayerObject controller,
+    Player owner,
+    Player controller,
     Location location,
     bool enteredBattlefieldThisTurn,
   }) {

@@ -1,5 +1,6 @@
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/exceptions/state_change_exception.dart';
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
 import 'package:test/test.dart';
 
@@ -14,7 +15,7 @@ void main() {
   const p2 = PlayerObject(name: 'Bob');
   group('Remove stack event state change', () {
     test('removes the specified stack event.', () {
-      const event = DrawCardEvent(player: p1);
+      const event = DrawCardEvent(player: Player.one);
       const state = GameState(
         gameInfo: GameInfo(
           player1: p1,
@@ -23,9 +24,11 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [event],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       const change = RemoveStackEventStateChange(event: event);
       expect(
@@ -38,9 +41,11 @@ void main() {
           gameOverState: GameOverState.playing,
           cards: [],
           stack: [],
-          activePlayer: p1,
-          priorityPlayer: p1,
+          activePlayer: Player.one,
+          priorityPlayer: Player.one,
           turnPhase: TurnPhase.start,
+          p1DeckOrder: [],
+          p2DeckOrder: [],
         ),
       );
     });
@@ -53,12 +58,14 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: p1,
-        priorityPlayer: p1,
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
+        p1DeckOrder: [],
+        p2DeckOrder: [],
       );
       const change =
-          RemoveStackEventStateChange(event: DrawCardEvent(player: p1));
+          RemoveStackEventStateChange(event: DrawCardEvent(player: Player.one));
       expect(() => state.applyStateChanges([change]),
           throwsA(isA<StateChangeException>()));
     });

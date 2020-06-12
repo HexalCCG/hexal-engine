@@ -1,3 +1,4 @@
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/game_info.dart';
@@ -12,30 +13,31 @@ void main() {
   group('GameState creation', () {
     const p1 = PlayerObject(name: 'Alice');
     const p2 = PlayerObject(name: 'Bob');
+    const card1 = CardObject(
+      owner: Player.one,
+      controller: Player.one,
+      enteredBattlefieldThisTurn: false,
+      location: Location.deck,
+    );
+    const card2 = CardObject(
+      owner: Player.two,
+      controller: Player.two,
+      enteredBattlefieldThisTurn: false,
+      location: Location.deck,
+    );
     final state = const GameState(
       gameInfo: GameInfo(
         player1: p1,
         player2: p2,
       ),
       gameOverState: GameOverState.playing,
-      cards: [
-        CardObject(
-          owner: p1,
-          controller: p1,
-          enteredBattlefieldThisTurn: false,
-          location: Location.deck,
-        ),
-        CardObject(
-          owner: p2,
-          controller: p2,
-          enteredBattlefieldThisTurn: false,
-          location: Location.deck,
-        ),
-      ],
+      cards: [card1, card2],
       stack: [],
-      activePlayer: p1,
-      priorityPlayer: p2,
+      activePlayer: Player.one,
+      priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
+      p1DeckOrder: [card1],
+      p2DeckOrder: [card2],
     );
     test('records players.', () {
       expect(state.gameInfo.player1, isNotNull);

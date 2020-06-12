@@ -1,11 +1,11 @@
 import 'package:meta/meta.dart';
 
 import '../game_state/game_state.dart';
-import '../objects/player_object.dart';
+import '../game_state/player.dart';
 import 'state_change.dart';
 
 class PriorityStateChange extends StateChange {
-  final PlayerObject player;
+  final Player player;
   const PriorityStateChange({@required this.player});
 
   @override

@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../event/event.dart';
+import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
 
@@ -11,11 +12,15 @@ class RemoveStackEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    // TODO: implement apply
-    throw UnimplementedError();
+    final newStack = state.stack.toList();
+    if (newStack.remove(event)) {
+      return state.copyWith(stack: newStack);
+    } else {
+      throw const StateChangeException(
+          'RemoveStackEventStateChange: Provided event not found in stack');
+    }
   }
 
   @override
-  // TODO: implement props
   List<Object> get props => [event];
 }
