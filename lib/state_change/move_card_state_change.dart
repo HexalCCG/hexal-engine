@@ -1,3 +1,4 @@
+import 'package:hexal_engine/exceptions/state_change_exception.dart';
 import 'package:meta/meta.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
@@ -12,11 +13,24 @@ class MoveCardStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    // TODO: implement apply
-    throw UnimplementedError();
+    try {
+      state.cards.singleWhere((element) => element == card);
+      final newCard = card.copyWith(location: location);
+      final newCards = state.cards.toList()
+        ..remove(card)
+        ..add(newCard);
+
+      return state.copyWith(cards: newCards);
+    } catch (e) {
+      if (e is StateError) {
+        throw StateChangeException(
+            'MoveCardStateChange: Provided card not found exactly once in state');
+      } else {
+        rethrow;
+      }
+    }
   }
 
   @override
-  // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [card, location];
 }

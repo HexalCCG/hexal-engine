@@ -18,6 +18,21 @@ class CardObject extends GameObject {
     @required this.enteredBattlefieldThisTurn,
   });
 
+  CardObject copyWith({
+    PlayerObject owner,
+    PlayerObject controller,
+    Location location,
+    bool enteredBattlefieldThisTurn,
+  }) {
+    return CardObject(
+      owner: owner ?? this.owner,
+      controller: controller ?? this.controller,
+      location: location ?? this.location,
+      enteredBattlefieldThisTurn:
+          enteredBattlefieldThisTurn ?? this.enteredBattlefieldThisTurn,
+    );
+  }
+
   @override
   List<Object> get props =>
       [owner, controller, location, enteredBattlefieldThisTurn];
