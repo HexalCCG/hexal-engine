@@ -10,8 +10,8 @@ import 'package:hexal_engine/state_change/priority_state_change.dart';
 void main() {
   const p1 = PlayerObject(name: 'Alice');
   const p2 = PlayerObject(name: 'Bob');
-  group('Priority state change changes from', () {
-    test('player 1 to player 2.', () {
+  group('Remove stack event state change', () {
+    test('removes the specified stack event.', () {
       final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,

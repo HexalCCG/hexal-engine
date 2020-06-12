@@ -24,7 +24,7 @@ class MoveCardStateChange extends StateChange {
       return state.copyWith(cards: newCards);
     } catch (e) {
       if (e is StateError) {
-        throw StateChangeException(
+        throw const StateChangeException(
             'MoveCardStateChange: Provided card not found exactly once in state');
       } else {
         rethrow;

@@ -1,3 +1,4 @@
+import 'package:hexal_engine/exceptions/state_change_exception.dart';
 import 'package:hexal_engine/state_change/move_card_state_change.dart';
 import 'package:test/test.dart';
 
@@ -58,6 +59,31 @@ void main() {
           turnPhase: TurnPhase.start,
         ),
       );
+    });
+    test('throws a state change exception if the card is not found', () {
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        gameOverState: GameOverState.playing,
+        cards: [],
+        stack: [],
+        activePlayer: p1,
+        priorityPlayer: p1,
+        turnPhase: TurnPhase.start,
+      );
+      expect(
+          () => state.applyStateChanges([
+                MoveCardStateChange(
+                    card: CardObject(
+                        controller: p1,
+                        location: Location.deck,
+                        enteredBattlefieldThisTurn: false,
+                        owner: p1),
+                    location: Location.hand)
+              ]),
+          throwsA(isA<StateChangeException>()));
     });
   });
 }
