@@ -4,5 +4,5 @@ class StateChangeException implements Exception {
   const StateChangeException([this.message]);
 
   @override
-  String toString() => 'CardNotFoundException: $message';
+  String toString() => 'StateChangeException: $message';
 }
