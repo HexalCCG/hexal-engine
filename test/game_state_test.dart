@@ -1,8 +1,8 @@
+import 'package:test/test.dart';
+
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
-import 'package:test/test.dart';
-
 import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
@@ -25,7 +25,7 @@ void main() {
         CardObject(
           controller: Player.one,
           owner: Player.one,
-          enteredBattlefieldThisTurn: false,
+          enteredFieldThisTurn: false,
           location: Location.deck,
         )
       ],
