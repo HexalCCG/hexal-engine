@@ -8,6 +8,7 @@ import '../state_change/remove_stack_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'game_info.dart';
 import 'game_over_state.dart';
+import 'location.dart';
 import 'player.dart';
 import 'turn_phase.dart';
 
@@ -52,6 +53,12 @@ class GameState extends Equatable {
 
   List<StateChange> resolveTopStackEvent() => stack.last.apply(this)
     ..add(RemoveStackEventStateChange(event: stack.last));
+
+  List<CardObject> getCardsByLocation(Player player, Location location) {
+    return cards
+        .where((card) => card.controller == player && card.location == location)
+        .toList();
+  }
 
   GameState copyWith({
     GameInfo gameInfo,
