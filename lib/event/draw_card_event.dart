@@ -16,8 +16,8 @@ class DrawCardEvent extends Event {
 
   @override
   List<StateChange> apply(GameState state) {
-    final deck = state.getCardsByLocation(player, Location.deck);
-    if (deck.isEmpty) {
+    final card = state.getTopCardOfDeck(player);
+    if (card == null) {
       return [
         GameOverStateChange(
             gameOverState: player == Player.one
@@ -25,7 +25,6 @@ class DrawCardEvent extends Event {
                 : GameOverState.player1Win),
       ];
     } else {
-      final card = (deck..shuffle()).first;
       return [
         MoveCardStateChange(card: card, location: Location.hand),
       ];

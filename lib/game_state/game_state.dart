@@ -60,6 +60,15 @@ class GameState extends Equatable {
         .toList();
   }
 
+  CardObject getTopCardOfDeck(Player player) {
+    final deck = getCardsByLocation(player, Location.deck);
+    if (deck.isEmpty) {
+      return null;
+    } else {
+      return (deck..shuffle()).first;
+    }
+  }
+
   GameState copyWith({
     GameInfo gameInfo,
     GameOverState gameOverState,
