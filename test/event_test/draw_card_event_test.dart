@@ -43,31 +43,7 @@ void main() {
       expect(changes,
           contains(MoveCardStateChange(card: card, location: Location.hand)));
     });
-    test('returns a remove stack event state change', () {
-      const event = DrawCardEvent(player: Player.one);
-      final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
-        gameOverState: GameOverState.playing,
-        cards: [
-          CardObject(
-            controller: Player.one,
-            owner: Player.one,
-            enteredBattlefieldThisTurn: false,
-            location: Location.deck,
-          )
-        ],
-        stack: [event],
-        activePlayer: Player.one,
-        priorityPlayer: Player.one,
-        turnPhase: TurnPhase.draw,
-      );
-      final changes = state.resolveTopStackEvent();
 
-      expect(changes, contains(RemoveStackEventStateChange(event: event)));
-    });
     test('returns a game over state change if the deck is empty', () {
       final state = const GameState(
         gameInfo: GameInfo(

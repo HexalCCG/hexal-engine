@@ -1,4 +1,6 @@
+import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
+import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/game_info.dart';
@@ -10,44 +12,29 @@ import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  group('GameState creation', () {
-    const p1 = PlayerObject(name: 'Alice');
-    const p2 = PlayerObject(name: 'Bob');
-    const card1 = CardObject(
-      owner: Player.one,
-      controller: Player.one,
-      enteredBattlefieldThisTurn: false,
-      location: Location.deck,
-    );
-    const card2 = CardObject(
-      owner: Player.two,
-      controller: Player.two,
-      enteredBattlefieldThisTurn: false,
-      location: Location.deck,
-    );
+  test('Resolve top stack event returns a remove stack event state change', () {
+    const event = DrawCardEvent(player: Player.one);
     final state = const GameState(
       gameInfo: GameInfo(
-        player1: p1,
-        player2: p2,
+        player1: PlayerObject(name: 'Alice'),
+        player2: PlayerObject(name: 'Bob'),
       ),
       gameOverState: GameOverState.playing,
-      cards: [card1, card2],
-      stack: [],
+      cards: [
+        CardObject(
+          controller: Player.one,
+          owner: Player.one,
+          enteredBattlefieldThisTurn: false,
+          location: Location.deck,
+        )
+      ],
+      stack: [event],
       activePlayer: Player.one,
-      priorityPlayer: Player.two,
-      turnPhase: TurnPhase.start,
+      priorityPlayer: Player.one,
+      turnPhase: TurnPhase.draw,
     );
-    test('records players.', () {
-      expect(state.gameInfo.player1, isNotNull);
-      expect(state.gameInfo.player2, isNotNull);
-      expect(state.gameInfo.player2, isNot(equals(state.gameInfo.player1)));
-    });
-    test('records active and priority player.', () {
-      expect(state.activePlayer, Player.one);
-      expect(state.priorityPlayer, Player.two);
-    });
-    test('records passed card list.', () {
-      expect(state.cards.length, 2);
-    });
+    final changes = state.resolveTopStackEvent();
+
+    expect(changes, contains(RemoveStackEventStateChange(event: event)));
   });
 }

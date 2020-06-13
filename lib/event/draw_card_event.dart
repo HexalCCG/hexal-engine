@@ -13,7 +13,8 @@ class DrawCardEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     // TODO: implement apply
-    throw UnimplementedError();
+    //throw UnimplementedError();
+    return [];
   }
 
   @override
