@@ -14,14 +14,11 @@ import 'turn_phase.dart';
 class GameState extends Equatable {
   final GameInfo gameInfo;
   final GameOverState gameOverState;
-  final List<Event> stack;
   final List<CardObject> cards;
+  final List<Event> stack;
   final Player activePlayer;
   final Player priorityPlayer;
   final TurnPhase turnPhase;
-
-  final List<CardObject> p1DeckOrder;
-  final List<CardObject> p2DeckOrder;
 
   Player get notPriorityPlayer =>
       (priorityPlayer == Player.one) ? Player.two : Player.one;
@@ -36,8 +33,6 @@ class GameState extends Equatable {
     @required this.activePlayer,
     @required this.priorityPlayer,
     @required this.turnPhase,
-    @required this.p1DeckOrder,
-    @required this.p2DeckOrder,
   });
 
   const GameState.startingState({
@@ -48,9 +43,7 @@ class GameState extends Equatable {
         stack = const [],
         activePlayer = player1Starts ? Player.one : Player.two,
         priorityPlayer = player1Starts ? Player.one : Player.two,
-        turnPhase = TurnPhase.start,
-        p1DeckOrder = const [],
-        p2DeckOrder = const [];
+        turnPhase = TurnPhase.start;
 
   List<StateChange> applyAction(Action action) => action.apply(this);
 
@@ -68,8 +61,6 @@ class GameState extends Equatable {
     Player activePlayer,
     Player priorityPlayer,
     TurnPhase turnPhase,
-    List<CardObject> p1DeckOrder,
-    List<CardObject> p2DeckOrder,
   }) {
     return GameState(
       gameInfo: gameInfo ?? this.gameInfo,
@@ -79,8 +70,6 @@ class GameState extends Equatable {
       activePlayer: activePlayer ?? this.activePlayer,
       priorityPlayer: priorityPlayer ?? this.priorityPlayer,
       turnPhase: turnPhase ?? this.turnPhase,
-      p1DeckOrder: p1DeckOrder ?? this.p1DeckOrder,
-      p2DeckOrder: p2DeckOrder ?? this.p2DeckOrder,
     );
   }
 
@@ -93,7 +82,5 @@ class GameState extends Equatable {
         activePlayer,
         priorityPlayer,
         turnPhase,
-        p1DeckOrder,
-        p2DeckOrder,
       ];
 }

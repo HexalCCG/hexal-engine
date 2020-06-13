@@ -27,8 +27,6 @@ void main() {
       activePlayer: Player.one,
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.start,
-      p1DeckOrder: [],
-      p2DeckOrder: [],
     );
     final stateChange = AddStackEventStateChange(event: event);
     expect(

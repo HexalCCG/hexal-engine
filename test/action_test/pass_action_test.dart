@@ -27,8 +27,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       const action = PassAction();
       final change = state.applyAction(action);
@@ -49,8 +47,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       const action = PassAction();
       final change = state.applyAction(action);
@@ -74,8 +70,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.end,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       const action = PassAction();
       final change = state.applyAction(action);

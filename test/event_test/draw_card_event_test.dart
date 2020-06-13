@@ -37,8 +37,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
-        p1DeckOrder: [card],
-        p2DeckOrder: [],
       );
       final changes = state.resolveTopStackEvent();
 
@@ -65,8 +63,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       final changes = state.resolveTopStackEvent();
 
@@ -84,8 +80,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       final changes = state.resolveTopStackEvent();
 

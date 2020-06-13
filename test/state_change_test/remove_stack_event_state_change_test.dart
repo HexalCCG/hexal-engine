@@ -27,8 +27,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       const change = RemoveStackEventStateChange(event: event);
       expect(
@@ -44,8 +42,6 @@ void main() {
           activePlayer: Player.one,
           priorityPlayer: Player.one,
           turnPhase: TurnPhase.start,
-          p1DeckOrder: [],
-          p2DeckOrder: [],
         ),
       );
     });
@@ -61,8 +57,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       const change =
           RemoveStackEventStateChange(event: DrawCardEvent(player: Player.one));

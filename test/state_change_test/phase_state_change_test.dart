@@ -23,8 +23,6 @@ void main() {
       activePlayer: Player.one,
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
-      p1DeckOrder: [],
-      p2DeckOrder: [],
     );
     final stateChange = PhaseStateChange(phase: TurnPhase.draw);
     expect(
@@ -46,8 +44,6 @@ void main() {
       activePlayer: Player.one,
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
-      p1DeckOrder: [],
-      p2DeckOrder: [],
     );
     final stateChange = PhaseStateChange(phase: TurnPhase.draw);
     expect(

@@ -35,8 +35,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [card],
-        p2DeckOrder: [],
       );
       final stateChange =
           MoveCardStateChange(card: card, location: Location.hand);
@@ -60,8 +58,6 @@ void main() {
           activePlayer: Player.one,
           priorityPlayer: Player.one,
           turnPhase: TurnPhase.start,
-          p1DeckOrder: [card],
-          p2DeckOrder: [],
         ),
       );
     });
@@ -77,8 +73,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       expect(
           () => state.applyStateChanges([

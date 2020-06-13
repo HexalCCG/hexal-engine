@@ -24,8 +24,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       final stateChange =
           GameOverStateChange(gameOverState: GameOverState.player1Win);
@@ -46,8 +44,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       final stateChange =
           GameOverStateChange(gameOverState: GameOverState.player2Win);
@@ -68,8 +64,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       final stateChange =
           GameOverStateChange(gameOverState: GameOverState.draw);
@@ -91,8 +85,6 @@ void main() {
       activePlayer: Player.one,
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.start,
-      p1DeckOrder: [],
-      p2DeckOrder: [],
     );
     final stateChange = GameOverStateChange(gameOverState: GameOverState.draw);
     expect(
@@ -108,8 +100,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       ),
     );
   });

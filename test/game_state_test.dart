@@ -36,8 +36,6 @@ void main() {
       activePlayer: Player.one,
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
-      p1DeckOrder: [card1],
-      p2DeckOrder: [card2],
     );
     test('records players.', () {
       expect(state.gameInfo.player1, isNotNull);

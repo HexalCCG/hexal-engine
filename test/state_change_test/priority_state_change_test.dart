@@ -24,8 +24,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       final stateChange = PriorityStateChange(player: Player.two);
       expect(
@@ -45,8 +43,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       );
       final stateChange = PriorityStateChange(player: Player.two);
       expect(
@@ -67,8 +63,6 @@ void main() {
       activePlayer: Player.one,
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
-      p1DeckOrder: [],
-      p2DeckOrder: [],
     );
     final stateChange = PriorityStateChange(player: Player.one);
     expect(
@@ -84,8 +78,6 @@ void main() {
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
-        p1DeckOrder: [],
-        p2DeckOrder: [],
       ),
     );
   });
