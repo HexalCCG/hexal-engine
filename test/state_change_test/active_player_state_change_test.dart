@@ -11,7 +11,7 @@ import 'package:hexal_engine/objects/player_object.dart';
 void main() {
   const p1 = PlayerObject(name: 'Alice');
   const p2 = PlayerObject(name: 'Bob');
-  group('Active player state change changes from', () {
+  group('Active player state change changes from.', () {
     test('player 1 to player 2.', () {
       final state = const GameState(
         gameInfo: GameInfo(
@@ -51,7 +51,7 @@ void main() {
       );
     });
   });
-  test('Active player state change doesn\'t change anything except priority',
+  test('Active player state change doesn\'t change anything except priority.',
       () {
     final state = const GameState(
       gameInfo: GameInfo(

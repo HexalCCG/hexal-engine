@@ -61,7 +61,7 @@ void main() {
         ),
       );
     });
-    test('throws a state change exception if the card is not found', () {
+    test('throws a state change exception if the card is not found.', () {
       final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,

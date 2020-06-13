@@ -43,7 +43,7 @@ void main() {
           contains(MoveCardStateChange(card: card, location: Location.hand)));
     });
 
-    test('returns a game over state change if the deck is empty', () {
+    test('returns a game over state change if the deck is empty.', () {
       final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,

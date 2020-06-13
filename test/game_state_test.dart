@@ -12,7 +12,8 @@ import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  test('Resolve top stack event returns a remove stack event state change', () {
+  test('Resolve top stack event returns a remove stack event state change.',
+      () {
     const event = DrawCardEvent(player: Player.one);
     final state = const GameState(
       gameInfo: GameInfo(

@@ -45,7 +45,7 @@ void main() {
         ),
       );
     });
-    test('throws a state change exception if the event is not found', () {
+    test('throws a state change exception if the event is not found.', () {
       final state = const GameState(
         gameInfo: GameInfo(
           player1: p1,
