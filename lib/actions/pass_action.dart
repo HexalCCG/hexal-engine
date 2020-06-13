@@ -10,26 +10,30 @@ class PassAction extends Action {
   const PassAction();
 
   @override
-  List<Object> get props => [];
-
-  @override
   List<StateChange> apply(GameState state) {
     if (state.priorityPlayer == state.activePlayer) {
-      // Pass priority to the other player
+      // Active player has passed so check for non-active response
       return [PriorityStateChange(player: state.notPriorityPlayer)];
-    } else if (state.turnPhase != TurnPhase.end) {
+    }
+    if (state.stack.isNotEmpty) {
+      // Non-active player has passed so resolve top stack event
+      return state.resolveTopStackEvent();
+    }
+    if (state.turnPhase != TurnPhase.end) {
       // Move on to the next phase
       return [
         PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
         PriorityStateChange(player: state.activePlayer)
       ];
-    } else {
-      // Move on to the next turn
-      return [
-        ActivePlayerStateChange(player: state.notActivePlayer),
-        PhaseStateChange(phase: TurnPhase.start),
-        PriorityStateChange(player: state.notActivePlayer)
-      ];
     }
+    // Move on to the next turn
+    return [
+      ActivePlayerStateChange(player: state.notActivePlayer),
+      PhaseStateChange(phase: TurnPhase.start),
+      PriorityStateChange(player: state.notActivePlayer)
+    ];
   }
+
+  @override
+  List<Object> get props => [];
 }

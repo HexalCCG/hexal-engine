@@ -8,11 +8,11 @@ import '../state_change/state_change.dart';
 abstract class Action extends Equatable {
   const Action();
 
+  List<StateChange> apply(GameState state);
+
   @override
   List<Object> get props;
 
   @override
   bool get stringify => true;
-
-  List<StateChange> apply(GameState state);
 }
