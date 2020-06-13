@@ -9,10 +9,10 @@ class PriorityStateChange extends StateChange {
   const PriorityStateChange({@required this.player});
 
   @override
-  List<Object> get props => [player];
-
-  @override
   GameState apply(GameState state) {
     return state.copyWith(priorityPlayer: player);
   }
+
+  @override
+  List<Object> get props => [player];
 }
