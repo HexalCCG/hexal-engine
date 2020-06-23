@@ -1,3 +1,4 @@
+import 'package:hexal_engine/event/damage_player_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
@@ -13,7 +14,7 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  group('Draw card event', () {
+  group('Damage player event event', () {
     const p1 = PlayerObject(name: 'Alice');
     const p2 = PlayerObject(name: 'Bob');
     test('returns the correct move card state change. ', () {
@@ -31,7 +32,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DrawCardEvent(player: Player.one),
+          DamagePlayerEvent(player: Player.one),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -40,7 +41,7 @@ void main() {
       final changes = state.resolveTopStackEvent();
 
       expect(changes,
-          contains(MoveCardStateChange(card: card, location: Location.hand)));
+          contains(MoveCardStateChange(card: card, location: Location.exile)));
     });
 
     test('returns a game over state change if the deck is empty', () {
@@ -51,7 +52,7 @@ void main() {
         ),
         gameOverState: GameOverState.playing,
         cards: [],
-        stack: [DrawCardEvent(player: Player.one)],
+        stack: [DamagePlayerEvent(player: Player.one)],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
