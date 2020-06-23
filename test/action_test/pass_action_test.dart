@@ -1,4 +1,6 @@
+import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
+import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/game_info.dart';
@@ -31,8 +33,7 @@ void main() {
       const action = PassAction();
       final change = state.applyAction(action);
 
-      expect(change,
-          unorderedEquals(const [PriorityStateChange(player: Player.two)]));
+      expect(change, contains(const PriorityStateChange(player: Player.two)));
     });
 
     test('moves phase on when used by the non-priority player. ', () {
@@ -53,7 +54,7 @@ void main() {
 
       expect(
           change,
-          unorderedEquals(const [
+          containsAll(const [
             PhaseStateChange(phase: TurnPhase.draw),
             PriorityStateChange(player: Player.one),
           ]));
@@ -76,11 +77,34 @@ void main() {
 
       expect(
           change,
-          unorderedEquals(const [
+          containsAll(const [
             PhaseStateChange(phase: TurnPhase.start),
             ActivePlayerStateChange(player: Player.two),
             PriorityStateChange(player: Player.two),
           ]));
+    });
+    test('adds a draw event to the stack when entering the draw phase.', () {
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        gameOverState: GameOverState.playing,
+        cards: [],
+        stack: [],
+        activePlayer: Player.one,
+        priorityPlayer: Player.two,
+        turnPhase: TurnPhase.start,
+      );
+      const action = PassAction();
+      final change = state.applyAction(action);
+
+      expect(
+          change,
+          contains(
+            const AddStackEventStateChange(
+                event: DrawCardEvent(player: Player.one)),
+          ));
     });
   });
 }

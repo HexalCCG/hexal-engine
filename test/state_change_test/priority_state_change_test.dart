@@ -51,7 +51,7 @@ void main() {
       );
     });
   });
-  test('Priority state change doesn\'t change anything except priority', () {
+  test('Priority state change doesn\'t change anything except priority.', () {
     final state = const GameState(
       gameInfo: GameInfo(
         player1: p1,
