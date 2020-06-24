@@ -4,4 +4,5 @@ enum Location {
   mana,
   battlefield,
   exile,
+  limbo,
 }

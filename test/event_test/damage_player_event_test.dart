@@ -21,7 +21,7 @@ void main() {
       const card = CardObject(
         controller: Player.one,
         owner: Player.one,
-        enteredBattlefieldThisTurn: false,
+        enteredFieldThisTurn: false,
         location: Location.deck,
       );
       final state = const GameState(
