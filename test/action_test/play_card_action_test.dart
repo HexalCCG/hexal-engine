@@ -49,7 +49,7 @@ void main() {
             AddStackEventStateChange(event: PlayCardEvent(card: card)),
           ]));
     });
-    test('fails if targetting card not in hand', () {
+    test('fails if targeting card not in hand', () {
       const card = CardObject(
         controller: Player.one,
         owner: Player.one,
@@ -71,7 +71,7 @@ void main() {
       const action = PlayCardAction(card: card);
 
       expect(
-        state.applyAction(action),
+        () => state.applyAction(action),
         throwsA(isA<ActionException>()),
       );
     });
@@ -97,7 +97,7 @@ void main() {
       const action = PlayCardAction(card: card);
 
       expect(
-        state.applyAction(action),
+        () => state.applyAction(action),
         throwsA(isA<ActionException>()),
       );
     });

@@ -60,8 +60,10 @@ void main() {
       );
       const change =
           RemoveStackEventStateChange(event: DrawCardEvent(player: Player.one));
-      expect(() => state.applyStateChanges([change]),
-          throwsA(isA<StateChangeException>()));
+      expect(
+        () => state.applyStateChanges([change]),
+        throwsA(isA<StateChangeException>()),
+      );
     });
   });
 }

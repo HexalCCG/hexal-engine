@@ -2,7 +2,6 @@ import 'package:hexal_engine/event/damage_player_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
-import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/state_change/game_over_state_change.dart';
