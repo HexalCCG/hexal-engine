@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/combination/put_into_field_state_changes.dart';
 import 'package:meta/meta.dart';
 
 import '../game_state/game_state.dart';
@@ -12,7 +13,7 @@ class PlayCardEvent extends Event {
 
   @override
   List<StateChange> apply(GameState state) {
-    throw UnimplementedError();
+    return PutIntoFieldStateChanges.generate(card);
   }
 
   @override
