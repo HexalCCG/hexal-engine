@@ -12,7 +12,7 @@ class PutIntoFieldStateChanges {
         location: Location.battlefield,
       ),
       ModifyEnteredFieldThisTurnStateChange(
-        card: card.copyWith(location: Location.battlefield),
+        card: card.copyWith({'location': Location.battlefield}),
         enteredFieldThisTurn: true,
       ),
     ];

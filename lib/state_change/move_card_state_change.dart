@@ -16,7 +16,7 @@ class MoveCardStateChange extends StateChange {
   GameState apply(GameState state) {
     try {
       state.cards.singleWhere((element) => element == card);
-      final newCard = card.copyWith(location: location);
+      final newCard = card.copyWith({'location': location});
       final newCards = state.cards.toList()
         ..remove(card)
         ..add(newCard);
