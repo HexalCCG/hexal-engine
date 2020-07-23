@@ -1,5 +1,6 @@
 import 'package:hexal_engine/event/play_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
+import 'package:hexal_engine/state_change/combination/put_into_field_state_changes.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/location.dart';
@@ -16,13 +17,12 @@ void main() {
     const p1 = PlayerObject(name: 'Alice');
     const p2 = PlayerObject(name: 'Bob');
 
-    test('returns the correct move card state change. ', () {
-      /*
+    test('returns the correct enter battlefield event. ', () {
       const card = CardObject(
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,
-        location: Location.deck,
+        location: Location.limbo,
       );
       final state = const GameState(
         gameInfo: GameInfo(
@@ -32,20 +32,15 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          PlayCardEvent(card: null),
+          PlayCardEvent(card: card),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
-        turnPhase: TurnPhase.draw,
+        turnPhase: TurnPhase.main1,
       );
       final changes = state.resolveTopStackEvent();
 
-      expect(
-          changes,
-          contains(
-              MoveCardStateChange(card: card, location: Location.battlefield)));
-              */
-      // TODO: Implement this test
+      expect(changes, containsAll(PutIntoFieldStateChanges.generate(card)));
     });
   });
 }

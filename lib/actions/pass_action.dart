@@ -12,12 +12,12 @@ class PassAction extends Action {
     if (state.priorityPlayer == state.activePlayer) {
       // Active player has passed so check for non-active response
       return [PriorityStateChange(player: state.notPriorityPlayer)];
-    }
-    if (state.stack.isNotEmpty) {
+    } else if (state.stack.isNotEmpty) {
       // Non-active player has passed so resolve top stack event
       return state.resolveTopStackEvent();
+    } else {
+      return NextPhaseStateChanges.generate(state);
     }
-    return NextPhaseStateChanges.generate(state);
   }
 
   @override
