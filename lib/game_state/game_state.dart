@@ -47,15 +47,15 @@ class GameState extends Equatable {
         turnPhase = TurnPhase.start;
 
   /// Returns state changes caused by the provided action.
-  List<StateChange> applyAction(Action action) => action.apply(this);
-
-  /// Generates then applies state changes for provided action.
-  GameState applyActionStateChanges(Action action) =>
-      applyStateChanges(applyAction(action));
+  List<StateChange> generateStateChanges(Action action) => action.apply(this);
 
   /// Returns GameState created by the specified state changes.
   GameState applyStateChanges(List<StateChange> changes) =>
       changes.fold(this, (currentState, change) => change.apply(currentState));
+
+  /// Generates then applies state changes for provided action.
+  GameState applyAction(Action action) =>
+      applyStateChanges(generateStateChanges(action));
 
   List<StateChange> resolveTopStackEvent() => stack.last.apply(this)
     ..add(RemoveStackEventStateChange(event: stack.last));
@@ -108,4 +108,8 @@ class GameState extends Equatable {
 
   @override
   bool get stringify => true;
+
+  /// Override toString to fix equatable stringify missing some props.
+  @override
+  String toString() => props.toString();
 }
