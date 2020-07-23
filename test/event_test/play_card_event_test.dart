@@ -1,10 +1,10 @@
+import 'package:hexal_engine/cards/sample/test_card.dart';
 import 'package:hexal_engine/event/play_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/state_change/combination/put_into_field_state_changes.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
@@ -17,7 +17,7 @@ void main() {
     const p2 = PlayerObject(name: 'Bob');
 
     test('returns the correct enter battlefield event. ', () {
-      const card = CardObject(
+      const card = TestCard(
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,

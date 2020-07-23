@@ -1,9 +1,9 @@
+import 'package:hexal_engine/cards/sample/test_card.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:hexal_engine/state_change/move_card_state_change.dart';
 import 'package:hexal_engine/game_state/game_info.dart';
@@ -17,7 +17,7 @@ void main() {
     const p1 = PlayerObject(name: 'Alice');
     const p2 = PlayerObject(name: 'Bob');
     test('returns the correct move card state change. ', () {
-      const card = CardObject(
+      const card = TestCard(
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,

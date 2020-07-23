@@ -1,13 +1,10 @@
+import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
 import 'package:hexal_engine/cards/sample/first_creature_card.dart';
-import 'package:hexal_engine/event/damage_player_event.dart';
-import 'package:hexal_engine/event/play_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/state_change/game_over_state_change.dart';
-import 'package:hexal_engine/state_change/move_card_state_change.dart';
 import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
@@ -38,11 +35,20 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
       );
-      state = state.applyActionStateChanges(PlayCardAction(card: card));
-      print(state);
-      //final changes = state.resolveTopStackEvent();
+      // Game starts in player 1's main phase 1, and player 1 has priority. They have one First Creature in hand.
+      // Player 1 plays their First Creature.
+      state = state.applyAction(PlayCardAction(card: card));
 
-      //print(changes);
+      // First Creature moves into limbo and priority passes.
+      expect(state.getCardsByLocation(Player.one, Location.limbo).first,
+          isA<FirstCreatureCard>());
+      expect(state.priorityPlayer, Player.two);
+
+      // Player 2 passes. Priority passes.
+      state = state.applyAction(PassAction());
+      // Player 1 passes. Played card is resolved.
+      state = state.applyAction(PassAction());
+      print(state);
     });
   });
 }

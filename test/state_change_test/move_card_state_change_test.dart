@@ -1,3 +1,4 @@
+import 'package:hexal_engine/cards/sample/test_card.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/exceptions/state_change_exception.dart';
@@ -8,7 +9,6 @@ import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
@@ -16,7 +16,7 @@ void main() {
   const p2 = PlayerObject(name: 'Bob');
   group('Move card state change', () {
     test('moves card from deck to hand.', () {
-      const card = CardObject(
+      const card = TestCard(
         owner: Player.one,
         controller: Player.one,
         location: Location.deck,
@@ -47,7 +47,7 @@ void main() {
           ),
           gameOverState: GameOverState.playing,
           cards: [
-            CardObject(
+            TestCard(
               owner: Player.one,
               controller: Player.one,
               location: Location.hand,
@@ -77,7 +77,7 @@ void main() {
       expect(
           () => state.applyStateChanges([
                 MoveCardStateChange(
-                    card: CardObject(
+                    card: TestCard(
                         controller: Player.one,
                         location: Location.deck,
                         enteredFieldThisTurn: false,
