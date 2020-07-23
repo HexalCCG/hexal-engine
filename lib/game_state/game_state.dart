@@ -46,8 +46,14 @@ class GameState extends Equatable {
         priorityPlayer = player1Starts ? Player.one : Player.two,
         turnPhase = TurnPhase.start;
 
+  /// Returns state changes caused by the provided action.
   List<StateChange> applyAction(Action action) => action.apply(this);
 
+  /// Generates then applies state changes for provided action.
+  GameState applyActionStateChanges(Action action) =>
+      applyStateChanges(applyAction(action));
+
+  /// Returns GameState created by the specified state changes.
   GameState applyStateChanges(List<StateChange> changes) =>
       changes.fold(this, (currentState, change) => change.apply(currentState));
 
@@ -99,4 +105,7 @@ class GameState extends Equatable {
         priorityPlayer,
         turnPhase,
       ];
+
+  @override
+  bool get stringify => true;
 }

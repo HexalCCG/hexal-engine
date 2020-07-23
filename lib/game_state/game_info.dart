@@ -18,4 +18,7 @@ class GameInfo extends Equatable {
 
   @override
   List<Object> get props => [player1, player2];
+
+  @override
+  bool get stringify => true;
 }

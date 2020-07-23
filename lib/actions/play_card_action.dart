@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/priority_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../event/play_card_event.dart';
@@ -31,6 +32,7 @@ class PlayCardAction extends Action {
     return [
       MoveCardStateChange(card: card, location: Location.limbo),
       AddStackEventStateChange(event: PlayCardEvent(card: card)),
+      PriorityStateChange(player: state.notPriorityPlayer),
     ];
   }
 }

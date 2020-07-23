@@ -11,10 +11,7 @@ import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/objects/player_object.dart';
-import 'package:hexal_engine/state_change/phase_state_change.dart';
-import 'package:hexal_engine/state_change/priority_state_change.dart';
 
 void main() {
   group('Play card action', () {
