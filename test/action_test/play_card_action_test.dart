@@ -1,8 +1,8 @@
 import 'package:hexal_engine/actions/play_card_action.dart';
+import 'package:hexal_engine/cards/sample/test_card.dart';
 import 'package:hexal_engine/event/play_card_event.dart';
 import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
 import 'package:test/test.dart';
 
@@ -19,7 +19,7 @@ void main() {
     const p2 = PlayerObject(name: 'Bob');
 
     test('adds play card event to the stack. ', () {
-      const card = CardObject(
+      const card = TestCard(
         controller: Player.one,
         owner: Player.one,
         location: Location.hand,
@@ -38,7 +38,7 @@ void main() {
         turnPhase: TurnPhase.main1,
       );
       const action = PlayCardAction(card: card);
-      final change = state.applyAction(action);
+      final change = state.generateStateChanges(action);
 
       expect(
           change,
@@ -47,7 +47,7 @@ void main() {
           ]));
     });
     test('fails if targeting card not in hand', () {
-      const card = CardObject(
+      const card = TestCard(
         controller: Player.one,
         owner: Player.one,
         location: Location.deck,
@@ -68,12 +68,12 @@ void main() {
       const action = PlayCardAction(card: card);
 
       expect(
-        () => state.applyAction(action),
+        () => state.generateStateChanges(action),
         throwsA(isA<ActionException>()),
       );
     });
     test('fails if used by non-active player', () {
-      const card = CardObject(
+      const card = TestCard(
         controller: Player.two,
         owner: Player.two,
         location: Location.hand,
@@ -94,7 +94,7 @@ void main() {
       const action = PlayCardAction(card: card);
 
       expect(
-        () => state.applyAction(action),
+        () => state.generateStateChanges(action),
         throwsA(isA<ActionException>()),
       );
     });

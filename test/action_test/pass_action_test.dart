@@ -31,7 +31,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       const action = PassAction();
-      final change = state.applyAction(action);
+      final change = state.generateStateChanges(action);
 
       expect(change, contains(const PriorityStateChange(player: Player.two)));
     });
@@ -50,7 +50,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       const action = PassAction();
-      final change = state.applyAction(action);
+      final change = state.generateStateChanges(action);
 
       expect(
           change,
@@ -73,7 +73,7 @@ void main() {
         turnPhase: TurnPhase.end,
       );
       const action = PassAction();
-      final change = state.applyAction(action);
+      final change = state.generateStateChanges(action);
 
       expect(
           change,
@@ -97,7 +97,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       const action = PassAction();
-      final change = state.applyAction(action);
+      final change = state.generateStateChanges(action);
 
       expect(
           change,
