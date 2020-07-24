@@ -83,6 +83,10 @@ void main() {
             PriorityStateChange(player: Player.two),
           ]));
     });
+    test('adds a heal all creatures state change when end phase ends.', () {
+      // TODO: heal creatures test
+      expect(1, 2);
+    });
     test('adds a draw event to the stack when entering the draw phase.', () {
       final state = const GameState(
         gameInfo: GameInfo(
