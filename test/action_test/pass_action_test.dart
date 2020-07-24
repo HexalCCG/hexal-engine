@@ -1,6 +1,9 @@
+import 'package:hexal_engine/cards/sample/test_card.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
+import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
+import 'package:hexal_engine/state_change/heal_card_state_change.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/game_info.dart';
@@ -84,8 +87,32 @@ void main() {
           ]));
     });
     test('adds a heal all creatures state change when end phase ends.', () {
-      // TODO: heal creatures test
-      expect(1, 2);
+      const card = TestCard(
+        controller: Player.one,
+        owner: Player.one,
+        location: Location.battlefield,
+        enteredFieldThisTurn: false,
+      );
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        gameOverState: GameOverState.playing,
+        cards: [card],
+        stack: [],
+        activePlayer: Player.one,
+        priorityPlayer: Player.two,
+        turnPhase: TurnPhase.end,
+      );
+      const action = PassAction();
+      final change = state.generateStateChanges(action);
+
+      expect(
+          change,
+          contains(
+            const HealCardStateChange(card: card),
+          ));
     });
     test('adds a draw event to the stack when entering the draw phase.', () {
       final state = const GameState(

@@ -1,23 +1,20 @@
-import 'package:meta/meta.dart';
-
 import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
-import '../game_state/location.dart';
 import '../objects/card_object.dart';
 import 'state_change.dart';
 
-class MoveCardStateChange extends StateChange {
+/// Sets the damage property of the provided card to 0.
+class HealCardStateChange extends StateChange {
   final CardObject card;
-  final Location location;
 
-  const MoveCardStateChange({@required this.card, @required this.location});
+  const HealCardStateChange({this.card});
 
   @override
   GameState apply(GameState state) {
     try {
       final newCard = state.cards
           .singleWhere((element) => element == card)
-          .copyWith({'location': location});
+          .copyWith({'damage': 0});
       final newCards = state.cards.toList()
         ..remove(card)
         ..add(newCard);
@@ -26,7 +23,7 @@ class MoveCardStateChange extends StateChange {
     } catch (e) {
       if (e is StateError) {
         throw const StateChangeException(
-            'MoveCardStateChange: Provided card not found exactly once in state');
+            'HealCardStateChange: Provided card not found exactly once in state');
       } else {
         rethrow;
       }
@@ -34,5 +31,5 @@ class MoveCardStateChange extends StateChange {
   }
 
   @override
-  List<Object> get props => [card, location];
+  List<Object> get props => [card];
 }

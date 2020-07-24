@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/combination/heal_all_state_changes.dart';
 import 'package:hexal_engine/state_change/modify_entered_field_this_turn_state_change.dart';
 
 import '../../event/draw_card_event.dart';
@@ -35,7 +36,8 @@ class NextPhaseStateChanges {
               return null;
             }
           }),
-          // TODO heal all creatures
+          // Heal all creatures
+          ...HealAllStateChanges.generate(state),
         ];
       default:
         // Move on to the next phase

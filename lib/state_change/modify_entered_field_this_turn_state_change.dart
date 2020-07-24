@@ -15,9 +15,9 @@ class ModifyEnteredFieldThisTurnStateChange extends StateChange {
   @override
   GameState apply(GameState state) {
     try {
-      state.cards.singleWhere((element) => element == card);
-      final newCard =
-          card.copyWith({'enteredFieldThisTurn': enteredFieldThisTurn});
+      final newCard = state.cards
+          .singleWhere((element) => element == card)
+          .copyWith({'enteredFieldThisTurn': enteredFieldThisTurn});
       final newCards = state.cards.toList()
         ..remove(card)
         ..add(newCard);
