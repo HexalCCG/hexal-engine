@@ -1,4 +1,4 @@
-import 'package:hexal_engine/cards/sample/test_card.dart';
+import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/exceptions/state_change_exception.dart';

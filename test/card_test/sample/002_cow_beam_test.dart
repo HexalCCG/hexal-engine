@@ -1,6 +1,6 @@
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
-import 'package:hexal_engine/cards/sample/first_creature_card.dart';
+import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
 
@@ -12,11 +12,11 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  group('First creature card ', () {
+  group('Card test S.002  ', () {
     const p1 = PlayerObject(name: 'Alice');
     const p2 = PlayerObject(name: 'Bob');
     test('enters the battlefield when played.', () {
-      const card = FirstCreatureCard(
+      const card = CowBeamCard(
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,
@@ -41,14 +41,19 @@ void main() {
 
       // First Creature moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo).first,
-          isA<FirstCreatureCard>());
+          isA<CowBeamCard>());
       expect(state.priorityPlayer, Player.two);
+
+      print(state);
 
       // Player 2 passes. Priority passes.
       state = state.applyAction(PassAction());
       // Player 1 passes. Played card is resolved.
       state = state.applyAction(PassAction());
-      print(state);
+
+      expect(state.getCardsByLocation(Player.one, Location.battlefield).first,
+          isA<CowBeamCard>());
+      expect(state.priorityPlayer, Player.one);
     });
   });
 }

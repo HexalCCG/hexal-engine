@@ -1,5 +1,5 @@
 import 'package:hexal_engine/actions/play_card_action.dart';
-import 'package:hexal_engine/cards/sample/test_card.dart';
+import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/event/play_card_event.dart';
 import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:hexal_engine/game_state/location.dart';

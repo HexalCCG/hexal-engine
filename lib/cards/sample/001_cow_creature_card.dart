@@ -5,7 +5,7 @@ import 'package:hexal_engine/cards/creature.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
 
-class FirstCreatureCard extends CardObject with MCreature implements ICreature {
+class CowCreatureCard extends CardObject with MCreature implements ICreature {
   @override
   final Player owner;
   @override
@@ -22,7 +22,7 @@ class FirstCreatureCard extends CardObject with MCreature implements ICreature {
   @override
   int get baseHealth => 1;
 
-  const FirstCreatureCard(
+  const CowCreatureCard(
       {@required this.owner,
       @required this.controller,
       @required this.location,
@@ -30,8 +30,8 @@ class FirstCreatureCard extends CardObject with MCreature implements ICreature {
       @required this.damage});
 
   @override
-  FirstCreatureCard copyWith(Map<String, dynamic> data) {
-    return FirstCreatureCard(
+  CowCreatureCard copyWith(Map<String, dynamic> data) {
+    return CowCreatureCard(
       owner: data['owner'] ?? owner,
       controller: data['controller'] ?? controller,
       location: data['location'] ?? location,
