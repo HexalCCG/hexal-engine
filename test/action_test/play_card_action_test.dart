@@ -42,8 +42,10 @@ void main() {
 
       expect(
           change,
-          containsAll(const [
-            AddStackEventStateChange(event: PlayCardEvent(card: card)),
+          containsAll([
+            AddStackEventStateChange(
+                event: PlayCardEvent(
+                    card: card.copyWith({'location': Location.limbo}))),
           ]));
     });
     test('fails if targeting card not in hand', () {

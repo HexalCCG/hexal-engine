@@ -31,7 +31,9 @@ class PlayCardAction extends Action {
     }
     return [
       MoveCardStateChange(card: card, location: Location.limbo),
-      AddStackEventStateChange(event: PlayCardEvent(card: card)),
+      AddStackEventStateChange(
+          event:
+              PlayCardEvent(card: card.copyWith({'location': Location.limbo}))),
       PriorityStateChange(player: state.notPriorityPlayer),
     ];
   }
