@@ -15,11 +15,12 @@ import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
   group('Play card action', () {
-    const p1 = PlayerObject(name: 'Alice');
-    const p2 = PlayerObject(name: 'Bob');
+    const p1 = PlayerObject(id: 0, name: 'Alice');
+    const p2 = PlayerObject(id: 1, name: 'Bob');
 
     test('adds play card event to the stack. ', () {
       const card = TestCard(
+        id: 2,
         controller: Player.one,
         owner: Player.one,
         location: Location.hand,
@@ -50,6 +51,7 @@ void main() {
     });
     test('fails if targeting card not in hand', () {
       const card = TestCard(
+        id: 2,
         controller: Player.one,
         owner: Player.one,
         location: Location.deck,
@@ -76,6 +78,7 @@ void main() {
     });
     test('fails if used by non-active player', () {
       const card = TestCard(
+        id: 2,
         controller: Player.two,
         owner: Player.two,
         location: Location.hand,

@@ -9,8 +9,8 @@ import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  const p1 = PlayerObject(name: 'Alice');
-  const p2 = PlayerObject(name: 'Bob');
+  const p1 = PlayerObject(id: 0, name: 'Alice');
+  const p2 = PlayerObject(id: 1, name: 'Bob');
   group('Game over state change changes from.', () {
     test('playing to player 1 wins.', () {
       final state = const GameState(

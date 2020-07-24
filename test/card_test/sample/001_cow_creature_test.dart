@@ -13,10 +13,11 @@ import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
   group('Card test S.002 ', () {
-    const p1 = PlayerObject(name: 'Alice');
-    const p2 = PlayerObject(name: 'Bob');
+    const p1 = PlayerObject(id: 0, name: 'Alice');
+    const p2 = PlayerObject(id: 1, name: 'Bob');
     test('enters the battlefield when played.', () {
       const card = CowCreatureCard(
+        id: 2,
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,

@@ -9,8 +9,8 @@ import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/phase_state_change.dart';
 
 void main() {
-  const p1 = PlayerObject(name: 'Alice');
-  const p2 = PlayerObject(name: 'Bob');
+  const p1 = PlayerObject(id: 0, name: 'Alice');
+  const p2 = PlayerObject(id: 1, name: 'Bob');
   test('Phase state change changes phase.', () {
     final state = const GameState(
       gameInfo: GameInfo(

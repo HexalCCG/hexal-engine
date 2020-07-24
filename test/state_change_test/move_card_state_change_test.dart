@@ -12,11 +12,12 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  const p1 = PlayerObject(name: 'Alice');
-  const p2 = PlayerObject(name: 'Bob');
+  const p1 = PlayerObject(id: 0, name: 'Alice');
+  const p2 = PlayerObject(id: 1, name: 'Bob');
   group('Move card state change', () {
     test('moves card from deck to hand.', () {
       const card = TestCard(
+        id: 2,
         owner: Player.one,
         controller: Player.one,
         location: Location.deck,
@@ -48,6 +49,7 @@ void main() {
           gameOverState: GameOverState.playing,
           cards: [
             TestCard(
+              id: 2,
               owner: Player.one,
               controller: Player.one,
               location: Location.hand,
@@ -78,6 +80,7 @@ void main() {
           () => state.applyStateChanges([
                 MoveCardStateChange(
                     card: TestCard(
+                        id: 2,
                         controller: Player.one,
                         location: Location.deck,
                         enteredFieldThisTurn: false,

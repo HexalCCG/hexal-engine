@@ -12,17 +12,20 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
+  const p1 = PlayerObject(id: 0, name: 'Alice');
+  const p2 = PlayerObject(id: 1, name: 'Bob');
   test('Resolve top stack event returns a remove stack event state change.',
       () {
     const event = DrawCardEvent(player: Player.one);
     final state = const GameState(
       gameInfo: GameInfo(
-        player1: PlayerObject(name: 'Alice'),
-        player2: PlayerObject(name: 'Bob'),
+        player1: p1,
+        player2: p2,
       ),
       gameOverState: GameOverState.playing,
       cards: [
         TestCard(
+          id: 2,
           controller: Player.one,
           owner: Player.one,
           enteredFieldThisTurn: false,

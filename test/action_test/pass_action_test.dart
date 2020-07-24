@@ -18,8 +18,8 @@ import 'package:hexal_engine/state_change/priority_state_change.dart';
 
 void main() {
   group('Pass action', () {
-    const p1 = PlayerObject(name: 'Alice');
-    const p2 = PlayerObject(name: 'Bob');
+    const p1 = PlayerObject(id: 0, name: 'Alice');
+    const p2 = PlayerObject(id: 1, name: 'Bob');
     test('passes priority when used by the active player. ', () {
       final state = const GameState(
         gameInfo: GameInfo(
@@ -88,6 +88,7 @@ void main() {
     });
     test('adds a heal all creatures state change when end phase ends.', () {
       const card = TestCard(
+        id: 2,
         controller: Player.one,
         owner: Player.one,
         location: Location.battlefield,

@@ -13,11 +13,12 @@ import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
   group('Play card event', () {
-    const p1 = PlayerObject(name: 'Alice');
-    const p2 = PlayerObject(name: 'Bob');
+    const p1 = PlayerObject(id: 0, name: 'Alice');
+    const p2 = PlayerObject(id: 1, name: 'Bob');
 
     test('returns the correct enter battlefield event. ', () {
       const card = TestCard(
+        id: 2,
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,
