@@ -18,4 +18,7 @@ mixin MCreature on CardObject implements ICreature {
   int get health => baseHealth - damage;
   @override
   int get attack => baseAttack;
+
+  @override
+  List<Object> get toStringProps => super.toStringProps..add(damage);
 }

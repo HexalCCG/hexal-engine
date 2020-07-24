@@ -6,6 +6,8 @@ import 'package:hexal_engine/game_state/player.dart';
 
 class TestCard extends CardObject {
   @override
+  final int id;
+  @override
   final Player owner;
   @override
   final Player controller;
@@ -15,6 +17,7 @@ class TestCard extends CardObject {
   final bool enteredFieldThisTurn;
 
   const TestCard({
+    @required this.id,
     @required this.owner,
     @required this.controller,
     @required this.location,
@@ -24,7 +27,8 @@ class TestCard extends CardObject {
   @override
   TestCard copyWith(Map<String, dynamic> data) {
     return TestCard(
-      owner: data['owner'] ?? owner,
+      id: id,
+      owner: owner,
       controller: data['controller'] ?? controller,
       location: data['location'] ?? location,
       enteredFieldThisTurn:

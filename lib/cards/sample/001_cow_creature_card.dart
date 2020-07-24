@@ -7,6 +7,8 @@ import 'package:hexal_engine/game_state/player.dart';
 
 class CowCreatureCard extends CardObject with MCreature implements ICreature {
   @override
+  final int id;
+  @override
   final Player owner;
   @override
   final Player controller;
@@ -23,7 +25,8 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
   int get baseHealth => 1;
 
   const CowCreatureCard(
-      {@required this.owner,
+      {@required this.id,
+      @required this.owner,
       @required this.controller,
       @required this.location,
       @required this.enteredFieldThisTurn,
@@ -32,7 +35,8 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
   @override
   CowCreatureCard copyWith(Map<String, dynamic> data) {
     return CowCreatureCard(
-      owner: data['owner'] ?? owner,
+      id: id,
+      owner: owner,
       controller: data['controller'] ?? controller,
       location: data['location'] ?? location,
       enteredFieldThisTurn:
@@ -40,7 +44,4 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
       damage: data['damage'] ?? damage,
     );
   }
-
-  @override
-  List<Object> get props => [owner, controller, location, enteredFieldThisTurn];
 }

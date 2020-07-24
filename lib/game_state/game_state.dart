@@ -12,6 +12,8 @@ import 'location.dart';
 import 'player.dart';
 import 'turn_phase.dart';
 
+/// GameStates represent a single moment snapshot of a game.
+@immutable
 class GameState extends Equatable {
   final GameInfo gameInfo;
   final GameOverState gameOverState;

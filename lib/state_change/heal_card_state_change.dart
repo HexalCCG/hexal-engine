@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
 import '../objects/card_object.dart';
@@ -7,7 +9,7 @@ import 'state_change.dart';
 class HealCardStateChange extends StateChange {
   final CardObject card;
 
-  const HealCardStateChange({this.card});
+  const HealCardStateChange({@required this.card});
 
   @override
   GameState apply(GameState state) {
