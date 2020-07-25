@@ -23,7 +23,10 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
         return [RemoveStackEventStateChange(event: this)];
       }
       // Return the next effect and increment
-      else {}
+      else {
+        // TODO: this
+        throw UnimplementedError();
+      }
     } else {
       return [RemoveStackEventStateChange(event: this)];
     }
