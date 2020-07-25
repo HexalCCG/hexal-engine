@@ -46,5 +46,67 @@ void main() {
           contains(RemoveStackEventStateChange(
               event: OnCardEnterFieldEvent(card: card))));
     });
+    test('adds the card\'s effect if it has only one. ', () {
+      const card = TestCard(
+        id: 2,
+        controller: Player.one,
+        owner: Player.one,
+        enteredFieldThisTurn: false,
+        location: Location.hand,
+      );
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        gameOverState: GameOverState.playing,
+        cards: [card],
+        stack: [
+          OnCardEnterFieldEvent(card: card),
+        ],
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.draw,
+      );
+      final changes = state.resolveTopStackEvent();
+
+      throw UnimplementedError();
+
+      expect(
+          changes,
+          contains(RemoveStackEventStateChange(
+              event: OnCardEnterFieldEvent(card: card))));
+    });
+    test('iterates if the card has effects. ', () {
+      const card = TestCard(
+        id: 2,
+        controller: Player.one,
+        owner: Player.one,
+        enteredFieldThisTurn: false,
+        location: Location.hand,
+      );
+      final state = const GameState(
+        gameInfo: GameInfo(
+          player1: p1,
+          player2: p2,
+        ),
+        gameOverState: GameOverState.playing,
+        cards: [card],
+        stack: [
+          OnCardEnterFieldEvent(card: card),
+        ],
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.draw,
+      );
+      final changes = state.resolveTopStackEvent();
+
+      throw UnimplementedError();
+
+      expect(
+          changes,
+          contains(RemoveStackEventStateChange(
+              event: OnCardEnterFieldEvent(card: card))));
+    });
   });
 }
