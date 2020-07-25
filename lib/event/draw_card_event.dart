@@ -1,6 +1,7 @@
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:hexal_engine/state_change/move_card_state_change.dart';
+import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../game_state/game_state.dart';
@@ -23,10 +24,12 @@ class DrawCardEvent extends Event {
             gameOverState: player == Player.one
                 ? GameOverState.player2Win
                 : GameOverState.player1Win),
+        RemoveStackEventStateChange(event: this),
       ];
     } else {
       return [
         MoveCardStateChange(card: card, location: Location.hand),
+        RemoveStackEventStateChange(event: this),
       ];
     }
   }

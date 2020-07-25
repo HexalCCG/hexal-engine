@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/exceptions/game_state_exception.dart';
+import 'package:hexal_engine/state_change/increment_stack_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
@@ -59,9 +61,22 @@ class GameState extends Equatable {
   GameState applyAction(Action action) =>
       applyStateChanges(generateStateChanges(action));
 
-  List<StateChange> resolveTopStackEvent() => stack.last.apply(this)
-    ..add(RemoveStackEventStateChange(event: stack.last));
+  /// Attempts to resolve the top stack event.
+  List<StateChange> resolveTopStackEvent() {
+    final list = stack.last.apply(this);
 
+    // Check for infinite loops
+    // TODO: Remove in release
+    if (!list.any((element) =>
+        element is RemoveStackEventStateChange ||
+        element is IncrementStackEventStateChange)) {
+      throw GameStateException('Probable infinite loop: no card ');
+    } else {
+      return list;
+    }
+  }
+
+  /// Returns cards in the specified zone.
   List<CardObject> getCardsByLocation(Player player, Location location) {
     return cards
         .where((card) => card.controller == player && card.location == location)
@@ -107,9 +122,6 @@ class GameState extends Equatable {
         priorityPlayer,
         turnPhase,
       ];
-
-  @override
-  bool get stringify => true;
 
   /// Override toString to fix equatable stringify missing some props.
   @override

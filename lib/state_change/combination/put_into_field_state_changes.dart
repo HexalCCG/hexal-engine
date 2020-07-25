@@ -1,4 +1,4 @@
-import 'package:hexal_engine/event/on_card_enter_battlefield_event.dart';
+import 'package:hexal_engine/event/on_card_enter_field_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
@@ -18,7 +18,7 @@ class PutIntoFieldStateChanges {
         card: card,
         enteredFieldThisTurn: true,
       ),
-      AddStackEventStateChange(event: OnCardEnterBattleFieldEvent(card: card)),
+      AddStackEventStateChange(event: OnCardEnterFieldEvent(card: card)),
     ];
   }
 }
