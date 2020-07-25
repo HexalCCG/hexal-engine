@@ -25,14 +25,12 @@ class TestCard extends CardObject {
   });
 
   @override
-  TestCard copyWith(Map<String, dynamic> data) {
-    return TestCard(
-      id: id,
-      owner: owner,
-      controller: data['controller'] ?? controller,
-      location: data['location'] ?? location,
-      enteredFieldThisTurn:
-          data['enteredFieldThisTurn'] ?? enteredFieldThisTurn,
-    );
-  }
+  TestCard copyWith(Map<String, dynamic> data) => TestCard(
+        id: id,
+        owner: owner,
+        controller: data['controller'] ?? controller,
+        location: data['location'] ?? location,
+        enteredFieldThisTurn:
+            data['enteredFieldThisTurn'] ?? enteredFieldThisTurn,
+      );
 }

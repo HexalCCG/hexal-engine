@@ -19,11 +19,6 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
   @override
   final int damage;
 
-  @override
-  int get baseAttack => 1;
-  @override
-  int get baseHealth => 1;
-
   const CowCreatureCard(
       {@required this.id,
       @required this.owner,
@@ -33,15 +28,18 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
       @required this.damage});
 
   @override
-  CowCreatureCard copyWith(Map<String, dynamic> data) {
-    return CowCreatureCard(
-      id: id,
-      owner: owner,
-      controller: data['controller'] ?? controller,
-      location: data['location'] ?? location,
-      enteredFieldThisTurn:
-          data['enteredFieldThisTurn'] ?? enteredFieldThisTurn,
-      damage: data['damage'] ?? damage,
-    );
-  }
+  CowCreatureCard copyWith(Map<String, dynamic> data) => CowCreatureCard(
+        id: id,
+        owner: owner,
+        controller: data['controller'] ?? controller,
+        location: data['location'] ?? location,
+        enteredFieldThisTurn:
+            data['enteredFieldThisTurn'] ?? enteredFieldThisTurn,
+        damage: data['damage'] ?? damage,
+      );
+
+  @override
+  int get baseAttack => 1;
+  @override
+  int get baseHealth => 1;
 }
