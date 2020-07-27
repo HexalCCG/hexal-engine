@@ -3,7 +3,6 @@ import 'package:hexal_engine/effect/effect.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:meta/meta.dart';
 
-import 'package:hexal_engine/cards/mi_creature.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
 

@@ -22,7 +22,6 @@ void main() {
         owner: Player.one,
         enteredFieldThisTurn: false,
         location: Location.hand,
-        damage: 0,
       );
       var state = const GameState(
         gameInfo: GameInfo(
