@@ -2,6 +2,8 @@ import 'package:hexal_engine/cards/i_on_enter_field.dart';
 import 'package:hexal_engine/event/event.dart';
 import 'package:hexal_engine/event/i_incrementing.dart';
 import 'package:hexal_engine/objects/card_object.dart';
+import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
+import 'package:hexal_engine/state_change/increment_stack_event_state_change.dart';
 import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
 import 'package:hexal_engine/state_change/state_change.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
@@ -24,8 +26,11 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
       }
       // Return the next effect and increment
       else {
-        // TODO: this
-        throw UnimplementedError();
+        return [
+          AddStackEventStateChange(
+              event: (card as IOnEnterField).onEnterFieldEffects[counter]),
+          IncrementStackEventStateChange(event: this),
+        ];
       }
     } else {
       return [RemoveStackEventStateChange(event: this)];
@@ -33,7 +38,7 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
   }
 
   @override
-  Event get increment =>
+  OnCardEnterFieldEvent get increment =>
       OnCardEnterFieldEvent(card: card, counter: counter + 1);
 
   @override
