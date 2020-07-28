@@ -3,7 +3,7 @@ import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/event/play_card_event.dart';
 import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
+import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/player.dart';
@@ -44,7 +44,7 @@ void main() {
       expect(
           change,
           containsAll([
-            AddStackEventStateChange(
+            AddEventStateChange(
                 event: PlayCardEvent(
                     card: card.copyWith({'location': Location.limbo}))),
           ]));

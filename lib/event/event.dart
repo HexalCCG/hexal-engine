@@ -7,7 +7,9 @@ import '../state_change/state_change.dart';
 /// Events are items placed on the stack to resolve.
 @immutable
 abstract class Event extends Equatable {
-  const Event();
+  final bool resolved;
+
+  const Event({@required this.resolved});
 
   List<StateChange> apply(GameState state);
 

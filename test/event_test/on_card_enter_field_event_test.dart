@@ -1,7 +1,7 @@
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/event/on_card_enter_field_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
+import 'package:hexal_engine/state_change/remove_event_state_change.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/location.dart';

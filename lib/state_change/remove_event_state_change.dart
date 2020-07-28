@@ -5,10 +5,10 @@ import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
 
-class RemoveStackEventStateChange extends StateChange {
+class RemoveEventStateChange extends StateChange {
   final Event event;
 
-  const RemoveStackEventStateChange({@required this.event});
+  const RemoveEventStateChange({@required this.event});
 
   @override
   GameState apply(GameState state) {
@@ -17,7 +17,7 @@ class RemoveStackEventStateChange extends StateChange {
       return state.copyWith(stack: newStack);
     } else {
       throw const StateChangeException(
-          'RemoveStackEventStateChange: Provided event not found in stack');
+          'RemoveEventStateChange: Provided event not found in stack');
     }
   }
 

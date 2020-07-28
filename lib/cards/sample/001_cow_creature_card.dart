@@ -1,9 +1,9 @@
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:meta/meta.dart';
 
-import 'package:hexal_engine/cards/mi_creature.dart';
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/game_state/player.dart';
+import '../../game_state/location.dart';
+import '../../game_state/player.dart';
+import '../../objects/card_object.dart';
+import '../mi_creature.dart';
 
 class CowCreatureCard extends CardObject with MCreature implements ICreature {
   @override

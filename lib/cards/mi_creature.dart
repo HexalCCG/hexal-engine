@@ -1,4 +1,4 @@
-import 'package:hexal_engine/objects/card_object.dart';
+import '../objects/card_object.dart';
 
 abstract class ICreature {
   // Constant

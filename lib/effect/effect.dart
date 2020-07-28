@@ -1,12 +1,12 @@
-import 'package:equatable/equatable.dart';
-
 import '../event/event.dart';
 import '../game_state/game_state.dart';
+import '../state_change/state_change.dart';
 
-abstract class Effect extends Equatable {
+abstract class Effect extends Event {
   const Effect();
 
-  List<Event> apply(GameState state);
+  @override
+  List<StateChange> apply(GameState state);
 
   @override
   List<Object> get props;

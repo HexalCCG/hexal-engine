@@ -1,14 +1,13 @@
-import 'package:hexal_engine/state_change/combination/heal_all_state_changes.dart';
-import 'package:hexal_engine/state_change/modify_entered_field_this_turn_state_change.dart';
-
 import '../../event/draw_card_event.dart';
 import '../../game_state/game_state.dart';
 import '../../game_state/turn_phase.dart';
 import '../active_player_state_change.dart';
-import '../add_stack_event_state_change.dart';
+import '../add_event_state_change.dart';
+import '../modify_entered_field_this_turn_state_change.dart';
 import '../phase_state_change.dart';
 import '../priority_state_change.dart';
 import '../state_change.dart';
+import 'heal_all_state_changes.dart';
 
 class NextPhaseStateChanges {
   static List<StateChange> generate(GameState state) {
@@ -16,8 +15,7 @@ class NextPhaseStateChanges {
       case TurnPhase.start:
         // Entering draw phase so add draw a card
         return [
-          AddStackEventStateChange(
-              event: DrawCardEvent(player: state.activePlayer)),
+          AddEventStateChange(event: DrawCardEvent(player: state.activePlayer)),
           PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
           PriorityStateChange(player: state.activePlayer)
         ];

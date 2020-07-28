@@ -7,7 +7,7 @@ import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/objects/player_object.dart';
-import 'package:hexal_engine/state_change/remove_stack_event_state_change.dart';
+import 'package:hexal_engine/state_change/remove_event_state_change.dart';
 import 'package:test/test.dart';
 
 void main() {

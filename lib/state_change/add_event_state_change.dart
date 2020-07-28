@@ -4,10 +4,10 @@ import '../event/event.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
 
-class AddStackEventStateChange extends StateChange {
+class AddEventStateChange extends StateChange {
   final Event event;
 
-  const AddStackEventStateChange({@required this.event});
+  const AddEventStateChange({@required this.event});
 
   @override
   GameState apply(GameState state) {

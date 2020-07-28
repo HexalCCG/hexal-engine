@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/exceptions/game_state_exception.dart';
-import 'package:hexal_engine/state_change/increment_stack_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
 import '../event/event.dart';
+import '../exceptions/game_state_exception.dart';
 import '../objects/card_object.dart';
-import '../state_change/remove_stack_event_state_change.dart';
+import '../state_change/increment_event_state_change.dart';
+import '../state_change/remove_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'game_info.dart';
 import 'game_over_state.dart';
@@ -68,8 +68,8 @@ class GameState extends Equatable {
     // Check for infinite loops
     // TODO: Remove in release
     if (!list.any((element) =>
-        element is RemoveStackEventStateChange ||
-        element is IncrementStackEventStateChange)) {
+        element is RemoveEventStateChange ||
+        element is IncrementEventStateChange)) {
       throw GameStateException('Probable infinite loop: no card ');
     } else {
       return list;

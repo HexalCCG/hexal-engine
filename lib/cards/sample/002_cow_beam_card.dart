@@ -1,10 +1,10 @@
-import 'package:hexal_engine/cards/i_on_enter_field.dart';
-import 'package:hexal_engine/effect/effect.dart';
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:meta/meta.dart';
 
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/game_state/player.dart';
+import '../../effect/effect.dart';
+import '../../game_state/location.dart';
+import '../../game_state/player.dart';
+import '../../objects/card_object.dart';
+import '../i_on_enter_field.dart';
 
 class CowBeamCard extends CardObject implements IOnEnterField {
   @override

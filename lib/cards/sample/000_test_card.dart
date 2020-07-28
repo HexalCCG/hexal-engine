@@ -1,8 +1,8 @@
-import 'package:hexal_engine/objects/card_object.dart';
 import 'package:meta/meta.dart';
 
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/game_state/player.dart';
+import '../../game_state/location.dart';
+import '../../game_state/player.dart';
+import '../../objects/card_object.dart';
 
 class TestCard extends CardObject {
   @override

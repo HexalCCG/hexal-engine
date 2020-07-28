@@ -1,10 +1,10 @@
-import 'package:hexal_engine/event/on_card_enter_field_event.dart';
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/objects/card_object.dart';
-import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
-import 'package:hexal_engine/state_change/modify_entered_field_this_turn_state_change.dart';
-import 'package:hexal_engine/state_change/move_card_state_change.dart';
-import 'package:hexal_engine/state_change/state_change.dart';
+import '../../event/on_card_enter_field_event.dart';
+import '../../game_state/location.dart';
+import '../../objects/card_object.dart';
+import '../add_event_state_change.dart';
+import '../modify_entered_field_this_turn_state_change.dart';
+import '../move_card_state_change.dart';
+import '../state_change.dart';
 
 /// Puts a card into the battlefield.
 class PutIntoFieldStateChanges {
@@ -18,7 +18,7 @@ class PutIntoFieldStateChanges {
         card: card,
         enteredFieldThisTurn: true,
       ),
-      AddStackEventStateChange(event: OnCardEnterFieldEvent(card: card)),
+      AddEventStateChange(event: OnCardEnterFieldEvent(card: card)),
     ];
   }
 }

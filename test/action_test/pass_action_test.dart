@@ -2,7 +2,7 @@ import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/state_change/add_stack_event_state_change.dart';
+import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:hexal_engine/state_change/heal_card_state_change.dart';
 import 'package:test/test.dart';
 
@@ -134,8 +134,7 @@ void main() {
       expect(
           change,
           contains(
-            const AddStackEventStateChange(
-                event: DrawCardEvent(player: Player.one)),
+            const AddEventStateChange(event: DrawCardEvent(player: Player.one)),
           ));
     });
   });
