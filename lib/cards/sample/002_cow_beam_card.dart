@@ -1,3 +1,4 @@
+import 'package:hexal_engine/effect/damage_creature_effect.dart';
 import 'package:meta/meta.dart';
 
 import '../../effect/effect.dart';
@@ -37,6 +38,6 @@ class CowBeamCard extends CardObject implements IOnEnterField {
       );
 
   @override
-  // TODO: implement onEnterFieldEffects
-  List<Effect> get onEnterFieldEffects => throw UnimplementedError();
+  List<Effect> get onEnterFieldEffects =>
+      [DamageCreatureEffect(damage: 1, target: null)];
 }
