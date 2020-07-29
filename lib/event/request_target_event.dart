@@ -1,3 +1,4 @@
+import 'package:hexal_engine/effect/target/target.dart';
 import 'package:meta/meta.dart';
 
 import '../effect/effect.dart';
@@ -7,8 +8,10 @@ import 'event.dart';
 
 class RequestTargetEvent extends Event {
   final Effect effect;
+  final Target target;
 
-  const RequestTargetEvent({@required this.effect, bool resolved = false})
+  const RequestTargetEvent(
+      {@required this.effect, @required this.target, bool resolved = false})
       : super(resolved: resolved);
 
   @override
@@ -16,8 +19,8 @@ class RequestTargetEvent extends Event {
 
   @override
   RequestTargetEvent get copyResolved =>
-      RequestTargetEvent(effect: effect, resolved: true);
+      RequestTargetEvent(effect: effect, target: target, resolved: true);
 
   @override
-  List<Object> get props => [effect, resolved];
+  List<Object> get props => [effect, target, resolved];
 }

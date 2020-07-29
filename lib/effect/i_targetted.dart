@@ -1,7 +1,12 @@
+import 'package:hexal_engine/effect/target/target.dart';
+
 import 'effect.dart';
 
 abstract class ITargetted {
-  bool get targetSet;
-  bool targetValid(dynamic target);
+  final Target target;
+  final TargetResult targetResult;
+
+  ITargetted(this.target, this.targetResult);
+
   Effect copyWithTarget(dynamic target);
 }
