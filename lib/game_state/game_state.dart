@@ -1,12 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/state_change/remove_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
 import '../event/event.dart';
-import '../exceptions/game_state_exception.dart';
 import '../objects/card_object.dart';
-import '../state_change/increment_event_state_change.dart';
-import '../state_change/remove_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'game_info.dart';
 import 'game_over_state.dart';
@@ -62,7 +60,14 @@ class GameState extends Equatable {
       applyStateChanges(generateStateChanges(action));
 
   /// Attempts to resolve the top stack event.
-  List<StateChange> resolveTopStackEvent() => stack.last.apply(this);
+  List<StateChange> resolveTopStackEvent() {
+    // If the top event has been resolved, remove it and check for player inputs again.
+    if (stack.last.resolved) {
+      return [RemoveEventStateChange(event: stack.last)];
+    }
+    // If the top event still needs to be resolved, iterate it.
+    return stack.last.apply(this);
+  }
 
   /// Returns cards in the specified zone.
   List<CardObject> getCardsByLocation(Player player, Location location) {
