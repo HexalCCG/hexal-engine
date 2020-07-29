@@ -39,6 +39,6 @@ void main() {
     );
     final changes = state.resolveTopStackEvent();
 
-    expect(changes, contains(RemoveStackEventStateChange(event: event)));
+    expect(changes, contains(RemoveEventStateChange(event: event)));
   });
 }

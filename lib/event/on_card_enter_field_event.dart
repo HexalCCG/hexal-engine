@@ -45,5 +45,3 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
   @override
   List<Object> get props => [card, counter];
 }
-
-class RemoveStackEventStateChange {}

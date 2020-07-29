@@ -20,10 +20,8 @@ class DamageEffect extends Effect implements ITargetted {
   bool get targetSet => target.targetSet;
 
   @override
-  DamageEffect copyWithTarget(target) {
-    // TODO: implement copyWithTarget
-    throw UnimplementedError();
-  }
+  DamageEffect copyWithTarget(target) =>
+      DamageEffect(target: target, damage: damage);
 
   @override
   List<StateChange> apply(GameState state) {

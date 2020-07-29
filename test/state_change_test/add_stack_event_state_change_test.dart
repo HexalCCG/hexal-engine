@@ -28,7 +28,7 @@ void main() {
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.start,
     );
-    final stateChange = AddStackEventStateChange(event: event);
+    final stateChange = AddEventStateChange(event: event);
     expect(
       state.applyStateChanges([stateChange]).stack,
       [event],

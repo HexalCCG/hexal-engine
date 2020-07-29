@@ -28,7 +28,7 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
       );
-      const change = RemoveStackEventStateChange(event: event);
+      const change = RemoveEventStateChange(event: event);
       expect(
         state.applyStateChanges([change]),
         const GameState(
@@ -59,7 +59,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       const change =
-          RemoveStackEventStateChange(event: DrawCardEvent(player: Player.one));
+          RemoveEventStateChange(event: DrawCardEvent(player: Player.one));
       expect(
         () => state.applyStateChanges([change]),
         throwsA(isA<StateChangeException>()),

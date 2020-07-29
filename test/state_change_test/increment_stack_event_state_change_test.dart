@@ -43,7 +43,7 @@ void main() {
 
       expect(
           changes,
-          contains(RemoveStackEventStateChange(
+          contains(RemoveEventStateChange(
               event: OnCardEnterFieldEvent(card: card))));
     });
   });

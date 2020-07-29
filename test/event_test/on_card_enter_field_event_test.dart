@@ -43,7 +43,7 @@ void main() {
 
       expect(
           changes,
-          contains(RemoveStackEventStateChange(
+          contains(RemoveEventStateChange(
               event: OnCardEnterFieldEvent(card: card))));
     });
     test('adds the card\'s effect if it has only one. ', () {
@@ -74,7 +74,7 @@ void main() {
 
       expect(
           changes,
-          contains(RemoveStackEventStateChange(
+          contains(RemoveEventStateChange(
               event: OnCardEnterFieldEvent(card: card))));
     });
     test('iterates if the card has effects. ', () {
@@ -105,7 +105,7 @@ void main() {
 
       expect(
           changes,
-          contains(RemoveStackEventStateChange(
+          contains(RemoveEventStateChange(
               event: OnCardEnterFieldEvent(card: card))));
     });
   });
