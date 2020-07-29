@@ -10,32 +10,40 @@ import 'effect.dart';
 import 'i_targetted.dart';
 
 class DamageEffect extends Effect implements ITargetted {
+  @override
   final Target target;
+  @override
+  final TargetResult targetResult;
+
   final int damage;
 
-  const DamageEffect(
-      {@required this.target, @required this.damage, bool resolved = false})
-      : super(resolved: resolved);
+  const DamageEffect({
+    @required this.target,
+    this.targetResult,
+    @required this.damage,
+    bool resolved = false,
+  }) : super(resolved: resolved);
 
   @override
-  bool targetValid(target) => target.targetValid(target);
+  DamageEffect copyWithTarget(target) => DamageEffect(
+      target: target,
+      targetResult: targetResult,
+      damage: damage,
+      resolved: resolved);
 
   @override
-  bool get targetSet => target.targetSet;
-
-  @override
-  DamageEffect copyWithTarget(target) =>
-      DamageEffect(target: target, damage: damage, resolved: resolved);
-
-  @override
-  DamageEffect get copyResolved =>
-      DamageEffect(target: target, damage: damage, resolved: true);
+  DamageEffect get copyResolved => DamageEffect(
+      target: target,
+      targetResult: targetResult,
+      damage: damage,
+      resolved: true);
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!target.targetSet) {
+    if (targetResult == null) {
       return [
-        AddEventStateChange(event: RequestTargetEvent(effect: this)),
+        AddEventStateChange(
+            event: RequestTargetEvent(effect: this, target: target)),
       ];
     } else {
       return [
