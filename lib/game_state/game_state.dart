@@ -76,6 +76,14 @@ class GameState extends Equatable {
         .toList();
   }
 
+  // Gets this state's version of the provided card.
+  CardObject getCard(CardObject card) =>
+      cards.firstWhere((element) => element == card);
+
+  // Gets this state's version of the provided event.
+  Event getEvent(Event event) =>
+      stack.firstWhere((element) => element == event);
+
   CardObject getTopCardOfDeck(Player player) {
     final deck = getCardsByLocation(player, Location.deck);
     if (deck.isEmpty) {

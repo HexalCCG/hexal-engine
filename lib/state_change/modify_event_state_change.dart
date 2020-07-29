@@ -4,6 +4,7 @@ import '../event/event.dart';
 import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
+import '../extensions/list_replace.dart';
 
 class ModifyEventStateChange extends StateChange {
   final Event event;
@@ -13,13 +14,11 @@ class ModifyEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    final index = state.stack.indexOf(event);
-    if (index == -1) {
+    if (!state.stack.contains(event)) {
       throw const StateChangeException(
           'ModifyEventStateChange: Provided event not found in stack');
     } else {
-      final newStack = state.stack.toList()
-        ..replaceRange(index, index, [newEvent]);
+      final newStack = state.stack.replaceSingle(event, newEvent);
       return state.copyWith(stack: newStack);
     }
   }

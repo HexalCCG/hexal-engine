@@ -4,6 +4,7 @@ import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
 import '../objects/card_object.dart';
 import 'state_change.dart';
+import '../extensions/list_replace.dart';
 
 class ModifyEnteredFieldThisTurnStateChange extends StateChange {
   final CardObject card;
@@ -14,22 +15,16 @@ class ModifyEnteredFieldThisTurnStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    try {
-      final newCard = state.cards
-          .singleWhere((element) => element == card)
+    if (!state.cards.contains(card)) {
+      throw const StateChangeException(
+          'MoveCardStateChange: Provided card not found exactly once in state');
+    } else {
+      final newCard = state
+          .getCard(card)
           .copyWith({'enteredFieldThisTurn': enteredFieldThisTurn});
-      final newCards = state.cards.toList()
-        ..remove(card)
-        ..add(newCard);
+      final newCards = state.cards.replaceSingle(card, newCard);
 
       return state.copyWith(cards: newCards);
-    } catch (e) {
-      if (e is StateError) {
-        throw const StateChangeException(
-            'MoveCardStateChange: Provided card not found exactly once in state');
-      } else {
-        rethrow;
-      }
     }
   }
 

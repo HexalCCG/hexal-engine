@@ -5,6 +5,7 @@ import '../game_state/game_state.dart';
 import '../game_state/location.dart';
 import '../objects/card_object.dart';
 import 'state_change.dart';
+import '../extensions/list_replace.dart';
 
 class MoveCardStateChange extends StateChange {
   final CardObject card;
@@ -14,22 +15,14 @@ class MoveCardStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    try {
-      final newCard = state.cards
-          .singleWhere((element) => element == card)
-          .copyWith({'location': location});
-      final newCards = state.cards.toList()
-        ..remove(card)
-        ..add(newCard);
+    if (!state.cards.contains(card)) {
+      throw const StateChangeException(
+          'MoveCardStateChange: Provided card not found exactly once in state');
+    } else {
+      final newCard = state.getCard(card).copyWith({'location': location});
+      final newCards = state.cards.replaceSingle(card, newCard);
 
       return state.copyWith(cards: newCards);
-    } catch (e) {
-      if (e is StateError) {
-        throw const StateChangeException(
-            'MoveCardStateChange: Provided card not found exactly once in state');
-      } else {
-        rethrow;
-      }
     }
   }
 

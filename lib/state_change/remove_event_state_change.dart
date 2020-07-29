@@ -12,12 +12,12 @@ class RemoveEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    final newStack = state.stack.toList();
-    if (newStack.remove(event)) {
-      return state.copyWith(stack: newStack);
-    } else {
+    if (!state.stack.contains(event)) {
       throw const StateChangeException(
           'RemoveEventStateChange: Provided event not found in stack');
+    } else {
+      final newStack = state.stack.toList()..remove(event);
+      return state.copyWith(stack: newStack);
     }
   }
 

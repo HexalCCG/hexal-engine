@@ -27,14 +27,12 @@ class NextPhaseStateChanges {
           PhaseStateChange(phase: TurnPhase.start),
           PriorityStateChange(player: state.notActivePlayer),
           // Set entered field this turn to false
-          ...state.cards.map((card) {
-            if (card.enteredFieldThisTurn) {
-              return ModifyEnteredFieldThisTurnStateChange(
-                  card: card, enteredFieldThisTurn: false);
-            } else {
-              return null;
-            }
-          }),
+          ...state.cards
+              .map((card) => (card.enteredFieldThisTurn)
+                  ? ModifyEnteredFieldThisTurnStateChange(
+                      card: card, enteredFieldThisTurn: false)
+                  : null)
+              .where((element) => element != null),
           // Heal all creatures
           ...HealAllStateChanges.generate(state),
         ];

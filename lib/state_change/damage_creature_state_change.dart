@@ -5,6 +5,7 @@ import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
 import '../objects/card_object.dart';
 import 'state_change.dart';
+import '../extensions/list_replace.dart';
 
 /// Increases the damage property of the provided card by an amount.
 class DamageCreatureStateChange extends StateChange {
@@ -18,15 +19,14 @@ class DamageCreatureStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    final index = state.cards.indexOf(card);
-    if (index == -1) {
+    if (!state.cards.contains(card)) {
       throw const StateChangeException(
           'DamageCreatureStateChange: Provided card not found in state');
     } else {
-      final newDamage = (card as ICreature).damage + damage;
-      final newCard = card.copyWith({'damage': newDamage});
-      final newCards = state.cards.toList()
-        ..replaceRange(index, index, newCard);
+      final newCard = state
+          .getCard(card)
+          .copyWith({'damage': (card as ICreature).damage + damage});
+      final newCards = state.cards.replaceSingle(card, newCard);
       return state.copyWith(cards: newCards);
     }
   }

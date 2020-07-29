@@ -6,13 +6,14 @@ import 'state_change.dart';
 
 class PhaseStateChange extends StateChange {
   final TurnPhase phase;
-  const PhaseStateChange({@required this.phase});
 
-  @override
-  List<Object> get props => [phase];
+  const PhaseStateChange({@required this.phase});
 
   @override
   GameState apply(GameState state) {
     return state.copyWith(turnPhase: phase);
   }
+
+  @override
+  List<Object> get props => [phase];
 }

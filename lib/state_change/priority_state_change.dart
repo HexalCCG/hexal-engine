@@ -6,6 +6,7 @@ import 'state_change.dart';
 
 class PriorityStateChange extends StateChange {
   final Player player;
+
   const PriorityStateChange({@required this.player});
 
   @override

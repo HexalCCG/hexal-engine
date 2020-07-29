@@ -15,17 +15,12 @@ class HealCardStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    final index = state.cards.indexOf(card);
-    if (index == -1) {
+    if (!state.cards.contains(card)) {
       throw const StateChangeException(
           'HealCardStateChange: Provided card not found in state');
     } else {
-      final newCard = card.copyWith({'damage': 0});
-      // final newCards = state.cards.toList()
-      //   ..replaceRange(index, index, [newCard]);
-      final newCards = state.cards.toList().replaceSingle(card, newCard);
-      print(state.cards);
-      print(newCards);
+      final newCard = state.getCard(card).copyWith({'damage': 0});
+      final newCards = state.cards.replaceSingle(card, newCard);
       return state.copyWith(cards: newCards);
     }
   }
