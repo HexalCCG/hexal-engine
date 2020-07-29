@@ -12,7 +12,7 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  group('Card test S.002  ', () {
+  group('Card test S.002', () {
     const p1 = PlayerObject(id: 0, name: 'Alice');
     const p2 = PlayerObject(id: 1, name: 'Bob');
     test('enters the battlefield when played.', () {

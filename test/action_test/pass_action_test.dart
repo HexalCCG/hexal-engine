@@ -108,8 +108,6 @@ void main() {
       const action = PassAction();
       final change = state.generateStateChanges(action);
 
-      print(change);
-
       expect(
           change,
           contains(
