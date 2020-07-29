@@ -24,8 +24,8 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
       @required this.owner,
       @required this.controller,
       @required this.location,
-      @required this.enteredFieldThisTurn,
-      @required this.damage});
+      this.enteredFieldThisTurn = false,
+      this.damage = 0});
 
   @override
   CowCreatureCard copyWith(Map<String, dynamic> data) => CowCreatureCard(

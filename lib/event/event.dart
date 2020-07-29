@@ -13,6 +13,8 @@ abstract class Event extends Equatable {
 
   List<StateChange> apply(GameState state);
 
+  Event get copyResolved;
+
   @override
   List<Object> get props;
 

@@ -1,4 +1,3 @@
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../cards/i_on_enter_field.dart';
@@ -6,7 +5,7 @@ import '../game_state/game_state.dart';
 import '../objects/card_object.dart';
 import '../state_change/add_event_state_change.dart';
 import '../state_change/increment_event_state_change.dart';
-import '../state_change/remove_event_state_change.dart';
+import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 import 'i_incrementing.dart';
@@ -17,7 +16,9 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
   @override
   final int counter;
 
-  const OnCardEnterFieldEvent({@required this.card, this.counter = 0});
+  const OnCardEnterFieldEvent(
+      {@required this.card, this.counter = 0, bool resolved = false})
+      : super(resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state) {
@@ -41,9 +42,13 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
   }
 
   @override
-  OnCardEnterFieldEvent get increment =>
-      OnCardEnterFieldEvent(card: card, counter: counter + 1);
+  OnCardEnterFieldEvent get copyResolved =>
+      OnCardEnterFieldEvent(card: card, counter: counter, resolved: true);
 
   @override
-  List<Object> get props => [card, counter];
+  OnCardEnterFieldEvent get increment => OnCardEnterFieldEvent(
+      card: card, counter: counter + 1, resolved: resolved);
+
+  @override
+  List<Object> get props => [card, counter, resolved];
 }

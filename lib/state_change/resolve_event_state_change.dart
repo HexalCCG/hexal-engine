@@ -1,3 +1,4 @@
+import 'package:hexal_engine/exceptions/state_change_exception.dart';
 import 'package:meta/meta.dart';
 
 import '../event/event.dart';
@@ -10,11 +11,17 @@ class ResolveEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    // TODO: implement apply
-    throw UnimplementedError();
+    final index = state.stack.indexOf(event);
+    if (index == -1) {
+      throw const StateChangeException(
+          'ResolveEventStateChange: Provided event not found in stack');
+    } else {
+      final newStack = state.stack.toList()
+        ..replaceRange(index, index, [event]);
+      return state.copyWith(stack: newStack);
+    }
   }
 
   @override
-  // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [event];
 }

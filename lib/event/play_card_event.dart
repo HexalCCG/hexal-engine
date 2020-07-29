@@ -10,7 +10,8 @@ import 'event.dart';
 class PlayCardEvent extends Event {
   final CardObject card;
 
-  const PlayCardEvent({@required this.card});
+  const PlayCardEvent({@required this.card, bool resolved = false})
+      : super(resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state) {
@@ -21,5 +22,8 @@ class PlayCardEvent extends Event {
   }
 
   @override
-  List<Object> get props => [card];
+  PlayCardEvent get copyResolved => PlayCardEvent(card: card, resolved: true);
+
+  @override
+  List<Object> get props => [card, resolved];
 }

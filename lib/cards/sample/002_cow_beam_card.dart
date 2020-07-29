@@ -24,7 +24,7 @@ class CowBeamCard extends CardObject implements IOnEnterField {
     @required this.owner,
     @required this.controller,
     @required this.location,
-    @required this.enteredFieldThisTurn,
+    this.enteredFieldThisTurn = false,
   });
 
   @override

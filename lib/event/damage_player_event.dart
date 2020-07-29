@@ -13,7 +13,8 @@ import 'event.dart';
 class DamagePlayerEvent extends Event {
   final Player player;
 
-  const DamagePlayerEvent({@required this.player});
+  const DamagePlayerEvent({@required this.player, bool resolved = false})
+      : super(resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state) {
@@ -36,5 +37,9 @@ class DamagePlayerEvent extends Event {
   }
 
   @override
-  List<Object> get props => [player];
+  DamagePlayerEvent get copyResolved =>
+      DamagePlayerEvent(player: player, resolved: true);
+
+  @override
+  List<Object> get props => [player, resolved];
 }

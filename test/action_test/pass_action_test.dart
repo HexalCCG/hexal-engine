@@ -1,4 +1,4 @@
-import 'package:hexal_engine/cards/sample/000_test_card.dart';
+import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
@@ -87,12 +87,11 @@ void main() {
           ]));
     });
     test('adds a heal all creatures state change when end phase ends.', () {
-      const card = TestCard(
+      const card = CowCreatureCard(
         id: 2,
         controller: Player.one,
         owner: Player.one,
         location: Location.battlefield,
-        enteredFieldThisTurn: false,
       );
       final state = const GameState(
         gameInfo: GameInfo(

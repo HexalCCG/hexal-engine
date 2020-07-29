@@ -6,20 +6,25 @@ import '../game_state/game_state.dart';
 import '../objects/card_object.dart';
 import 'state_change.dart';
 
-/// Sets the damage property of the provided card to 0.
-class HealCardStateChange extends StateChange {
+/// Increases the damage property of the provided card by an amount.
+class DamageCardStateChange extends StateChange {
   final CardObject card;
+  final int damage;
 
-  const HealCardStateChange({@required this.card}) : assert(card is ICreature);
+  const DamageCardStateChange({@required this.card, @required this.damage})
+      : assert(card != null),
+        assert(card is ICreature),
+        assert(damage >= 0);
 
   @override
   GameState apply(GameState state) {
     final index = state.cards.indexOf(card);
     if (index == -1) {
       throw const StateChangeException(
-          'HealCardStateChange: Provided card not found in state');
+          'DamageCardStateChange: Provided card not found in state');
     } else {
-      final newCard = card.copyWith({'damage': 0});
+      final newDamage = (card as ICreature).damage + damage;
+      final newCard = card.copyWith({'damage': newDamage});
       final newCards = state.cards.toList()
         ..replaceRange(index, index, newCard);
       return state.copyWith(cards: newCards);
@@ -27,5 +32,5 @@ class HealCardStateChange extends StateChange {
   }
 
   @override
-  List<Object> get props => [card];
+  List<Object> get props => [card, damage];
 }
