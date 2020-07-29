@@ -16,7 +16,7 @@ void main() {
   const p2 = PlayerObject(id: 1, name: 'Bob');
   test('Resolve top stack event returns a remove stack event state change.',
       () {
-    const event = DrawCardEvent(player: Player.one);
+    const event = DrawCardEvent(player: Player.one, draws: 1);
     final state = const GameState(
       gameInfo: GameInfo(
         player1: p1,

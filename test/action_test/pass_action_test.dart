@@ -133,7 +133,8 @@ void main() {
       expect(
           change,
           contains(
-            const AddEventStateChange(event: DrawCardEvent(player: Player.one)),
+            const AddEventStateChange(
+                event: DrawCardEvent(draws: 1, player: Player.one)),
           ));
     });
   });

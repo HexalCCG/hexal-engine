@@ -32,7 +32,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DrawCardEvent(player: Player.one),
+          DrawCardEvent(player: Player.one, draws: 1),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -52,7 +52,7 @@ void main() {
         ),
         gameOverState: GameOverState.playing,
         cards: [],
-        stack: [DrawCardEvent(player: Player.one)],
+        stack: [DrawCardEvent(player: Player.one, draws: 1)],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,

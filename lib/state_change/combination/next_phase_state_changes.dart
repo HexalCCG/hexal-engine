@@ -15,7 +15,8 @@ class NextPhaseStateChanges {
       case TurnPhase.start:
         // Entering draw phase so add draw a card
         return [
-          AddEventStateChange(event: DrawCardEvent(player: state.activePlayer)),
+          AddEventStateChange(
+              event: DrawCardEvent(draws: 1, player: state.activePlayer)),
           PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
           PriorityStateChange(player: state.activePlayer)
         ];

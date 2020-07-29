@@ -13,9 +13,7 @@ void main() {
   const p1 = PlayerObject(id: 0, name: 'Alice');
   const p2 = PlayerObject(id: 1, name: 'Bob');
   test('Add stack event state change adds event to stack.', () {
-    final event = DrawCardEvent(
-      player: Player.one,
-    );
+    final event = DrawCardEvent(player: Player.one, draws: 1);
     final state = const GameState(
       gameInfo: GameInfo(
         player1: p1,

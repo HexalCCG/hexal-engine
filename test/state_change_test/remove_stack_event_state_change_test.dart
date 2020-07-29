@@ -15,7 +15,7 @@ void main() {
   const p2 = PlayerObject(id: 1, name: 'Bob');
   group('Remove stack event state change', () {
     test('removes the specified stack event.', () {
-      const event = DrawCardEvent(player: Player.one);
+      const event = DrawCardEvent(player: Player.one, draws: 1);
       const state = GameState(
         gameInfo: GameInfo(
           player1: p1,
@@ -58,8 +58,8 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
       );
-      const change =
-          RemoveEventStateChange(event: DrawCardEvent(player: Player.one));
+      const change = RemoveEventStateChange(
+          event: DrawCardEvent(player: Player.one, draws: 1));
       expect(
         () => state.applyStateChanges([change]),
         throwsA(isA<StateChangeException>()),
