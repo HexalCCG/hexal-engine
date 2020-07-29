@@ -26,7 +26,7 @@ class PlayCardAction extends Action {
     }
     return [
       ...PlayCardStateChanges.generate(card),
-      PriorityStateChange(player: state.notPriorityPlayer),
+      PriorityStateChange(player: state.activePlayer),
     ];
   }
 

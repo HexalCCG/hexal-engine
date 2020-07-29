@@ -43,11 +43,13 @@ void main() {
       // First Creature moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo).first,
           isA<CowCreatureCard>());
-      expect(state.priorityPlayer, Player.two);
+      expect(state.priorityPlayer, Player.one);
 
-      // Player 2 passes. Priority passes.
+      // Player 1 keeps priority after playing a card as they are active.
+      // They pass, moving priority to player 2.
+
       state = state.applyAction(PassAction());
-      // Player 1 passes. Played card is resolved.
+      // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(PassAction());
 
       expect(state.getCardsByLocation(Player.one, Location.battlefield).first,

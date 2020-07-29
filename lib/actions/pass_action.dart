@@ -16,7 +16,7 @@ class PassAction extends Action {
       // Non-active player has passed so resolve top stack event and switch priority
       return [
         ...state.resolveTopStackEvent(),
-        PriorityStateChange(player: state.priorityPlayer)
+        PriorityStateChange(player: state.activePlayer)
       ];
     } else {
       return NextPhaseStateChanges.generate(state);

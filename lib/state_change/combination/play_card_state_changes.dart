@@ -9,9 +9,7 @@ class PlayCardStateChanges {
   static List<StateChange> generate(CardObject card) {
     return [
       MoveCardStateChange(card: card, location: Location.limbo),
-      AddEventStateChange(
-          event:
-              PlayCardEvent(card: card.copyWith({'location': Location.limbo}))),
+      AddEventStateChange(event: PlayCardEvent(card: card)),
     ];
   }
 }
