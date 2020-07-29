@@ -62,19 +62,7 @@ class GameState extends Equatable {
       applyStateChanges(generateStateChanges(action));
 
   /// Attempts to resolve the top stack event.
-  List<StateChange> resolveTopStackEvent() {
-    final list = stack.last.apply(this);
-
-    // Check for infinite loops
-    // TODO: Remove in release
-    if (!list.any((element) =>
-        element is RemoveEventStateChange ||
-        element is IncrementEventStateChange)) {
-      throw GameStateException('Probable infinite loop: no card ');
-    } else {
-      return list;
-    }
-  }
+  List<StateChange> resolveTopStackEvent() => stack.last.apply(this);
 
   /// Returns cards in the specified zone.
   List<CardObject> getCardsByLocation(Player player, Location location) {

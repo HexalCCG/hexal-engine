@@ -1,4 +1,4 @@
-import 'package:hexal_engine/effect/damage_creature_effect.dart';
+import 'package:hexal_engine/effect/damage_effect.dart';
 import 'package:meta/meta.dart';
 
 import '../../effect/effect.dart';
