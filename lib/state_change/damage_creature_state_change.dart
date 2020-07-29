@@ -7,11 +7,11 @@ import '../objects/card_object.dart';
 import 'state_change.dart';
 
 /// Increases the damage property of the provided card by an amount.
-class DamageCardStateChange extends StateChange {
+class DamageCreatureStateChange extends StateChange {
   final CardObject card;
   final int damage;
 
-  const DamageCardStateChange({@required this.card, @required this.damage})
+  const DamageCreatureStateChange({@required this.card, @required this.damage})
       : assert(card != null),
         assert(card is ICreature),
         assert(damage >= 0);
@@ -21,7 +21,7 @@ class DamageCardStateChange extends StateChange {
     final index = state.cards.indexOf(card);
     if (index == -1) {
       throw const StateChangeException(
-          'DamageCardStateChange: Provided card not found in state');
+          'DamageCreatureStateChange: Provided card not found in state');
     } else {
       final newDamage = (card as ICreature).damage + damage;
       final newCard = card.copyWith({'damage': newDamage});
