@@ -1,7 +1,9 @@
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
+import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
 import 'package:hexal_engine/event/on_card_enter_field_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/state_change/remove_event_state_change.dart';
+import 'package:hexal_engine/state_change/add_event_state_change.dart';
+import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:test/test.dart';
 
 import 'package:hexal_engine/game_state/location.dart';
@@ -16,7 +18,7 @@ void main() {
     const p1 = PlayerObject(id: 0, name: 'Alice');
     const p2 = PlayerObject(id: 1, name: 'Bob');
     test(
-        'removes itself with no state changes if the card has no relevent effect. ',
+        'resolves itself with no state changes if the card has no relevent effect. ',
         () {
       const card = TestCard(
         id: 2,
@@ -43,11 +45,11 @@ void main() {
 
       expect(
           changes,
-          contains(RemoveEventStateChange(
+          contains(ResolveEventStateChange(
               event: OnCardEnterFieldEvent(card: card))));
     });
     test('adds the card\'s effect if it has only one. ', () {
-      const card = TestCard(
+      const card = CowBeamCard(
         id: 2,
         controller: Player.one,
         owner: Player.one,
@@ -70,43 +72,8 @@ void main() {
       );
       final changes = state.resolveTopStackEvent();
 
-      throw UnimplementedError();
-
-      expect(
-          changes,
-          contains(RemoveEventStateChange(
-              event: OnCardEnterFieldEvent(card: card))));
-    });
-    test('iterates if the card has effects. ', () {
-      const card = TestCard(
-        id: 2,
-        controller: Player.one,
-        owner: Player.one,
-        enteredFieldThisTurn: false,
-        location: Location.hand,
-      );
-      final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
-        gameOverState: GameOverState.playing,
-        cards: [card],
-        stack: [
-          OnCardEnterFieldEvent(card: card),
-        ],
-        activePlayer: Player.one,
-        priorityPlayer: Player.one,
-        turnPhase: TurnPhase.draw,
-      );
-      final changes = state.resolveTopStackEvent();
-
-      throw UnimplementedError();
-
-      expect(
-          changes,
-          contains(RemoveEventStateChange(
-              event: OnCardEnterFieldEvent(card: card))));
+      expect(changes,
+          contains(AddEventStateChange(event: card.onEnterFieldEffects.first)));
     });
   });
 }
