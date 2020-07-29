@@ -25,7 +25,7 @@ class DamageEffect extends Effect implements ITargetted {
   }) : super(resolved: resolved);
 
   @override
-  DamageEffect copyWithTarget(target) => DamageEffect(
+  DamageEffect copyWithTarget(targetResult) => DamageEffect(
       target: target,
       targetResult: targetResult,
       damage: damage,

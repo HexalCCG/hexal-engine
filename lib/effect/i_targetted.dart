@@ -8,5 +8,5 @@ abstract class ITargetted {
 
   ITargetted(this.target, this.targetResult);
 
-  Effect copyWithTarget(dynamic target);
+  Effect copyWithTarget(TargetResult target);
 }

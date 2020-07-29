@@ -1,13 +1,8 @@
-import 'package:hexal_engine/objects/card_object.dart';
-import 'package:hexal_engine/state_change/damage_creature_state_change.dart';
 import 'package:meta/meta.dart';
 
-import '../game_state/game_over_state.dart';
 import '../game_state/game_state.dart';
-import '../game_state/location.dart';
-import '../game_state/player.dart';
-import '../state_change/game_over_state_change.dart';
-import '../state_change/move_card_state_change.dart';
+import '../objects/card_object.dart';
+import '../state_change/damage_creature_state_change.dart';
 import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
