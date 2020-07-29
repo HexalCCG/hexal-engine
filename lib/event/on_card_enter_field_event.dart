@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../cards/i_on_enter_field.dart';
@@ -23,7 +24,7 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
     if (card is IOnEnterField) {
       // If no valid effects are left
       if (counter == (card as IOnEnterField).onEnterFieldEffects.length) {
-        return [RemoveEventStateChange(event: this)];
+        return [ResolveEventStateChange(event: this)];
       }
       // Return the next effect and increment
       else {
@@ -34,7 +35,8 @@ class OnCardEnterFieldEvent extends Event implements IIncrementing {
         ];
       }
     } else {
-      return [RemoveEventStateChange(event: this)];
+      // If the card has no enter field effects, resolve this.
+      return [ResolveEventStateChange(event: this)];
     }
   }
 

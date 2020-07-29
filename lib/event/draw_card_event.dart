@@ -6,7 +6,7 @@ import '../game_state/location.dart';
 import '../game_state/player.dart';
 import '../state_change/game_over_state_change.dart';
 import '../state_change/move_card_state_change.dart';
-import '../state_change/remove_event_state_change.dart';
+import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 
@@ -24,12 +24,12 @@ class DrawCardEvent extends Event {
             gameOverState: player == Player.one
                 ? GameOverState.player2Win
                 : GameOverState.player1Win),
-        RemoveEventStateChange(event: this),
+        ResolveEventStateChange(event: this),
       ];
     } else {
       return [
         MoveCardStateChange(card: card, location: Location.hand),
-        RemoveEventStateChange(event: this),
+        ResolveEventStateChange(event: this),
       ];
     }
   }
