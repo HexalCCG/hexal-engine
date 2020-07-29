@@ -39,7 +39,7 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
       );
 
   @override
-  int get baseAttack => 1;
+  int get baseAttack => 2;
   @override
-  int get baseHealth => 1;
+  int get baseHealth => 2;
 }
