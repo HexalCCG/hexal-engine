@@ -1,3 +1,5 @@
+import 'package:hexal_engine/actions/pass_action.dart';
+import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
@@ -33,6 +35,43 @@ void main() {
 
       expect(changes,
           contains(MoveCardStateChange(card: card, location: Location.exile)));
+    });
+    test('deals 1 damage and resolves if damage is 1. ', () {
+      const card1 = TestCard(
+        id: 2,
+        controller: Player.one,
+        owner: Player.one,
+        enteredFieldThisTurn: false,
+        location: Location.deck,
+      );
+      const card2 = TestCard(
+        id: 3,
+        controller: Player.one,
+        owner: Player.one,
+        enteredFieldThisTurn: false,
+        location: Location.deck,
+      );
+      var state = const GameState(
+        gameOverState: GameOverState.playing,
+        cards: [card1, card2],
+        stack: [
+          DamagePlayerEvent(player: Player.one, damage: 2),
+        ],
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.draw,
+      );
+      // Both players pass for first damage
+      state = state.applyAction(PassAction());
+      state = state.applyAction(PassAction());
+      // Both players pass for second damage
+      state = state.applyAction(PassAction());
+      state = state.applyAction(PassAction());
+      // Expect player 1 to have exiled two cards from their deck.
+      expect(state.cards, [
+        card1.copyWith({'location': Location.exile}),
+        card2.copyWith({'location': Location.exile}),
+      ]);
     });
     test('triggers game over if the player has no cards. ', () {
       final state = const GameState(
