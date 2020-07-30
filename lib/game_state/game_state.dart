@@ -83,8 +83,8 @@ class GameState extends Equatable {
 
   // Return the playerobject for a player
   PlayerObject getPlayerObject(Player player) => player == Player.one
-      ? const PlayerObject(player: Player.one)
-      : const PlayerObject(player: Player.two);
+      ? const PlayerObject(id: 0, player: Player.one)
+      : const PlayerObject(id: 1, player: Player.two);
 
   CardObject getTopCardOfDeck(Player player) {
     final deck = getCardsByLocation(player, Location.deck);

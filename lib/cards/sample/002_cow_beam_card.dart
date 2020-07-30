@@ -14,7 +14,7 @@ class CowBeamCard extends CardObject implements IOnEnterField {
     @required Player owner,
     @required Player controller,
     @required Location location,
-    bool enteredFieldThisTurn,
+    bool enteredFieldThisTurn = false,
   }) : super(
             id: id,
             owner: owner,

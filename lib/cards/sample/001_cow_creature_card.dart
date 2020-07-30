@@ -14,7 +14,7 @@ class CowCreatureCard extends CardObject with MCreature implements ICreature {
     @required Player owner,
     @required Player controller,
     @required Location location,
-    bool enteredFieldThisTurn,
+    bool enteredFieldThisTurn = false,
     this.damage = 0,
   }) : super(
             id: id,

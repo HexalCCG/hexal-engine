@@ -8,7 +8,7 @@ abstract class GameObject extends Equatable {
 
   List<Object> get toStringProps;
 
-  const GameObject({@required this.id});
+  const GameObject({@required this.id}) : assert(id != null);
 
   @override
   String toString() => _mapPropsToString(runtimeType, toStringProps);

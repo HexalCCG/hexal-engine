@@ -10,7 +10,7 @@ class TestCard extends CardObject {
     @required Player owner,
     @required Player controller,
     @required Location location,
-    bool enteredFieldThisTurn,
+    bool enteredFieldThisTurn = false,
   }) : super(
             id: id,
             owner: owner,

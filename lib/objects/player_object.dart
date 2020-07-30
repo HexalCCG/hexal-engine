@@ -5,10 +5,7 @@ import 'package:meta/meta.dart';
 class PlayerObject extends GameObject {
   final Player player;
 
-  const PlayerObject({@required this.player});
-
-  @override
-  int get id => player.index;
+  const PlayerObject({@required int id, @required this.player}) : super(id: id);
 
   @override
   List<Object> get toStringProps => [id, player];
