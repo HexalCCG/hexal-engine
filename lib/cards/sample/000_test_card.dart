@@ -5,24 +5,18 @@ import '../../game_state/player.dart';
 import '../../objects/card_object.dart';
 
 class TestCard extends CardObject {
-  @override
-  final int id;
-  @override
-  final Player owner;
-  @override
-  final Player controller;
-  @override
-  final Location location;
-  @override
-  final bool enteredFieldThisTurn;
-
   const TestCard({
-    @required this.id,
-    @required this.owner,
-    @required this.controller,
-    @required this.location,
-    @required this.enteredFieldThisTurn,
-  });
+    @required int id,
+    @required Player owner,
+    @required Player controller,
+    @required Location location,
+    bool enteredFieldThisTurn,
+  }) : super(
+            id: id,
+            owner: owner,
+            controller: controller,
+            location: location,
+            enteredFieldThisTurn: enteredFieldThisTurn);
 
   @override
   TestCard copyWith(Map<String, dynamic> data) => TestCard(

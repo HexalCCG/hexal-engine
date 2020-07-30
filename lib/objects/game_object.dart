@@ -4,11 +4,11 @@ import 'package:meta/meta.dart';
 /// GameObjects represent anything in the game that can be targeted by effects.
 @immutable
 abstract class GameObject extends Equatable {
-  int get id;
+  final int id;
 
   List<Object> get toStringProps;
 
-  const GameObject();
+  const GameObject({@required this.id});
 
   @override
   String toString() => _mapPropsToString(runtimeType, toStringProps);

@@ -9,24 +9,18 @@ import '../../objects/card_object.dart';
 import '../i_on_enter_field.dart';
 
 class CowBeamCard extends CardObject implements IOnEnterField {
-  @override
-  final int id;
-  @override
-  final Player owner;
-  @override
-  final Player controller;
-  @override
-  final Location location;
-  @override
-  final bool enteredFieldThisTurn;
-
   const CowBeamCard({
-    @required this.id,
-    @required this.owner,
-    @required this.controller,
-    @required this.location,
-    this.enteredFieldThisTurn = false,
-  });
+    @required int id,
+    @required Player owner,
+    @required Player controller,
+    @required Location location,
+    bool enteredFieldThisTurn,
+  }) : super(
+            id: id,
+            owner: owner,
+            controller: controller,
+            location: location,
+            enteredFieldThisTurn: enteredFieldThisTurn);
 
   @override
   CowBeamCard copyWith(Map<String, dynamic> data) => CowBeamCard(

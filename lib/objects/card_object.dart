@@ -7,12 +7,18 @@ import 'game_object.dart';
 /// CardObjects represent single cards.
 @immutable
 abstract class CardObject extends GameObject {
-  Player get owner;
-  Player get controller;
-  Location get location;
-  bool get enteredFieldThisTurn;
+  final Player owner;
+  final Player controller;
+  final Location location;
+  final bool enteredFieldThisTurn;
 
-  const CardObject();
+  const CardObject({
+    @required int id,
+    @required this.owner,
+    @required this.controller,
+    @required this.location,
+    this.enteredFieldThisTurn = false,
+  }) : super(id: id);
 
   dynamic copyWith(Map<String, dynamic> data);
 

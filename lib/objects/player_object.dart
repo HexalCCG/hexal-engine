@@ -11,5 +11,5 @@ class PlayerObject extends GameObject {
   int get id => player.index;
 
   @override
-  List<Object> get toStringProps => [player];
+  List<Object> get toStringProps => [id, player];
 }

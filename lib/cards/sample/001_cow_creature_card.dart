@@ -7,25 +7,21 @@ import '../mi_creature.dart';
 
 class CowCreatureCard extends CardObject with MCreature implements ICreature {
   @override
-  final int id;
-  @override
-  final Player owner;
-  @override
-  final Player controller;
-  @override
-  final Location location;
-  @override
-  final bool enteredFieldThisTurn;
-  @override
   final int damage;
 
-  const CowCreatureCard(
-      {@required this.id,
-      @required this.owner,
-      @required this.controller,
-      @required this.location,
-      this.enteredFieldThisTurn = false,
-      this.damage = 0});
+  const CowCreatureCard({
+    @required int id,
+    @required Player owner,
+    @required Player controller,
+    @required Location location,
+    bool enteredFieldThisTurn,
+    this.damage = 0,
+  }) : super(
+            id: id,
+            owner: owner,
+            controller: controller,
+            location: location,
+            enteredFieldThisTurn: enteredFieldThisTurn);
 
   @override
   CowCreatureCard copyWith(Map<String, dynamic> data) => CowCreatureCard(
