@@ -25,13 +25,16 @@ class CreatureTarget extends Target {
   }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [optional];
 }
 
 class CreatureTargetResult extends TargetResult {
   final GameObject target;
 
   const CreatureTargetResult({@required this.target});
+
+  @override
+  List<GameObject> get targets => [target];
 
   @override
   List<Object> get props => [target];

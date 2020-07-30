@@ -1,19 +1,14 @@
-import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:test/test.dart';
-
+import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/exceptions/state_change_exception.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/state_change/move_card_state_change.dart';
-import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
-  const p1 = PlayerObject(id: 0, name: 'Alice');
-  const p2 = PlayerObject(id: 1, name: 'Bob');
   group('Move card state change', () {
     test('moves card from deck to hand.', () {
       const card = TestCard(
@@ -24,10 +19,6 @@ void main() {
         enteredFieldThisTurn: false,
       );
       final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
         gameOverState: GameOverState.playing,
         cards: [
           card,
@@ -42,10 +33,6 @@ void main() {
       expect(
         state.applyStateChanges([stateChange]),
         const GameState(
-          gameInfo: GameInfo(
-            player1: p1,
-            player2: p2,
-          ),
           gameOverState: GameOverState.playing,
           cards: [
             TestCard(
@@ -65,10 +52,6 @@ void main() {
     });
     test('throws a state change exception if the card is not found.', () {
       final state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],

@@ -1,19 +1,15 @@
+import '../game_state/player.dart';
+import 'game_object.dart';
 import 'package:meta/meta.dart';
 
-import 'game_object.dart';
-
-/// GameObject representing a player.
-@immutable
 class PlayerObject extends GameObject {
-  @override
-  final int id;
-  final String name;
+  final Player player;
 
-  const PlayerObject({@required this.id, @required this.name});
+  const PlayerObject({@required this.player});
 
   @override
-  List<Object> get toStringProps => [name];
+  int get id => player.index;
 
   @override
-  List<Object> get props => [id];
+  List<Object> get toStringProps => [player];
 }

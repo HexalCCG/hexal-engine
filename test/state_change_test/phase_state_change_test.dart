@@ -1,22 +1,13 @@
-import 'package:hexal_engine/game_state/player.dart';
 import 'package:test/test.dart';
-
-import 'package:hexal_engine/game_state/game_info.dart';
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/phase_state_change.dart';
 
 void main() {
-  const p1 = PlayerObject(id: 0, name: 'Alice');
-  const p2 = PlayerObject(id: 1, name: 'Bob');
   test('Phase state change changes phase.', () {
     final state = const GameState(
-      gameInfo: GameInfo(
-        player1: p1,
-        player2: p2,
-      ),
       gameOverState: GameOverState.playing,
       cards: [],
       stack: [],
@@ -34,10 +25,6 @@ void main() {
       'Phase state change doesn\'t change activePlayer when moving from end to start phase.',
       () {
     final state = const GameState(
-      gameInfo: GameInfo(
-        player1: p1,
-        player2: p2,
-      ),
       gameOverState: GameOverState.playing,
       cards: [],
       stack: [],

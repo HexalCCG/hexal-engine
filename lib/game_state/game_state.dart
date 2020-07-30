@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/remove_event_state_change.dart';
 import 'package:meta/meta.dart';
 
@@ -6,7 +7,6 @@ import '../actions/action.dart';
 import '../event/event.dart';
 import '../objects/card_object.dart';
 import '../state_change/state_change.dart';
-import 'game_info.dart';
 import 'game_over_state.dart';
 import 'location.dart';
 import 'player.dart';
@@ -15,7 +15,6 @@ import 'turn_phase.dart';
 /// GameStates represent a single moment snapshot of a game.
 @immutable
 class GameState extends Equatable {
-  final GameInfo gameInfo;
   final GameOverState gameOverState;
   final List<CardObject> cards;
   final List<Event> stack;
@@ -29,7 +28,6 @@ class GameState extends Equatable {
       (activePlayer == Player.one) ? Player.two : Player.one;
 
   const GameState({
-    @required this.gameInfo,
     @required this.gameOverState,
     @required this.cards,
     @required this.stack,
@@ -39,7 +37,6 @@ class GameState extends Equatable {
   });
 
   const GameState.startingState({
-    @required this.gameInfo,
     bool player1Starts,
   })  : gameOverState = GameOverState.playing,
         cards = const [],
@@ -84,6 +81,11 @@ class GameState extends Equatable {
   Event getEvent(Event event) =>
       stack.firstWhere((element) => element == event);
 
+  // Return the playerobject for a player
+  PlayerObject getPlayerObject(Player player) => player == Player.one
+      ? const PlayerObject(player: Player.one)
+      : const PlayerObject(player: Player.two);
+
   CardObject getTopCardOfDeck(Player player) {
     final deck = getCardsByLocation(player, Location.deck);
     if (deck.isEmpty) {
@@ -94,7 +96,8 @@ class GameState extends Equatable {
   }
 
   GameState copyWith({
-    GameInfo gameInfo,
+    PlayerObject player1,
+    PlayerObject player2,
     GameOverState gameOverState,
     List<CardObject> cards,
     List<Event> stack,
@@ -103,7 +106,6 @@ class GameState extends Equatable {
     TurnPhase turnPhase,
   }) {
     return GameState(
-      gameInfo: gameInfo ?? this.gameInfo,
       gameOverState: gameOverState ?? this.gameOverState,
       cards: cards ?? this.cards,
       stack: stack ?? this.stack,
@@ -115,7 +117,6 @@ class GameState extends Equatable {
 
   @override
   List<Object> get props => [
-        gameInfo,
         gameOverState,
         cards,
         stack,

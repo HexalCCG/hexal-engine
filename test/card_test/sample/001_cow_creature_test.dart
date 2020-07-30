@@ -1,20 +1,15 @@
+import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/game_state/player.dart';
-import 'package:test/test.dart';
-
 import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/game_state/game_info.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/objects/player_object.dart';
 
 void main() {
   group('Card test S.001', () {
-    const p1 = PlayerObject(id: 0, name: 'Alice');
-    const p2 = PlayerObject(id: 1, name: 'Bob');
     test('enters the battlefield when played.', () {
       const card = CowCreatureCard(
         id: 2,
@@ -25,10 +20,6 @@ void main() {
         damage: 0,
       );
       var state = const GameState(
-        gameInfo: GameInfo(
-          player1: p1,
-          player2: p2,
-        ),
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [],

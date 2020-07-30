@@ -1,6 +1,13 @@
-import 'package:hexal_engine/effect/target/target.dart';
-import 'package:hexal_engine/event/request_target_event.dart';
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
+import 'package:hexal_engine/exceptions/event_exceptipn.dart';
+import 'package:hexal_engine/objects/card_object.dart';
+import 'package:hexal_engine/objects/player_object.dart';
+
+import '../cards/mi_creature.dart';
+import 'target/target.dart';
+import '../event/damage_creature_event.dart';
+import '../event/damage_player_event.dart';
+import '../event/request_target_event.dart';
+import '../state_change/resolve_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../game_state/game_state.dart';
@@ -47,8 +54,18 @@ class DamageEffect extends Effect implements ITargetted {
       ];
     } else {
       return [
-        AddEventStateChange(
-            event: DamageEffect(target: target, damage: damage)),
+        ...targetResult.targets.map((target) {
+          if (target is CardObject && target is ICreature) {
+            return AddEventStateChange(
+                event: DamageCreatureEvent(creature: target, damage: damage));
+          } else if (target is PlayerObject) {
+            return AddEventStateChange(
+                event:
+                    DamagePlayerEvent(player: target.player, damage: damage));
+          } else {
+            throw const EventException('DamageEffect: Invalid target');
+          }
+        }),
         ResolveEventStateChange(event: this),
       ];
     }
