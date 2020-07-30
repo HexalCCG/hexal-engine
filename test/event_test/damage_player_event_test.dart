@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/event/damage_player_event.dart';
@@ -32,6 +33,24 @@ void main() {
 
       expect(changes,
           contains(MoveCardStateChange(card: card, location: Location.exile)));
+    });
+    test('triggers game over if the player has no cards. ', () {
+      final state = const GameState(
+        gameOverState: GameOverState.playing,
+        cards: [],
+        stack: [
+          DamagePlayerEvent(player: Player.one, damage: 1),
+        ],
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.draw,
+      );
+      final changes = state.resolveTopStackEvent();
+
+      expect(
+          changes,
+          contains(
+              GameOverStateChange(gameOverState: GameOverState.player2Win)));
     });
   });
 }
