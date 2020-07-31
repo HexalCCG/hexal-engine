@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/exceptions/game_state_exception.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/remove_event_state_change.dart';
 import 'package:meta/meta.dart';
@@ -15,12 +16,12 @@ import 'turn_phase.dart';
 /// GameStates represent a single moment snapshot of a game.
 @immutable
 class GameState extends Equatable {
-  final GameOverState gameOverState;
-  final List<CardObject> cards;
-  final List<Event> stack;
   final Player activePlayer;
   final Player priorityPlayer;
   final TurnPhase turnPhase;
+  final List<CardObject> cards;
+  final List<Event> stack;
+  final GameOverState gameOverState;
 
   Player get notPriorityPlayer =>
       (priorityPlayer == Player.one) ? Player.two : Player.one;
@@ -28,12 +29,12 @@ class GameState extends Equatable {
       (activePlayer == Player.one) ? Player.two : Player.one;
 
   const GameState({
-    @required this.gameOverState,
-    @required this.cards,
-    @required this.stack,
     @required this.activePlayer,
     @required this.priorityPlayer,
     @required this.turnPhase,
+    @required this.cards,
+    @required this.stack,
+    this.gameOverState = GameOverState.playing,
   });
 
   const GameState.startingState({
@@ -53,8 +54,13 @@ class GameState extends Equatable {
       changes.fold(this, (currentState, change) => change.apply(currentState));
 
   /// Generates then applies state changes for provided action.
-  GameState applyAction(Action action) =>
-      applyStateChanges(generateStateChanges(action));
+  GameState applyAction(Action action) {
+    if (gameOverState != GameOverState.playing) {
+      throw GameStateException(
+          'GameState Exception: Game is over: ' + gameOverState.toString());
+    }
+    return applyStateChanges(generateStateChanges(action));
+  }
 
   /// Attempts to resolve the top stack event.
   List<StateChange> resolveTopStackEvent() {

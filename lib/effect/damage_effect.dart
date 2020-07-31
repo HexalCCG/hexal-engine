@@ -1,3 +1,4 @@
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:meta/meta.dart';
 
 import '../cards/mi_creature.dart';
@@ -24,14 +25,16 @@ class DamageEffect extends Effect implements ITargetted {
   final int damage;
 
   const DamageEffect({
+    @required Player controller,
     @required this.target,
     this.targetResult,
     @required this.damage,
     bool resolved = false,
-  }) : super(resolved: resolved);
+  }) : super(controller: controller, resolved: resolved);
 
   @override
   DamageEffect copyWithTarget(targetResult) => DamageEffect(
+      controller: controller,
       target: target,
       targetResult: targetResult,
       damage: damage,
@@ -39,6 +42,7 @@ class DamageEffect extends Effect implements ITargetted {
 
   @override
   DamageEffect get copyResolved => DamageEffect(
+      controller: controller,
       target: target,
       targetResult: targetResult,
       damage: damage,

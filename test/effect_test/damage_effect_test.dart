@@ -14,8 +14,10 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 void main() {
   group('Damage effect', () {
     test('requests a target if one hasn\'t been given yet. ', () {
-      const effect =
-          DamageEffect(damage: 1, target: CreatureTarget(optional: false));
+      const effect = DamageEffect(
+          controller: Player.one,
+          damage: 1,
+          target: CreatureTarget(optional: false));
       const state = GameState(
         gameOverState: GameOverState.playing,
         cards: [],
@@ -44,6 +46,7 @@ void main() {
         damage: 0,
       );
       const effect = DamageEffect(
+          controller: Player.one,
           damage: 1,
           target: CreatureTarget(optional: false),
           targetResult: CreatureTargetResult(target: card));

@@ -33,6 +33,10 @@ class CowBeamCard extends CardObject implements IOnEnterField {
       );
 
   @override
-  List<Effect> get onEnterFieldEffects =>
-      [DamageEffect(damage: 1, target: CreatureTarget(optional: false))];
+  List<Effect> get onEnterFieldEffects => [
+        DamageEffect(
+            controller: controller,
+            damage: 1,
+            target: CreatureTarget(optional: false))
+      ];
 }

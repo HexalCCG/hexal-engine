@@ -1,3 +1,4 @@
+import 'package:hexal_engine/game_state/player.dart';
 import 'package:meta/meta.dart';
 
 import '../event/event.dart';
@@ -5,7 +6,10 @@ import '../game_state/game_state.dart';
 import '../state_change/state_change.dart';
 
 abstract class Effect extends Event {
-  const Effect({@required bool resolved}) : super(resolved: resolved);
+  final Player controller;
+
+  const Effect({@required this.controller, @required bool resolved})
+      : super(resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state);

@@ -25,6 +25,7 @@ class RequestTargetEvent extends Event {
 
   @override
   List<StateChange> apply(GameState state) {
+    // TODO: implement optional requests
     if (targetResult == null) {
       throw const EventException(
           'RequestTargetEvent error: TargetResult should not be null');
