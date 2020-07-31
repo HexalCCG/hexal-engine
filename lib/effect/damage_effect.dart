@@ -60,7 +60,7 @@ class DamageEffect extends Effect implements ITargetted {
         ...targetResult.targets.map((target) {
           if (target is CardObject && target is ICreature) {
             return AddEventStateChange(
-                event: DamageCreatureEvent(creature: target, damage: damage));
+                event: DamageCreatureEvent(card: target, damage: damage));
           } else if (target is PlayerObject) {
             return AddEventStateChange(
                 event:

@@ -8,25 +8,25 @@ import '../state_change/state_change.dart';
 import 'event.dart';
 
 class DamageCreatureEvent extends Event {
-  final CardObject creature;
+  final CardObject card;
   final int damage;
 
   const DamageCreatureEvent(
-      {@required this.creature, @required this.damage, bool resolved = false})
+      {@required this.card, @required this.damage, bool resolved = false})
       : super(resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state) {
     return [
-      DamageCreatureStateChange(card: creature, damage: damage),
+      DamageCreatureStateChange(card: card, damage: damage),
       ResolveEventStateChange(event: this),
     ];
   }
 
   @override
   DamageCreatureEvent get copyResolved =>
-      DamageCreatureEvent(creature: creature, damage: damage, resolved: true);
+      DamageCreatureEvent(card: card, damage: damage, resolved: true);
 
   @override
-  List<Object> get props => [creature, damage, resolved];
+  List<Object> get props => [card, damage, resolved];
 }

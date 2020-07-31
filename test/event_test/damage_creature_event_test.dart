@@ -22,7 +22,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DamageCreatureEvent(creature: card, damage: 1),
+          DamageCreatureEvent(card: card, damage: 1),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,

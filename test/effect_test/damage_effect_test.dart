@@ -63,7 +63,7 @@ void main() {
       expect(
           changes,
           contains(const AddEventStateChange(
-            event: DamageCreatureEvent(creature: card, damage: 1),
+            event: DamageCreatureEvent(card: card, damage: 1),
           )));
     });
   });
