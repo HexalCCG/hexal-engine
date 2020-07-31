@@ -1,3 +1,5 @@
+import 'package:hexal_engine/game_state/player.dart';
+
 import '../../cards/mi_creature.dart';
 import 'target.dart';
 import '../../exceptions/event_exceptipn.dart';
@@ -7,9 +9,8 @@ import '../../objects/game_object.dart';
 import 'package:meta/meta.dart';
 
 class CreatureTarget extends Target {
-  final bool optional;
-
-  const CreatureTarget({this.optional = false});
+  const CreatureTarget({@required Player controller})
+      : super(controller: controller);
 
   @override
   bool targetValid(target) => ((target is CardObject) &&
@@ -25,7 +26,7 @@ class CreatureTarget extends Target {
   }
 
   @override
-  List<Object> get props => [optional];
+  List<Object> get props => [controller];
 }
 
 class CreatureTargetResult extends TargetResult {

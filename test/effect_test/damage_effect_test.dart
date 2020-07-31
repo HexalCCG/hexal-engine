@@ -17,7 +17,7 @@ void main() {
       const effect = DamageEffect(
           controller: Player.one,
           damage: 1,
-          target: CreatureTarget(optional: false));
+          target: CreatureTarget(controller: Player.one));
       const state = GameState(
         gameOverState: GameOverState.playing,
         cards: [],
@@ -32,7 +32,7 @@ void main() {
           changes,
           contains(const AddEventStateChange(
             event: RequestTargetEvent(
-                effect: effect, target: CreatureTarget(optional: false)),
+                effect: effect, target: CreatureTarget(controller: Player.one)),
           )));
     });
 
@@ -48,7 +48,7 @@ void main() {
       const effect = DamageEffect(
           controller: Player.one,
           damage: 1,
-          target: CreatureTarget(optional: false),
+          target: CreatureTarget(controller: Player.one),
           targetResult: CreatureTargetResult(target: card));
       const state = GameState(
         gameOverState: GameOverState.playing,

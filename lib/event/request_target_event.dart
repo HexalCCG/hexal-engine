@@ -38,6 +38,9 @@ class RequestTargetEvent extends Event {
     ];
   }
 
+  RequestTargetEvent copyWithResult(TargetResult result) => RequestTargetEvent(
+      effect: effect, target: target, targetResult: result, resolved: resolved);
+
   @override
   RequestTargetEvent get copyResolved =>
       RequestTargetEvent(effect: effect, target: target, resolved: true);

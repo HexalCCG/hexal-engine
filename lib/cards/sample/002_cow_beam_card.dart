@@ -37,6 +37,6 @@ class CowBeamCard extends CardObject implements IOnEnterField {
         DamageEffect(
             controller: controller,
             damage: 1,
-            target: CreatureTarget(optional: false))
+            target: CreatureTarget(controller: controller))
       ];
 }
