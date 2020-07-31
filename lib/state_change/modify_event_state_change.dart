@@ -24,5 +24,5 @@ class ModifyEventStateChange extends StateChange {
   }
 
   @override
-  List<Object> get props => [event];
+  List<Object> get props => [event, newEvent];
 }

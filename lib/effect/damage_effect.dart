@@ -1,4 +1,6 @@
 import 'package:hexal_engine/game_state/player.dart';
+import 'package:hexal_engine/objects/game_object.dart';
+import 'package:hexal_engine/state_change/modify_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../cards/mi_creature.dart';
@@ -23,14 +25,66 @@ class DamageEffect extends Effect implements ITargetted {
   final TargetResult targetResult;
 
   final int damage;
+  final int targetIndex;
 
   const DamageEffect({
     @required Player controller,
     @required this.target,
     this.targetResult,
+    this.targetIndex = 0,
     @required this.damage,
     bool resolved = false,
   }) : super(controller: controller, resolved: resolved);
+
+  @override
+  List<StateChange> apply(GameState state) {
+    if (targetResult == null) {
+      return [
+        AddEventStateChange(
+            event: RequestTargetEvent(effect: this, target: target)),
+      ];
+    } else {
+      if (targetResult.targets.isEmpty) {
+        // If there are no targets, resolve this.
+        return [ResolveEventStateChange(event: this)];
+      } else {
+        // If only one target is left, do it and resolve
+        if (targetIndex == targetResult.targets.length - 1) {
+          return [
+            _generateStateChange(targetResult.targets[targetIndex]),
+            ResolveEventStateChange(event: this),
+          ];
+        }
+        // Otherwise do one target and increment
+        else {
+          return [
+            _generateStateChange(targetResult.targets[targetIndex]),
+            ModifyEventStateChange(event: this, newEvent: _copyIncremented),
+          ];
+        }
+      }
+    }
+  }
+
+  StateChange _generateStateChange(GameObject target) {
+    if (target is CardObject && target is ICreature) {
+      return AddEventStateChange(
+          event: DamageCreatureEvent(card: target, damage: damage));
+    } else if (target is PlayerObject) {
+      return AddEventStateChange(
+          event: DamagePlayerEvent(player: target.player, damage: damage));
+    } else {
+      throw const EventException('DamageEffect: Invalid target');
+    }
+  }
+
+  DamageEffect get _copyIncremented => DamageEffect(
+      controller: controller,
+      target: target,
+      targetResult: targetResult,
+      targetIndex: targetIndex + 1,
+      damage: damage,
+      resolved: resolved);
 
   @override
   DamageEffect copyWithTarget(targetResult) => DamageEffect(
@@ -49,31 +103,5 @@ class DamageEffect extends Effect implements ITargetted {
       resolved: true);
 
   @override
-  List<StateChange> apply(GameState state) {
-    if (targetResult == null) {
-      return [
-        AddEventStateChange(
-            event: RequestTargetEvent(effect: this, target: target)),
-      ];
-    } else {
-      return [
-        ...targetResult.targets.map((target) {
-          if (target is CardObject && target is ICreature) {
-            return AddEventStateChange(
-                event: DamageCreatureEvent(card: target, damage: damage));
-          } else if (target is PlayerObject) {
-            return AddEventStateChange(
-                event:
-                    DamagePlayerEvent(player: target.player, damage: damage));
-          } else {
-            throw const EventException('DamageEffect: Invalid target');
-          }
-        }),
-        ResolveEventStateChange(event: this),
-      ];
-    }
-  }
-
-  @override
-  List<Object> get props => [target, damage, resolved];
+  List<Object> get props => [target, targetResult, damage, resolved];
 }

@@ -1,6 +1,7 @@
 import 'package:hexal_engine/effect/i_targetted.dart';
 import 'package:hexal_engine/effect/target/target.dart';
 import 'package:hexal_engine/exceptions/event_exceptipn.dart';
+import 'package:hexal_engine/state_change/fill_request_state_change.dart';
 import 'package:hexal_engine/state_change/modify_event_state_change.dart';
 import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:meta/meta.dart';
@@ -31,9 +32,19 @@ class RequestTargetEvent extends Event {
     }
     return [
       ModifyEventStateChange(
-          event: effect,
-          newEvent: (effect as ITargetted).copyWithTarget(targetResult)),
+        event: effect,
+        newEvent: (effect as ITargetted).copyWithTarget(targetResult),
+      ),
       ResolveEventStateChange(event: this),
+    ];
+  }
+
+  bool targetValid(dynamic input) => target.targetValid(input);
+
+  List<StateChange> createFillStateChange(dynamic input) {
+    return [
+      FillRequestStateChange(
+          request: this, targetResult: target.createResult(input)),
     ];
   }
 
@@ -41,9 +52,12 @@ class RequestTargetEvent extends Event {
       effect: effect, target: target, targetResult: result, resolved: resolved);
 
   @override
-  RequestTargetEvent get copyResolved =>
-      RequestTargetEvent(effect: effect, target: target, resolved: true);
+  RequestTargetEvent get copyResolved => RequestTargetEvent(
+      effect: effect,
+      target: target,
+      targetResult: targetResult,
+      resolved: true);
 
   @override
-  List<Object> get props => [effect, target, resolved];
+  List<Object> get props => [effect, target, targetResult, resolved];
 }

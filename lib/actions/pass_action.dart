@@ -1,6 +1,5 @@
 import 'package:hexal_engine/event/request_target_event.dart';
 import 'package:hexal_engine/exceptions/action_exception.dart';
-import 'package:hexal_engine/state_change/fill_request_state_change.dart';
 
 import '../game_state/game_state.dart';
 import '../state_change/combination/next_phase_state_changes.dart';
@@ -17,13 +16,12 @@ class PassAction extends Action {
     if (state.stack.isNotEmpty) {
       var topStackEvent = state.stack.last;
       if (topStackEvent is RequestTargetEvent &&
+          topStackEvent.targetResult == null &&
           topStackEvent.target.controller == state.priorityPlayer) {
         // Top event is a request that we control.
-        if (topStackEvent.target.targetValid(null)) {
+        if (topStackEvent.targetValid(null)) {
           return [
-            FillRequestStateChange(
-                request: topStackEvent,
-                targetResult: topStackEvent.target.createResult(null))
+            ...topStackEvent.createFillStateChange(null),
           ];
         } else {
           throw const ActionException(

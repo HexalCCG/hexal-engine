@@ -16,6 +16,7 @@ class CreatureTarget extends Target {
 
   @override
   bool targetValid(target) {
+    //TODO: should be able to pass if no valid targets exist
     if (optional && target == null) {
       return true;
     }
