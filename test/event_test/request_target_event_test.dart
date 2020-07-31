@@ -31,10 +31,24 @@ void main() {
       expect(() => state.applyAction(PassAction()),
           throwsA(isA<ActionException>()));
     });
-    /*test('can be passed if optional. ', () {
-      
-    });*/
-    test('is filled by fill request action. ', () {});
-    test('cannot be passed if set to required. ', () {});
+    test('can be passed if optional. ', () {
+      const effect = DamageEffect(
+          controller: Player.one,
+          damage: 1,
+          target: CreatureTarget(optional: true, controller: Player.one));
+      var state = GameState(
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.main1,
+        cards: [],
+        stack: [
+          RequestTargetEvent(
+            effect: effect,
+            target: effect.target,
+          )
+        ],
+      );
+      expect(() => state.applyAction(PassAction()), returnsNormally);
+    });
   });
 }

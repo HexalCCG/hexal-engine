@@ -9,18 +9,28 @@ import '../../objects/game_object.dart';
 import 'package:meta/meta.dart';
 
 class CreatureTarget extends Target {
-  const CreatureTarget({@required Player controller})
+  final bool optional;
+
+  const CreatureTarget({this.optional = false, @required Player controller})
       : super(controller: controller);
 
   @override
-  bool targetValid(target) => ((target is CardObject) &&
-      (target is ICreature) &&
-      (target.location == Location.battlefield));
+  bool targetValid(target) {
+    if (optional && target == null) {
+      return true;
+    }
+    return ((target is CardObject) &&
+        (target is ICreature) &&
+        (target.location == Location.battlefield));
+  }
 
   @override
-  CreatureTargetResult createResult(dynamic target) {
+  TargetResult createResult(dynamic target) {
     if (!targetValid(target)) {
       throw EventException('Create target result failed: invalid target');
+    }
+    if (target == null) {
+      return EmptyTargetResult();
     }
     return CreatureTargetResult(target: target);
   }

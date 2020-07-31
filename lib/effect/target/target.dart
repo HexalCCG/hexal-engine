@@ -29,3 +29,13 @@ abstract class TargetResult extends Equatable {
   @override
   bool get stringify => true;
 }
+
+class EmptyTargetResult extends TargetResult {
+  const EmptyTargetResult();
+
+  @override
+  List<GameObject> get targets => [];
+
+  @override
+  List<Object> get props => [];
+}
