@@ -1,8 +1,15 @@
-import 'package:hexal_engine/event/request_target_event.dart';
-import 'package:hexal_engine/exceptions/action_exception.dart';
+import '../cards/mi_creature.dart';
+import '../event/draw_card_event.dart';
+import '../event/request_target_event.dart';
+import '../exceptions/action_exception.dart';
+import '../game_state/turn_phase.dart';
+import '../state_change/active_player_state_change.dart';
+import '../state_change/add_event_state_change.dart';
+import '../state_change/heal_card_state_change.dart';
+import '../state_change/modify_entered_field_this_turn_state_change.dart';
+import '../state_change/phase_state_change.dart';
 
 import '../game_state/game_state.dart';
-import '../state_change/combination/next_phase_state_changes.dart';
 import '../state_change/priority_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
@@ -31,7 +38,7 @@ class PassAction extends Action {
         PriorityStateChange(player: state.activePlayer)
       ];
     } else {
-      return NextPhaseStateChanges.generate(state);
+      return _nextPhase(state);
     }
   }
 
@@ -45,6 +52,44 @@ class PassAction extends Action {
     } else {
       throw const ActionException(
           'PassAction Exception: Cannot pass non-optional target request.');
+    }
+  }
+
+  List<StateChange> _nextPhase(GameState state) {
+    switch (state.turnPhase) {
+      case TurnPhase.start:
+        // Entering draw phase so add draw a card
+        return [
+          AddEventStateChange(
+              event: DrawCardEvent(draws: 1, player: state.activePlayer)),
+          PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
+          PriorityStateChange(player: state.activePlayer)
+        ];
+      case TurnPhase.end:
+        // Move on to the next turn
+        return [
+          ActivePlayerStateChange(player: state.notActivePlayer),
+          PhaseStateChange(phase: TurnPhase.start),
+          PriorityStateChange(player: state.notActivePlayer),
+          // Set entered field this turn to false
+          ...state.cards
+              .map((card) => (card.enteredFieldThisTurn)
+                  ? ModifyEnteredFieldThisTurnStateChange(
+                      card: card, enteredFieldThisTurn: false)
+                  : null)
+              .where((element) => element != null),
+          // Heal all creatures
+          ...state.cards
+              // ignore: prefer_iterable_wheretype
+              .where((element) => element is ICreature)
+              .map((card) => HealCardStateChange(card: card)),
+        ];
+      default:
+        // Move on to the next phase
+        return [
+          PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
+          PriorityStateChange(player: state.activePlayer)
+        ];
     }
   }
 

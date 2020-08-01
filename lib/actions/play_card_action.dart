@@ -1,10 +1,12 @@
 import 'package:meta/meta.dart';
 
+import '../event/play_card_event.dart';
 import '../exceptions/action_exception.dart';
 import '../game_state/game_state.dart';
 import '../game_state/location.dart';
 import '../objects/card_object.dart';
-import '../state_change/combination/play_card_state_changes.dart';
+import '../state_change/add_event_state_change.dart';
+import '../state_change/move_card_state_change.dart';
 import '../state_change/priority_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
@@ -24,8 +26,12 @@ class PlayCardAction extends Action {
     if (state.activePlayer != state.priorityPlayer) {
       throw ActionException("Cannot play card on opponent's turn");
     }
+    if (state.stack.isNotEmpty) {
+      throw const ActionException('Cannot play cards if stack is not empty');
+    }
     return [
-      ...PlayCardStateChanges.generate(card),
+      MoveCardStateChange(card: card, location: Location.limbo),
+      AddEventStateChange(event: PlayCardEvent(card: card)),
       PriorityStateChange(player: state.activePlayer),
     ];
   }

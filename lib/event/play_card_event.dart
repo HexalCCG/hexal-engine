@@ -1,11 +1,15 @@
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../game_state/game_state.dart';
+import '../game_state/location.dart';
 import '../objects/card_object.dart';
-import '../state_change/combination/put_into_field_state_changes.dart';
+import '../state_change/add_event_state_change.dart';
+import '../state_change/modify_entered_field_this_turn_state_change.dart';
+import '../state_change/move_card_state_change.dart';
+import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
+import 'on_card_enter_field_event.dart';
 
 class PlayCardEvent extends Event {
   final CardObject card;
@@ -16,7 +20,15 @@ class PlayCardEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     return [
-      ...PutIntoFieldStateChanges.generate(card),
+      MoveCardStateChange(
+        card: card,
+        location: Location.battlefield,
+      ),
+      ModifyEnteredFieldThisTurnStateChange(
+        card: card,
+        enteredFieldThisTurn: true,
+      ),
+      AddEventStateChange(event: OnCardEnterFieldEvent(card: card)),
       ResolveEventStateChange(event: this)
     ];
   }
