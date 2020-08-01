@@ -39,14 +39,17 @@ class RequestTargetEvent extends Event {
     ];
   }
 
-  bool targetValid(dynamic input) => target.targetValid(input);
-
   List<StateChange> createFillStateChange(dynamic input) {
     return [
       FillRequestStateChange(
           request: this, targetResult: target.createResult(input)),
     ];
   }
+
+  List<StateChange> get emptyFillStateChange => [
+        FillRequestStateChange(
+            request: this, targetResult: EmptyTargetResult()),
+      ];
 
   RequestTargetEvent copyWithResult(TargetResult result) => RequestTargetEvent(
       effect: effect, target: target, targetResult: result, resolved: resolved);

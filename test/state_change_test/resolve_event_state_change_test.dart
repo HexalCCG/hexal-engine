@@ -1,8 +1,7 @@
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:test/test.dart';
+import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';

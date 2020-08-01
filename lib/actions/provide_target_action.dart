@@ -19,7 +19,7 @@ class ProvideTargetAction extends Action {
           topStackEvent.targetResult == null &&
           topStackEvent.target.controller == state.priorityPlayer) {
         // Top event is a request that we control.
-        if (topStackEvent.targetValid(target)) {
+        if (topStackEvent.target.targetValid(target)) {
           return [
             ...topStackEvent.createFillStateChange(target),
           ];

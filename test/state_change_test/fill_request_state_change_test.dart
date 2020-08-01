@@ -1,14 +1,10 @@
-import 'package:hexal_engine/cards/mi_creature.dart';
+import 'package:test/test.dart';
 import 'package:hexal_engine/effect/damage_effect.dart';
 import 'package:hexal_engine/effect/target/creature_target.dart';
 import 'package:hexal_engine/effect/target/target.dart';
 import 'package:hexal_engine/event/request_target_event.dart';
 import 'package:hexal_engine/state_change/fill_request_state_change.dart';
-import 'package:test/test.dart';
-import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/state_change/add_event_state_change.dart';
-import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
 

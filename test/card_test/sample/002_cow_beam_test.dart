@@ -1,11 +1,9 @@
-import 'dart:math';
-
+import 'package:test/test.dart';
 import 'package:hexal_engine/actions/provide_target_action.dart';
 import 'package:hexal_engine/cards/mi_creature.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/on_card_enter_field_event.dart';
 import 'package:hexal_engine/event/request_target_event.dart';
-import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
 import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';

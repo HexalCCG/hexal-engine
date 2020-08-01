@@ -1,3 +1,6 @@
+import 'package:hexal_engine/cards/mi_creature.dart';
+import 'package:hexal_engine/event/destroy_card_event.dart';
+import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../game_state/game_state.dart';
@@ -17,10 +20,18 @@ class DamageCreatureEvent extends Event {
 
   @override
   List<StateChange> apply(GameState state) {
-    return [
-      DamageCreatureStateChange(card: card, damage: damage),
-      ResolveEventStateChange(event: this),
-    ];
+    if ((card as ICreature).damage + damage > (card as ICreature).health) {
+      return [
+        DamageCreatureStateChange(card: card, damage: damage),
+        ResolveEventStateChange(event: this),
+        AddEventStateChange(event: DestroyCardEvent(card: card)),
+      ];
+    } else {
+      return [
+        DamageCreatureStateChange(card: card, damage: damage),
+        ResolveEventStateChange(event: this),
+      ];
+    }
   }
 
   @override

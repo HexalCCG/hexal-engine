@@ -13,21 +13,12 @@ class PassAction extends Action {
   @override
   List<StateChange> apply(GameState state) {
     // Check if the top event is a request.
-    if (state.stack.isNotEmpty) {
-      var topStackEvent = state.stack.last;
-      if (topStackEvent is RequestTargetEvent &&
-          topStackEvent.targetResult == null &&
-          topStackEvent.target.controller == state.priorityPlayer) {
-        // Top event is a request that we control.
-        if (topStackEvent.targetValid(null)) {
-          return [
-            ...topStackEvent.createFillStateChange(null),
-          ];
-        } else {
-          throw const ActionException(
-              'PassAction Exception: Cannot pass non-optional target request.');
-        }
-      }
+    if (state.stack.isNotEmpty &&
+        state.stack.last is RequestTargetEvent &&
+        (state.stack.last as RequestTargetEvent).targetResult == null &&
+        (state.stack.last as RequestTargetEvent).target.controller ==
+            state.priorityPlayer) {
+      return _checkRequest(state);
     }
 
     if (state.priorityPlayer == state.activePlayer) {
@@ -41,6 +32,19 @@ class PassAction extends Action {
       ];
     } else {
       return NextPhaseStateChanges.generate(state);
+    }
+  }
+
+  List<StateChange> _checkRequest(GameState state) {
+    final event = (state.stack.last as RequestTargetEvent);
+
+    if (event.target.optional || event.target.anyValid(state)) {
+      return [
+        ...event.emptyFillStateChange,
+      ];
+    } else {
+      throw const ActionException(
+          'PassAction Exception: Cannot pass non-optional target request.');
     }
   }
 

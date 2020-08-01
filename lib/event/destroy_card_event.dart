@@ -3,6 +3,7 @@ import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/objects/card_object.dart';
 import 'package:hexal_engine/state_change/move_card_state_change.dart';
+import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
 import 'package:hexal_engine/state_change/state_change.dart';
 import 'package:meta/meta.dart';
 
@@ -16,8 +17,10 @@ class DestroyCardEvent extends Event {
         super(resolved: resolved);
 
   @override
-  List<StateChange> apply(GameState state) =>
-      [MoveCardStateChange(card: card, location: Location.mana)];
+  List<StateChange> apply(GameState state) => [
+        MoveCardStateChange(card: card, location: Location.mana),
+        ResolveEventStateChange(event: this),
+      ];
 
   @override
   DestroyCardEvent get copyResolved => DestroyCardEvent(
