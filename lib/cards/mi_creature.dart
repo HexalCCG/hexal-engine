@@ -1,6 +1,8 @@
+import 'package:hexal_engine/cards/i_permanent.dart';
+
 import '../objects/card_object.dart';
 
-abstract class ICreature {
+abstract class ICreature implements IPermanent {
   // Constant
   int get baseHealth;
   int get baseAttack;

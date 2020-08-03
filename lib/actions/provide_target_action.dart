@@ -25,7 +25,7 @@ class ProvideTargetAction extends Action {
           ];
         } else {
           throw const ActionException(
-              'ProvideTargetAction Exception: Cannot pass non-optional target request.');
+              'ProvideTargetAction Exception: Invalid target provided.');
         }
       } else {
         throw const ActionException(

@@ -1,3 +1,5 @@
+import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
+import 'package:hexal_engine/game_state/location.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/effect/damage_effect.dart';
@@ -15,6 +17,33 @@ void main() {
           controller: Player.one,
           damage: 1,
           target: CreatureTarget(controller: Player.one));
+      const validTarget = CowCreatureCard(
+        id: 3,
+        owner: Player.two,
+        controller: Player.two,
+        location: Location.battlefield,
+      );
+      var state = GameState(
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.main1,
+        cards: [validTarget],
+        stack: [
+          RequestTargetEvent(
+            effect: effect,
+            target: effect.target,
+          )
+        ],
+      );
+
+      expect(() => state.applyAction(PassAction()),
+          throwsA(isA<ActionException>()));
+    });
+    test('can be passed if required if there are no valid targets.', () {
+      const effect = DamageEffect(
+          controller: Player.one,
+          damage: 1,
+          target: CreatureTarget(controller: Player.one));
       var state = GameState(
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -28,8 +57,7 @@ void main() {
         ],
       );
 
-      expect(() => state.applyAction(PassAction()),
-          throwsA(isA<ActionException>()));
+      expect(() => state.applyAction(PassAction()), returnsNormally);
     });
     test('can be passed if optional. ', () {
       const effect = DamageEffect(

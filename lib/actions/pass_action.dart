@@ -34,7 +34,7 @@ class PassAction extends Action {
     } else if (state.stack.isNotEmpty) {
       // Non-active player has passed so resolve top stack event and switch priority
       return [
-        ...state.resolveTopStackEvent(),
+        ..._resolve(state),
         PriorityStateChange(player: state.activePlayer)
       ];
     } else {
@@ -42,10 +42,12 @@ class PassAction extends Action {
     }
   }
 
+  List<StateChange> _resolve(GameState state) => state.resolveTopStackEvent();
+
   List<StateChange> _checkRequest(GameState state) {
     final event = (state.stack.last as RequestTargetEvent);
 
-    if (event.target.optional || event.target.anyValid(state)) {
+    if (event.target.optional || !event.target.anyValid(state)) {
       return [
         ...event.emptyFillStateChange,
       ];

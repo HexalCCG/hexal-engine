@@ -37,8 +37,8 @@ class EmptyTargetResult extends TargetResult {
   const EmptyTargetResult();
 
   @override
-  List<GameObject> get targets => [];
+  List<GameObject> get targets => const [];
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => const [];
 }
