@@ -1,7 +1,7 @@
+import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:meta/meta.dart';
 
 import '../event/play_card_event.dart';
-import '../exceptions/action_exception.dart';
 import '../game_state/game_state.dart';
 import '../game_state/location.dart';
 import '../objects/card_object.dart';
@@ -17,17 +17,28 @@ class PlayCardAction extends Action {
   const PlayCardAction({@required this.card});
 
   @override
-  List<StateChange> apply(GameState state) {
+  bool valid(GameState state) {
+    if (state.stack.isNotEmpty) {
+      // Cannot play cards if stack is not empty.
+      return false;
+    }
     if (!state
         .getCardsByLocation(state.priorityPlayer, Location.hand)
         .contains(card)) {
-      throw ActionException('Card not found in hand');
+      // Card not found in hand.
+      return false;
     }
     if (state.activePlayer != state.priorityPlayer) {
-      throw ActionException("Cannot play card on opponent's turn");
+      // Cannot play card on opponent's turn.
+      return false;
     }
-    if (state.stack.isNotEmpty) {
-      throw const ActionException('Cannot play cards if stack is not empty');
+    return true;
+  }
+
+  @override
+  List<StateChange> apply(GameState state) {
+    if (!valid(state)) {
+      throw const ActionException('PlayCardAction Exception: invalid argument');
     }
     return [
       MoveCardStateChange(card: card, location: Location.limbo),
