@@ -1,3 +1,5 @@
+import 'package:hexal_engine/effect/target/target.dart';
+import 'package:hexal_engine/state_change/fill_request_state_change.dart';
 import 'package:hexal_engine/state_change/set_counter_available_state_change.dart';
 
 import '../event/draw_card_event.dart';
@@ -21,7 +23,6 @@ class PassAction extends Action {
     // If the top stack event is our request
     if (state.stack.isNotEmpty &&
         state.stack.last is RequestTargetEvent &&
-        (state.stack.last as RequestTargetEvent).targetResult == null &&
         (state.stack.last as RequestTargetEvent).target.controller ==
             state.priorityPlayer) {
       if (((state.stack.last as RequestTargetEvent).target.optional ||
@@ -41,17 +42,16 @@ class PassAction extends Action {
     // Check if the top event is a request.
     if (state.stack.isNotEmpty &&
         state.stack.last is RequestTargetEvent &&
-        (state.stack.last as RequestTargetEvent).targetResult == null &&
         (state.stack.last as RequestTargetEvent).target.controller ==
             state.priorityPlayer) {
       return _checkRequest(state);
     }
 
     if (state.priorityPlayer == state.activePlayer) {
-      // Active player has passed so check for non-active response
+      // Active player has passed so check for non-active response.
       return [PriorityStateChange(player: state.notPriorityPlayer)];
     } else if (state.stack.isNotEmpty) {
-      // Non-active player has passed so resolve top stack event and switch priority
+      // Non-active player has passed so resolve and switch priority.
       return [
         ..._resolve(state),
         PriorityStateChange(player: state.activePlayer)
@@ -68,7 +68,9 @@ class PassAction extends Action {
 
     if (event.target.optional || !event.target.anyValid(state)) {
       return [
-        ...event.emptyFillStateChange,
+        FillRequestStateChange(
+            request: (state.stack.last as RequestTargetEvent),
+            targetResult: EmptyTargetResult())
       ];
     } else {
       throw const ActionException(

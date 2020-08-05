@@ -1,66 +1,45 @@
-import 'package:hexal_engine/effect/i_targetted.dart';
-import 'package:hexal_engine/effect/target/target.dart';
-import 'package:hexal_engine/exceptions/event_exceptipn.dart';
-import 'package:hexal_engine/state_change/fill_request_state_change.dart';
-import 'package:hexal_engine/state_change/modify_event_state_change.dart';
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
-import 'package:meta/meta.dart';
+import 'dart:math';
+
+import 'package:hexal_engine/event/provide_target_event.dart';
+import 'package:hexal_engine/objects/game_object.dart';
 
 import '../effect/effect.dart';
+import '../effect/i_targetted.dart';
+import '../effect/target/target.dart';
+import '../exceptions/event_exceptipn.dart';
 import '../game_state/game_state.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 
+/// Requests a target from a player for an effect.
 class RequestTargetEvent extends Event {
+  /// The effect to be filled.
   final Effect effect;
-  final Target target;
-  final TargetResult targetResult;
 
+  /// Target the result must conform to.
+  final Target target;
+
+  /// [Effect] to be filled, and its [target] pattern.
   const RequestTargetEvent({
-    @required this.effect,
-    @required this.target,
-    this.targetResult,
+    required this.effect,
+    required this.target,
     bool resolved = false,
   })  : assert(effect is ITargetted),
         super(resolved: resolved);
 
+  TargetResult createTargetResult(dynamic providedTarget) =>
+      target.createResult(providedTarget);
+
   @override
   List<StateChange> apply(GameState state) {
-    if (targetResult == null) {
-      throw const EventException(
-          'RequestTargetEvent error: TargetResult should not be null');
-    }
-    return [
-      ModifyEventStateChange(
-        event: effect,
-        newEvent: (effect as ITargetted).copyWithTarget(targetResult),
-      ),
-      ResolveEventStateChange(event: this),
-    ];
+    throw const EventException(
+        'RequestTargetEvent error: This should never be applied');
   }
 
-  List<StateChange> createFillStateChange(dynamic input) {
-    return [
-      FillRequestStateChange(
-          request: this, targetResult: target.createResult(input)),
-    ];
-  }
-
-  List<StateChange> get emptyFillStateChange => [
-        FillRequestStateChange(
-            request: this, targetResult: EmptyTargetResult()),
-      ];
-
-  RequestTargetEvent copyWithResult(TargetResult result) => RequestTargetEvent(
-      effect: effect, target: target, targetResult: result, resolved: resolved);
+  @override
+  RequestTargetEvent get copyResolved =>
+      RequestTargetEvent(effect: effect, target: target, resolved: true);
 
   @override
-  RequestTargetEvent get copyResolved => RequestTargetEvent(
-      effect: effect,
-      target: target,
-      targetResult: targetResult,
-      resolved: true);
-
-  @override
-  List<Object> get props => [effect, target, targetResult, resolved];
+  List<Object> get props => [effect, target, resolved];
 }

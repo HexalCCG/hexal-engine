@@ -1,3 +1,5 @@
+import 'package:hexal_engine/objects/game_object.dart';
+import 'package:hexal_engine/state_change/fill_request_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../event/request_target_event.dart';
@@ -6,10 +8,11 @@ import '../game_state/game_state.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
 
+/// Provides target to a request.
 class ProvideTargetAction extends Action {
-  final dynamic target;
+  final List<GameObject> targets;
 
-  const ProvideTargetAction({@required this.target});
+  const ProvideTargetAction({required this.targets});
 
   @override
   bool valid(GameState state) {
@@ -17,13 +20,12 @@ class ProvideTargetAction extends Action {
       // Top event is not a request.
       return false;
     }
-    if ((state.stack.last as RequestTargetEvent).targetResult != null ||
-        (state.stack.last as RequestTargetEvent).target.controller !=
-            state.priorityPlayer) {
-      // Request is not yours or has been filled already.
+    if ((state.stack.last as RequestTargetEvent).target.controller !=
+        state.priorityPlayer) {
+      // Request is not yours.
       return false;
     }
-    if (!(state.stack.last as RequestTargetEvent).target.targetValid(target)) {
+    if (!(state.stack.last as RequestTargetEvent).target.targetValid(targets)) {
       // Target is not valid.
       return false;
     }
@@ -37,10 +39,13 @@ class ProvideTargetAction extends Action {
           'ProvideTargetAction Exception: invalid argument');
     }
     return [
-      ...(state.stack.last as RequestTargetEvent).createFillStateChange(target),
+      FillRequestStateChange(
+          request: (state.stack.last as RequestTargetEvent),
+          targetResult: (state.stack.last as RequestTargetEvent)
+              .createTargetResult(targets))
     ];
   }
 
   @override
-  List<Object> get props => [target];
+  List<Object> get props => [targets];
 }

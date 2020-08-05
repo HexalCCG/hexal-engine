@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../event/play_card_event.dart';
 import '../exceptions/action_exception.dart';
 import '../game_state/game_state.dart';
@@ -14,7 +12,7 @@ import 'action.dart';
 class PlayCardAction extends Action {
   final CardObject card;
 
-  const PlayCardAction({@required this.card});
+  const PlayCardAction({required this.card});
 
   @override
   bool valid(GameState state) {
