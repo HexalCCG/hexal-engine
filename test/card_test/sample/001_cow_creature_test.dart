@@ -10,7 +10,7 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 
 void main() {
   group('Card test S.001', () {
-    test('enters the battlefield when played.', () {
+    test('enters the field when played.', () {
       const card = CowCreatureCard(
         id: 2,
         controller: Player.one,
@@ -43,7 +43,7 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(PassAction());
 
-      expect(state.getCardsByLocation(Player.one, Location.battlefield).first,
+      expect(state.getCardsByLocation(Player.one, Location.field).first,
           isA<CowCreatureCard>());
       expect(state.priorityPlayer, Player.one);
     });

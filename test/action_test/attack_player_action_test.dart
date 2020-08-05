@@ -16,7 +16,7 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        location: Location.battlefield,
+        location: Location.field,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,

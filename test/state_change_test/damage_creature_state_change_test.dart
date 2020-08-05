@@ -15,7 +15,7 @@ void main() {
           id: 3,
           owner: Player.one,
           controller: Player.one,
-          location: Location.battlefield);
+          location: Location.field);
       var state = const GameState(
         gameOverState: GameOverState.playing,
         cards: [creature],

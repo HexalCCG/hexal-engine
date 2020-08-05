@@ -20,7 +20,7 @@ class AttackPlayerEvent extends Event {
 
   @override
   List<StateChange> apply(GameState state) {
-    if (attacker.location != Location.battlefield) {
+    if (attacker.location != Location.field) {
       return [ResolveEventStateChange(event: this)];
     } else {
       return [

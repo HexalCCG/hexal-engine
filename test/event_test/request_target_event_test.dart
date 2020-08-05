@@ -21,7 +21,7 @@ void main() {
         id: 3,
         owner: Player.two,
         controller: Player.two,
-        location: Location.battlefield,
+        location: Location.field,
       );
       var state = GameState(
         activePlayer: Player.one,

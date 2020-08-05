@@ -9,7 +9,7 @@ import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 
-/// Effect caused by a card entering the battlefield.
+/// Effect caused by a card entering the field.
 class OnCardEnterFieldEvent extends Event {
   final CardObject card;
   final int effectIndex;

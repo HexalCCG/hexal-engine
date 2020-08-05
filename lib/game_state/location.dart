@@ -2,7 +2,7 @@ enum Location {
   deck,
   hand,
   mana,
-  battlefield,
+  field,
   exile,
   limbo,
 }

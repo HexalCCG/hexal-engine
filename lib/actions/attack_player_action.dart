@@ -51,7 +51,7 @@ class AttackPlayerAction extends Action {
 
     // Check opponent's board has no valid targets
     if (state
-        .getCardsByLocation(state.notPriorityPlayer, Location.battlefield)
+        .getCardsByLocation(state.notPriorityPlayer, Location.field)
         .where((card) => (card is Creature) && card.canBeAttacked)
         .isNotEmpty) {
       return false;

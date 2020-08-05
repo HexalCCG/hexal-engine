@@ -15,7 +15,7 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 
 void main() {
   group('Card test S.002', () {
-    test('enters the battlefield when played.', () {
+    test('enters the field when played.', () {
       const card = CowBeamCard(
         id: 2,
         controller: Player.one,
@@ -46,7 +46,7 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(PassAction());
 
-      expect(state.getCardsByLocation(Player.one, Location.battlefield).first,
+      expect(state.getCardsByLocation(Player.one, Location.field).first,
           isA<CowBeamCard>());
       expect(state.priorityPlayer, Player.one);
     });
@@ -56,7 +56,7 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,
-        location: Location.battlefield,
+        location: Location.field,
       );
       const card = CowBeamCard(
         id: 2,
@@ -87,8 +87,8 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(PassAction());
 
-      // Cow Beam moves into the battlefield and its enter field effect is added to the stack.
-      expect(state.getCardsByLocation(Player.one, Location.battlefield),
+      // Cow Beam moves into the field and its enter field effect is added to the stack.
+      expect(state.getCardsByLocation(Player.one, Location.field),
           contains(isA<CowBeamCard>()));
       expect(state.stack.last, isA<OnCardEnterFieldEvent>());
 

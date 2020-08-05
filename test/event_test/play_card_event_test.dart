@@ -16,7 +16,7 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 
 void main() {
   group('Play card event', () {
-    test('returns the correct enter battlefield event. ', () {
+    test('returns the correct enter field event. ', () {
       const card = TestCard(
         id: 2,
         controller: Player.one,
@@ -74,8 +74,8 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(PassAction());
 
-      // Cow moves into the battlefield.
-      expect(state.getCardsByLocation(Player.one, Location.battlefield),
+      // Cow moves into the field.
+      expect(state.getCardsByLocation(Player.one, Location.field),
           contains(isA<CowCreatureCard>()));
       expect(state.stack.last, isA<PlayCardEvent>());
 
@@ -86,7 +86,7 @@ void main() {
       state = state.applyAction(PassAction());
 
       expect(state.stack, isEmpty);
-      expect(state.getCardsByLocation(Player.one, Location.battlefield),
+      expect(state.getCardsByLocation(Player.one, Location.field),
           contains(isA<CowCreatureCard>()));
     });
     test('destroys a played non-permanent as it resolves.', () {
@@ -119,8 +119,8 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(PassAction());
 
-      // Cow moves into the battlefield.
-      expect(state.getCardsByLocation(Player.one, Location.battlefield),
+      // Cow moves into the field.
+      expect(state.getCardsByLocation(Player.one, Location.field),
           contains(isA<CowBeamCard>()));
       expect(state.stack.last, isA<OnCardEnterFieldEvent>());
 
@@ -135,7 +135,7 @@ void main() {
 
       // Cow Beam requests a target for its damage.
       expect(state.stack.last, isA<RequestTargetEvent>());
-      expect(state.getCardsByLocation(Player.one, Location.battlefield),
+      expect(state.getCardsByLocation(Player.one, Location.field),
           contains(isA<CowBeamCard>()));
 
       // Player 1 fails to provide a target.

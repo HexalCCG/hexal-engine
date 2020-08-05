@@ -17,13 +17,13 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        location: Location.battlefield,
+        location: Location.field,
       );
       const defender = CowCreatureCard(
         id: 3,
         controller: Player.two,
         owner: Player.two,
-        location: Location.battlefield,
+        location: Location.field,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,
@@ -46,14 +46,14 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        location: Location.battlefield,
+        location: Location.field,
         enteredFieldThisTurn: true,
       );
       const defender = CowCreatureCard(
         id: 3,
         controller: Player.two,
         owner: Player.two,
-        location: Location.battlefield,
+        location: Location.field,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,

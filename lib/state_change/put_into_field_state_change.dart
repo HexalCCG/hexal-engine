@@ -8,7 +8,7 @@ import 'move_card_state_change.dart';
 
 class PutIntoFieldStateChange extends MoveCardStateChange {
   const PutIntoFieldStateChange({@required CardObject card})
-      : super(card: card, location: Location.battlefield);
+      : super(card: card, location: Location.field);
   @override
   GameState apply(GameState state) {
     state = super.apply(state);

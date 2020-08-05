@@ -9,13 +9,13 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 
 void main() {
   group('Destroy card event', () {
-    test('sends the card from the battlefield to its controller\'s mana.', () {
+    test('sends the card from the field to its controller\'s mana.', () {
       const card = CowCreatureCard(
         id: 2,
         controller: Player.one,
         owner: Player.one,
         enteredFieldThisTurn: false,
-        location: Location.battlefield,
+        location: Location.field,
       );
       var state = const GameState(
         gameOverState: GameOverState.playing,

@@ -52,8 +52,8 @@ class AttackAction extends Action {
         return false;
       }
 
-      // Cannot attack creatures not in battlefield.
-      if (defender.location != Location.battlefield) {
+      // Cannot attack creatures not in field.
+      if (defender.location != Location.field) {
         return false;
       }
 
@@ -82,8 +82,8 @@ class AttackAction extends Action {
         return false;
       }
 
-      // Cannot attack creatures not in battlefield.
-      if (defender.location != Location.battlefield) {
+      // Cannot attack creatures not in field.
+      if (defender.location != Location.field) {
         return false;
       }
 

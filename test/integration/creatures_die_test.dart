@@ -19,7 +19,7 @@ void main() {
       id: 3,
       controller: Player.one,
       owner: Player.one,
-      location: Location.battlefield,
+      location: Location.field,
     );
     const card = CowBeamCard(
       id: 2,
@@ -50,8 +50,8 @@ void main() {
     // Player 2 passes. Top item of stack is resolved.
     state = state.applyAction(PassAction());
 
-    // Cow Beam moves into the battlefield and its enter field effect is added to the stack.
-    expect(state.getCardsByLocation(Player.one, Location.battlefield),
+    // Cow Beam moves into the field and its enter field effect is added to the stack.
+    expect(state.getCardsByLocation(Player.one, Location.field),
         contains(isA<CowBeamCard>()));
     expect(state.stack.last, isA<OnCardEnterFieldEvent>());
 

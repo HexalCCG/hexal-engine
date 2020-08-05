@@ -16,7 +16,7 @@ class CreatureTarget extends Target {
   bool targetValid(target) {
     return ((target is CardObject) &&
         (target is Creature) &&
-        (target.location == Location.battlefield));
+        (target.location == Location.field));
   }
 
   @override

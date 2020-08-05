@@ -43,13 +43,13 @@ class AttackEvent extends Event {
   }
 
   bool _validate(GameState state) {
-    // Check target creature is still on the battlefield.
-    if (state.getCard(defender).location != Location.battlefield) {
+    // Check target creature is still on the field.
+    if (state.getCard(defender).location != Location.field) {
       return false;
     }
 
-    // Check attacker is still on the battlefield
-    if (attacker.location != Location.battlefield) {
+    // Check attacker is still on the field
+    if (attacker.location != Location.field) {
       return false;
     }
     return true;
