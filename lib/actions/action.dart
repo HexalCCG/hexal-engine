@@ -9,6 +9,8 @@ import '../state_change/state_change.dart';
 abstract class Action extends Equatable {
   const Action();
 
+  bool valid(GameState state);
+
   List<StateChange> apply(GameState state);
 
   @override
