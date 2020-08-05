@@ -1,3 +1,5 @@
+import 'package:hexal_engine/state_change/set_counter_available_state_change.dart';
+
 import '../event/draw_card_event.dart';
 import '../event/request_target_event.dart';
 import '../exceptions/action_exception.dart';
@@ -76,28 +78,50 @@ class PassAction extends Action {
 
   List<StateChange> _nextPhase(GameState state) {
     switch (state.turnPhase) {
+      // Entering draw phase so add draw a card
       case TurnPhase.start:
-        // Entering draw phase so add draw a card
         return [
           AddEventStateChange(
               event: DrawCardEvent(draws: 1, player: state.activePlayer)),
-          PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
-          PriorityStateChange(player: state.activePlayer)
+          const PhaseStateChange(phase: TurnPhase.draw),
+          PriorityStateChange(player: state.activePlayer),
         ];
+      case TurnPhase.draw:
+        return [
+          const PhaseStateChange(phase: TurnPhase.main1),
+          PriorityStateChange(player: state.activePlayer),
+        ];
+      case TurnPhase.main1:
+        return [
+          const PhaseStateChange(phase: TurnPhase.battle),
+          const SetCounterAvailableStateChange(enabled: false),
+          PriorityStateChange(player: state.activePlayer),
+        ];
+      case TurnPhase.battle:
+        return [
+          state.counterAvailable
+              ? const PhaseStateChange(phase: TurnPhase.counter)
+              : const PhaseStateChange(phase: TurnPhase.main2),
+          PriorityStateChange(player: state.activePlayer),
+        ];
+      case TurnPhase.counter:
+        return [
+          const PhaseStateChange(phase: TurnPhase.main2),
+          PriorityStateChange(player: state.activePlayer),
+        ];
+      case TurnPhase.main2:
+        return [
+          PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
+          PriorityStateChange(player: state.activePlayer),
+        ];
+      // Move on to the next turn
       case TurnPhase.end:
-        // Move on to the next turn
         return [
           ActivePlayerStateChange(player: state.notActivePlayer),
           PhaseStateChange(phase: TurnPhase.start),
           PriorityStateChange(player: state.notActivePlayer),
           // Clear single-turn card variables
           ...state.cards.map((card) => EndTurnClearStateChange(card: card)),
-        ];
-      default:
-        // Move on to the next phase
-        return [
-          PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
-          PriorityStateChange(player: state.activePlayer)
         ];
     }
   }

@@ -23,6 +23,7 @@ class GameState extends Equatable {
   final List<CardObject> cards;
   final List<Event> stack;
   final GameOverState gameOverState;
+  final bool counterAvailable;
 
   Player get notPriorityPlayer =>
       (priorityPlayer == Player.one) ? Player.two : Player.one;
@@ -36,6 +37,7 @@ class GameState extends Equatable {
     @required this.cards,
     @required this.stack,
     this.gameOverState = GameOverState.playing,
+    this.counterAvailable = false,
   });
 
   const GameState.startingState({
@@ -122,33 +124,34 @@ class GameState extends Equatable {
   }
 
   GameState copyWith({
-    PlayerObject player1,
-    PlayerObject player2,
-    GameOverState gameOverState,
-    List<CardObject> cards,
-    List<Event> stack,
     Player activePlayer,
     Player priorityPlayer,
     TurnPhase turnPhase,
+    List<CardObject> cards,
+    List<Event> stack,
+    GameOverState gameOverState,
+    bool counterAvailable,
   }) {
     return GameState(
-      gameOverState: gameOverState ?? this.gameOverState,
-      cards: cards ?? this.cards,
-      stack: stack ?? this.stack,
       activePlayer: activePlayer ?? this.activePlayer,
       priorityPlayer: priorityPlayer ?? this.priorityPlayer,
       turnPhase: turnPhase ?? this.turnPhase,
+      cards: cards ?? this.cards,
+      stack: stack ?? this.stack,
+      gameOverState: gameOverState ?? this.gameOverState,
+      counterAvailable: counterAvailable ?? this.counterAvailable,
     );
   }
 
   @override
   List<Object> get props => [
-        gameOverState,
-        cards,
-        stack,
         activePlayer,
         priorityPlayer,
         turnPhase,
+        cards,
+        stack,
+        gameOverState,
+        counterAvailable,
       ];
 
   /// Override toString to fix equatable stringify missing some props.

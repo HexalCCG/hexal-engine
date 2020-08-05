@@ -1,4 +1,5 @@
 import 'package:hexal_engine/state_change/exhaust_creature_state_change.dart';
+import 'package:hexal_engine/state_change/set_counter_available_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../cards/creature.dart';
@@ -14,13 +15,15 @@ class AttackEvent extends Event {
   final Creature attacker;
   final Creature defender;
   final bool exhaustAttacker;
+  final bool enableCounter;
 
-  const AttackEvent(
-      {@required this.attacker,
-      @required this.defender,
-      this.exhaustAttacker = true,
-      bool resolved = false})
-      : super(resolved: resolved);
+  const AttackEvent({
+    @required this.attacker,
+    @required this.defender,
+    this.exhaustAttacker = true,
+    this.enableCounter = true,
+    bool resolved = false,
+  }) : super(resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state) {
@@ -36,6 +39,9 @@ class AttackEvent extends Event {
                 creature: defender, damage: attacker.attack)),
         ...exhaustAttacker
             ? [ExhaustCreatureStateChange(creature: attacker)]
+            : [],
+        ...enableCounter
+            ? [const SetCounterAvailableStateChange(enabled: true)]
             : [],
         ResolveEventStateChange(event: this),
       ];
