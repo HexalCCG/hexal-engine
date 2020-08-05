@@ -1,3 +1,6 @@
+import 'package:hexal_engine/actions/attack_action.dart';
+import 'package:hexal_engine/actions/attack_player_action.dart';
+import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/creature.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
@@ -23,9 +26,9 @@ void main() {
     );
     const defender = CowCreatureCard(
       id: 4,
-      controller: Player.one,
-      owner: Player.one,
-      location: Location.hand,
+      controller: Player.two,
+      owner: Player.two,
+      location: Location.field,
     );
     var state = const GameState(
       gameOverState: GameOverState.playing,
@@ -33,12 +36,18 @@ void main() {
       stack: [],
       activePlayer: Player.one,
       priorityPlayer: Player.one,
-      turnPhase: TurnPhase.main1,
+      turnPhase: TurnPhase.battle,
     );
 
     expect(
-        (state.cards.firstWhere((element) => element.id == 3) as Creature)
-            .damage,
-        1);
+        () => state.applyAction(
+            AttackPlayerAction(attacker: attacker1, player: Player.two)),
+        throwsA(isA<ActionException>()));
+
+    state = state
+        .applyAction(AttackAction(attacker: attacker2, defender: defender));
+    state = state.testPassUntilEmpty();
+
+    print(state);
   });
 }
