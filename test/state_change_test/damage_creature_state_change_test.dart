@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:hexal_engine/cards/mi_creature.dart';
+import 'package:hexal_engine/cards/creature.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/state_change/damage_creature_state_change.dart';
@@ -25,8 +25,8 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       state = state.applyStateChanges(
-          [DamageCreatureStateChange(card: creature, damage: 1)]);
-      expect((state.cards.first as ICreature).damage, 1);
+          [DamageCreatureStateChange(creature: creature, damage: 1)]);
+      expect((state.cards.first as Creature).damage, 1);
     });
   });
 }

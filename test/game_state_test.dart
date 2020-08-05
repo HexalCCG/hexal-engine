@@ -19,7 +19,6 @@ void main() {
           id: 2,
           controller: Player.one,
           owner: Player.one,
-          enteredFieldThisTurn: false,
           location: Location.deck,
         )
       ],

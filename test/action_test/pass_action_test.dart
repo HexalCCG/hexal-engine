@@ -1,10 +1,10 @@
+import 'package:hexal_engine/state_change/end_turn_clear_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/state_change/add_event_state_change.dart';
-import 'package:hexal_engine/state_change/heal_card_state_change.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
@@ -90,7 +90,7 @@ void main() {
       expect(
           change,
           contains(
-            const HealCardStateChange(card: card),
+            const EndTurnClearStateChange(card: card),
           ));
     });
     test('adds a draw event to the stack when entering the draw phase.', () {

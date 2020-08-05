@@ -1,36 +1,33 @@
-import 'package:hexal_engine/cards/mi_creature.dart';
 import 'package:meta/meta.dart';
 
+import '../cards/creature.dart';
 import '../exceptions/state_change_exception.dart';
-import '../game_state/game_state.dart';
-import '../objects/card_object.dart';
-import 'state_change.dart';
 import '../extensions/list_replace.dart';
+import '../game_state/game_state.dart';
+import 'state_change.dart';
 
 /// Increases the damage property of the provided card by an amount.
 class DamageCreatureStateChange extends StateChange {
-  final CardObject card;
+  final Creature creature;
   final int damage;
 
-  const DamageCreatureStateChange({@required this.card, @required this.damage})
-      : assert(card != null),
-        assert(card is ICreature),
-        assert(damage >= 0);
+  const DamageCreatureStateChange(
+      {@required this.creature, @required this.damage});
 
   @override
   GameState apply(GameState state) {
-    if (!state.cards.contains(card)) {
+    if (!state.cards.contains(creature)) {
       throw const StateChangeException(
           'DamageCreatureStateChange: Provided card not found in state');
     } else {
       final newCard = state
-          .getCard(card)
-          .copyWith({'damage': (card as ICreature).damage + damage});
-      final newCards = state.cards.replaceSingle(card, newCard);
+          .getCard(creature)
+          .copyWith({'damage': creature.damage + damage});
+      final newCards = state.cards.replaceSingle(creature, newCard);
       return state.copyWith(cards: newCards);
     }
   }
 
   @override
-  List<Object> get props => [card, damage];
+  List<Object> get props => [creature, damage];
 }

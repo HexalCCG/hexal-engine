@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/game_state/game_state.dart';
-import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/objects/game_object.dart';
 import 'package:meta/meta.dart';
+
+import '../../game_state/game_state.dart';
+import '../../game_state/player.dart';
+import '../../objects/game_object.dart';
 
 abstract class Target extends Equatable {
   final Player controller;

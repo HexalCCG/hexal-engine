@@ -1,17 +1,17 @@
-import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/objects/game_object.dart';
-import 'package:hexal_engine/state_change/modify_event_state_change.dart';
 import 'package:meta/meta.dart';
 
-import '../cards/mi_creature.dart';
+import '../cards/creature.dart';
 import '../event/damage_creature_event.dart';
 import '../event/damage_player_event.dart';
 import '../event/request_target_event.dart';
 import '../exceptions/event_exceptipn.dart';
 import '../game_state/game_state.dart';
+import '../game_state/player.dart';
 import '../objects/card_object.dart';
+import '../objects/game_object.dart';
 import '../objects/player_object.dart';
 import '../state_change/add_event_state_change.dart';
+import '../state_change/modify_event_state_change.dart';
 import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'effect.dart';
@@ -67,9 +67,9 @@ class DamageEffect extends Effect implements ITargetted {
   }
 
   StateChange _generateStateChange(GameObject target) {
-    if (target is CardObject && target is ICreature) {
+    if (target is CardObject && target is Creature) {
       return AddEventStateChange(
-          event: DamageCreatureEvent(card: target, damage: damage));
+          event: DamageCreatureEvent(creature: target, damage: damage));
     } else if (target is PlayerObject) {
       return AddEventStateChange(
           event: DamagePlayerEvent(player: target.player, damage: damage));

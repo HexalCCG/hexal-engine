@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/put_into_field_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
@@ -5,9 +6,6 @@ import 'package:hexal_engine/event/request_target_event.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/on_card_enter_field_event.dart';
-import 'package:hexal_engine/state_change/add_event_state_change.dart';
-import 'package:hexal_engine/state_change/modify_entered_field_this_turn_state_change.dart';
-import 'package:hexal_engine/state_change/move_card_state_change.dart';
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/event/play_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
@@ -23,7 +21,6 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.limbo,
       );
       final state = const GameState(
@@ -41,15 +38,9 @@ void main() {
       expect(
           changes,
           containsAll([
-            MoveCardStateChange(
+            PutIntoFieldStateChange(
               card: card,
-              location: Location.battlefield,
             ),
-            ModifyEnteredFieldThisTurnStateChange(
-              card: card,
-              enteredFieldThisTurn: true,
-            ),
-            AddEventStateChange(event: OnCardEnterFieldEvent(card: card)),
           ]));
     });
     test('does not destroy a played permanent.', () {
@@ -86,23 +77,14 @@ void main() {
       // Cow moves into the battlefield.
       expect(state.getCardsByLocation(Player.one, Location.battlefield),
           contains(isA<CowCreatureCard>()));
-      expect(state.stack.last, isA<OnCardEnterFieldEvent>());
+      expect(state.stack.last, isA<PlayCardEvent>());
 
-      // Player 1 has priority again after the last effect resolved.
-      // They pass, moving priority to player 2.
-      // Resolves the onenterfield effect
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      // Removes the onenterfield effect
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
       // Resolve and remove the play effect
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
 
-      // Cow Beam requests a target for its damage.
       expect(state.stack, isEmpty);
       expect(state.getCardsByLocation(Player.one, Location.battlefield),
           contains(isA<CowCreatureCard>()));
@@ -112,7 +94,6 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.hand,
       );
       var state = const GameState(

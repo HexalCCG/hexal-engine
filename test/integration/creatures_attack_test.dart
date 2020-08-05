@@ -14,15 +14,21 @@ import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
 
 void main() {
-  test('Creatures die when they run out of health. ', () {
-    const creature = CowCreatureCard(
+  test('Creatures can attack correctly. ', () {
+    const attacker1 = CowCreatureCard(
+      id: 2,
+      controller: Player.one,
+      owner: Player.one,
+      location: Location.battlefield,
+    );
+    const attacker2 = CowCreatureCard(
       id: 3,
       controller: Player.one,
       owner: Player.one,
       location: Location.battlefield,
     );
-    const card = CowBeamCard(
-      id: 2,
+    const defender = CowCreatureCard(
+      id: 4,
       controller: Player.one,
       owner: Player.one,
       location: Location.hand,

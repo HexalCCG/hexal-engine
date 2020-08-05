@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/provide_target_action.dart';
-import 'package:hexal_engine/cards/mi_creature.dart';
+import 'package:hexal_engine/cards/creature.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/on_card_enter_field_event.dart';
 import 'package:hexal_engine/event/request_target_event.dart';
@@ -20,7 +20,6 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.hand,
       );
       var state = const GameState(
@@ -63,7 +62,6 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.hand,
       );
       var state = const GameState(
@@ -136,7 +134,7 @@ void main() {
       state = state.applyAction(PassAction());
 
       expect(
-          (state.cards.firstWhere((element) => element.id == 3) as ICreature)
+          (state.cards.firstWhere((element) => element.id == 3) as Creature)
               .damage,
           1);
     });

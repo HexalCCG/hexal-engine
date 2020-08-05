@@ -17,7 +17,6 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.deck,
       );
       final state = const GameState(
@@ -41,14 +40,12 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.deck,
       );
       const card2 = TestCard(
         id: 3,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.deck,
       );
       var state = const GameState(

@@ -1,12 +1,12 @@
-import 'package:hexal_engine/game_state/game_state.dart';
-import 'package:hexal_engine/game_state/player.dart';
+import 'package:meta/meta.dart';
 
-import '../../cards/mi_creature.dart';
-import 'target.dart';
+import '../../cards/creature.dart';
+import '../../game_state/game_state.dart';
 import '../../game_state/location.dart';
+import '../../game_state/player.dart';
 import '../../objects/card_object.dart';
 import '../../objects/game_object.dart';
-import 'package:meta/meta.dart';
+import 'target.dart';
 
 class CreatureTarget extends Target {
   const CreatureTarget({bool optional = false, @required Player controller})
@@ -15,7 +15,7 @@ class CreatureTarget extends Target {
   @override
   bool targetValid(target) {
     return ((target is CardObject) &&
-        (target is ICreature) &&
+        (target is Creature) &&
         (target.location == Location.battlefield));
   }
 

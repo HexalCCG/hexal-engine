@@ -22,7 +22,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DamageCreatureEvent(card: card, damage: 1),
+          DamageCreatureEvent(creature: card, damage: 1),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -30,8 +30,8 @@ void main() {
       );
       final changes = state.resolveTopStackEvent();
 
-      expect(
-          changes, contains(DamageCreatureStateChange(card: card, damage: 1)));
+      expect(changes,
+          contains(DamageCreatureStateChange(creature: card, damage: 1)));
     });
   });
 }
