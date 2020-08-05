@@ -1,26 +1,20 @@
-import 'package:hexal_engine/effect/damage_effect.dart';
-import 'package:hexal_engine/effect/target/creature_target.dart';
 import 'package:meta/meta.dart';
 
+import '../../effect/damage_effect.dart';
 import '../../effect/effect.dart';
+import '../../effect/target/creature_target.dart';
 import '../../game_state/location.dart';
 import '../../game_state/player.dart';
-import '../../objects/card_object.dart';
 import '../i_on_enter_field.dart';
+import '../spell.dart';
 
-class CowBeamCard extends CardObject implements IOnEnterField {
+class CowBeamCard extends Spell implements IOnEnterField {
   const CowBeamCard({
     @required int id,
     @required Player owner,
     @required Player controller,
     @required Location location,
-    bool enteredFieldThisTurn = false,
-  }) : super(
-            id: id,
-            owner: owner,
-            controller: controller,
-            location: location,
-            enteredFieldThisTurn: enteredFieldThisTurn);
+  }) : super(id: id, owner: owner, controller: controller, location: location);
 
   @override
   CowBeamCard copyWith(Map<String, dynamic> data) => CowBeamCard(
@@ -28,8 +22,6 @@ class CowBeamCard extends CardObject implements IOnEnterField {
         owner: owner,
         controller: data['controller'] ?? controller,
         location: data['location'] ?? location,
-        enteredFieldThisTurn:
-            data['enteredFieldThisTurn'] ?? enteredFieldThisTurn,
       );
 
   @override
