@@ -1,6 +1,3 @@
-import 'package:hexal_engine/state_change/set_counter_available_state_change.dart';
-import 'package:meta/meta.dart';
-
 import '../cards/creature.dart';
 import '../event/attack_event.dart';
 import '../exceptions/action_exception.dart';
@@ -12,11 +9,16 @@ import '../state_change/priority_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
 
+/// Declares an attack targetting a creature.
 class AttackAction extends Action {
+  /// Creature attacking.
   final Creature attacker;
+
+  /// Creature defending.
   final Creature defender;
 
-  const AttackAction({@required this.attacker, @required this.defender});
+  /// Causes [attacker] to attack [defender].
+  const AttackAction({required this.attacker, required this.defender});
 
   @override
   bool valid(GameState state) {

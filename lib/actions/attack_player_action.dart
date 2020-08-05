@@ -16,7 +16,7 @@ class AttackPlayerAction extends Action {
   final Creature attacker;
   final Player player;
 
-  const AttackPlayerAction({@required this.attacker, @required this.player});
+  const AttackPlayerAction({required this.attacker, required this.player});
 
   @override
   bool valid(GameState state) {
