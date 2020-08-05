@@ -1,16 +1,15 @@
-import 'package:hexal_engine/cards/i_permanent.dart';
-import 'package:hexal_engine/event/destroy_card_event.dart';
-import 'package:hexal_engine/state_change/modify_event_state_change.dart';
 import 'package:meta/meta.dart';
 
+import '../cards/i_on_enter_field.dart';
+import '../cards/i_permanent.dart';
 import '../game_state/game_state.dart';
-import '../game_state/location.dart';
 import '../objects/card_object.dart';
 import '../state_change/add_event_state_change.dart';
-import '../state_change/modify_entered_field_this_turn_state_change.dart';
-import '../state_change/move_card_state_change.dart';
+import '../state_change/modify_event_state_change.dart';
+import '../state_change/put_into_field_state_change.dart';
 import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
+import 'destroy_card_event.dart';
 import 'event.dart';
 import 'on_card_enter_field_event.dart';
 
@@ -29,15 +28,10 @@ class PlayCardEvent extends Event {
     // If card hasn't been put into field yet, do that.
     if (!donePutIntoField) {
       return [
-        MoveCardStateChange(
-          card: card,
-          location: Location.battlefield,
-        ),
-        ModifyEnteredFieldThisTurnStateChange(
-          card: card,
-          enteredFieldThisTurn: true,
-        ),
-        AddEventStateChange(event: OnCardEnterFieldEvent(card: card)),
+        PutIntoFieldStateChange(card: card),
+        ...(card is IOnEnterField)
+            ? [AddEventStateChange(event: OnCardEnterFieldEvent(card: card))]
+            : [],
         ModifyEventStateChange(event: this, newEvent: _copyDonePutIntoField),
       ];
       // If it's in play, destroy it if it's not permanent

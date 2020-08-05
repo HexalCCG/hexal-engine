@@ -16,7 +16,6 @@ void main() {
         owner: Player.one,
         controller: Player.one,
         location: Location.deck,
-        enteredFieldThisTurn: false,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,
@@ -40,7 +39,6 @@ void main() {
               owner: Player.one,
               controller: Player.one,
               location: Location.hand,
-              enteredFieldThisTurn: false,
             ),
           ],
           stack: [],
@@ -66,7 +64,6 @@ void main() {
                         id: 2,
                         controller: Player.one,
                         location: Location.deck,
-                        enteredFieldThisTurn: false,
                         owner: Player.one),
                     location: Location.hand)
               ]),

@@ -1,3 +1,4 @@
+import 'package:hexal_engine/state_change/end_turn_clear_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
@@ -5,10 +6,9 @@ import 'package:hexal_engine/game_state/game_state.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/game_state/turn_phase.dart';
-import 'package:hexal_engine/state_change/heal_card_state_change.dart';
 
 void main() {
-  group('Heal card state change ', () {
+  group('End turn clear state change ', () {
     test('sets the card\'s damage to 0. ', () {
       const card = CowCreatureCard(
         id: 2,
@@ -27,7 +27,7 @@ void main() {
         turnPhase: TurnPhase.draw,
       );
       final result = state.applyStateChanges([
-        HealCardStateChange(card: card),
+        EndTurnClearStateChange(card: card),
       ]);
 
       expect(
