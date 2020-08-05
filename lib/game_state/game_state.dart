@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/exceptions/game_state_exception.dart';
 import 'package:hexal_engine/objects/player_object.dart';
 import 'package:hexal_engine/state_change/remove_event_state_change.dart';
@@ -60,6 +61,15 @@ class GameState extends Equatable {
           'GameState Exception: Game is over: ' + gameOverState.toString());
     }
     return applyStateChanges(generateStateChanges(action));
+  }
+
+  /// Test only - submits pass actions until the stack is empty.
+  GameState testPassUntilEmpty() {
+    var state = this;
+    while (state.stack.isNotEmpty) {
+      state = state.applyAction(PassAction());
+    }
+    return state;
   }
 
   /// Attempts to resolve the top stack event.
