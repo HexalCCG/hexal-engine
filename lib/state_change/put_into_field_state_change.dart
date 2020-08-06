@@ -1,22 +1,30 @@
-import 'package:meta/meta.dart';
-
+import '../cards/creature.dart';
 import '../extensions/list_replace.dart';
 import '../game_state/game_state.dart';
 import '../game_state/location.dart';
 import '../objects/card_object.dart';
-import 'move_card_state_change.dart';
+import 'state_change.dart';
 
-class PutIntoFieldStateChange extends MoveCardStateChange {
-  const PutIntoFieldStateChange({@required CardObject card})
-      : super(card: card, location: Location.field);
+/// StateChange to put a card into the field.
+class PutIntoFieldStateChange extends StateChange {
+  /// Card to put into field.
+  final CardObject card;
+
+  /// Puts [card] into the field.
+  const PutIntoFieldStateChange({required this.card});
+
   @override
   GameState apply(GameState state) {
-    state = super.apply(state);
+    assert(state.cards.contains(card));
 
-    final newCard = state.getCard(card).copyWith(
-        {'enteredFieldThisTurn': true, 'attackedThisTurn': false, 'damage': 0});
+    var newCard = state.getCard(card).copyWithBase(location: Location.field);
+    if (newCard is Creature) {
+      newCard = newCard.copyWithCreature(
+          enteredFieldThisTurn: true, exhausted: false, damage: 0);
+    }
 
-    return state.copyWith(cards: state.cards.replaceSingle(card, newCard));
+    final newCards = state.cards.replaceSingle(card, newCard);
+    return state.copyWith(cards: newCards);
   }
 
   @override

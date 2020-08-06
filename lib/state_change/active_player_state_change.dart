@@ -1,13 +1,14 @@
-import 'package:meta/meta.dart';
-
 import '../game_state/game_state.dart';
 import '../game_state/player.dart';
 import '../state_change/state_change.dart';
 
+/// StateChange to change the active player.
 class ActivePlayerStateChange extends StateChange {
+  /// Player to make active.
   final Player player;
 
-  const ActivePlayerStateChange({@required this.player});
+  /// Sets active player to [player].
+  const ActivePlayerStateChange({required this.player});
 
   @override
   GameState apply(GameState state) {

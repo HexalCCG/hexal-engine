@@ -1,13 +1,14 @@
-import 'package:meta/meta.dart';
-
 import '../game_state/game_state.dart';
 import '../game_state/player.dart';
 import 'state_change.dart';
 
+/// StateChange to change priority.
 class PriorityStateChange extends StateChange {
+  /// Player to make priority player.
   final Player player;
 
-  const PriorityStateChange({@required this.player});
+  /// Sets priority to [player].
+  const PriorityStateChange({required this.player});
 
   @override
   GameState apply(GameState state) {

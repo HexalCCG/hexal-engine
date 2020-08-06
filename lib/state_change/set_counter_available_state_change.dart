@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../game_state/game_state.dart';
 import 'state_change.dart';
 
@@ -9,7 +7,7 @@ class SetCounterAvailableStateChange extends StateChange {
   final bool enabled;
 
   /// [Enabled] changes the game state's counterAvailable flag.
-  const SetCounterAvailableStateChange({@required this.enabled});
+  const SetCounterAvailableStateChange({required this.enabled});
 
   @override
   GameState apply(GameState state) {

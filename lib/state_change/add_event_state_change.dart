@@ -1,13 +1,14 @@
-import 'package:meta/meta.dart';
-
 import '../event/event.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
 
+/// StateChange to add an event to the stack.
 class AddEventStateChange extends StateChange {
+  /// Event to add.
   final Event event;
 
-  const AddEventStateChange({@required this.event});
+  /// Adds [event] to the stack.
+  const AddEventStateChange({required this.event});
 
   @override
   GameState apply(GameState state) {

@@ -1,13 +1,14 @@
-import 'package:meta/meta.dart';
-
 import '../game_state/game_state.dart';
 import '../game_state/turn_phase.dart';
 import 'state_change.dart';
 
+/// StateChange to change the turn phase.
 class PhaseStateChange extends StateChange {
+  /// Phase to set state to.
   final TurnPhase phase;
 
-  const PhaseStateChange({@required this.phase});
+  /// Set turn phase to [phase].
+  const PhaseStateChange({required this.phase});
 
   @override
   GameState apply(GameState state) {

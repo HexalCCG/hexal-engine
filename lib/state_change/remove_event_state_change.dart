@@ -1,24 +1,21 @@
-import 'package:meta/meta.dart';
-
 import '../event/event.dart';
-import '../exceptions/state_change_exception.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
 
+/// StateChange to remove an event.
 class RemoveEventStateChange extends StateChange {
+  /// Event to remove.
   final Event event;
 
-  const RemoveEventStateChange({@required this.event});
+  /// Removes [event] from the stack.
+  const RemoveEventStateChange({required this.event});
 
   @override
   GameState apply(GameState state) {
-    if (!state.stack.contains(event)) {
-      throw const StateChangeException(
-          'RemoveEventStateChange: Provided event not found in stack');
-    } else {
-      final newStack = state.stack.toList()..remove(event);
-      return state.copyWith(stack: newStack);
-    }
+    assert(state.stack.contains(event));
+
+    final newStack = state.stack.toList()..remove(event);
+    return state.copyWith(stack: newStack);
   }
 
   @override
