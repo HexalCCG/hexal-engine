@@ -32,6 +32,10 @@ abstract class Creature extends CardObject implements IPermanent {
   bool get canAttackPlayer => canAttack;
   bool get canBeAttacked => true;
 
+  Creature copyWithExhausted(int damage);
+  Creature copyWithEnteredFieldThisTurn(bool enteredFieldThisTurn);
+  Creature copyWithDamage(int damage);
+
   @override
   List<Object> get toStringProps =>
       [...super.toStringProps, damage, enteredFieldThisTurn, exhausted];

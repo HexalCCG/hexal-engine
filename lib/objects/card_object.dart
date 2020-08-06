@@ -18,7 +18,9 @@ abstract class CardObject extends GameObject {
     @required this.location,
   }) : super(id: id);
 
-  dynamic copyWith(Map<String, dynamic> data);
+  CardObject copyWithController(Player controller);
+
+  CardObject copyWithLocation(Location location);
 
   @override
   List<Object> get toStringProps => [owner, controller, location];
