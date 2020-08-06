@@ -1,21 +1,24 @@
-import 'package:hexal_engine/state_change/modify_event_state_change.dart';
-import 'package:meta/meta.dart';
-
 import '../cards/i_on_enter_field.dart';
 import '../game_state/game_state.dart';
 import '../objects/card_object.dart';
 import '../state_change/add_event_state_change.dart';
+import '../state_change/modify_event_state_change.dart';
 import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 
 /// Effect caused by a card entering the field.
 class OnCardEnterFieldEvent extends Event {
+  /// Card whose effects are being applied.
   final CardObject card;
+
+  /// Index of effect currently being applied.
   final int effectIndex;
 
+  /// [Card] is the card entering the field.
+  /// [effectIndex] is the effect currently being resolved.
   const OnCardEnterFieldEvent(
-      {@required this.card, this.effectIndex = 0, bool resolved = false})
+      {required this.card, this.effectIndex = 0, bool resolved = false})
       : super(resolved: resolved);
 
   @override

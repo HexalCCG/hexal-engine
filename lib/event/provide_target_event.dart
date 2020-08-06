@@ -1,13 +1,9 @@
-import 'package:hexal_engine/effect/i_targeted.dart';
-import 'package:hexal_engine/effect/target/target.dart';
-import 'package:hexal_engine/exceptions/event_exception.dart';
-import 'package:hexal_engine/state_change/fill_request_state_change.dart';
-import 'package:hexal_engine/state_change/modify_event_state_change.dart';
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
-import 'package:meta/meta.dart';
-
 import '../effect/effect.dart';
+import '../effect/i_targeted.dart';
+import '../effect/target/target.dart';
 import '../game_state/game_state.dart';
+import '../state_change/modify_event_state_change.dart';
+import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 
@@ -24,7 +20,7 @@ class ProvideTargetEvent extends Event {
     required this.effect,
     required this.targetResult,
     bool resolved = false,
-  })  : assert(effect is ITargetted),
+  })  : assert(effect is ITargeted),
         super(resolved: resolved);
 
   @override
@@ -32,7 +28,7 @@ class ProvideTargetEvent extends Event {
     return [
       ModifyEventStateChange(
         event: effect,
-        newEvent: (effect as ITargetted).copyWithTarget(targetResult),
+        newEvent: (effect as ITargeted).copyWithTarget(targetResult),
       ),
       ResolveEventStateChange(event: this),
     ];

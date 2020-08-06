@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../game_state/game_over_state.dart';
 import '../game_state/game_state.dart';
 import '../game_state/location.dart';
@@ -11,14 +9,21 @@ import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';
 
+/// Event dealing damage to a player.
 class DamagePlayerEvent extends Event {
+  /// Player to be damaged.
   final Player player;
+
+  /// Damage to deal.
   final int damage;
+
+  /// Which point of damage is currently being resolved.
   final int damageNumber;
 
+  /// Deals [damage] damage to [player] one point at a time.
   const DamagePlayerEvent({
-    @required this.player,
-    @required this.damage,
+    required this.player,
+    required this.damage,
     this.damageNumber = 1,
     bool resolved = false,
   }) : super(resolved: resolved);

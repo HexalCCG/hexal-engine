@@ -1,20 +1,19 @@
-import 'package:hexal_engine/event/event.dart';
-import 'package:hexal_engine/game_state/game_state.dart';
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/objects/card_object.dart';
-import 'package:hexal_engine/state_change/move_card_state_change.dart';
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
-import 'package:hexal_engine/state_change/state_change.dart';
-import 'package:meta/meta.dart';
+import '../game_state/game_state.dart';
+import '../game_state/location.dart';
+import '../objects/card_object.dart';
+import '../state_change/move_card_state_change.dart';
+import '../state_change/resolve_event_state_change.dart';
+import '../state_change/state_change.dart';
+import 'event.dart';
 
+/// Event that destroys a card.
 class DestroyCardEvent extends Event {
+  /// Card to destroy.
   final CardObject card;
 
-  const DestroyCardEvent({
-    @required this.card,
-    bool resolved = false,
-  })  : assert(card != null),
-        super(resolved: resolved);
+  /// Destroys [card].
+  const DestroyCardEvent({required this.card, bool resolved = false})
+      : super(resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state) => [
@@ -23,10 +22,8 @@ class DestroyCardEvent extends Event {
       ];
 
   @override
-  DestroyCardEvent get copyResolved => DestroyCardEvent(
-        card: card,
-        resolved: true,
-      );
+  DestroyCardEvent get copyResolved =>
+      DestroyCardEvent(card: card, resolved: true);
 
   @override
   List<Object> get props => [card, resolved];

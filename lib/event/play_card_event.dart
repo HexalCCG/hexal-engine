@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../cards/i_on_enter_field.dart';
 import '../cards/i_permanent.dart';
 import '../game_state/game_state.dart';
@@ -13,12 +11,17 @@ import 'destroy_card_event.dart';
 import 'event.dart';
 import 'on_card_enter_field_event.dart';
 
+/// Event to play a card from hand.
 class PlayCardEvent extends Event {
+  /// Card to play.
   final CardObject card;
+
+  /// Whether the card has been put into the field yet.
   final bool donePutIntoField;
 
+  /// [card] is put into the field.
   const PlayCardEvent(
-      {@required this.card,
+      {required this.card,
       this.donePutIntoField = false,
       bool resolved = false})
       : super(resolved: resolved);

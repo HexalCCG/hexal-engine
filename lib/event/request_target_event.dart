@@ -19,14 +19,12 @@ class RequestTargetEvent extends Event {
     required this.effect,
     required this.target,
     bool resolved = false,
-  })  : assert(effect is ITargetted),
+  })  : assert(effect is ITargeted),
         super(resolved: resolved);
 
   @override
-  List<StateChange> apply(GameState state) {
-    throw const EventException(
-        'RequestTargetEvent error: This should never be applied');
-  }
+  List<StateChange> apply(GameState state) => throw const EventException(
+      'RequestTargetEvent error: This should be filled and never applied.');
 
   @override
   RequestTargetEvent get copyResolved =>

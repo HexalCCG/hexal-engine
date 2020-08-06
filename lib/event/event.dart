@@ -7,12 +7,16 @@ import '../state_change/state_change.dart';
 /// Events are items placed on the stack to resolve.
 @immutable
 abstract class Event extends Equatable {
+  /// Whether this event should be removed.
   final bool resolved;
 
-  const Event({@required this.resolved});
+  /// [Resolved] is whether this event has been applied and needs to be removed.
+  const Event({required this.resolved});
 
+  /// Resultant StateChanges of resolving this event.
   List<StateChange> apply(GameState state);
 
+  /// A copy of this event with resolved set to true.
   Event get copyResolved;
 
   @override
