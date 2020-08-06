@@ -1,10 +1,7 @@
-import 'package:meta/meta.dart';
-
 import '../event/event.dart';
-import '../exceptions/state_change_exception.dart';
+import '../extensions/list_replace.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
-import '../extensions/list_replace.dart';
 
 /// StateChange to modify an event.
 class ModifyEventStateChange extends StateChange {

@@ -21,9 +21,7 @@ void main() {
       TurnPhase.draw,
     );
   });
-  test(
-      'Phase state change doesn\'t change activePlayer when moving from end to start phase.',
-      () {
+  test('Phase state change doesn\'t change activePlayer.', () {
     final state = const GameState(
       gameOverState: GameOverState.playing,
       cards: [],

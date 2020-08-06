@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:hexal_engine/event/provide_target_event.dart';
 import 'package:hexal_engine/effect/damage_effect.dart';
 import 'package:hexal_engine/effect/target/creature_target.dart';
 import 'package:hexal_engine/effect/target/target.dart';
@@ -29,7 +30,7 @@ void main() {
         FillRequestStateChange(
             request: request, targetResult: const EmptyTargetResult())
       ]);
-      expect((state.stack.last as RequestTargetEvent).targetResult,
+      expect((state.stack.last as ProvideTargetEvent).targetResult,
           const EmptyTargetResult());
     });
   });

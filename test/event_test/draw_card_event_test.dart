@@ -1,5 +1,6 @@
-import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:test/test.dart';
+import 'package:hexal_engine/objects/card_object.dart';
+import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
@@ -65,9 +66,9 @@ void main() {
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
 
-      expect(state.cards, [
-        card1.copyWith({'location': Location.hand}),
-        card2.copyWith({'location': Location.hand}),
+      expect(state.cards, <CardObject>[
+        card1.copyWithBase(location: Location.hand),
+        card2.copyWithBase(location: Location.hand),
       ]);
     });
 

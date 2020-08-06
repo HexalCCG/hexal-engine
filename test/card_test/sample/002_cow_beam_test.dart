@@ -30,7 +30,8 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
       );
-      // Game starts in player 1's main phase 1, and player 1 has priority. They have one First Creature in hand.
+      // Game starts in player 1's main phase 1, and player 1 has priority.
+      // They have one First Creature in hand.
       // Player 1 plays their First Creature.
       state = state.applyAction(PlayCardAction(card: card));
 
@@ -55,8 +56,10 @@ void main() {
         id: 3,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       const card = CowBeamCard(
         id: 2,
@@ -87,7 +90,7 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(PassAction());
 
-      // Cow Beam moves into the field and its enter field effect is added to the stack.
+      // Cow Beam moves into the field .
       expect(state.getCardsByLocation(Player.one, Location.field),
           contains(isA<CowBeamCard>()));
       expect(state.stack.last, isA<OnCardEnterFieldEvent>());
@@ -106,7 +109,7 @@ void main() {
 
       // Player 1 provides a target.
       state = state.applyAction(ProvideTargetAction(
-          target: state.cards.firstWhere((element) => element.id == 3)));
+          targets: [state.cards.firstWhere((element) => element.id == 3)]));
 
       // Target added to target request & folded into DamageEvent.
       state = state.applyAction(PassAction());

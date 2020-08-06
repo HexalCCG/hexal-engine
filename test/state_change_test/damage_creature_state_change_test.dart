@@ -12,10 +12,14 @@ void main() {
   group('Damage creature state change', () {
     test('increases a creature\'s damage by the provided amount', () {
       const creature = CowCreatureCard(
-          id: 3,
-          owner: Player.one,
-          controller: Player.one,
-          location: Location.field);
+        id: 3,
+        owner: Player.one,
+        controller: Player.one,
+        location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
+      );
       var state = const GameState(
         gameOverState: GameOverState.playing,
         cards: [creature],

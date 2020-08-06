@@ -1,10 +1,7 @@
-import 'package:hexal_engine/exceptions/state_change_exception.dart';
-import 'package:meta/meta.dart';
-
 import '../event/event.dart';
+import '../extensions/list_replace.dart';
 import '../game_state/game_state.dart';
 import 'state_change.dart';
-import '../extensions/list_replace.dart';
 
 /// StateChange to resolve an event.
 class ResolveEventStateChange extends StateChange {

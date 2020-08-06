@@ -12,8 +12,7 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 
 void main() {
   group('On card enter field event ', () {
-    test(
-        'resolves itself with no state changes if the card has no relevent effect. ',
+    test('resolves with no state changes if the card has no relevent effect. ',
         () {
       const card = TestCard(
         id: 2,

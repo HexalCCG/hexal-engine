@@ -41,8 +41,9 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.hand,
+        enteredFieldThisTurn: false,
+        exhausted: false,
         damage: 0,
       );
       const effect = DamageEffect(

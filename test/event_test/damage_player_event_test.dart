@@ -1,6 +1,7 @@
-import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:test/test.dart';
+import 'package:hexal_engine/actions/pass_action.dart';
+import 'package:hexal_engine/objects/card_object.dart';
+import 'package:hexal_engine/state_change/game_over_state_change.dart';
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/event/damage_player_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
@@ -64,9 +65,9 @@ void main() {
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
       // Expect player 1 to have exiled two cards from their deck.
-      expect(state.cards, [
-        card1.copyWith({'location': Location.exile}),
-        card2.copyWith({'location': Location.exile}),
+      expect(state.cards, <CardObject>[
+        card1.copyWithBase(location: Location.exile),
+        card2.copyWithBase(location: Location.exile),
       ]);
     });
     test('triggers game over if the player has no cards. ', () {

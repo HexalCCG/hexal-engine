@@ -1,5 +1,6 @@
-import 'package:hexal_engine/state_change/put_into_field_state_change.dart';
 import 'package:test/test.dart';
+import 'package:hexal_engine/state_change/state_change.dart';
+import 'package:hexal_engine/state_change/put_into_field_state_change.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
 import 'package:hexal_engine/event/request_target_event.dart';
@@ -37,10 +38,8 @@ void main() {
 
       expect(
           changes,
-          containsAll([
-            PutIntoFieldStateChange(
-              card: card,
-            ),
+          containsAll(<StateChange>[
+            PutIntoFieldStateChange(card: card),
           ]));
     });
     test('does not destroy a played permanent.', () {
@@ -48,8 +47,10 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.hand,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       var state = const GameState(
         gameOverState: GameOverState.playing,

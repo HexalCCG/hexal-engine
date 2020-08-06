@@ -1,6 +1,6 @@
+import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/game_state/location.dart';
-import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/effect/damage_effect.dart';
 import 'package:hexal_engine/effect/target/creature_target.dart';
@@ -22,6 +22,9 @@ void main() {
         owner: Player.two,
         controller: Player.two,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       var state = GameState(
         activePlayer: Player.one,

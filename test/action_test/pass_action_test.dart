@@ -1,5 +1,6 @@
-import 'package:hexal_engine/state_change/end_turn_clear_state_change.dart';
 import 'package:test/test.dart';
+import 'package:hexal_engine/state_change/end_turn_clear_state_change.dart';
+import 'package:hexal_engine/state_change/state_change.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/location.dart';
@@ -44,7 +45,7 @@ void main() {
 
       expect(
           change,
-          containsAll(const [
+          containsAll(const <StateChange>[
             PhaseStateChange(phase: TurnPhase.draw),
             PriorityStateChange(player: Player.one),
           ]));
@@ -63,7 +64,7 @@ void main() {
 
       expect(
           change,
-          containsAll(const [
+          containsAll(const <StateChange>[
             PhaseStateChange(phase: TurnPhase.start),
             ActivePlayerStateChange(player: Player.two),
             PriorityStateChange(player: Player.two),
@@ -75,6 +76,9 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,

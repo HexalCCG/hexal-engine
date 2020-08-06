@@ -1,8 +1,8 @@
+import 'package:test/test.dart';
 import 'package:hexal_engine/actions/attack_action.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/attack_event.dart';
 import 'package:hexal_engine/exceptions/action_exception.dart';
-import 'package:test/test.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:hexal_engine/game_state/player.dart';
@@ -18,12 +18,18 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       const defender = CowCreatureCard(
         id: 3,
         controller: Player.two,
         owner: Player.two,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,
@@ -48,12 +54,17 @@ void main() {
         owner: Player.one,
         location: Location.field,
         enteredFieldThisTurn: true,
+        exhausted: false,
+        damage: 0,
       );
       const defender = CowCreatureCard(
         id: 3,
         controller: Player.two,
         owner: Player.two,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,

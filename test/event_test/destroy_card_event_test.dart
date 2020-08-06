@@ -1,6 +1,6 @@
+import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/event/destroy_card_event.dart';
-import 'package:test/test.dart';
 import 'package:hexal_engine/game_state/player.dart';
 import 'package:hexal_engine/game_state/location.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
@@ -14,8 +14,10 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       var state = const GameState(
         gameOverState: GameOverState.playing,
@@ -35,8 +37,10 @@ void main() {
             id: 2,
             controller: Player.one,
             owner: Player.one,
-            enteredFieldThisTurn: false,
             location: Location.mana,
+            enteredFieldThisTurn: false,
+            exhausted: false,
+            damage: 0,
           ));
     });
   });

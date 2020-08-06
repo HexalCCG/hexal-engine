@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:hexal_engine/state_change/state_change.dart';
 import 'package:hexal_engine/event/attack_event.dart';
 import 'package:hexal_engine/event/damage_creature_event.dart';
 import 'package:hexal_engine/state_change/add_event_state_change.dart';
@@ -11,18 +12,24 @@ import 'package:hexal_engine/game_state/turn_phase.dart';
 
 void main() {
   group('Attack event', () {
-    test('deals damage to each creature equal to the other\'s attack. ', () {
+    test('deals damage to each creature equal to the other\'s attack.', () {
       const card1 = CowCreatureCard(
         id: 2,
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       const card2 = CowCreatureCard(
         id: 3,
         controller: Player.two,
         owner: Player.two,
         location: Location.field,
+        enteredFieldThisTurn: false,
+        exhausted: false,
+        damage: 0,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,
@@ -38,7 +45,7 @@ void main() {
 
       expect(
           changes,
-          containsAll([
+          containsAll(<StateChange>[
             AddEventStateChange(
                 event:
                     DamageCreatureEvent(creature: card1, damage: card2.attack)),

@@ -15,8 +15,9 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.hand,
+        enteredFieldThisTurn: false,
+        exhausted: false,
         damage: 0,
       );
       var state = const GameState(
@@ -27,7 +28,8 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
       );
-      // Game starts in player 1's main phase 1, and player 1 has priority. They have one First Creature in hand.
+      // Game starts in player 1's main phase 1, and player 1 has priority.
+      // They have one First Creature in hand.
       // Player 1 plays their First Creature.
       state = state.applyAction(PlayCardAction(card: card));
 

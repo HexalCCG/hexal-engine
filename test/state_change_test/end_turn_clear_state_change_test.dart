@@ -1,5 +1,5 @@
-import 'package:hexal_engine/state_change/end_turn_clear_state_change.dart';
 import 'package:test/test.dart';
+import 'package:hexal_engine/state_change/end_turn_clear_state_change.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/game_state/game_over_state.dart';
 import 'package:hexal_engine/game_state/game_state.dart';
@@ -14,8 +14,9 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        enteredFieldThisTurn: false,
         location: Location.hand,
+        enteredFieldThisTurn: false,
+        exhausted: false,
         damage: 1,
       );
       final state = const GameState(
@@ -39,8 +40,9 @@ void main() {
                 id: 2,
                 controller: Player.one,
                 owner: Player.one,
-                enteredFieldThisTurn: false,
                 location: Location.hand,
+                enteredFieldThisTurn: false,
+                exhausted: false,
                 damage: 0,
               )
             ],
