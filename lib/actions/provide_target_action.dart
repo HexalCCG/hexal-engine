@@ -1,17 +1,17 @@
-import 'package:hexal_engine/objects/game_object.dart';
-import 'package:hexal_engine/state_change/fill_request_state_change.dart';
-import 'package:meta/meta.dart';
-
 import '../event/request_target_event.dart';
 import '../exceptions/action_exception.dart';
 import '../game_state/game_state.dart';
+import '../objects/game_object.dart';
+import '../state_change/fill_request_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
 
 /// Provides target to a request.
 class ProvideTargetAction extends Action {
+  /// Targets provided by player.
   final List<GameObject> targets;
 
+  /// Provides targets to a request.
   const ProvideTargetAction({required this.targets});
 
   @override
@@ -42,7 +42,8 @@ class ProvideTargetAction extends Action {
       FillRequestStateChange(
           request: (state.stack.last as RequestTargetEvent),
           targetResult: (state.stack.last as RequestTargetEvent)
-              .createTargetResult(targets))
+              .target
+              .createResult(targets))
     ];
   }
 

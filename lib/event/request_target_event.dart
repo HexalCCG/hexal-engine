@@ -1,8 +1,3 @@
-import 'dart:math';
-
-import 'package:hexal_engine/event/provide_target_event.dart';
-import 'package:hexal_engine/objects/game_object.dart';
-
 import '../effect/effect.dart';
 import '../effect/i_targetted.dart';
 import '../effect/target/target.dart';
@@ -26,9 +21,6 @@ class RequestTargetEvent extends Event {
     bool resolved = false,
   })  : assert(effect is ITargetted),
         super(resolved: resolved);
-
-  TargetResult createTargetResult(dynamic providedTarget) =>
-      target.createResult(providedTarget);
 
   @override
   List<StateChange> apply(GameState state) {

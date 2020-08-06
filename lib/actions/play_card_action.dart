@@ -9,9 +9,12 @@ import '../state_change/priority_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
 
+/// Plays the card from your hand.
 class PlayCardAction extends Action {
+  /// Card to play.
   final CardObject card;
 
+  /// Plays [card] from priority player's hand.
   const PlayCardAction({required this.card});
 
   @override

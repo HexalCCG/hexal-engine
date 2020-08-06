@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../cards/creature.dart';
 import '../event/attack_player_event.dart';
 import '../exceptions/action_exception.dart';
@@ -12,10 +10,15 @@ import '../state_change/priority_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
 
+/// Declares an attack targeting a player.
 class AttackPlayerAction extends Action {
+  /// Creature attacking.
   final Creature attacker;
+
+  /// Player being attacked.
   final Player player;
 
+  /// Causes [attacker] to attack [player].
   const AttackPlayerAction({required this.attacker, required this.player});
 
   @override

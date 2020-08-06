@@ -9,7 +9,7 @@ import '../state_change/priority_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
 
-/// Declares an attack targetting a creature.
+/// Declares an attack targeting a creature.
 class AttackAction extends Action {
   /// Creature attacking.
   final Creature attacker;

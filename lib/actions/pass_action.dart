@@ -1,7 +1,4 @@
-import 'package:hexal_engine/effect/target/target.dart';
-import 'package:hexal_engine/state_change/fill_request_state_change.dart';
-import 'package:hexal_engine/state_change/set_counter_available_state_change.dart';
-
+import '../effect/target/target.dart';
 import '../event/draw_card_event.dart';
 import '../event/request_target_event.dart';
 import '../exceptions/action_exception.dart';
@@ -10,12 +7,16 @@ import '../game_state/turn_phase.dart';
 import '../state_change/active_player_state_change.dart';
 import '../state_change/add_event_state_change.dart';
 import '../state_change/end_turn_clear_state_change.dart';
+import '../state_change/fill_request_state_change.dart';
 import '../state_change/phase_state_change.dart';
 import '../state_change/priority_state_change.dart';
+import '../state_change/set_counter_available_state_change.dart';
 import '../state_change/state_change.dart';
 import 'action.dart';
 
+/// Do nothing.
 class PassAction extends Action {
+  /// Do nothing.
   const PassAction();
 
   @override
