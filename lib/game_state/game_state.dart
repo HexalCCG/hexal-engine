@@ -1,53 +1,61 @@
 import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/exceptions/game_state_exception.dart';
-import 'package:hexal_engine/objects/player_object.dart';
-import 'package:hexal_engine/state_change/remove_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
+import '../actions/pass_action.dart';
 import '../event/event.dart';
+import '../exceptions/game_state_exception.dart';
 import '../objects/card_object.dart';
+import '../objects/player_object.dart';
+import '../state_change/remove_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'game_over_state.dart';
 import 'location.dart';
 import 'player.dart';
 import 'turn_phase.dart';
 
-/// GameStates represent a single moment snapshot of a game.
+/// Represents a single moment snapshot of a game.
 @immutable
 class GameState extends Equatable {
+  /// The player whose turn it currently is.
   final Player activePlayer;
+
+  /// The player who holds priority and can play cards.
   final Player priorityPlayer;
+
+  /// Phase of the turn we are in.
   final TurnPhase turnPhase;
+
+  /// All cards held in the state.
   final List<CardObject> cards;
+
+  /// Stack of events resolved top-first.
   final List<Event> stack;
+
+  /// Whether the game has ended.
   final GameOverState gameOverState;
+
+  /// Whether a counter phase will occur this turn.
   final bool counterAvailable;
 
+  /// Player without priorty.
   Player get notPriorityPlayer =>
       (priorityPlayer == Player.one) ? Player.two : Player.one;
+
+  /// Player whose turn it isn't.
   Player get notActivePlayer =>
       (activePlayer == Player.one) ? Player.two : Player.one;
 
+  /// Represents a single moment snapshot of a game.
   const GameState({
-    @required this.activePlayer,
-    @required this.priorityPlayer,
-    @required this.turnPhase,
-    @required this.cards,
-    @required this.stack,
+    required this.activePlayer,
+    required this.priorityPlayer,
+    required this.turnPhase,
+    required this.cards,
+    required this.stack,
     this.gameOverState = GameOverState.playing,
     this.counterAvailable = false,
   });
-
-  const GameState.startingState({
-    bool player1Starts,
-  })  : gameOverState = GameOverState.playing,
-        cards = const [],
-        stack = const [],
-        activePlayer = player1Starts ? Player.one : Player.two,
-        priorityPlayer = player1Starts ? Player.one : Player.two,
-        turnPhase = TurnPhase.start;
 
   /// Returns state changes caused by the provided action.
   List<StateChange> generateStateChanges(Action action) => action.apply(this);
@@ -60,7 +68,7 @@ class GameState extends Equatable {
   GameState applyAction(Action action) {
     if (gameOverState != GameOverState.playing) {
       throw GameStateException(
-          'GameState Exception: Game is over: ' + gameOverState.toString());
+          'GameState Exception: Game is over: $gameOverState');
     }
     return applyStateChanges(generateStateChanges(action));
   }
@@ -101,20 +109,22 @@ class GameState extends Equatable {
         .toList();
   }
 
-  // Gets this state's version of the provided card.
+  /// Gets this state's version of the provided card.
   CardObject getCard(CardObject card) =>
       cards.firstWhere((element) => element == card);
 
-  // Gets this state's version of the provided event.
+  /// Gets this state's version of the provided event.
   Event getEvent(Event event) =>
       stack.firstWhere((element) => element == event);
 
-  // Return the playerobject for a player
+  /// Return the playerobject for a player
   PlayerObject getPlayerObject(Player player) => player == Player.one
       ? const PlayerObject(id: 0, player: Player.one)
       : const PlayerObject(id: 1, player: Player.two);
 
-  CardObject getTopCardOfDeck(Player player) {
+  /// Get the top card of the provided player's deck.
+  /// Returns null if deck is empty.
+  CardObject? getTopCardOfDeck(Player player) {
     final deck = getCardsByLocation(player, Location.deck);
     if (deck.isEmpty) {
       return null;
@@ -123,14 +133,15 @@ class GameState extends Equatable {
     }
   }
 
+  /// Return a copy of this state with the provided fields replaced.
   GameState copyWith({
-    Player activePlayer,
-    Player priorityPlayer,
-    TurnPhase turnPhase,
-    List<CardObject> cards,
-    List<Event> stack,
-    GameOverState gameOverState,
-    bool counterAvailable,
+    Player? activePlayer,
+    Player? priorityPlayer,
+    TurnPhase? turnPhase,
+    List<CardObject>? cards,
+    List<Event>? stack,
+    GameOverState? gameOverState,
+    bool? counterAvailable,
   }) {
     return GameState(
       activePlayer: activePlayer ?? this.activePlayer,
