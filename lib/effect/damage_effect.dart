@@ -2,7 +2,7 @@ import '../cards/creature.dart';
 import '../event/damage_creature_event.dart';
 import '../event/damage_player_event.dart';
 import '../event/request_target_event.dart';
-import '../exceptions/event_exceptipn.dart';
+import '../exceptions/event_exception.dart';
 import '../game_state/game_state.dart';
 import '../game_state/player.dart';
 import '../objects/card_object.dart';

@@ -1,7 +1,7 @@
 import '../effect/effect.dart';
 import '../effect/i_targeted.dart';
 import '../effect/target/target.dart';
-import '../exceptions/event_exceptipn.dart';
+import '../exceptions/event_exception.dart';
 import '../game_state/game_state.dart';
 import '../state_change/state_change.dart';
 import 'event.dart';

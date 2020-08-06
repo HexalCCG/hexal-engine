@@ -1,6 +1,6 @@
 import 'package:hexal_engine/effect/i_targeted.dart';
 import 'package:hexal_engine/effect/target/target.dart';
-import 'package:hexal_engine/exceptions/event_exceptipn.dart';
+import 'package:hexal_engine/exceptions/event_exception.dart';
 import 'package:hexal_engine/state_change/fill_request_state_change.dart';
 import 'package:hexal_engine/state_change/modify_event_state_change.dart';
 import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
