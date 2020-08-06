@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../cards/creature.dart';
 import '../event/damage_creature_event.dart';
 import '../event/damage_player_event.dart';
@@ -14,31 +12,34 @@ import '../state_change/add_event_state_change.dart';
 import '../state_change/modify_event_state_change.dart';
 import '../state_change/resolve_event_state_change.dart';
 import '../state_change/state_change.dart';
-import 'effect.dart';
-import 'i_targetted.dart';
 import 'target/target.dart';
+import 'targeted_effect.dart';
 
-class DamageEffect extends Effect implements ITargetted {
-  @override
-  final Target target;
-  @override
-  final TargetResult targetResult;
-
+/// Deals damage to a target.
+class DamageEffect extends TargetedEffect {
+  /// Amount of damage to deal.
   final int damage;
-  final int targetIndex;
+  final int _targetIndex;
 
+  /// [target] is target to request. [targetResult] returns from the request.
+  /// [targetIndex] counts through list of targets to apply damage.
   const DamageEffect({
-    @required Player controller,
-    @required this.target,
-    this.targetResult,
-    this.targetIndex = 0,
-    @required this.damage,
+    required Player controller,
+    required Target target,
+    TargetResult targetResult = const UnfilledTargetRequest(),
+    int targetIndex = 0,
+    required this.damage,
     bool resolved = false,
-  }) : super(controller: controller, resolved: resolved);
+  })  : _targetIndex = targetIndex,
+        super(
+            controller: controller,
+            target: target,
+            targetResult: targetResult,
+            resolved: resolved);
 
   @override
   List<StateChange> apply(GameState state) {
-    if (targetResult == null) {
+    if (targetResult == const UnfilledTargetRequest()) {
       return [
         AddEventStateChange(
             event: RequestTargetEvent(effect: this, target: target)),
@@ -49,16 +50,16 @@ class DamageEffect extends Effect implements ITargetted {
         return [ResolveEventStateChange(event: this)];
       } else {
         // If only one target is left, do it and resolve
-        if (targetIndex == targetResult.targets.length - 1) {
+        if (_targetIndex == targetResult.targets.length - 1) {
           return [
-            _generateStateChange(targetResult.targets[targetIndex]),
+            _generateStateChange(targetResult.targets[_targetIndex]),
             ResolveEventStateChange(event: this),
           ];
         }
         // Otherwise do one target and increment
         else {
           return [
-            _generateStateChange(targetResult.targets[targetIndex]),
+            _generateStateChange(targetResult.targets[_targetIndex]),
             ModifyEventStateChange(event: this, newEvent: _copyIncremented),
           ];
         }
@@ -82,12 +83,12 @@ class DamageEffect extends Effect implements ITargetted {
       controller: controller,
       target: target,
       targetResult: targetResult,
-      targetIndex: targetIndex + 1,
+      targetIndex: _targetIndex + 1,
       damage: damage,
       resolved: resolved);
 
   @override
-  DamageEffect copyWithTarget(targetResult) => DamageEffect(
+  DamageEffect copyWithTarget(TargetResult targetResult) => DamageEffect(
       controller: controller,
       target: target,
       targetResult: targetResult,

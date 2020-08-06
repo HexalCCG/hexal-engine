@@ -1,4 +1,4 @@
-import 'package:hexal_engine/effect/i_targetted.dart';
+import 'package:hexal_engine/effect/i_targeted.dart';
 import 'package:hexal_engine/effect/target/target.dart';
 import 'package:hexal_engine/exceptions/event_exceptipn.dart';
 import 'package:hexal_engine/state_change/fill_request_state_change.dart';

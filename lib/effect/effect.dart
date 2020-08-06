@@ -1,14 +1,15 @@
-import 'package:hexal_engine/game_state/player.dart';
-import 'package:meta/meta.dart';
-
 import '../event/event.dart';
 import '../game_state/game_state.dart';
+import '../game_state/player.dart';
 import '../state_change/state_change.dart';
 
+/// Empty effect.
 abstract class Effect extends Event {
+  /// Player than controls this effect and will provide targets.
   final Player controller;
 
-  const Effect({@required this.controller, @required bool resolved})
+  /// Empty effect.
+  const Effect({required this.controller, required bool resolved})
       : super(resolved: resolved);
 
   @override

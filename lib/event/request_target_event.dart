@@ -1,5 +1,5 @@
 import '../effect/effect.dart';
-import '../effect/i_targetted.dart';
+import '../effect/i_targeted.dart';
 import '../effect/target/target.dart';
 import '../exceptions/event_exceptipn.dart';
 import '../game_state/game_state.dart';
