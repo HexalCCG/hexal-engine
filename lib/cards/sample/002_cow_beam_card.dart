@@ -25,10 +25,10 @@ class CowBeamCard extends Spell implements IOnEnterField {
       ];
 
   @override
-  CowBeamCard copyWithController(Player controller) => CowBeamCard(
-      id: id, owner: owner, controller: controller, location: location);
-
-  @override
-  CowBeamCard copyWithLocation(Location location) => CowBeamCard(
-      id: id, owner: owner, controller: controller, location: location);
+  CowBeamCard copyWithBase({Player? controller, Location? location}) =>
+      CowBeamCard(
+          id: id,
+          owner: owner,
+          controller: controller ?? this.controller,
+          location: location ?? this.location);
 }

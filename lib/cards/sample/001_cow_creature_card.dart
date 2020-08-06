@@ -10,9 +10,9 @@ class CowCreatureCard extends Creature {
     required Player owner,
     required Player controller,
     required Location location,
-    bool exhausted = false,
-    bool enteredFieldThisTurn = false,
-    int damage = 0,
+    required bool exhausted,
+    required bool enteredFieldThisTurn,
+    required int damage,
   }) : super(
             id: id,
             owner: owner,
@@ -28,49 +28,25 @@ class CowCreatureCard extends Creature {
   int get baseHealth => 2;
 
   @override
-  CowCreatureCard copyWithController(Player controller) => CowCreatureCard(
-      id: id,
-      owner: owner,
-      controller: controller,
-      location: location,
-      exhausted: exhausted,
-      enteredFieldThisTurn: enteredFieldThisTurn,
-      damage: damage);
+  CowCreatureCard copyWithBase({Player? controller, Location? location}) =>
+      CowCreatureCard(
+          id: id,
+          owner: owner,
+          controller: controller ?? this.controller,
+          location: location ?? this.location,
+          exhausted: exhausted,
+          enteredFieldThisTurn: enteredFieldThisTurn,
+          damage: damage);
   @override
-  CowCreatureCard copyWithLocation(Location location) => CowCreatureCard(
-      id: id,
-      owner: owner,
-      controller: controller,
-      location: location,
-      exhausted: exhausted,
-      enteredFieldThisTurn: enteredFieldThisTurn,
-      damage: damage);
-  @override
-  Creature copyWithDamage(int damage) => CowCreatureCard(
-      id: id,
-      owner: owner,
-      controller: controller,
-      location: location,
-      exhausted: exhausted,
-      enteredFieldThisTurn: enteredFieldThisTurn,
-      damage: damage);
-  @override
-  Creature copyWithEnteredFieldThisTurn(bool enteredFieldThisTurn) =>
+  Creature copyWithCreature(
+          {int? damage, bool? enteredFieldThisTurn, bool? exhausted}) =>
       CowCreatureCard(
           id: id,
           owner: owner,
           controller: controller,
           location: location,
-          exhausted: exhausted,
-          enteredFieldThisTurn: enteredFieldThisTurn,
-          damage: damage);
-  @override
-  Creature copyWithExhausted(int damage) => CowCreatureCard(
-      id: id,
-      owner: owner,
-      controller: controller,
-      location: location,
-      exhausted: exhausted,
-      enteredFieldThisTurn: enteredFieldThisTurn,
-      damage: damage);
+          exhausted: exhausted ?? this.exhausted,
+          enteredFieldThisTurn:
+              enteredFieldThisTurn ?? this.enteredFieldThisTurn,
+          damage: damage ?? this.damage);
 }

@@ -18,9 +18,8 @@ abstract class CardObject extends GameObject {
     @required this.location,
   }) : super(id: id);
 
-  CardObject copyWithController(Player controller);
-
-  CardObject copyWithLocation(Location location);
+  /// Copy changing base parameters [controller], [location].
+  CardObject copyWithBase({Player? controller, Location? location});
 
   @override
   List<Object> get toStringProps => [owner, controller, location];
