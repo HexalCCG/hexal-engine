@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
@@ -66,11 +69,14 @@ class GameState extends Equatable {
 
   /// Generates then applies state changes for provided action.
   GameState applyAction(Action action) {
-    if (gameOverState != GameOverState.playing) {
-      throw GameStateException(
-          'GameState Exception: Game is over: $gameOverState');
-    }
+    assert(gameOverState == GameOverState.playing);
     return applyStateChanges(generateStateChanges(action));
+  }
+
+  /// Generates then applies state changes for provided event.
+  GameState addAndResolveEvent(Event event) {
+    var state = applyStateChanges([AddEventStateChange(event: event)]);
+    return state.applyStateChanges(state.resolveTopStackEvent());
   }
 
   /// Test only - submits pass actions until the stack is empty.
