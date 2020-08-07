@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
+import '../extensions/equatable/equatable.dart';
 import '../game_state/game_state.dart';
 import '../state_change/state_change.dart';
 

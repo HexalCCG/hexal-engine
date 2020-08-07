@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-
+import '../extensions/equatable/equatable.dart';
 import '../game_state/game_state.dart';
 
 /// StateChanges are applied to the GameState to change it.

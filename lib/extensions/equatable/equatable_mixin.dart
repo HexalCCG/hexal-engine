@@ -1,0 +1,30 @@
+import 'equatable.dart';
+import 'equatable_utils.dart';
+
+/// A mixin that helps implement equality
+/// without needing to explicitly override [operator ==] and [hashCode].
+///
+/// Like with extending [Equatable], the [EquatableMixin] overrides the
+/// [operator ==] as well as the [hashCode] based on the provided [props].
+mixin EquatableMixin {
+  /// {@macro equatable_props}
+  List<Object> get props;
+
+  /// {@macro equatable_stringify}
+  bool get stringify => false;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is EquatableMixin &&
+            runtimeType == other.runtimeType &&
+            equals(props, other.props);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode ^ mapPropsToHashCode(props);
+
+  @override
+  String toString() =>
+      stringify ? mapPropsToString(runtimeType, props) : '$runtimeType';
+}

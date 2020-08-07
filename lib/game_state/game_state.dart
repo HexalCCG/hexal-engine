@@ -1,15 +1,12 @@
-import 'dart:math';
-
-import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
 import '../actions/pass_action.dart';
 import '../event/event.dart';
-import '../exceptions/game_state_exception.dart';
+import '../extensions/equatable/equatable.dart';
 import '../objects/card_object.dart';
 import '../objects/player_object.dart';
+import '../state_change/add_event_state_change.dart';
 import '../state_change/remove_event_state_change.dart';
 import '../state_change/state_change.dart';
 import 'game_over_state.dart';
