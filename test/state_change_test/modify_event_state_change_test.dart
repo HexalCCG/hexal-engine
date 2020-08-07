@@ -1,5 +1,4 @@
 import 'package:test/test.dart';
-import 'package:hexal_engine/exceptions/state_change_exception.dart';
 import 'package:hexal_engine/state_change/modify_event_state_change.dart';
 import 'package:hexal_engine/event/draw_card_event.dart';
 import 'package:hexal_engine/game_state/player.dart';
