@@ -55,7 +55,5 @@ void main() {
     state = state
         .applyAction(AttackAction(attacker: attacker2, defender: defender));
     state = state.testPassUntilEmpty();
-
-    print(state);
   });
 }

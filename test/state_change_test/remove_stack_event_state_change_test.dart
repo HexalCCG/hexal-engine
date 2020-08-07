@@ -45,7 +45,7 @@ void main() {
           event: DrawCardEvent(player: Player.one, draws: 1));
       expect(
         () => state.applyStateChanges([change]),
-        throwsA(isA<StateChangeException>()),
+        throwsA(isA<AssertionError>()),
       );
     });
   });

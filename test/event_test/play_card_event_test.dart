@@ -171,9 +171,6 @@ void main() {
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
 
-      print(state);
-      print(state.stack);
-
       expect((state.stack), isEmpty);
       expect((state.cards.firstWhere((element) => element.id == 2).location),
           Location.mana);

@@ -67,7 +67,7 @@ void main() {
                         owner: Player.one),
                     location: Location.hand)
               ]),
-          throwsA(isA<StateChangeException>()));
+          throwsA(isA<AssertionError>()));
     });
   });
 }

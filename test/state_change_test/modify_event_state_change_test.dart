@@ -43,7 +43,7 @@ void main() {
           ModifyEventStateChange(event: missingEvent, newEvent: event2);
       expect(
         () => state.applyStateChanges([stateChange]),
-        throwsA(isA<StateChangeException>()),
+        throwsA(isA<AssertionError>()),
       );
     });
   });
