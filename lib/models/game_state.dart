@@ -1,4 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
@@ -15,11 +14,7 @@ import 'player.dart';
 import 'player_object.dart';
 import 'turn_phase.dart';
 
-/// Allows us to access JSON conversion methods in the generated file.
-part 'game_state.g.dart';
-
 /// Represents a single moment snapshot of a game.
-@JsonSerializable()
 @immutable
 class GameState extends Equatable {
   /// The player whose turn it currently is.
@@ -140,15 +135,6 @@ class GameState extends Equatable {
       return (deck..shuffle()).first;
     }
   }
-
-  /// Factory constructor for creating an instance of this from JSON.
-  factory GameState.fromJson(Map<String, dynamic> json) =>
-      _$GameStateFromJson(json);
-
-  /// `toJson` is the convention for a class to declare support for
-  /// serialization to JSON. The implementation simply calls the private,
-  /// generated helper method `_$GameStateToJson`.
-  Map<String, dynamic> toJson() => _$GameStateToJson(this);
 
   /// Return a copy of this state with the provided fields replaced.
   GameState copyWith({
