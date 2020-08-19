@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
 
 import '../extensions/equatable/equatable.dart';
-import '../game_state/game_state.dart';
-import '../state_change/state_change.dart';
+import '../models/game_state.dart';
+import '../state_changes/state_change.dart';
 
 /// Actions represent user inputs.
 @immutable

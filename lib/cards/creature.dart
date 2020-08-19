@@ -1,6 +1,6 @@
-import '../game_state/location.dart';
-import '../game_state/player.dart';
-import '../objects/card_object.dart';
+import '../models/card_object.dart';
+import '../models/location.dart';
+import '../models/player.dart';
 import 'i_permanent.dart';
 
 /// Permanent card with stats that can attack and block attacks.

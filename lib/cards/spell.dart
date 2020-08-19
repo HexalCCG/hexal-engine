@@ -1,6 +1,6 @@
-import '../game_state/location.dart';
-import '../game_state/player.dart';
-import '../objects/card_object.dart';
+import '../models/card_object.dart';
+import '../models/location.dart';
+import '../models/player.dart';
 
 /// Card with no stats that provides an effect.
 abstract class Spell extends CardObject {

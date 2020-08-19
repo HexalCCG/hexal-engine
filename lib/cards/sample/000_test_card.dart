@@ -1,5 +1,5 @@
-import '../../game_state/location.dart';
-import '../../game_state/player.dart';
+import '../../models/location.dart';
+import '../../models/player.dart';
 import '../spell.dart';
 
 /// Test spell with no effects or cost.

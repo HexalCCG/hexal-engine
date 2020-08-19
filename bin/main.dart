@@ -1,11 +1,13 @@
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
-import 'package:hexal_engine/event/draw_card_event.dart';
-import 'package:hexal_engine/game_state/game_over_state.dart';
-import 'package:hexal_engine/game_state/game_state.dart';
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/game_state/turn_phase.dart';
+import 'package:hexal_engine/events/draw_card_event.dart';
+import 'package:hexal_engine/events/event.dart';
+import 'package:hexal_engine/models/card_object.dart';
+import 'package:hexal_engine/models/game_over_state.dart';
+import 'package:hexal_engine/models/game_state.dart';
+import 'package:hexal_engine/models/location.dart';
+import 'package:hexal_engine/models/player.dart';
+import 'package:hexal_engine/models/turn_phase.dart';
 
 void main(List<String> arguments) {
   var state = GameState(
@@ -14,7 +16,7 @@ void main(List<String> arguments) {
       turnPhase: TurnPhase.start,
       counterAvailable: false,
       gameOverState: GameOverState.playing,
-      cards: [
+      cards: <CardObject>[
         CowCreatureCard(
           id: 2,
           owner: Player.one,
@@ -91,7 +93,7 @@ void main(List<String> arguments) {
           location: Location.deck,
         ),
       ],
-      stack: []);
+      stack: <Event>[]);
 
   state = state.addAndResolveEvent(DrawCardEvent(player: Player.one, draws: 3));
   state = state.addAndResolveEvent(DrawCardEvent(player: Player.two, draws: 4));

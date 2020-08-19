@@ -1,5 +1,5 @@
-import '../../game_state/location.dart';
-import '../../game_state/player.dart';
+import '../../models/location.dart';
+import '../../models/player.dart';
 import '../creature.dart';
 
 /// 2/2 Vanilla Creature.

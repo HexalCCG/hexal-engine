@@ -1,4 +1,4 @@
-import '../effect/effect.dart';
+import '../effects/effect.dart';
 
 /// Has an onEnterField effect.
 abstract class IOnEnterField {

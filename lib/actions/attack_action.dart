@@ -1,12 +1,12 @@
 import '../cards/creature.dart';
-import '../event/attack_event.dart';
+import '../events/attack_event.dart';
 import '../exceptions/action_exception.dart';
-import '../game_state/game_state.dart';
-import '../game_state/location.dart';
-import '../game_state/turn_phase.dart';
-import '../state_change/add_event_state_change.dart';
-import '../state_change/priority_state_change.dart';
-import '../state_change/state_change.dart';
+import '../models/game_state.dart';
+import '../models/location.dart';
+import '../models/turn_phase.dart';
+import '../state_changes/add_event_state_change.dart';
+import '../state_changes/priority_state_change.dart';
+import '../state_changes/state_change.dart';
 import 'action.dart';
 
 /// Declares an attack targeting a creature.

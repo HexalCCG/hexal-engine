@@ -1,12 +1,12 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
-import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
-import 'package:hexal_engine/event/draw_card_event.dart';
-import 'package:hexal_engine/game_state/player.dart';
-import 'package:hexal_engine/game_state/game_over_state.dart';
-import 'package:hexal_engine/game_state/game_state.dart';
-import 'package:hexal_engine/game_state/location.dart';
-import 'package:hexal_engine/game_state/turn_phase.dart';
+import 'package:hexal_engine/state_changes/resolve_event_state_change.dart';
+import 'package:hexal_engine/events/draw_card_event.dart';
+import 'package:hexal_engine/models/player.dart';
+import 'package:hexal_engine/models/game_over_state.dart';
+import 'package:hexal_engine/models/game_state.dart';
+import 'package:hexal_engine/models/location.dart';
+import 'package:hexal_engine/models/turn_phase.dart';
 
 void main() {
   test('Resolve top stack event returns a resolve stack event state change.',

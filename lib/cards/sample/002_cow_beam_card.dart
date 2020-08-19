@@ -1,8 +1,8 @@
-import '../../effect/damage_effect.dart';
-import '../../effect/effect.dart';
-import '../../effect/target/creature_target.dart';
-import '../../game_state/location.dart';
-import '../../game_state/player.dart';
+import '../../effects/damage_effect.dart';
+import '../../effects/effect.dart';
+import '../../effects/target/creature_target.dart';
+import '../../models/location.dart';
+import '../../models/player.dart';
 import '../i_on_enter_field.dart';
 import '../spell.dart';
 

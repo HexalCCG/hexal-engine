@@ -1,9 +1,9 @@
-import '../event/request_target_event.dart';
+import '../events/request_target_event.dart';
 import '../exceptions/action_exception.dart';
-import '../game_state/game_state.dart';
-import '../objects/game_object.dart';
-import '../state_change/fill_request_state_change.dart';
-import '../state_change/state_change.dart';
+import '../models/game_object.dart';
+import '../models/game_state.dart';
+import '../state_changes/fill_request_state_change.dart';
+import '../state_changes/state_change.dart';
 import 'action.dart';
 
 /// Provides target to a request.
