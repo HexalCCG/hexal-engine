@@ -11,7 +11,6 @@ import 'card_object.dart';
 import 'game_over_state.dart';
 import 'location.dart';
 import 'player.dart';
-import 'player_object.dart';
 import 'turn_phase.dart';
 
 /// Represents a single moment snapshot of a game.
@@ -38,14 +37,6 @@ class GameState extends Equatable {
   /// Whether a counter phase will occur this turn.
   final bool counterAvailable;
 
-  /// Player without priorty.
-  Player get notPriorityPlayer =>
-      (priorityPlayer == Player.one) ? Player.two : Player.one;
-
-  /// Player whose turn it isn't.
-  Player get notActivePlayer =>
-      (activePlayer == Player.one) ? Player.two : Player.one;
-
   /// Represents a single moment snapshot of a game.
   const GameState({
     required this.activePlayer,
@@ -56,6 +47,44 @@ class GameState extends Equatable {
     this.gameOverState = GameOverState.playing,
     this.counterAvailable = false,
   });
+
+  // GETTERS
+
+  /// Player without priorty.
+  Player get notPriorityPlayer =>
+      (priorityPlayer == Player.one) ? Player.two : Player.one;
+
+  /// Player whose turn it isn't.
+  Player get notActivePlayer =>
+      (activePlayer == Player.one) ? Player.two : Player.one;
+
+  /// Returns cards in the specified zone.
+  List<CardObject> getCardsByLocation(Player player, Location location) {
+    return cards
+        .where((card) => card.controller == player && card.location == location)
+        .toList();
+  }
+
+  /// Gets this state's version of the provided card.
+  CardObject getCard(CardObject card) =>
+      cards.firstWhere((element) => element == card);
+
+  /// Gets this state's version of the provided event.
+  Event getEvent(Event event) =>
+      stack.firstWhere((element) => element == event);
+
+  /// Get the top card of the provided player's deck.
+  /// Returns null if deck is empty.
+  CardObject? getTopCardOfDeck(Player player) {
+    final deck = getCardsByLocation(player, Location.deck);
+    if (deck.isEmpty) {
+      return null;
+    } else {
+      return (deck..shuffle()).first;
+    }
+  }
+
+  // MODIFICATION
 
   /// Returns state changes caused by the provided action.
   List<StateChange> generateStateChanges(Action action) => action.apply(this);
@@ -76,6 +105,18 @@ class GameState extends Equatable {
     return state.applyStateChanges(state.resolveTopStackEvent());
   }
 
+  /// Attempts to resolve the top stack event.
+  List<StateChange> resolveTopStackEvent() {
+    // If the top event has been resolved, remove it and check for input again.
+    if (stack.last.resolved) {
+      return [RemoveEventStateChange(event: stack.last)];
+    }
+    // If the top event still needs to be resolved, iterate it.
+    return stack.last.apply(this);
+  }
+
+  // TEST ONLY
+
   /// Test only - submits pass actions until the stack is empty.
   GameState testPassUntilEmpty() {
     var state = this;
@@ -85,56 +126,28 @@ class GameState extends Equatable {
     return state;
   }
 
-  /// Attempts to resolve the top stack event.
-  List<StateChange> resolveTopStackEvent() {
-    /*
-    // If the top event has been resolved, remove it and repeat.
-    if (stack.last.resolved) {
-      return [
-        RemoveEventStateChange(event: stack.last),
-        ...applyStateChanges([RemoveEventStateChange(event: stack.last)])
-            .resolveTopStackEvent(),
-      ];
-    }
-    */
-    // If the top event has been resolved, remove it and check for input again.
-    if (stack.last.resolved) {
-      return [RemoveEventStateChange(event: stack.last)];
-    }
-    // If the top event still needs to be resolved, iterate it.
-    return stack.last.apply(this);
-  }
+  // SERIALISATION
 
-  /// Returns cards in the specified zone.
-  List<CardObject> getCardsByLocation(Player player, Location location) {
-    return cards
-        .where((card) => card.controller == player && card.location == location)
-        .toList();
-  }
+  /// Create a GameState from its JSON encoding.
+  GameState.fromJson(Map<String, dynamic> json)
+      : activePlayer = json['activePlayer'] as Player,
+        priorityPlayer = json['priorityPlayer'] as Player,
+        turnPhase = json['turnPhase'] as TurnPhase,
+        cards = json['cards'] as List<CardObject>,
+        stack = json['stack'] as List<Event>,
+        gameOverState = json['gameOverState'] as GameOverState,
+        counterAvailable = json['counterAvailable'] as bool;
 
-  /// Gets this state's version of the provided card.
-  CardObject getCard(CardObject card) =>
-      cards.firstWhere((element) => element == card);
-
-  /// Gets this state's version of the provided event.
-  Event getEvent(Event event) =>
-      stack.firstWhere((element) => element == event);
-
-  /// Return the playerobject for a player
-  PlayerObject getPlayerObject(Player player) => player == Player.one
-      ? const PlayerObject(id: 0, player: Player.one)
-      : const PlayerObject(id: 1, player: Player.two);
-
-  /// Get the top card of the provided player's deck.
-  /// Returns null if deck is empty.
-  CardObject? getTopCardOfDeck(Player player) {
-    final deck = getCardsByLocation(player, Location.deck);
-    if (deck.isEmpty) {
-      return null;
-    } else {
-      return (deck..shuffle()).first;
-    }
-  }
+  /// Encode this GameState as JSON.
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'activePlayer': activePlayer,
+        'priorityPlayer': priorityPlayer,
+        'turnPhase': turnPhase,
+        'cards': cards,
+        'stack': stack,
+        'gameOverState': gameOverState,
+        'counterAvailable': counterAvailable,
+      };
 
   /// Return a copy of this state with the provided fields replaced.
   GameState copyWith({
