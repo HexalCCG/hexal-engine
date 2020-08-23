@@ -1,5 +1,4 @@
 import '../cards/i_on_enter_field.dart';
-import '../cards/i_permanent.dart';
 import '../models/card_object.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
@@ -39,7 +38,7 @@ class PlayCardEvent extends Event {
       ];
       // If it's in play, destroy it if it's not permanent
     } else {
-      if (card is IPermanent) {
+      if (card.permanent) {
         return [ResolveEventStateChange(event: this)];
       } else {
         return [
