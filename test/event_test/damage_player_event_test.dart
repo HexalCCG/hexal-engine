@@ -66,8 +66,8 @@ void main() {
       state = state.applyAction(PassAction());
       // Expect player 1 to have exiled two cards from their deck.
       expect(state.cards, <CardObject>[
-        card1.copyWithBase(location: Location.exile),
-        card2.copyWithBase(location: Location.exile),
+        card1.copyWith(location: Location.exile),
+        card2.copyWith(location: Location.exile),
       ]);
     });
     test('triggers game over if the player has no cards. ', () {

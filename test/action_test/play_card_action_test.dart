@@ -34,8 +34,8 @@ void main() {
           change,
           contains(
             AddEventStateChange(
-              event: PlayCardEvent(
-                  card: card.copyWithBase(location: Location.limbo)),
+              event:
+                  PlayCardEvent(card: card.copyWith(location: Location.limbo)),
             ),
           ));
     });

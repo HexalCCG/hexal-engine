@@ -1,5 +1,3 @@
-import 'package:hexal_engine/exceptions/game_object_exception.dart';
-
 import '../models/player.dart';
 import 'game_object.dart';
 
