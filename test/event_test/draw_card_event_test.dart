@@ -67,8 +67,8 @@ void main() {
       state = state.applyAction(PassAction());
 
       expect(state.cards, <CardObject>[
-        card1.copyWithBase(location: Location.hand),
-        card2.copyWithBase(location: Location.hand),
+        card1.copyWith(location: Location.hand),
+        card2.copyWith(location: Location.hand),
       ]);
     });
 
