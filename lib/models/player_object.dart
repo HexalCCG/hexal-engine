@@ -1,3 +1,5 @@
+import 'package:hexal_engine/exceptions/game_object_exception.dart';
+
 import '../models/player.dart';
 import 'game_object.dart';
 
@@ -8,8 +10,13 @@ class PlayerObject extends GameObject {
 
   /// Represents one of the players.
   /// [id] should be 0 for Player One, and 1 for Player Two.
-  const PlayerObject({required int id, required this.player}) : super(id: id);
+  const PlayerObject({required this.player})
+      : super(id: player == Player.one ? 0 : 1);
 
   @override
-  List<Object> get toStringProps => [id, player];
+  GameObject copyWith(Map<String, dynamic> changes) =>
+      PlayerObject(player: changes['player'] as Player? ?? player);
+
+  @override
+  List<Object> get props => [player];
 }

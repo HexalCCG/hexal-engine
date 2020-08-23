@@ -11,12 +11,12 @@ abstract class GameObject extends Equatable {
   /// [id] must be unique and cannot be changed.
   const GameObject({required this.id});
 
-  /// Props to be displayed in the object's toString method.
-  List<Object> get toStringProps;
-
   @override
   String toString() => '$runtimeType${props.map((prop) => prop.toString())}';
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props;
+
+  /// Returns a copy of this object with the changes applied.
+  GameObject copyWith(Map<String, dynamic> changes);
 }
