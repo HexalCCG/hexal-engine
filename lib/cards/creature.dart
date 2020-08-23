@@ -34,4 +34,11 @@ mixin Creature on CardObject {
 
   /// Whether this can be targeted by attacks, and whether this blocks.
   bool get canBeAttacked => true;
+
+  /// Copy this with creature fields modified.
+  CardObject copyWithCreature({
+    bool? exhausted,
+    bool? enteredFieldThisTurn,
+    int? damage,
+  });
 }

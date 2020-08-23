@@ -18,5 +18,5 @@ abstract class GameObject extends Equatable {
   List<Object> get props;
 
   /// Returns a copy of this object with the changes applied.
-  GameObject copyWith(Map<String, dynamic> changes);
+  GameObject copyWith({int id});
 }

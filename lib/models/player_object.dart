@@ -14,8 +14,8 @@ class PlayerObject extends GameObject {
       : super(id: player == Player.one ? 0 : 1);
 
   @override
-  GameObject copyWith(Map<String, dynamic> changes) =>
-      PlayerObject(player: changes['player'] as Player? ?? player);
+  GameObject copyWith({int? id, Player? player}) =>
+      PlayerObject(player: player ?? this.player);
 
   @override
   List<Object> get props => [player];
