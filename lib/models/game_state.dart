@@ -126,7 +126,7 @@ class GameState extends Equatable {
     return state;
   }
 
-  // SERIALISATION
+  // SERIALIZATION
 
   /// Create a GameState from its JSON encoding.
   GameState.fromJson(Map<String, dynamic> json)
@@ -180,8 +180,4 @@ class GameState extends Equatable {
         gameOverState,
         counterAvailable,
       ];
-
-  /// Override toString to fix equatable stringify missing some props.
-  @override
-  String toString() => props.toString();
 }
