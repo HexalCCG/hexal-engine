@@ -14,12 +14,13 @@ class TestCard extends CardObject with Spell {
   }) : super(id: id, owner: owner, controller: controller, location: location);
 
   @override
-  TestCard copyWith(Map<String, dynamic> changes) => TestCard(
-        id: changes['id'] as int? ?? id,
-        owner: changes['owner'] as Player? ?? owner,
-        controller: changes['controller'] as Player? ?? controller,
-        location: changes['location'] as Location? ?? location,
-      );
+  TestCard copyWith(
+          {int? id, Player? owner, Player? controller, Location? location}) =>
+      TestCard(
+          id: id ?? this.id,
+          owner: owner ?? this.owner,
+          controller: controller ?? this.controller,
+          location: location ?? this.location);
 
   @override
   List<Object> get props => [id, owner, controller, location];

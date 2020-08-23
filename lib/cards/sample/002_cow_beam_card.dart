@@ -1,9 +1,7 @@
-import 'package:hexal_engine/models/card_object.dart';
-import 'package:hexal_engine/models/game_object.dart';
-
 import '../../effects/damage_effect.dart';
 import '../../effects/effect.dart';
 import '../../effects/target/creature_target.dart';
+import '../../models/card_object.dart';
 import '../../models/location.dart';
 import '../../models/player.dart';
 import '../i_on_enter_field.dart';
@@ -29,12 +27,13 @@ class CowBeamCard extends CardObject with Spell implements IOnEnterField {
       ];
 
   @override
-  CowBeamCard copyWith(Map<String, dynamic> changes) => CowBeamCard(
-        id: changes['id'] as int? ?? id,
-        owner: changes['owner'] as Player? ?? owner,
-        controller: changes['controller'] as Player? ?? controller,
-        location: changes['location'] as Location? ?? location,
-      );
+  CowBeamCard copyWith(
+          {int? id, Player? owner, Player? controller, Location? location}) =>
+      CowBeamCard(
+          id: id ?? this.id,
+          owner: owner ?? this.owner,
+          controller: controller ?? this.controller,
+          location: location ?? this.location);
 
   @override
   List<Object> get props => [id, owner, controller, location];

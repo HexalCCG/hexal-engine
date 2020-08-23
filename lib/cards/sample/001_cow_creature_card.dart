@@ -31,15 +31,36 @@ class CowCreatureCard extends CardObject with Creature {
   int get baseHealth => 2;
 
   @override
-  CowCreatureCard copyWith(Map<String, dynamic> changes) => CowCreatureCard(
-        id: changes['id'] as int? ?? id,
-        owner: changes['owner'] as Player? ?? owner,
-        controller: changes['controller'] as Player? ?? controller,
-        location: changes['location'] as Location? ?? location,
-        exhausted: changes['exhausted'] as bool? ?? exhausted,
-        enteredFieldThisTurn:
-            changes['enteredFieldThisTurn'] as bool? ?? enteredFieldThisTurn,
-        damage: changes['damage'] as int? ?? damage,
+  CowCreatureCard copyWith({
+    int? id,
+    Player? owner,
+    Player? controller,
+    Location? location,
+  }) =>
+      CowCreatureCard(
+        id: id ?? this.id,
+        owner: owner ?? this.owner,
+        controller: controller ?? this.controller,
+        location: location ?? this.location,
+        exhausted: exhausted,
+        enteredFieldThisTurn: enteredFieldThisTurn,
+        damage: damage,
+      );
+
+  @override
+  CowCreatureCard copyWithCreature({
+    bool? exhausted,
+    bool? enteredFieldThisTurn,
+    int? damage,
+  }) =>
+      CowCreatureCard(
+        id: id,
+        owner: owner,
+        controller: controller,
+        location: location,
+        exhausted: exhausted ?? this.exhausted,
+        enteredFieldThisTurn: enteredFieldThisTurn ?? this.enteredFieldThisTurn,
+        damage: damage ?? this.damage,
       );
 
   @override
