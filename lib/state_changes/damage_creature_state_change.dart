@@ -1,4 +1,5 @@
 import '../cards/creature.dart';
+import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
@@ -19,8 +20,10 @@ class DamageCreatureStateChange extends StateChange {
   GameState apply(GameState state) {
     assert(state.cards.contains(creature));
 
-    final newCard = (state.getCard(creature))
-        .copyWith(<String, dynamic>{'damage': creature.damage + damage});
+    var newCard = state.getCard(creature);
+    if (newCard is Creature) {
+      newCard = newCard.copyWithCreature(damage: creature.damage + damage);
+    }
     final newCards = state.cards.replaceSingle(creature, newCard);
     return state.copyWith(cards: newCards);
   }

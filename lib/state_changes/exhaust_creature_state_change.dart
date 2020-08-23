@@ -15,10 +15,13 @@ class ExhaustCreatureStateChange extends StateChange {
   GameState apply(GameState state) {
     assert(state.cards.contains(creature));
 
-    final newCard =
-        (state.getCard(creature) as Creature).copyWithCreature(exhausted: true);
-    final newCards = state.cards.replaceSingle(creature, newCard);
-    return state.copyWith(cards: newCards);
+    var newCard = state.getCard(creature);
+
+    if (newCard is Creature) {
+      newCard = newCard.copyWithCreature(exhausted: true);
+    }
+
+    return state.copyWith(cards: state.cards.replaceSingle(creature, newCard));
   }
 
   @override

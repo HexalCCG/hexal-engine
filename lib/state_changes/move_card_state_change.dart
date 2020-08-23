@@ -19,7 +19,7 @@ class MoveCardStateChange extends StateChange {
   GameState apply(GameState state) {
     assert(state.cards.contains(card));
 
-    final newCard = state.getCard(card).copyWithBase(location: location);
+    final newCard = state.getCard(card).copyWith(location: location);
     final newCards = state.cards.replaceSingle(card, newCard);
 
     return state.copyWith(cards: newCards);

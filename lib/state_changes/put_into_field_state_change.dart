@@ -17,14 +17,15 @@ class PutIntoFieldStateChange extends StateChange {
   GameState apply(GameState state) {
     assert(state.cards.contains(card));
 
-    var newCard = state.getCard(card).copyWithBase(location: Location.field);
+    var newCard = state.getCard(card);
+    newCard = newCard.copyWith(location: Location.field);
+
     if (newCard is Creature) {
       newCard = newCard.copyWithCreature(
           enteredFieldThisTurn: true, exhausted: false, damage: 0);
     }
 
-    final newCards = state.cards.replaceSingle(card, newCard);
-    return state.copyWith(cards: newCards);
+    return state.copyWith(cards: state.cards.replaceSingle(card, newCard));
   }
 
   @override

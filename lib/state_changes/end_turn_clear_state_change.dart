@@ -16,18 +16,17 @@ class EndTurnClearStateChange extends StateChange {
   GameState apply(GameState state) {
     assert(state.cards.contains(card));
 
-    if (card is Creature) {
+    var newCard = state.getCard(card);
+
+    if (newCard is Creature) {
       /// Clear creature flags.
-      final newCard = (state.getCard(card) as Creature).copyWithCreature(
+      newCard = newCard.copyWithCreature(
         exhausted: false,
         enteredFieldThisTurn: false,
         damage: 0,
       );
-      return state.copyWith(cards: state.cards.replaceSingle(card, newCard));
-    } else {
-      // No non-creature flags so do nothing.
-      return state;
     }
+    return state.copyWith(cards: state.cards.replaceSingle(card, newCard));
   }
 
   @override
