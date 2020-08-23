@@ -16,6 +16,9 @@ abstract class CardObject extends GameObject {
   /// Which zone this is in.
   final Location location;
 
+  /// Whether this card survives on board after the play event resolves.
+  bool get permanent;
+
   /// [id] must be unique and cannot be changed. [owner] cannot be changed.
   const CardObject({
     required int id,
