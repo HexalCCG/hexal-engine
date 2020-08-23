@@ -26,4 +26,7 @@ abstract class CardObject extends GameObject {
     required this.controller,
     required this.location,
   }) : super(id: id);
+
+  @override
+  CardObject copyWith(Map<String, dynamic> changes);
 }

@@ -19,8 +19,8 @@ class DamageCreatureStateChange extends StateChange {
   GameState apply(GameState state) {
     assert(state.cards.contains(creature));
 
-    final newCard = (state.getCard(creature) as Creature)
-        .copyWithCreature(damage: creature.damage + damage);
+    final newCard = (state.getCard(creature))
+        .copyWith(<String, dynamic>{'damage': creature.damage + damage});
     final newCards = state.cards.replaceSingle(creature, newCard);
     return state.copyWith(cards: newCards);
   }
