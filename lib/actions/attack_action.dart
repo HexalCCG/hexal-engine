@@ -1,6 +1,7 @@
 import '../cards/creature.dart';
 import '../events/attack_event.dart';
 import '../exceptions/action_exception.dart';
+import '../models/card_object.dart';
 import '../models/game_state.dart';
 import '../models/location.dart';
 import '../models/turn_phase.dart';
@@ -12,10 +13,10 @@ import 'action.dart';
 /// Declares an attack targeting a creature.
 class AttackAction extends Action {
   /// Creature attacking.
-  final Creature attacker;
+  final CardObject attacker;
 
   /// Creature defending.
-  final Creature defender;
+  final CardObject defender;
 
   /// Causes [attacker] to attack [defender].
   const AttackAction({required this.attacker, required this.defender});
@@ -27,36 +28,45 @@ class AttackAction extends Action {
       return false;
     }
 
+    // Get attacker and defender from state.
+    final _attacker = state.getCardById(attacker.id);
+    final _defender = state.getCardById(defender.id);
+
+    // Check attacker and defender are creatures.
+    if (!(_attacker is Creature && _defender is Creature)) {
+      return false;
+    }
+
     // Check attacker is valid
     // Cannot control opponent's creatures.
-    if (attacker.controller != state.priorityPlayer) {
+    if (_attacker.controller != state.priorityPlayer) {
       return false;
     }
 
     // Normal attack.
     if (state.turnPhase == TurnPhase.battle) {
       // Can't attack on your opponent's turn.
-      if (attacker.controller != state.activePlayer) {
+      if (_attacker.controller != state.activePlayer) {
         return false;
       }
 
       // Check if attacker can attack.
-      if (!attacker.canAttack) {
+      if (!_attacker.canAttack) {
         return false;
       }
 
       // Cannot attack your own creatures
-      if (defender.controller == state.activePlayer) {
+      if (_defender.controller == state.activePlayer) {
         return false;
       }
 
       // Check if creature is being protected.
-      if (!defender.canBeAttacked) {
+      if (!_defender.canBeAttacked) {
         return false;
       }
 
       // Cannot attack creatures not in field.
-      if (defender.location != Location.field) {
+      if (_defender.location != Location.field) {
         return false;
       }
 
@@ -66,27 +76,27 @@ class AttackAction extends Action {
     // Counterattack.
     if (state.turnPhase == TurnPhase.counter) {
       // Can't counter on your turn.
-      if (attacker.controller != state.notActivePlayer) {
+      if (_attacker.controller != state.notActivePlayer) {
         return false;
       }
 
       // Check if attacker can attack.
-      if (!attacker.canAttack) {
+      if (!_attacker.canAttack) {
         return false;
       }
 
       // Check if creature is being protected.
-      if (!defender.canBeAttacked) {
+      if (!_defender.canBeAttacked) {
         return false;
       }
 
       // Cannot attack your own creatures
-      if (defender.controller == state.activePlayer) {
+      if (_defender.controller == state.activePlayer) {
         return false;
       }
 
       // Cannot attack creatures not in field.
-      if (defender.location != Location.field) {
+      if (_defender.location != Location.field) {
         return false;
       }
 
@@ -102,9 +112,14 @@ class AttackAction extends Action {
     if (!valid(state)) {
       throw const ActionException('AttackAction Exception: Attack not valid');
     }
+    // Get attacker and defender from state.
+    // Casts safe as valid check above already checks them.
+    final _attacker = state.getCardById(attacker.id) as Creature;
+    final _defender = state.getCardById(defender.id) as Creature;
+
     return [
       AddEventStateChange(
-          event: AttackEvent(attacker: attacker, defender: defender)),
+          event: AttackEvent(attacker: _attacker, defender: _defender)),
       PriorityStateChange(player: state.activePlayer),
     ];
   }

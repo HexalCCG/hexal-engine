@@ -19,13 +19,15 @@ class PlayCardAction extends Action {
 
   @override
   bool valid(GameState state) {
+    final _card = state.getCardById(card.id);
+
     if (state.stack.isNotEmpty) {
       // Cannot play cards if stack is not empty.
       return false;
     }
     if (!state
         .getCardsByLocation(state.priorityPlayer, Location.hand)
-        .contains(card)) {
+        .contains(_card)) {
       // Card not found in hand.
       return false;
     }
@@ -41,9 +43,12 @@ class PlayCardAction extends Action {
     if (!valid(state)) {
       throw const ActionException('PlayCardAction Exception: invalid argument');
     }
+
+    final _card = state.getCardById(card.id);
+
     return [
-      MoveCardStateChange(card: card, location: Location.limbo),
-      AddEventStateChange(event: PlayCardEvent(card: card)),
+      MoveCardStateChange(card: _card, location: Location.limbo),
+      AddEventStateChange(event: PlayCardEvent(card: _card)),
       PriorityStateChange(player: state.activePlayer),
     ];
   }

@@ -58,7 +58,7 @@ class AttackEvent extends Event {
 
   bool _validate(GameState state) {
     // Check target creature is still on the field.
-    if (state.getCard(defender).location != Location.field) {
+    if (state.getCardById(defender.id).location != Location.field) {
       return false;
     }
 

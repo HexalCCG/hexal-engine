@@ -23,6 +23,14 @@ class AttackPlayerAction extends Action {
 
   @override
   bool valid(GameState state) {
+    // Get attacker from state.
+    final _attacker = state.getCardById(attacker.id);
+
+    // Check attacker is a creature.
+    if (!(_attacker is Creature)) {
+      return false;
+    }
+
     // Attack cannot be a reaction.
     if (state.stack.isNotEmpty) {
       return false;
@@ -30,7 +38,7 @@ class AttackPlayerAction extends Action {
 
     // Check attacker is valid
     // Cannot control opponent's creatures.
-    if (attacker.controller != state.priorityPlayer) {
+    if (_attacker.controller != state.priorityPlayer) {
       return false;
     }
 
@@ -39,7 +47,7 @@ class AttackPlayerAction extends Action {
       return false;
     }
     // Can't attack on your opponent's turn.
-    if (attacker.controller != state.activePlayer) {
+    if (_attacker.controller != state.activePlayer) {
       return false;
     }
 
@@ -48,7 +56,7 @@ class AttackPlayerAction extends Action {
       return false;
     }
     // Check attacker can attack players
-    if (!attacker.canAttackPlayer) {
+    if (!_attacker.canAttackPlayer) {
       return false;
     }
 
@@ -69,9 +77,14 @@ class AttackPlayerAction extends Action {
       throw const ActionException(
           'AttackPlayerAction Exception: Attack not valid');
     }
+
+    // Get attacker and defender from state.
+    // Creature check done in valid().
+    final _attacker = state.getCardById(attacker.id) as Creature;
+
     return [
       AddEventStateChange(
-          event: AttackPlayerEvent(attacker: attacker, player: player)),
+          event: AttackPlayerEvent(attacker: _attacker, player: player)),
       PriorityStateChange(player: state.activePlayer),
     ];
   }

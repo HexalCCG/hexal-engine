@@ -1,27 +1,30 @@
 import '../cards/creature.dart';
+import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
+import '../models/card_object.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
 /// StateChange to exhaust a creature.
 class ExhaustCreatureStateChange extends StateChange {
   /// Creature to exhaust.
-  final Creature creature;
+  final CardObject creature;
 
   /// Exhausts [creature].
   const ExhaustCreatureStateChange({required this.creature});
 
   @override
   GameState apply(GameState state) {
-    assert(state.cards.contains(creature));
-
-    var newCard = state.getCard(creature);
-
+    final oldCard = state.getCardById(creature.id);
+    var newCard = oldCard;
     if (newCard is Creature) {
       newCard = newCard.copyWithCreature(exhausted: true);
+    } else {
+      throw (StateChangeException(
+          'Exhaust creature provided with non-creature.'));
     }
 
-    return state.copyWith(cards: state.cards.replaceSingle(creature, newCard));
+    return state.copyWith(cards: state.cards.replaceSingle(oldCard, newCard));
   }
 
   @override
