@@ -1,4 +1,5 @@
 import '../events/event.dart';
+import '../exceptions/state_change_exception.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
@@ -12,7 +13,9 @@ class RemoveEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    assert(state.stack.contains(event));
+    if (!state.stack.contains(event)) {
+      throw (StateChangeException('Event not found in stack.'));
+    }
 
     final newStack = state.stack.toList()..remove(event);
     return state.copyWith(stack: newStack);

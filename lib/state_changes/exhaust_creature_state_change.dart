@@ -15,6 +15,9 @@ class ExhaustCreatureStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
+    if (!state.containsCardWithId(creature.id)) {
+      throw (StateChangeException('Card with that id not found in state.'));
+    }
     final oldCard = state.getCardById(creature.id);
     var newCard = oldCard;
     if (newCard is Creature) {

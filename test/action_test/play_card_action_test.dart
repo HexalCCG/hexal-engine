@@ -31,13 +31,13 @@ void main() {
       final change = state.generateStateChanges(action);
 
       expect(
-          change,
-          contains(
-            AddEventStateChange(
-              event:
-                  PlayCardEvent(card: card.copyWith(location: Location.limbo)),
-            ),
-          ));
+        ((change.firstWhere((element) => element is AddEventStateChange)
+                    as AddEventStateChange)
+                .event as PlayCardEvent)
+            .card
+            .id,
+        card.id,
+      );
     });
     test('fails if targeting card not in hand', () {
       const card = TestCard(

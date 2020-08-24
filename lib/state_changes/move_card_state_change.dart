@@ -1,3 +1,5 @@
+import 'package:hexal_engine/exceptions/state_change_exception.dart';
+
 import '../extensions/list_replace.dart';
 import '../models/card_object.dart';
 import '../models/game_state.dart';
@@ -17,6 +19,9 @@ class MoveCardStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
+    if (!state.containsCardWithId(card.id)) {
+      throw (StateChangeException('Card with that id not found in state.'));
+    }
     final oldCard = state.getCardById(card.id);
     final newCard = oldCard.copyWith(location: location);
 

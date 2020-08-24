@@ -1,3 +1,5 @@
+import 'package:hexal_engine/exceptions/state_change_exception.dart';
+
 import '../events/event.dart';
 import '../extensions/list_replace.dart';
 import '../models/game_state.dart';
@@ -16,7 +18,9 @@ class ModifyEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    assert(state.stack.contains(event));
+    if (!state.stack.contains(event)) {
+      throw (StateChangeException('Event not found in stack.'));
+    }
 
     final newStack = state.stack.replaceSingle(event, newEvent);
     return state.copyWith(stack: newStack);
