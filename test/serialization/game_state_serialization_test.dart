@@ -8,7 +8,7 @@ import 'package:hexal_engine/models/game_state.dart';
 import 'package:hexal_engine/models/turn_phase.dart';
 
 void main() {
-  test('Creatures can attack correctly. ', () {
+  test('Serialization works properly. ', () {
     const state = GameState(
       gameOverState: GameOverState.playing,
       cards: [
@@ -28,6 +28,11 @@ void main() {
       turnPhase: TurnPhase.battle,
     );
 
-    print(state.toJson());
+    final map = state.toJson();
+    print(map);
+    final reSerialized = GameState.fromJson(map);
+    //print(reSerialized);
+
+    expect(reSerialized, state);
   });
 }

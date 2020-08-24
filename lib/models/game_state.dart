@@ -65,9 +65,9 @@ class GameState extends Equatable {
         .toList();
   }
 
-  /// Gets this state's version of the provided card.
-  CardObject getCard(CardObject card) =>
-      cards.firstWhere((element) => element == card);
+  /// Gets a card from this state by its id.
+  CardObject getCardById(int id) =>
+      cards.firstWhere((element) => element.id == id);
 
   /// Gets this state's version of the provided event.
   Event getEvent(Event event) =>
@@ -169,6 +169,9 @@ class GameState extends Equatable {
       counterAvailable: counterAvailable ?? this.counterAvailable,
     );
   }
+
+  @override
+  String toString() => props.toString();
 
   @override
   List<Object> get props => [

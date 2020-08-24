@@ -17,12 +17,10 @@ class MoveCardStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    assert(state.cards.contains(card));
+    final oldCard = state.getCardById(card.id);
+    final newCard = oldCard.copyWith(location: location);
 
-    final newCard = state.getCard(card).copyWith(location: location);
-    final newCards = state.cards.replaceSingle(card, newCard);
-
-    return state.copyWith(cards: newCards);
+    return state.copyWith(cards: state.cards.replaceSingle(oldCard, newCard));
   }
 
   @override
