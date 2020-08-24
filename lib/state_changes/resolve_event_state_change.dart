@@ -1,4 +1,5 @@
 import '../events/event.dart';
+import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
@@ -13,7 +14,9 @@ class ResolveEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    assert(state.stack.contains(event));
+    if (!state.stack.contains(event)) {
+      throw (StateChangeException('Event not found in stack.'));
+    }
 
     final newEvent = state.getEvent(event).copyResolved;
     final newStack = state.stack.replaceSingle(event, newEvent);

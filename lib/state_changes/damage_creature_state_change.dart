@@ -19,15 +19,18 @@ class DamageCreatureStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    var newCard = state.getCardById(creature.id);
+    if (!state.containsCardWithId(creature.id)) {
+      throw (StateChangeException('Card with that id not found in state.'));
+    }
+    final oldCard = state.getCardById(creature.id);
+    var newCard = oldCard;
     if (newCard is Creature) {
       newCard = newCard.copyWithCreature(damage: newCard.damage + damage);
     } else {
       throw (StateChangeException(
           'Damage creature must be provided with a creature.'));
     }
-    final newCards = state.cards.replaceSingle(creature, newCard);
-    return state.copyWith(cards: newCards);
+    return state.copyWith(cards: state.cards.replaceSingle(oldCard, newCard));
   }
 
   @override

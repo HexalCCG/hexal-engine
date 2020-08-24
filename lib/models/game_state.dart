@@ -65,6 +65,9 @@ class GameState extends Equatable {
         .toList();
   }
 
+  /// Checks if a card with the provided id exists in the state.
+  bool containsCardWithId(int id) => cards.any((card) => card.id == id);
+
   /// Gets a card from this state by its id.
   CardObject getCardById(int id) =>
       cards.firstWhere((element) => element.id == id);
