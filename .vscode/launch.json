@@ -1,21 +1,22 @@
 {
-  "configurations": [{
+  "configurations": [
+    {
       "name": "Dart",
       "type": "dart",
       "request": "launch",
-      "program": "bin/main.dart"
+      "program": "bin/main.dart",
+      "vmAdditionalArgs": [
+        "--enable-experiment=non-nullable",
+      ],
     },
     {
       "name": "Dart: Run all Tests",
       "type": "dart",
       "request": "launch",
       "program": "./test/",
+      "vmAdditionalArgs": [
+        "--enable-experiment=non-nullable",
+      ],
     },
-    {
-      "name": "Dart tests",
-      "program": "test",
-      "request": "launch",
-      "type": "dart"
-    }
   ]
 }
