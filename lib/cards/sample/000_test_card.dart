@@ -1,6 +1,6 @@
 import '../../models/card_object.dart';
-import '../../models/location.dart';
-import '../../models/player.dart';
+import '../../models/enums/location.dart';
+import '../../models/enums/player.dart';
 import '../spell.dart';
 
 /// Test spell with no effects or cost.

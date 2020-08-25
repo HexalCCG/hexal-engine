@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
 
+import 'enums/location.dart';
+import 'enums/player.dart';
 import 'game_object.dart';
-import 'location.dart';
-import 'player.dart';
 
 /// CardObjects represent single cards.
 @immutable

@@ -2,8 +2,8 @@ import '../effects/target/target.dart';
 import '../events/draw_card_event.dart';
 import '../events/request_target_event.dart';
 import '../exceptions/action_exception.dart';
+import '../models/enums/turn_phase.dart';
 import '../models/game_state.dart';
-import '../models/turn_phase.dart';
 import '../state_changes/active_player_state_change.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/end_turn_clear_state_change.dart';
@@ -114,18 +114,20 @@ class PassAction extends Action {
         ];
       case TurnPhase.main2:
         return [
-          PhaseStateChange(phase: TurnPhase.values[state.turnPhase.index + 1]),
+          const PhaseStateChange(phase: TurnPhase.end),
           PriorityStateChange(player: state.activePlayer),
         ];
       // Move on to the next turn
       case TurnPhase.end:
         return [
           ActivePlayerStateChange(player: state.notActivePlayer),
-          PhaseStateChange(phase: TurnPhase.start),
+          const PhaseStateChange(phase: TurnPhase.start),
           PriorityStateChange(player: state.notActivePlayer),
           // Clear single-turn card variables
           ...state.cards.map((card) => EndTurnClearStateChange(card: card)),
         ];
+      default:
+        throw FallThroughError();
     }
   }
 

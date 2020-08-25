@@ -1,6 +1,6 @@
 import '../events/event.dart';
+import '../models/enums/player.dart';
 import '../models/game_state.dart';
-import '../models/player.dart';
 import '../state_changes/state_change.dart';
 
 /// Empty effect.

@@ -1,8 +1,8 @@
 import '../events/play_card_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/card_object.dart';
+import '../models/enums/location.dart';
 import '../models/game_state.dart';
-import '../models/location.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/move_card_state_change.dart';
 import '../state_changes/priority_state_change.dart';

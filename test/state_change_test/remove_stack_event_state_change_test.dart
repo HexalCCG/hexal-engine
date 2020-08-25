@@ -1,10 +1,11 @@
+import 'package:hexal_engine/exceptions/state_change_exception.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/events/draw_card_event.dart';
-import 'package:hexal_engine/models/player.dart';
+import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/state_changes/remove_event_state_change.dart';
-import 'package:hexal_engine/models/game_over_state.dart';
+import 'package:hexal_engine/models/enums/game_over_state.dart';
 import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/turn_phase.dart';
+import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   group('Remove stack event state change', () {
@@ -44,7 +45,7 @@ void main() {
           event: DrawCardEvent(player: Player.one, draws: 1));
       expect(
         () => state.applyStateChanges([change]),
-        throwsA(isA<AssertionError>()),
+        throwsA(isA<StateChangeException>()),
       );
     });
   });

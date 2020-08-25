@@ -1,5 +1,5 @@
+import '../models/enums/player.dart';
 import '../models/game_state.dart';
-import '../models/player.dart';
 import '../state_changes/state_change.dart';
 
 /// StateChange to change the active player.

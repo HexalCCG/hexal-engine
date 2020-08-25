@@ -1,6 +1,6 @@
 import '../cards/creature.dart';
+import '../models/enums/location.dart';
 import '../models/game_state.dart';
-import '../models/location.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/exhaust_creature_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';

@@ -1,4 +1,4 @@
-import '../models/player.dart';
+import '../models/enums/player.dart';
 import 'effect.dart';
 import 'i_targeted.dart';
 import 'target/target.dart';

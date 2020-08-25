@@ -5,9 +5,9 @@ import 'package:hexal_engine/effects/target/creature_target.dart';
 import 'package:hexal_engine/effects/target/target.dart';
 import 'package:hexal_engine/events/request_target_event.dart';
 import 'package:hexal_engine/state_changes/fill_request_state_change.dart';
-import 'package:hexal_engine/models/player.dart';
+import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/turn_phase.dart';
+import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   group('Fill request state change', () {
