@@ -1,6 +1,6 @@
 import '../../models/card_object.dart';
-import '../../models/location.dart';
-import '../../models/player.dart';
+import '../../models/enums/location.dart';
+import '../../models/enums/player.dart';
 import '../creature.dart';
 
 /// 2/2 Vanilla Creature.

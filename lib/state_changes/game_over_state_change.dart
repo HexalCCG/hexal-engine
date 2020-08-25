@@ -1,4 +1,4 @@
-import '../models/game_over_state.dart';
+import '../models/enums/game_over_state.dart';
 import '../models/game_state.dart';
 import '../state_changes/state_change.dart';
 

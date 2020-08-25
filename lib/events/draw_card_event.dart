@@ -1,7 +1,7 @@
-import '../models/game_over_state.dart';
+import '../models/enums/game_over_state.dart';
+import '../models/enums/location.dart';
+import '../models/enums/player.dart';
 import '../models/game_state.dart';
-import '../models/location.dart';
-import '../models/player.dart';
 import '../state_changes/game_over_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
 import '../state_changes/move_card_state_change.dart';

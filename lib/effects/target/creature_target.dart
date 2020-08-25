@@ -1,8 +1,8 @@
 import '../../cards/creature.dart';
+import '../../models/enums/location.dart';
+import '../../models/enums/player.dart';
 import '../../models/game_object.dart';
 import '../../models/game_state.dart';
-import '../../models/location.dart';
-import '../../models/player.dart';
 import 'target.dart';
 
 /// Target a creature on either side of the field.

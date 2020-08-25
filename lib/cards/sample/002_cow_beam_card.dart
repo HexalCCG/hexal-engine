@@ -2,8 +2,8 @@ import '../../effects/damage_effect.dart';
 import '../../effects/effect.dart';
 import '../../effects/target/creature_target.dart';
 import '../../models/card_object.dart';
-import '../../models/location.dart';
-import '../../models/player.dart';
+import '../../models/enums/location.dart';
+import '../../models/enums/player.dart';
 import '../i_on_enter_field.dart';
 import '../spell.dart';
 

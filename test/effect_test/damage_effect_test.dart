@@ -4,12 +4,12 @@ import 'package:hexal_engine/effects/damage_effect.dart';
 import 'package:hexal_engine/effects/target/creature_target.dart';
 import 'package:hexal_engine/events/damage_creature_event.dart';
 import 'package:hexal_engine/events/request_target_event.dart';
-import 'package:hexal_engine/models/location.dart';
-import 'package:hexal_engine/models/player.dart';
+import 'package:hexal_engine/models/enums/location.dart';
+import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/state_changes/add_event_state_change.dart';
-import 'package:hexal_engine/models/game_over_state.dart';
+import 'package:hexal_engine/models/enums/game_over_state.dart';
 import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/turn_phase.dart';
+import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   group('Damage effect', () {

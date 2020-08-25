@@ -1,5 +1,5 @@
+import '../models/enums/turn_phase.dart';
 import '../models/game_state.dart';
-import '../models/turn_phase.dart';
 import 'state_change.dart';
 
 /// StateChange to change the turn phase.

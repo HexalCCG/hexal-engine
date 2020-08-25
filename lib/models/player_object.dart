@@ -1,4 +1,4 @@
-import '../models/player.dart';
+import 'enums/player.dart';
 import 'game_object.dart';
 
 /// GameObject to represent a player for targeting.

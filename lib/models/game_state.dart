@@ -8,10 +8,10 @@ import '../state_changes/add_event_state_change.dart';
 import '../state_changes/remove_event_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'card_object.dart';
-import 'game_over_state.dart';
-import 'location.dart';
-import 'player.dart';
-import 'turn_phase.dart';
+import 'enums/game_over_state.dart';
+import 'enums/location.dart';
+import 'enums/player.dart';
+import 'enums/turn_phase.dart';
 
 /// Represents a single moment snapshot of a game.
 @immutable
@@ -133,9 +133,12 @@ class GameState extends Equatable {
 
   /// Create a GameState from its JSON encoding.
   GameState.fromJson(Map<String, dynamic> json)
-      : activePlayer = json['activePlayer'] as Player,
-        priorityPlayer = json['priorityPlayer'] as Player,
-        turnPhase = json['turnPhase'] as TurnPhase,
+      : activePlayer =
+            Player.fromJson(json['activePlayer'] as Map<String, dynamic>),
+        priorityPlayer =
+            Player.fromJson(json['priorityPlayer'] as Map<String, dynamic>),
+        turnPhase =
+            TurnPhase.fromJson(json['turnPhase'] as Map<String, dynamic>),
         cards = json['cards'] as List<CardObject>,
         stack = json['stack'] as List<Event>,
         gameOverState = json['gameOverState'] as GameOverState,
@@ -143,9 +146,9 @@ class GameState extends Equatable {
 
   /// Encode this GameState as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'activePlayer': activePlayer,
-        'priorityPlayer': priorityPlayer,
-        'turnPhase': turnPhase,
+        'activePlayer': activePlayer.toJson(),
+        'priorityPlayer': priorityPlayer.toJson(),
+        'turnPhase': turnPhase.toJson(),
         'cards': cards,
         'stack': stack,
         'gameOverState': gameOverState,

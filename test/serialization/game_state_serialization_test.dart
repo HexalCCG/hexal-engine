@@ -1,11 +1,11 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/events/draw_card_event.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
-import 'package:hexal_engine/models/player.dart';
-import 'package:hexal_engine/models/location.dart';
-import 'package:hexal_engine/models/game_over_state.dart';
+import 'package:hexal_engine/models/enums/player.dart';
+import 'package:hexal_engine/models/enums/location.dart';
+import 'package:hexal_engine/models/enums/game_over_state.dart';
 import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/turn_phase.dart';
+import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   test('Serialization works properly. ', () {
@@ -28,11 +28,8 @@ void main() {
       turnPhase: TurnPhase.battle,
     );
 
-    final map = state.toJson();
-    print(map);
-    final reSerialized = GameState.fromJson(map);
-    //print(reSerialized);
-
-    expect(reSerialized, state);
+    //print(json.encode(state));
   });
+
+  test('Deserialization works properly too', () {});
 }

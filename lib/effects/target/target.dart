@@ -1,7 +1,7 @@
 import '../../extensions/equatable/equatable.dart';
+import '../../models/enums/player.dart';
 import '../../models/game_object.dart';
 import '../../models/game_state.dart';
-import '../../models/player.dart';
 
 /// Defines a target to be requested from a player.
 abstract class Target extends Equatable {

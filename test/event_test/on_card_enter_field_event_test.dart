@@ -2,13 +2,13 @@ import 'package:test/test.dart';
 import 'package:hexal_engine/cards/sample/000_test_card.dart';
 import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
 import 'package:hexal_engine/events/on_card_enter_field_event.dart';
-import 'package:hexal_engine/models/player.dart';
+import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/state_changes/add_event_state_change.dart';
 import 'package:hexal_engine/state_changes/resolve_event_state_change.dart';
-import 'package:hexal_engine/models/location.dart';
-import 'package:hexal_engine/models/game_over_state.dart';
+import 'package:hexal_engine/models/enums/location.dart';
+import 'package:hexal_engine/models/enums/game_over_state.dart';
 import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/turn_phase.dart';
+import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   group('On card enter field event ', () {
