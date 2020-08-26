@@ -14,6 +14,9 @@ abstract class Event extends Equatable {
   /// [Resolved] is whether this event has been applied and needs to be removed.
   const Event({required this.resolved});
 
+  /// Whether this event is valid on the provided state.
+  bool valid(GameState state);
+
   /// Resultant StateChanges of resolving this event.
   List<StateChange> apply(GameState state);
 
