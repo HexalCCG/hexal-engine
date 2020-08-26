@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../models/card_object.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
@@ -9,7 +11,7 @@ import 'event.dart';
 /// Event that destroys a card.
 class DestroyCardEvent extends Event {
   /// Card to destroy.
-  final CardObject card;
+  final GameObjectReference card;
 
   /// Destroys [card].
   const DestroyCardEvent({required this.card, bool resolved = false})
