@@ -1,15 +1,23 @@
 /// Locations in the game that cards can exist in.
 class Location {
-  final int _index;
-  const Location._(this._index);
+  /// Enum index.
+  final int index;
+  const Location._(this.index);
 
-  /// Create a GameState from its JSON encoding.
-  Location.fromJson(Map<String, dynamic> json) : _index = json['index'] as int;
+  /// Create a Location from its index.
+  factory Location.fromIndex(int _index) => _all[_index];
 
-  /// Encode this GameState as JSON.
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'index': _index,
-      };
+  /// Encode as json.
+  int toJson() => index;
+
+  static const List<Location> _all = [
+    deck,
+    hand,
+    mana,
+    field,
+    exile,
+    limbo,
+  ];
 
   /// The deck.
   static const deck = Location._(0);

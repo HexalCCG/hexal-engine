@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
@@ -133,25 +135,27 @@ class GameState extends Equatable {
 
   /// Create a GameState from its JSON encoding.
   GameState.fromJson(Map<String, dynamic> json)
-      : activePlayer =
-            Player.fromJson(json['activePlayer'] as Map<String, dynamic>),
-        priorityPlayer =
-            Player.fromJson(json['priorityPlayer'] as Map<String, dynamic>),
-        turnPhase =
-            TurnPhase.fromJson(json['turnPhase'] as Map<String, dynamic>),
-        cards = json['cards'] as List<CardObject>,
-        stack = json['stack'] as List<Event>,
-        gameOverState = json['gameOverState'] as GameOverState,
+      : activePlayer = Player.fromIndex(json['activePlayer'] as int),
+        priorityPlayer = Player.fromIndex(json['priorityPlayer'] as int),
+        turnPhase = TurnPhase.fromIndex(json['turnPhase'] as int),
+        cards = (json['cards'] as List<Map<String, List<Object>>>)
+            .map<CardObject>((final data) => CardObject.fromJson(data))
+            .toList(),
+        //stack = (json['stack'] as List<Map<String, List<Object>>>)
+        //    .map<Event>((final data) => Event.fromJson(data))
+        //    .toList(),
+        stack = [],
+        gameOverState = GameOverState.fromIndex(json['gameOverState'] as int),
         counterAvailable = json['counterAvailable'] as bool;
 
   /// Encode this GameState as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'activePlayer': activePlayer.toJson(),
-        'priorityPlayer': priorityPlayer.toJson(),
-        'turnPhase': turnPhase.toJson(),
+        'activePlayer': activePlayer.index,
+        'priorityPlayer': priorityPlayer.index,
+        'turnPhase': turnPhase.index,
         'cards': cards,
         'stack': stack,
-        'gameOverState': gameOverState,
+        'gameOverState': gameOverState.index,
         'counterAvailable': counterAvailable,
       };
 

@@ -1,15 +1,19 @@
 /// Refers to one of the two players.
 class Player {
-  final int _index;
-  const Player._(this._index);
+  /// Enum index.
+  final int index;
+  const Player._(this.index);
 
-  /// Create a GameState from its JSON encoding.
-  Player.fromJson(Map<String, dynamic> json) : _index = json['index'] as int;
+  /// Create from its index.
+  factory Player.fromIndex(int _index) => _all[_index];
 
-  /// Encode this GameState as JSON.
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'index': _index,
-      };
+  /// Encode as json.
+  int toJson() => index;
+
+  static const List<Player> _all = [
+    one,
+    two,
+  ];
 
   /// Player one.
   static const Player one = Player._(0);

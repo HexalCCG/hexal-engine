@@ -25,9 +25,10 @@ class CowCreatureCard extends CardObject with Creature {
           location: location,
         );
 
-  @override
+  int get setId => 0;
+  int get cardId => 1;
+
   int get baseAttack => 2;
-  @override
   int get baseHealth => 2;
 
   @override
@@ -61,6 +62,17 @@ class CowCreatureCard extends CardObject with Creature {
         exhausted: exhausted ?? this.exhausted,
         enteredFieldThisTurn: enteredFieldThisTurn ?? this.enteredFieldThisTurn,
         damage: damage ?? this.damage,
+      );
+
+  /// Create from json.
+  static CowCreatureCard fromJson(List<dynamic> json) => CowCreatureCard(
+        id: json[0] as int,
+        owner: Player.fromIndex(json[1] as int),
+        controller: Player.fromIndex(json[2] as int),
+        location: Location.fromIndex(json[3] as int),
+        exhausted: json[4] as bool,
+        enteredFieldThisTurn: json[5] as bool,
+        damage: json[6] as int,
       );
 
   @override
