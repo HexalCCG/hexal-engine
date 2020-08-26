@@ -1,8 +1,6 @@
-import 'package:hexal_engine/models/card_object.dart';
-import 'package:hexal_engine/models/game_object_reference.dart';
-
 import '../cards/creature.dart';
 import '../models/enums/location.dart';
+Updateimport '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/exhaust_creature_state_change.dart';
@@ -37,8 +35,28 @@ class AttackEvent extends Event {
   }) : super(resolved: resolved);
 
   @override
+  bool valid(GameState state) {
+    // Get cards from state
+    final _attacker = state.getCardById(attacker.id);
+    final _defender = state.getCardById(defender.id);
+
+    // Check cards are creatures.
+    if (!(_attacker is Creature) || !(_defender is Creature)) {
+      return false;
+    }
+
+    // Check target creature is still on the field.
+    if (_attacker.location != Location.field ||
+        _defender.location != Location.field) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @override
   List<StateChange> apply(GameState state) {
-    if (!_validate(state)) {
+    if (!valid(state)) {
       return [ResolveEventStateChange(event: this)];
     }
 
@@ -61,25 +79,6 @@ class AttackEvent extends Event {
           : [],
       ResolveEventStateChange(event: this),
     ];
-  }
-
-  bool _validate(GameState state) {
-    // Get cards from state
-    final _attacker = state.getCardById(attacker.id);
-    final _defender = state.getCardById(defender.id);
-
-    // Check cards are creatures.
-    if (!(_attacker is Creature) || !(_defender is Creature)) {
-      return false;
-    }
-
-    // Check target creature is still on the field.
-    if (_attacker.location != Location.field ||
-        _defender.location != Location.field) {
-      return false;
-    }
-
-    return true;
   }
 
   @override
