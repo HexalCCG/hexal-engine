@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import '../extensions/equatable/equatable.dart';
 import '../models/game_state.dart';
 import '../state_changes/state_change.dart';
+import 'event_index.dart';
 
 /// Events are items placed on the stack to resolve.
 @immutable
@@ -22,6 +23,26 @@ abstract class Event extends Equatable {
   @override
   List<Object> get props;
 
-  @override
-  bool get stringify => true;
+  /// Create a Card from its JSON form.
+  factory Event.fromJson(Map<String, dynamic> json) {
+    final type = json['type'] as String;
+    final data = json['data'] as List<dynamic>;
+
+    final builder = eventBuilders[type];
+
+    if (builder == null) {
+      throw ArgumentError('Invalid event type: $type');
+    }
+
+    return builder(data);
+  }
+
+  /// Properties packaged into json.
+  List<Object> get jsonProps => props;
+
+  /// Encode this card as JSON.
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'type': runtimeType,
+        'data': jsonProps,
+      };
 }
