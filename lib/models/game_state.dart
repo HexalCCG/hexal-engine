@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:hexal_engine/models/game_object.dart';
+import 'package:hexal_engine/models/player_object.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
@@ -73,6 +75,17 @@ class GameState extends Equatable {
   /// Gets a card from this state by its id.
   CardObject getCardById(int id) =>
       cards.firstWhere((element) => element.id == id);
+
+  /// Gets a game object from this state by its id.
+  GameObject getGameObjectById(int id) {
+    if (id == 0) {
+      return PlayerObject(player: Player.one);
+    } else if (id == 1) {
+      return PlayerObject(player: Player.two);
+    } else {
+      return getCardById(id);
+    }
+  }
 
   /// Gets this state's version of the provided event.
   Event getEvent(Event event) =>
