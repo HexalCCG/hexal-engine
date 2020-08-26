@@ -1,10 +1,8 @@
-import 'package:hexal_engine/cards/creature.dart';
-import 'package:hexal_engine/models/card_object.dart';
-import 'package:hexal_engine/models/player_object.dart';
-
+import '../cards/creature.dart';
 import '../models/enums/location.dart';
 import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
+import '../models/player_object.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/exhaust_creature_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';

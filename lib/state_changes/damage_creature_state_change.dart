@@ -1,3 +1,6 @@
+import 'package:hexal_engine/models/game_object.dart';
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../cards/creature.dart';
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
@@ -8,7 +11,7 @@ import 'state_change.dart';
 /// Increases the damage property of the provided card by an amount.
 class DamageCreatureStateChange extends StateChange {
   /// Creature to damage.
-  final CardObject creature;
+  final GameObjectReference creature;
 
   /// Damage to deal.
   final int damage;

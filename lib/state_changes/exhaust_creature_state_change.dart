@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../cards/creature.dart';
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
@@ -8,7 +10,7 @@ import 'state_change.dart';
 /// StateChange to exhaust a creature.
 class ExhaustCreatureStateChange extends StateChange {
   /// Creature to exhaust.
-  final CardObject creature;
+  final GameObjectReference creature;
 
   /// Exhausts [creature].
   const ExhaustCreatureStateChange({required this.creature});

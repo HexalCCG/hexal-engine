@@ -1,7 +1,6 @@
-import 'package:hexal_engine/models/card_object.dart';
-import 'package:hexal_engine/models/game_object_reference.dart';
-
 import '../cards/creature.dart';
+import '../models/enums/location.dart';
+import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/damage_creature_state_change.dart';
@@ -24,10 +23,34 @@ class DamageCreatureEvent extends Event {
       : super(resolved: resolved);
 
   @override
+  bool valid(GameState state) {
+    final _creature = state.getCardById(creature.id);
+
+    /// Check creature is a creature.
+    if (!(_creature is Creature)) {
+      return false;
+    }
+
+    // Check creature is still on the battlefield.
+    if (_creature.location != Location.field) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @override
   List<StateChange> apply(GameState state) {
-    if (creature.damage + damage > creature.health) {
+    if (!valid(state)) {
+      return [ResolveEventStateChange(event: this)];
+    }
+
+    final _creature = state.getCardById(creature.id) as Creature;
+
+    if (_creature.damage + damage > _creature.health) {
       return [
-        DamageCreatureStateChange(creature: creature, damage: damage),
+        DamageCreatureStateChange(
+            creature: GameObjectReference(id: _creature.id), damage: damage),
         ResolveEventStateChange(event: this),
         AddEventStateChange(event: DestroyCardEvent(card: creature)),
       ];
