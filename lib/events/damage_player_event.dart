@@ -1,3 +1,6 @@
+import 'package:hexal_engine/models/game_object.dart';
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../models/enums/game_over_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
@@ -12,7 +15,7 @@ import 'event.dart';
 /// Event dealing damage to a player.
 class DamagePlayerEvent extends Event {
   /// Player to be damaged.
-  final Player player;
+  final GameObject player;
 
   /// Damage to deal.
   final int damage;
@@ -79,4 +82,11 @@ class DamagePlayerEvent extends Event {
 
   @override
   List<Object> get props => [player, damage, damageNumber, resolved];
+
+  /// Create this event from json.
+  factory DamagePlayerEvent.fromJson(List<dynamic> json) => DamagePlayerEvent(
+      player: GameObjectReference.fromJson(json[0] as int),
+      damage: json[1] as int,
+      damageNumber: json[2] as int,
+      resolved: json[3] as bool);
 }

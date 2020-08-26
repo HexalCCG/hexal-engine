@@ -1,3 +1,6 @@
+import 'package:hexal_engine/models/card_object.dart';
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../cards/creature.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
@@ -10,7 +13,7 @@ import 'event.dart';
 /// Event dealing damage to a creature.
 class DamageCreatureEvent extends Event {
   /// Creature to be damaged.
-  final Creature creature;
+  final GameObjectReference creature;
 
   /// Amount of damage to deal.
   final int damage;
@@ -42,4 +45,11 @@ class DamageCreatureEvent extends Event {
 
   @override
   List<Object> get props => [creature, damage, resolved];
+
+  /// Create this event from json.
+  factory DamageCreatureEvent.fromJson(List<dynamic> json) =>
+      DamageCreatureEvent(
+          creature: GameObjectReference.fromJson(json[0] as int),
+          damage: json[1] as int,
+          resolved: json[2] as bool);
 }

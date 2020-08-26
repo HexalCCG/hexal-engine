@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../cards/creature.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
@@ -13,10 +15,10 @@ import 'event.dart';
 /// Event for a creature attacking a player.
 class AttackPlayerEvent extends Event {
   /// Creature attacking.
-  final Creature attacker;
+  final GameObjectReference attacker;
 
   /// Player being attacked.
-  final Player player;
+  final GameObjectReference player;
 
   /// Should the attacker be exhausted?
   final bool exhaustAttacker;
@@ -54,9 +56,22 @@ class AttackPlayerEvent extends Event {
   }
 
   @override
-  AttackPlayerEvent get copyResolved =>
-      AttackPlayerEvent(attacker: attacker, player: player, resolved: true);
+  AttackPlayerEvent get copyResolved => AttackPlayerEvent(
+      attacker: attacker,
+      player: player,
+      exhaustAttacker: exhaustAttacker,
+      enableCounter: enableCounter,
+      resolved: true);
 
   @override
-  List<Object> get props => [attacker, player, resolved];
+  List<Object> get props =>
+      [attacker, player, exhaustAttacker, enableCounter, resolved];
+
+  /// Create this event from json.
+  factory AttackPlayerEvent.fromJson(List<dynamic> json) => AttackPlayerEvent(
+      attacker: GameObjectReference.fromJson(json[0] as int),
+      player: GameObjectReference.fromJson(json[1] as int),
+      exhaustAttacker: json[2] as bool,
+      enableCounter: json[3] as bool,
+      resolved: json[4] as bool);
 }
