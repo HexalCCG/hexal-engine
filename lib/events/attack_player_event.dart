@@ -25,6 +25,9 @@ class AttackPlayerEvent extends Event {
   /// Should this enable counterattacks this turn?
   final bool enableCounter;
 
+  @override
+  final bool resolved;
+
   /// [attacker] attacks [player]. Exhausts attacker if [exhaustAttacker].
   /// Enables counterattacks this turn if [enableCounter].
   const AttackPlayerEvent({
@@ -32,8 +35,8 @@ class AttackPlayerEvent extends Event {
     required this.player,
     this.exhaustAttacker = true,
     this.enableCounter = true,
-    bool resolved = false,
-  }) : super(resolved: resolved);
+    this.resolved = false,
+  });
 
   @override
   bool valid(GameState state) {

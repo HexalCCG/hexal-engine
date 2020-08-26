@@ -1,6 +1,3 @@
-import 'package:hexal_engine/models/game_object.dart';
-import 'package:hexal_engine/models/game_object_reference.dart';
-
 import '../models/enums/game_over_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
@@ -10,30 +7,41 @@ import '../state_changes/modify_event_state_change.dart';
 import '../state_changes/move_card_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
 import '../state_changes/state_change.dart';
+import 'damage_event.dart';
 import 'event.dart';
 
 /// Event dealing damage to a player.
-class DamagePlayerEvent extends Event {
+class DamagePlayerEvent extends Event implements DamageEvent {
   /// Player to be damaged.
-  final GameObject player;
+  final Player player;
 
   /// Damage to deal.
   final int damage;
 
   /// Which point of damage is currently being resolved.
-  final int damageNumber;
+  final int damageDealt;
+
+  @override
+  final bool resolved;
 
   /// Deals [damage] damage to [player] one point at a time.
   const DamagePlayerEvent({
     required this.player,
     required this.damage,
-    this.damageNumber = 1,
-    bool resolved = false,
-  }) : super(resolved: resolved);
+    this.damageDealt = 0,
+    this.resolved = false,
+  });
+
+  @override
+  bool valid(GameState state) => true;
 
   @override
   List<StateChange> apply(GameState state) {
-    if (damageNumber < damage) {
+    if (!valid(state)) {
+      return [ResolveEventStateChange(event: this)];
+    }
+
+    if (damageDealt < damage - 1) {
       // If this isn't the last damage.
       return [
         ..._dealDamage(state),
@@ -68,7 +76,7 @@ class DamagePlayerEvent extends Event {
   DamagePlayerEvent get _copyIncremented => DamagePlayerEvent(
         player: player,
         damage: damage,
-        damageNumber: damageNumber + 1,
+        damageDealt: damageDealt + 1,
         resolved: resolved,
       );
 
@@ -76,17 +84,17 @@ class DamagePlayerEvent extends Event {
   DamagePlayerEvent get copyResolved => DamagePlayerEvent(
         player: player,
         damage: damage,
-        damageNumber: damageNumber,
+        damageDealt: damageDealt,
         resolved: true,
       );
 
   @override
-  List<Object> get props => [player, damage, damageNumber, resolved];
+  List<Object> get props => [player, damage, damageDealt, resolved];
 
   /// Create this event from json.
   factory DamagePlayerEvent.fromJson(List<dynamic> json) => DamagePlayerEvent(
-      player: GameObjectReference.fromJson(json[0] as int),
+      player: Player.fromIndex(json[0] as int),
       damage: json[1] as int,
-      damageNumber: json[2] as int,
+      damageDealt: json[2] as int,
       resolved: json[3] as bool);
 }
