@@ -24,8 +24,7 @@ void main() {
           damage: 0,
         )
       ],
-      //stack: [DrawCardEvent(player: Player.one, draws: 1)],
-      stack: [],
+      stack: [DrawCardEvent(player: Player.one, draws: 1)],
       activePlayer: Player.one,
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.battle,

@@ -141,10 +141,9 @@ class GameState extends Equatable {
         cards = (json['cards'] as List<Map<String, List<Object>>>)
             .map<CardObject>((final data) => CardObject.fromJson(data))
             .toList(),
-        //stack = (json['stack'] as List<Map<String, List<Object>>>)
-        //    .map<Event>((final data) => Event.fromJson(data))
-        //    .toList(),
-        stack = [],
+        stack = (json['stack'] as List<Map<String, List<Object>>>)
+            .map<Event>((final data) => Event.fromJson(data))
+            .toList(),
         gameOverState = GameOverState.fromIndex(json['gameOverState'] as int),
         counterAvailable = json['counterAvailable'] as bool;
 
