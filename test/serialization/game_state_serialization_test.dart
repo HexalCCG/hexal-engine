@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:test/test.dart';
 import 'package:hexal_engine/events/draw_card_event.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
@@ -22,13 +24,14 @@ void main() {
           damage: 0,
         )
       ],
-      stack: [DrawCardEvent(player: Player.one, draws: 1)],
+      //stack: [DrawCardEvent(player: Player.one, draws: 1)],
+      stack: [],
       activePlayer: Player.one,
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.battle,
     );
 
-    //print(json.encode(state));
+    print(json.encode(state));
   });
 
   test('Deserialization works properly too', () {});

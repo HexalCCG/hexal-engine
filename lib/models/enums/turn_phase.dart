@@ -1,15 +1,24 @@
 /// A phase of a turn.
 class TurnPhase {
-  final int _index;
-  const TurnPhase._(this._index);
+  /// Enum index.
+  final int index;
+  const TurnPhase._(this.index);
 
-  /// Create a GameState from its JSON encoding.
-  TurnPhase.fromJson(Map<String, dynamic> json) : _index = json['index'] as int;
+  /// Create from its JSON encoding.
+  factory TurnPhase.fromIndex(int _index) => _all[_index];
 
-  /// Encode this GameState as JSON.
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'index': _index,
-      };
+  /// Encode as json.
+  int toJson() => index;
+
+  static const List<TurnPhase> _all = [
+    start,
+    draw,
+    main1,
+    battle,
+    counter,
+    main2,
+    end,
+  ];
 
   /// First phase of a turn where effects are activated.
   static const TurnPhase start = TurnPhase._(0);

@@ -13,6 +13,9 @@ class TestCard extends CardObject with Spell {
     required Location location,
   }) : super(id: id, owner: owner, controller: controller, location: location);
 
+  int get setId => 0;
+  int get cardId => 0;
+
   @override
   TestCard copyWith(
           {int? id, Player? owner, Player? controller, Location? location}) =>
@@ -21,6 +24,14 @@ class TestCard extends CardObject with Spell {
           owner: owner ?? this.owner,
           controller: controller ?? this.controller,
           location: location ?? this.location);
+
+  /// Create from json.
+  static TestCard fromJson(List<dynamic> json) => TestCard(
+        id: json[0] as int,
+        owner: Player.fromIndex(json[1] as int),
+        controller: Player.fromIndex(json[2] as int),
+        location: Location.fromIndex(json[3] as int),
+      );
 
   @override
   List<Object> get props => [id, owner, controller, location];

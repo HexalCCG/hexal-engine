@@ -17,6 +17,9 @@ class CowBeamCard extends CardObject with Spell implements IOnEnterField {
     required Location location,
   }) : super(id: id, owner: owner, controller: controller, location: location);
 
+  int get setId => 0;
+  int get cardId => 2;
+
   // OnEnterField
   @override
   List<Effect> get onEnterFieldEffects => [
@@ -34,6 +37,14 @@ class CowBeamCard extends CardObject with Spell implements IOnEnterField {
           owner: owner ?? this.owner,
           controller: controller ?? this.controller,
           location: location ?? this.location);
+
+  /// Create from json.
+  static CowBeamCard fromJson(List<dynamic> json) => CowBeamCard(
+        id: json[0] as int,
+        owner: Player.fromIndex(json[1] as int),
+        controller: Player.fromIndex(json[2] as int),
+        location: Location.fromIndex(json[3] as int),
+      );
 
   @override
   List<Object> get props => [id, owner, controller, location];

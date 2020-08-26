@@ -1,16 +1,21 @@
 /// Represents whether the game has finished or is continuing.
 class GameOverState {
-  final int _index;
-  const GameOverState._(this._index);
+  /// Enum index.
+  final int index;
+  const GameOverState._(this.index);
 
   /// Create a GameState from its JSON encoding.
-  GameOverState.fromJson(Map<String, dynamic> json)
-      : _index = json['index'] as int;
+  factory GameOverState.fromIndex(int _index) => _all[_index];
 
-  /// Encode this GameState as JSON.
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'index': _index,
-      };
+  /// Encode as json.
+  int toJson() => index;
+
+  static const List<GameOverState> _all = [
+    playing,
+    player1Win,
+    player2Win,
+    draw
+  ];
 
   /// Game is still being played.
   static const GameOverState playing = GameOverState._(0);
