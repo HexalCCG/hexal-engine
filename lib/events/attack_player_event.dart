@@ -1,8 +1,9 @@
-import 'package:hexal_engine/models/game_object_reference.dart';
+import 'package:hexal_engine/cards/creature.dart';
+import 'package:hexal_engine/models/card_object.dart';
+import 'package:hexal_engine/models/player_object.dart';
 
-import '../cards/creature.dart';
 import '../models/enums/location.dart';
-import '../models/enums/player.dart';
+import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/exhaust_creature_state_change.dart';
@@ -37,22 +38,43 @@ class AttackPlayerEvent extends Event {
   }) : super(resolved: resolved);
 
   @override
-  List<StateChange> apply(GameState state) {
-    if (attacker.location != Location.field) {
-      return [ResolveEventStateChange(event: this)];
-    } else {
-      return [
-        AddEventStateChange(
-            event: DamagePlayerEvent(player: player, damage: attacker.attack)),
-        ...exhaustAttacker
-            ? [ExhaustCreatureStateChange(creature: attacker)]
-            : [],
-        ...enableCounter
-            ? [const SetCounterAvailableStateChange(enabled: true)]
-            : [],
-        ResolveEventStateChange(event: this),
-      ];
+  bool valid(GameState state) {
+    final _attacker = state.getGameObjectById(attacker.id);
+    final _player = state.getGameObjectById(player.id);
+
+    // Check if attacker is valid
+    if (!(_attacker is Creature) || _attacker.location != Location.field) {
+      return false;
     }
+    // Check if player is valid
+    if (!(_player is PlayerObject)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @override
+  List<StateChange> apply(GameState state) {
+    if (!valid(state)) {
+      return [ResolveEventStateChange(event: this)];
+    }
+
+    // Casts safe because of valid check above.
+    final _attacker = state.getGameObjectById(attacker.id) as Creature;
+    final _player = state.getGameObjectById(player.id) as PlayerObject;
+
+    return [
+      AddEventStateChange(
+          event: DamagePlayerEvent(player: _player, damage: _attacker.attack)),
+      ...exhaustAttacker
+          ? [ExhaustCreatureStateChange(creature: attacker)]
+          : [],
+      ...enableCounter
+          ? [const SetCounterAvailableStateChange(enabled: true)]
+          : [],
+      ResolveEventStateChange(event: this),
+    ];
   }
 
   @override
