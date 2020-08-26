@@ -8,11 +8,10 @@ import 'event_index.dart';
 /// Events are items placed on the stack to resolve.
 @immutable
 abstract class Event extends Equatable {
-  /// Whether this event should be removed.
-  final bool resolved;
+  const Event();
 
-  /// [Resolved] is whether this event has been applied and needs to be removed.
-  const Event({required this.resolved});
+  /// Whether this event should be removed.
+  bool get resolved;
 
   /// Whether this event is valid on the provided state.
   bool valid(GameState state);

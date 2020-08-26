@@ -6,21 +6,24 @@ import '../state_changes/add_event_state_change.dart';
 import '../state_changes/damage_creature_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
 import '../state_changes/state_change.dart';
+import 'damage_event.dart';
 import 'destroy_card_event.dart';
 import 'event.dart';
 
 /// Event dealing damage to a creature.
-class DamageCreatureEvent extends Event {
+class DamageCreatureEvent extends Event implements DamageEvent {
   /// Creature to be damaged.
   final GameObjectReference creature;
 
   /// Amount of damage to deal.
   final int damage;
 
+  @override
+  final bool resolved;
+
   /// [creature] is dealt [damage] damage.
   const DamageCreatureEvent(
-      {required this.creature, required this.damage, bool resolved = false})
-      : super(resolved: resolved);
+      {required this.creature, required this.damage, this.resolved = false});
 
   @override
   bool valid(GameState state) {
