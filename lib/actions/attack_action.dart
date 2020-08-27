@@ -1,9 +1,9 @@
 import '../cards/creature.dart';
 import '../events/attack_event.dart';
 import '../exceptions/action_exception.dart';
-import '../models/card_object.dart';
 import '../models/enums/location.dart';
 import '../models/enums/turn_phase.dart';
+import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/priority_state_change.dart';
@@ -13,10 +13,10 @@ import 'action.dart';
 /// Declares an attack targeting a creature.
 class AttackAction extends Action {
   /// Creature attacking.
-  final CardObject attacker;
+  final GameObjectReference attacker;
 
   /// Creature defending.
-  final CardObject defender;
+  final GameObjectReference defender;
 
   /// Causes [attacker] to attack [defender].
   const AttackAction({required this.attacker, required this.defender});
@@ -112,14 +112,10 @@ class AttackAction extends Action {
     if (!valid(state)) {
       throw const ActionException('AttackAction Exception: Attack not valid');
     }
-    // Get attacker and defender from state.
-    // Casts safe as valid check above already checks them.
-    final _attacker = state.getCardById(attacker.id) as Creature;
-    final _defender = state.getCardById(defender.id) as Creature;
 
     return [
       AddEventStateChange(
-          event: AttackEvent(attacker: _attacker, defender: _defender)),
+          event: AttackEvent(attacker: attacker, defender: defender)),
       PriorityStateChange(player: state.activePlayer),
     ];
   }

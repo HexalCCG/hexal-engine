@@ -39,13 +39,16 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.battle,
       );
-      const action = AttackAction(attacker: attacker, defender: defender);
+      final action = AttackAction(
+          attacker: attacker.toReference, defender: defender.toReference);
       final change = state.generateStateChanges(action);
 
       expect(
           change,
           contains(AddEventStateChange(
-              event: AttackEvent(attacker: attacker, defender: defender))));
+              event: AttackEvent(
+                  attacker: attacker.toReference,
+                  defender: defender.toReference))));
     });
     test('fails if the attacker can\'t attack. ', () {
       const attacker = CowCreatureCard(
@@ -74,7 +77,8 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.battle,
       );
-      const action = AttackAction(attacker: attacker, defender: defender);
+      final action = AttackAction(
+          attacker: attacker.toReference, defender: defender.toReference);
 
       expect(() => state.applyAction(action), throwsA(isA<ActionException>()));
     });

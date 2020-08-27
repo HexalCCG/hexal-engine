@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
 
 import '../extensions/equatable/equatable.dart';
+import 'game_object_reference.dart';
 
 /// GameObjects represent anything in the game that can be targeted by effects.
 @immutable
@@ -19,4 +20,7 @@ abstract class GameObject extends Equatable {
 
   /// Returns a copy of this object with the changes applied.
   GameObject copyWith({int id});
+
+  /// Get a reference with this object's id.
+  GameObjectReference get toReference => GameObjectReference(id: id);
 }
