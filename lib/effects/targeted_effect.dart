@@ -1,18 +1,18 @@
-import '../models/enums/player.dart';
+import '../models/game_object_reference.dart';
 import 'effect.dart';
-import 'i_targeted.dart';
 import 'target/target.dart';
 
-/// Effect that requests a target.
-abstract class TargetedEffect extends Effect implements ITargeted {
-  final Target target;
-  final TargetResult targetResult;
+/// Defines an effect as requiring a target.
+mixin TargetedEffect on Effect {
+  /// Target template to fill.
+  Target get target;
 
-  /// Effect that requests a target.
-  const TargetedEffect(
-      {required Player controller,
-      required this.target,
-      required this.targetResult,
-      bool resolved = false})
-      : super(controller: controller, resolved: resolved);
+  /// If this has had its target set.
+  bool get targetFilled;
+
+  /// Result of requesting a target from the player.
+  List<GameObjectReference> get targets;
+
+  /// Copies this effect with [targets] set to this.
+  TargetedEffect copyFilled(List<GameObjectReference> targets);
 }
