@@ -1,70 +1,48 @@
 import '../../extensions/equatable/equatable.dart';
 import '../../models/enums/player.dart';
-import '../../models/game_object.dart';
+import '../../models/game_object_reference.dart';
 import '../../models/game_state.dart';
+import 'target_index.dart';
 
 /// Defines a target to be requested from a player.
 abstract class Target extends Equatable {
   /// Which player must answer the request.
-  final Player controller;
+  Player get controller;
 
   /// Whether this can be passed if valid targets exist.
-  final bool optional;
+  bool get optional;
 
-  /// Empty target
-  const Target({required this.controller, this.optional = false});
+  /// Defines a target to be requested from a player.
+  const Target();
 
   /// Checks if a given target list is valid.
-  bool targetValid(List<GameObject> targets);
+  bool targetValid(GameState state, List<GameObjectReference> targets);
 
   /// Checks if any targets are valid for the state.
   bool anyValid(GameState state);
 
-  /// Returns a TargetResult representing the provided targets.
-  TargetResult createResult(List<GameObject> targets);
+  /// Create a target from its JSON form.
+  factory Target.fromJson(Map<String, dynamic> json) {
+    final type = json['type'] as String;
+    final data = json['data'] as List<dynamic>;
 
-  @override
-  List<Object> get props => [controller, optional];
+    if (!targetBuilders.keys.any((_type) => _type.toString() == type)) {
+      throw ArgumentError('Invalid event type: $type');
+    }
+    final typeKey =
+        targetBuilders.keys.firstWhere((_type) => _type.toString() == type);
+    final builder = targetBuilders[typeKey];
 
-  @override
-  bool get stringify => true;
-}
+    if (builder == null) {
+      throw ArgumentError('Builder missing from index: $type');
+    }
 
-/// Result returned from a target request.
-abstract class TargetResult extends Equatable {
-  /// Empty target result.
-  const TargetResult();
+    return builder(data);
+  }
 
-  /// GameObjects this result targets.
-  List<GameObject> get targets;
-
-  @override
-  List<Object> get props;
-
-  @override
-  bool get stringify => true;
-}
-
-/// TargetResult targeting nothing.
-class EmptyTargetResult extends TargetResult {
-  /// Target result with no targets.
-  const EmptyTargetResult();
-
-  @override
-  List<GameObject> get targets => const [];
-
-  @override
-  List<Object> get props => const [];
-}
-
-/// TargetResult before being filled.
-class UnfilledTargetRequest extends TargetResult {
-  /// TargetResult placeholder.
-  const UnfilledTargetRequest();
-
-  @override
-  List<GameObject> get targets => throw UnimplementedError();
-
-  @override
-  List<Object> get props => const [];
+  /// Encode this target as JSON.
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'type': runtimeType.toString(),
+        'data': props,
+      };
 }

@@ -8,6 +8,7 @@ import 'event_index.dart';
 /// Events are items placed on the stack to resolve.
 @immutable
 abstract class Event extends Equatable {
+  /// Events are items placed on the stack to resolve.
   const Event();
 
   /// Whether this event should be removed.
@@ -25,12 +26,17 @@ abstract class Event extends Equatable {
   @override
   List<Object> get props;
 
-  /// Create a Card from its JSON form.
+  /// Create an Event from its JSON form.
   factory Event.fromJson(Map<String, dynamic> json) {
     final type = json['type'] as String;
     final data = json['data'] as List<dynamic>;
 
-    final builder = eventBuilders[type];
+    if (!eventBuilders.keys.any((_type) => _type.toString() == type)) {
+      throw ArgumentError('Invalid event type: $type');
+    }
+    final typeKey =
+        eventBuilders.keys.firstWhere((_type) => _type.toString() == type);
+    final builder = eventBuilders[typeKey];
 
     if (builder == null) {
       throw ArgumentError('Invalid event type: $type');
@@ -39,12 +45,9 @@ abstract class Event extends Equatable {
     return builder(data);
   }
 
-  /// Properties packaged into json.
-  List<Object> get jsonProps => props;
-
   /// Encode this card as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'type': runtimeType,
-        'data': jsonProps,
+        'type': runtimeType.toString(),
+        'data': props,
       };
 }
