@@ -10,6 +10,9 @@ class Player {
   /// Encode as json.
   int toJson() => index;
 
+  @override
+  String toString() => index.toString();
+
   static const List<Player> _all = [
     one,
     two,
