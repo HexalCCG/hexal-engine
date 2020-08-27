@@ -4,11 +4,11 @@ import '../../effects/target/creature_target.dart';
 import '../../models/card_object.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
-import '../i_on_enter_field.dart';
+import '../on_enter_field.dart';
 import '../spell.dart';
 
 /// 0 cost spell. Deal 1 damage to a creature.
-class CowBeamCard extends CardObject with Spell implements IOnEnterField {
+class CowBeamCard extends CardObject with Spell, OnEnterField {
   /// [id] must be unique. [owner] cannot be changed.
   const CowBeamCard({
     required int id,
@@ -17,16 +17,21 @@ class CowBeamCard extends CardObject with Spell implements IOnEnterField {
     required Location location,
   }) : super(id: id, owner: owner, controller: controller, location: location);
 
+  @override
   int get setId => 0;
+  @override
   int get cardId => 2;
 
   // OnEnterField
   @override
   List<Effect> get onEnterFieldEffects => [
         DamageEffect(
+          damage: 1,
+          target: CreatureTarget(
             controller: controller,
-            damage: 1,
-            target: CreatureTarget(controller: controller))
+          ),
+          controller: controller,
+        )
       ];
 
   @override

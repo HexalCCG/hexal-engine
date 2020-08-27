@@ -5,8 +5,11 @@ import '../creature.dart';
 
 /// 2/2 Vanilla Creature.
 class CowCreatureCard extends CardObject with Creature {
+  @override
   final bool exhausted;
+  @override
   final bool enteredFieldThisTurn;
+  @override
   final int damage;
 
   /// [id] must be unique. [owner] cannot be changed.
@@ -25,10 +28,14 @@ class CowCreatureCard extends CardObject with Creature {
           location: location,
         );
 
+  @override
   int get setId => 0;
+  @override
   int get cardId => 1;
 
+  @override
   int get baseAttack => 2;
+  @override
   int get baseHealth => 2;
 
   @override
