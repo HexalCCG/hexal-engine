@@ -1,5 +1,6 @@
 import '../cards/creature.dart';
 import '../models/enums/location.dart';
+import '../models/enums/player.dart';
 import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../models/player_object.dart';
@@ -63,7 +64,7 @@ class AttackPlayerEvent extends Event {
 
     // Casts safe because of valid check above.
     final _attacker = state.getGameObjectById(attacker.id) as Creature;
-    final _player = state.getGameObjectById(player.id) as PlayerObject;
+    final _player = Player.fromIndex(player.id);
 
     return [
       AddEventStateChange(

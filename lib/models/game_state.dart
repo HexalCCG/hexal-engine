@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hexal_engine/exceptions/game_state_exception.dart';
 import 'package:hexal_engine/models/game_object.dart';
 import 'package:hexal_engine/models/player_object.dart';
 import 'package:meta/meta.dart';
@@ -73,8 +74,15 @@ class GameState extends Equatable {
   bool containsCardWithId(int id) => cards.any((card) => card.id == id);
 
   /// Gets a card from this state by its id.
-  CardObject getCardById(int id) =>
-      cards.firstWhere((element) => element.id == id);
+  CardObject getCardById(int id) {
+    if (id < 2) {
+      throw GameStateException('Cannot get card with player ID');
+    }
+    if (!containsCardWithId(id)) {
+      throw GameStateException('Card not found in state');
+    }
+    return cards.firstWhere((element) => element.id == id);
+  }
 
   /// Gets a game object from this state by its id.
   GameObject getGameObjectById(int id) {
