@@ -55,4 +55,12 @@ class ProvideTargetAction extends Action {
 
   @override
   List<Object> get props => [targets];
+
+  /// Create from json.
+  static ProvideTargetAction fromJson(List<dynamic> json) =>
+      ProvideTargetAction(
+        targets: (json[0] as List<int>)
+            .map((id) => GameObjectReference.fromJson(id))
+            .toList(),
+      );
 }

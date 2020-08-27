@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import '../extensions/equatable/equatable.dart';
 import '../models/game_state.dart';
 import '../state_changes/state_change.dart';
+import 'action_index.dart';
 
 /// Actions represent user inputs.
 @immutable
@@ -21,4 +22,29 @@ abstract class Action extends Equatable {
 
   @override
   bool get stringify => true;
+
+  /// Create an Event from its JSON form.
+  factory Action.fromJson(Map<String, dynamic> json) {
+    final type = json['type'] as String;
+    final data = json['data'] as List<dynamic>;
+
+    if (!actionBuilders.keys.any((_type) => _type.toString() == type)) {
+      throw ArgumentError('Invalid event type: $type');
+    }
+    final typeKey =
+        actionBuilders.keys.firstWhere((_type) => _type.toString() == type);
+    final builder = actionBuilders[typeKey];
+
+    if (builder == null) {
+      throw ArgumentError('Invalid event type: $type');
+    }
+
+    return builder(data);
+  }
+
+  /// Encode this card as JSON.
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'type': runtimeType.toString(),
+        'data': props,
+      };
 }
