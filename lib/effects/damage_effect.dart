@@ -135,7 +135,7 @@ class DamageEffect extends Effect with TargetedEffect {
       ];
 
   /// Create this effect from json.
-  factory DamageEffect.fromJson(List<dynamic> json) => DamageEffect(
+  static DamageEffect fromJson(List<dynamic> json) => DamageEffect(
       damage: json[0] as int,
       target: Target.fromJson(json[1] as Map<String, dynamic>),
       targetFilled: json[2] as bool,

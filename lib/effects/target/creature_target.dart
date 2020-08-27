@@ -36,7 +36,7 @@ class CreatureTarget extends Target {
   List<Object> get props => [controller, optional];
 
   /// Create this target from json.
-  factory CreatureTarget.fromJson(List<dynamic> json) => CreatureTarget(
+  static CreatureTarget fromJson(List<dynamic> json) => CreatureTarget(
         controller: Player.fromIndex(json[0] as int),
         optional: json[1] as bool,
       );
