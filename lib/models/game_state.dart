@@ -1,13 +1,9 @@
-import 'dart:convert';
-
-import 'package:hexal_engine/exceptions/game_state_exception.dart';
-import 'package:hexal_engine/models/game_object.dart';
-import 'package:hexal_engine/models/player_object.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
 import '../actions/pass_action.dart';
 import '../events/event.dart';
+import '../exceptions/game_state_exception.dart';
 import '../extensions/equatable/equatable.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/remove_event_state_change.dart';
@@ -17,6 +13,8 @@ import 'enums/game_over_state.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
 import 'enums/turn_phase.dart';
+import 'game_object.dart';
+import 'player_object.dart';
 
 /// Represents a single moment snapshot of a game.
 @immutable
@@ -159,11 +157,12 @@ class GameState extends Equatable {
       : activePlayer = Player.fromIndex(json['activePlayer'] as int),
         priorityPlayer = Player.fromIndex(json['priorityPlayer'] as int),
         turnPhase = TurnPhase.fromIndex(json['turnPhase'] as int),
-        cards = (json['cards'] as List<Map<String, List<Object>>>)
-            .map<CardObject>((final data) => CardObject.fromJson(data))
+        cards = (json['cards'] as List<dynamic>)
+            .map((dynamic data) =>
+                CardObject.fromJson(data as Map<String, dynamic>))
             .toList(),
-        stack = (json['stack'] as List<Map<String, List<Object>>>)
-            .map<Event>((final data) => Event.fromJson(data))
+        stack = (json['stack'] as List<dynamic>)
+            .map((dynamic data) => Event.fromJson(data as Map<String, dynamic>))
             .toList(),
         gameOverState = GameOverState.fromIndex(json['gameOverState'] as int),
         counterAvailable = json['counterAvailable'] as bool;
