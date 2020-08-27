@@ -1,8 +1,7 @@
 # Defines a default set of lint rules enforced for
 # projects at Google. For details and rationale,
 # see https://github.com/dart-lang/pedantic#enabled-lints.
-include: package:pedantic/analysis_options.yaml
-#include: package:effective_dart/analysis_options.yaml
+include: package:effective_dart/analysis_options.1.2.0.yaml
 
 # For lint rules and documentation, see http://dart-lang.github.io/linter/lints.
 # Uncomment to specify additional rules.
@@ -13,6 +12,30 @@ include: package:pedantic/analysis_options.yaml
 linter:
   rules:
     file_names: false
+    annotate_overrides: true
+    omit_local_variable_types: true
+    use_function_type_syntax: true
+    avoid_empty_else: true
+    avoid_types_as_parameter_names: true
+    no_duplicate_case_values: true
+    unrelated_type_equality_checks: true
+    valid_regexps: true
+    always_declare_return_types: true
+    always_require_non_null_named_parameters: true
+    avoid_shadowing_type_parameters: true
+    empty_catches: true
+    null_closures: true
+    prefer_conditional_assignment: true
+    prefer_contains: true
+    prefer_for_elements_to_map_fromIterable: true
+    prefer_if_null_operators: true
+    prefer_is_empty: true
+    prefer_single_quotes: true
+    prefer_spread_collections: true
+    recursive_getters: true
+    unawaited_futures: true
+    unnecessary_null_in_if_null_operators: true
+    use_function_type_syntax_for_parameters: true
 
 analyzer:
   #   exclude:
