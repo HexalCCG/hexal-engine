@@ -22,8 +22,11 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   final bool resolved;
 
   /// [creature] is dealt [damage] damage.
-  const DamageCreatureEvent(
-      {required this.creature, required this.damage, this.resolved = false});
+  const DamageCreatureEvent({
+    required this.creature,
+    required this.damage,
+    this.resolved = false,
+  });
 
   @override
   bool valid(GameState state) {
@@ -73,7 +76,7 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   List<Object> get props => [creature, damage, resolved];
 
   /// Create this event from json.
-  factory DamageCreatureEvent.fromJson(List<dynamic> json) =>
+  static DamageCreatureEvent fromJson(List<dynamic> json) =>
       DamageCreatureEvent(
           creature: GameObjectReference.fromJson(json[0] as int),
           damage: json[1] as int,

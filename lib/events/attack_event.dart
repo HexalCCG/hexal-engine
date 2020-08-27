@@ -32,9 +32,9 @@ class AttackEvent extends Event {
   const AttackEvent({
     required this.attacker,
     required this.defender,
-    required this.exhaustAttacker,
-    required this.enableCounter,
-    required this.resolved,
+    this.exhaustAttacker = true,
+    this.enableCounter = true,
+    this.resolved = false,
   });
 
   @override
@@ -97,7 +97,7 @@ class AttackEvent extends Event {
       [attacker, defender, exhaustAttacker, enableCounter, resolved];
 
   /// Create this event from json.
-  factory AttackEvent.fromJson(List<dynamic> json) => AttackEvent(
+  static AttackEvent fromJson(List<dynamic> json) => AttackEvent(
       attacker: GameObjectReference.fromJson(json[0] as int),
       defender: GameObjectReference.fromJson(json[1] as int),
       exhaustAttacker: json[2] as bool,

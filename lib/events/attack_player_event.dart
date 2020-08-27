@@ -92,7 +92,7 @@ class AttackPlayerEvent extends Event {
       [attacker, player, exhaustAttacker, enableCounter, resolved];
 
   /// Create this event from json.
-  factory AttackPlayerEvent.fromJson(List<dynamic> json) => AttackPlayerEvent(
+  static AttackPlayerEvent fromJson(List<dynamic> json) => AttackPlayerEvent(
       attacker: GameObjectReference.fromJson(json[0] as int),
       player: GameObjectReference.fromJson(json[1] as int),
       exhaustAttacker: json[2] as bool,

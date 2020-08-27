@@ -15,7 +15,10 @@ class DestroyCardEvent extends Event {
   final bool resolved;
 
   /// Destroys [card].
-  const DestroyCardEvent({required this.card, this.resolved = false});
+  const DestroyCardEvent({
+    required this.card,
+    this.resolved = false,
+  });
 
   @override
   bool valid(GameState state) {
@@ -42,7 +45,8 @@ class DestroyCardEvent extends Event {
   @override
   List<Object> get props => [card, resolved];
 
-  factory DestroyCardEvent.fromJson(List<dynamic> json) => DestroyCardEvent(
+  /// Create this event from json
+  static DestroyCardEvent fromJson(List<dynamic> json) => DestroyCardEvent(
       card: GameObjectReference.fromJson(json[0] as int),
       resolved: json[1] as bool);
 }

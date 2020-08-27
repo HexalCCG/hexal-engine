@@ -99,7 +99,7 @@ class DamagePlayerEvent extends Event implements DamageEvent {
   List<Object> get props => [player, damage, damageDealt, resolved];
 
   /// Create this event from json.
-  factory DamagePlayerEvent.fromJson(List<dynamic> json) => DamagePlayerEvent(
+  static DamagePlayerEvent fromJson(List<dynamic> json) => DamagePlayerEvent(
       player: Player.fromIndex(json[0] as int),
       damage: json[1] as int,
       damageDealt: json[2] as int,
