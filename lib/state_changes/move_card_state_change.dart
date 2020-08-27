@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
 import '../models/card_object.dart';
@@ -8,7 +10,7 @@ import 'state_change.dart';
 /// StateChange to move a card.
 class MoveCardStateChange extends StateChange {
   /// Card to move.
-  final CardObject card;
+  final GameObjectReference card;
 
   /// Location to move the card to.
   final Location location;

@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../models/enums/game_over_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
@@ -33,7 +35,10 @@ class DamagePlayerEvent extends Event implements DamageEvent {
   });
 
   @override
-  bool valid(GameState state) => true;
+  bool valid(GameState state) {
+    if (damageDealt >= damage) return false;
+    return true;
+  }
 
   @override
   List<StateChange> apply(GameState state) {
@@ -58,6 +63,7 @@ class DamagePlayerEvent extends Event implements DamageEvent {
 
   List<StateChange> _dealDamage(GameState state) {
     final deck = state.getCardsByLocation(player, Location.deck);
+
     if (deck.isEmpty) {
       return [
         GameOverStateChange(
@@ -66,9 +72,11 @@ class DamagePlayerEvent extends Event implements DamageEvent {
                 : GameOverState.player1Win),
       ];
     } else {
-      final card = (deck..shuffle()).first;
+      final _card = (deck..shuffle()).first;
+      final _reference = GameObjectReference(id: _card.id);
+
       return [
-        MoveCardStateChange(card: card, location: Location.exile),
+        MoveCardStateChange(card: _reference, location: Location.exile),
       ];
     }
   }
