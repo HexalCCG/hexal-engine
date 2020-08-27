@@ -1,23 +1,31 @@
 import '../events/event.dart';
 import '../models/enums/player.dart';
-import '../models/game_state.dart';
-import '../state_changes/state_change.dart';
+import 'effect_index.dart';
 
 /// Empty effect.
 abstract class Effect extends Event {
-  /// Player than controls this effect and will provide targets.
-  final Player controller;
-
   /// Empty effect.
-  const Effect({required this.controller, required bool resolved})
-      : super(resolved: resolved);
+  const Effect();
 
-  @override
-  List<StateChange> apply(GameState state);
+  /// Player that controls this effect and will provide targets.
+  Player get controller;
 
-  @override
-  List<Object> get props;
+  /// Create an Event from its JSON form.
+  factory Effect.fromJson(Map<String, dynamic> json) {
+    final type = json['type'] as String;
+    final data = json['data'] as List<dynamic>;
 
-  @override
-  bool get stringify => true;
+    if (!effectBuilders.keys.any((_type) => _type.toString() == type)) {
+      throw ArgumentError('Invalid event type: $type');
+    }
+    final typeKey =
+        effectBuilders.keys.firstWhere((_type) => _type.toString() == type);
+    final builder = effectBuilders[typeKey];
+
+    if (builder == null) {
+      throw ArgumentError('Builder missing from index: $type');
+    }
+
+    return builder(data);
+  }
 }
