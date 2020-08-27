@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
+
 import '../cards/creature.dart';
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
@@ -9,7 +11,7 @@ import 'state_change.dart';
 /// StateChange to put a card into the field.
 class PutIntoFieldStateChange extends StateChange {
   /// Card to put into field.
-  final CardObject card;
+  final GameObjectReference card;
 
   /// Puts [card] into the field.
   const PutIntoFieldStateChange({required this.card});

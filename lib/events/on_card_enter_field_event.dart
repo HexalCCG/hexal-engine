@@ -38,7 +38,9 @@ class OnCardEnterFieldEvent extends Event {
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {}
+    if (!valid(state)) {
+      return [ResolveEventStateChange(event: this)];
+    }
 
     final _card = state.getCardById(card.id);
 
