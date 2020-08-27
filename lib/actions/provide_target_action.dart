@@ -1,32 +1,37 @@
-import '../events/request_target_event.dart';
+import '../effects/targeted_effect.dart';
 import '../exceptions/action_exception.dart';
-import '../models/game_object.dart';
+import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
-import '../state_changes/fill_request_state_change.dart';
+import '../state_changes/priority_state_change.dart';
+import '../state_changes/provide_target_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'action.dart';
 
 /// Provides target to a request.
 class ProvideTargetAction extends Action {
   /// Targets provided by player.
-  final List<GameObject> targets;
+  final List<GameObjectReference> targets;
 
   /// Provides targets to a request.
   const ProvideTargetAction({required this.targets});
 
   @override
   bool valid(GameState state) {
-    if (state.stack.isEmpty || !(state.stack.last is RequestTargetEvent)) {
-      // Top event is not a request.
+    // Check stack isn't empty.
+    if (state.stack.isEmpty || state.stack.last is! TargetedEffect) {
       return false;
     }
-    if ((state.stack.last as RequestTargetEvent).target.controller !=
-        state.priorityPlayer) {
-      // Request is not yours.
+    final _request = state.stack.last as TargetedEffect;
+    // Request must not be filled.
+    if (_request.targetFilled) {
       return false;
     }
-    if (!(state.stack.last as RequestTargetEvent).target.targetValid(targets)) {
-      // Target is not valid.
+    // Check request belongs to the priority player.
+    if (_request.target.controller != state.priorityPlayer) {
+      return false;
+    }
+    // Check provided targets are valid.
+    if (!(_request.target.targetValid(state, targets))) {
       return false;
     }
     return true;
@@ -38,12 +43,13 @@ class ProvideTargetAction extends Action {
       throw const ActionException(
           'ProvideTargetAction Exception: invalid argument');
     }
+
     return [
-      FillRequestStateChange(
-          request: (state.stack.last as RequestTargetEvent),
-          targetResult: (state.stack.last as RequestTargetEvent)
-              .target
-              .createResult(targets))
+      ProvideTargetStateChange(
+        request: state.stack.last as TargetedEffect,
+        targets: targets,
+      ),
+      PriorityStateChange(player: state.notPriorityPlayer),
     ];
   }
 
