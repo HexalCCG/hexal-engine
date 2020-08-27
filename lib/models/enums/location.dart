@@ -10,6 +10,9 @@ class Location {
   /// Encode as json.
   int toJson() => index;
 
+  @override
+  String toString() => index.toString();
+
   static const List<Location> _all = [
     deck,
     hand,

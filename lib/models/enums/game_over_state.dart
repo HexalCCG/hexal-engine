@@ -10,6 +10,9 @@ class GameOverState {
   /// Encode as json.
   int toJson() => index;
 
+  @override
+  String toString() => index.toString();
+
   static const List<GameOverState> _all = [
     playing,
     player1Win,

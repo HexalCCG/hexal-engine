@@ -10,6 +10,9 @@ class TurnPhase {
   /// Encode as json.
   int toJson() => index;
 
+  @override
+  String toString() => index.toString();
+
   static const List<TurnPhase> _all = [
     start,
     draw,
