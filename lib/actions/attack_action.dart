@@ -122,4 +122,10 @@ class AttackAction extends Action {
 
   @override
   List<Object> get props => [attacker, defender];
+
+  /// Create from json.
+  static AttackAction fromJson(List<dynamic> json) => AttackAction(
+        attacker: GameObjectReference.fromJson(json[0] as int),
+        defender: GameObjectReference.fromJson(json[1] as int),
+      );
 }

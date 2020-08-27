@@ -133,4 +133,7 @@ class PassAction extends Action {
 
   @override
   List<Object> get props => [];
+
+  /// Create from json.
+  static PassAction fromJson(List<dynamic> json) => PassAction();
 }

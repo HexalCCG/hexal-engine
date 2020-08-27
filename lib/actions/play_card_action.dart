@@ -53,4 +53,9 @@ class PlayCardAction extends Action {
 
   @override
   List<Object> get props => [card];
+
+  /// Create from json.
+  static PlayCardAction fromJson(List<dynamic> json) => PlayCardAction(
+        card: GameObjectReference.fromJson(json[0] as int),
+      );
 }
