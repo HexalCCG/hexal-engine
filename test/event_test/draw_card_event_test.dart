@@ -32,8 +32,10 @@ void main() {
       );
       final changes = state.resolveTopStackEvent();
 
-      expect(changes,
-          contains(MoveCardStateChange(card: card, location: Location.hand)));
+      expect(
+          changes,
+          contains(MoveCardStateChange(
+              card: card.toReference, location: Location.hand)));
     });
 
     test('can draw multiple cards sequentially. ', () {

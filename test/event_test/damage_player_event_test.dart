@@ -32,8 +32,10 @@ void main() {
       );
       final changes = state.resolveTopStackEvent();
 
-      expect(changes,
-          contains(MoveCardStateChange(card: card, location: Location.exile)));
+      expect(
+          changes,
+          contains(MoveCardStateChange(
+              card: card.toReference, location: Location.exile)));
     });
     test('deals 1 damage and resolves if damage is 1. ', () {
       const card1 = TestCard(

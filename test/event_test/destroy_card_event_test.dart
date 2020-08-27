@@ -19,11 +19,11 @@ void main() {
         exhausted: false,
         damage: 0,
       );
-      var state = const GameState(
+      var state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DestroyCardEvent(card: card),
+          DestroyCardEvent(card: card.toReference),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
