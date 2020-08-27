@@ -15,16 +15,16 @@ void main() {
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        location: Location.deck,
+        location: Location.field,
         enteredFieldThisTurn: false,
         exhausted: false,
         damage: 0,
       );
-      final state = const GameState(
+      final state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DamageCreatureEvent(creature: card, damage: 1),
+          DamageCreatureEvent(creature: card.toReference, damage: 1),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -32,8 +32,10 @@ void main() {
       );
       final changes = state.resolveTopStackEvent();
 
-      expect(changes,
-          contains(DamageCreatureStateChange(creature: card, damage: 1)));
+      expect(
+          changes,
+          contains(DamageCreatureStateChange(
+              creature: card.toReference, damage: 1)));
     });
   });
 }

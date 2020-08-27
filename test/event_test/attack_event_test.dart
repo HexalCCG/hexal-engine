@@ -31,11 +31,11 @@ void main() {
         exhausted: false,
         damage: 0,
       );
-      final state = const GameState(
+      final state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card1, card2],
         stack: [
-          AttackEvent(attacker: card1, defender: card2),
+          AttackEvent(attacker: card1.toReference, defender: card2.toReference),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -47,11 +47,11 @@ void main() {
           changes,
           containsAll(<StateChange>[
             AddEventStateChange(
-                event:
-                    DamageCreatureEvent(creature: card1, damage: card2.attack)),
+                event: DamageCreatureEvent(
+                    creature: card1.toReference, damage: card2.attack)),
             AddEventStateChange(
-                event:
-                    DamageCreatureEvent(creature: card2, damage: card1.attack))
+                event: DamageCreatureEvent(
+                    creature: card2.toReference, damage: card1.attack))
           ]));
     });
   });

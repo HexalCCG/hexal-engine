@@ -3,7 +3,6 @@ import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/effects/damage_effect.dart';
 import 'package:hexal_engine/effects/target/creature_target.dart';
 import 'package:hexal_engine/events/damage_creature_event.dart';
-import 'package:hexal_engine/events/request_target_event.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/state_changes/add_event_state_change.dart';
@@ -13,29 +12,6 @@ import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   group('Damage effect', () {
-    test('requests a target if one hasn\'t been given yet. ', () {
-      const effect = DamageEffect(
-          controller: Player.one,
-          damage: 1,
-          target: CreatureTarget(controller: Player.one));
-      const state = GameState(
-        gameOverState: GameOverState.playing,
-        cards: [],
-        stack: [effect],
-        activePlayer: Player.one,
-        priorityPlayer: Player.one,
-        turnPhase: TurnPhase.draw,
-      );
-      final changes = state.resolveTopStackEvent();
-
-      expect(
-          changes,
-          contains(const AddEventStateChange(
-            event: RequestTargetEvent(
-                effect: effect, target: CreatureTarget(controller: Player.one)),
-          )));
-    });
-
     test('deals damage to the target when applied.', () {
       const card = CowCreatureCard(
         id: 2,
@@ -46,12 +22,13 @@ void main() {
         exhausted: false,
         damage: 0,
       );
-      const effect = DamageEffect(
+      final effect = DamageEffect(
           controller: Player.one,
           damage: 1,
           target: CreatureTarget(controller: Player.one),
-          targetResult: CreatureTargetResult(target: card));
-      const state = GameState(
+          targetFilled: true,
+          targets: [card.toReference]);
+      final state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [effect],
@@ -63,8 +40,8 @@ void main() {
 
       expect(
           changes,
-          contains(const AddEventStateChange(
-            event: DamageCreatureEvent(creature: card, damage: 1),
+          contains(AddEventStateChange(
+            event: DamageCreatureEvent(creature: card.toReference, damage: 1),
           )));
     });
   });

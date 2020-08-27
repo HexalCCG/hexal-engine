@@ -28,7 +28,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       final stateChange =
-          MoveCardStateChange(card: card, location: Location.hand);
+          MoveCardStateChange(card: card.toReference, location: Location.hand);
       expect(
         state.applyStateChanges([stateChange]),
         const GameState(
@@ -61,10 +61,11 @@ void main() {
           () => state.applyStateChanges([
                 MoveCardStateChange(
                     card: TestCard(
-                        id: 2,
-                        controller: Player.one,
-                        location: Location.deck,
-                        owner: Player.one),
+                            id: 2,
+                            controller: Player.one,
+                            location: Location.deck,
+                            owner: Player.one)
+                        .toReference,
                     location: Location.hand)
               ]),
           throwsA(isA<StateChangeException>()));

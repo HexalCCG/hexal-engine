@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/attack_action.dart';
 import 'package:hexal_engine/actions/attack_player_action.dart';
@@ -48,12 +49,13 @@ void main() {
     );
 
     expect(
-        () => state.applyAction(
-            AttackPlayerAction(attacker: attacker1, player: Player.two)),
+        () => state.applyAction(AttackPlayerAction(
+            attacker: attacker1.toReference,
+            player: GameObjectReference(id: Player.two.index))),
         throwsA(isA<ActionException>()));
 
-    state = state
-        .applyAction(AttackAction(attacker: attacker2, defender: defender));
+    state = state.applyAction(AttackAction(
+        attacker: attacker2.toReference, defender: defender.toReference));
     state = state.testPassUntilEmpty();
   });
 }

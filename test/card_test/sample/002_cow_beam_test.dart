@@ -1,9 +1,10 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
 import 'package:test/test.dart';
+import 'package:hexal_engine/effects/targeted_effect.dart';
 import 'package:hexal_engine/actions/provide_target_action.dart';
 import 'package:hexal_engine/cards/creature.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/on_card_enter_field_event.dart';
-import 'package:hexal_engine/events/request_target_event.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
 import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
@@ -33,7 +34,7 @@ void main() {
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // They have one First Creature in hand.
       // Player 1 plays their First Creature.
-      state = state.applyAction(PlayCardAction(card: card));
+      state = state.applyAction(PlayCardAction(card: card.toReference));
 
       // First Creature moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo).first,
@@ -77,7 +78,7 @@ void main() {
       );
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // Player 1 plays their Cow Beam.
-      state = state.applyAction(PlayCardAction(card: card));
+      state = state.applyAction(PlayCardAction(card: card.toReference));
 
       // Cow Beam moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo),
@@ -91,8 +92,8 @@ void main() {
       state = state.applyAction(PassAction());
 
       // Cow Beam moves into the field .
-      expect(state.getCardsByLocation(Player.one, Location.field),
-          contains(isA<CowBeamCard>()));
+      expect(state.getCardById(2), isA<CowBeamCard>());
+
       expect(state.stack.last, isA<OnCardEnterFieldEvent>());
 
       // Player 1 has priority again after the last effect resolved.
@@ -101,15 +102,16 @@ void main() {
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
       // Resolve the damage effect creating
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      // state = state.applyAction(PassAction());
+      // state = state.applyAction(PassAction());
 
       // Cow Beam requests a target for its damage.
-      expect(state.stack.last, isA<RequestTargetEvent>());
+      expect(state.stack.last, isA<TargetedEffect>());
 
       // Player 1 provides a target.
-      state = state.applyAction(ProvideTargetAction(
-          targets: [state.cards.firstWhere((element) => element.id == 3)]));
+      state = state.applyAction(ProvideTargetAction(targets: [
+        GameObjectReference(id: 3),
+      ]));
 
       // Target added to target request & folded into DamageEvent.
       state = state.applyAction(PassAction());

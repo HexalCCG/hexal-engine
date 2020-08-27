@@ -1,9 +1,9 @@
+import 'package:hexal_engine/effects/targeted_effect.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/state_change.dart';
 import 'package:hexal_engine/state_changes/put_into_field_state_change.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
-import 'package:hexal_engine/events/request_target_event.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/on_card_enter_field_event.dart';
@@ -24,11 +24,11 @@ void main() {
         owner: Player.one,
         location: Location.limbo,
       );
-      final state = const GameState(
+      final state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          PlayCardEvent(card: card),
+          PlayCardEvent(card: card.toReference),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -39,7 +39,7 @@ void main() {
       expect(
           changes,
           containsAll(<StateChange>[
-            PutIntoFieldStateChange(card: card),
+            PutIntoFieldStateChange(card: card.toReference),
           ]));
     });
     test('does not destroy a played permanent.', () {
@@ -62,7 +62,7 @@ void main() {
       );
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // Player 1 plays their creature.
-      state = state.applyAction(PlayCardAction(card: creature));
+      state = state.applyAction(PlayCardAction(card: creature.toReference));
 
       // Cow moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo),
@@ -107,7 +107,7 @@ void main() {
       );
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // Player 1 plays their creature.
-      state = state.applyAction(PlayCardAction(card: spell));
+      state = state.applyAction(PlayCardAction(card: spell.toReference));
 
       // Cow moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo),
@@ -135,7 +135,7 @@ void main() {
       state = state.applyAction(PassAction());
 
       // Cow Beam requests a target for its damage.
-      expect(state.stack.last, isA<RequestTargetEvent>());
+      expect(state.stack.last, isA<TargetedEffect>());
       expect(state.getCardsByLocation(Player.one, Location.field),
           contains(isA<CowBeamCard>()));
 

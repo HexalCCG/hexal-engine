@@ -27,7 +27,7 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
       );
-      const action = PlayCardAction(card: card);
+      final action = PlayCardAction(card: card.toReference);
       final change = state.generateStateChanges(action);
 
       expect(
@@ -54,7 +54,7 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
       );
-      const action = PlayCardAction(card: card);
+      final action = PlayCardAction(card: card.toReference);
 
       expect(
         () => state.generateStateChanges(action),
@@ -76,7 +76,7 @@ void main() {
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.main1,
       );
-      const action = PlayCardAction(card: card);
+      final action = PlayCardAction(card: card.toReference);
 
       expect(
         () => state.generateStateChanges(action),

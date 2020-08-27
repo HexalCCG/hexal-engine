@@ -20,11 +20,11 @@ void main() {
         owner: Player.one,
         location: Location.hand,
       );
-      final state = const GameState(
+      final state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          OnCardEnterFieldEvent(card: card),
+          OnCardEnterFieldEvent(card: card.toReference),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -35,20 +35,20 @@ void main() {
       expect(
           changes,
           contains(ResolveEventStateChange(
-              event: OnCardEnterFieldEvent(card: card))));
+              event: OnCardEnterFieldEvent(card: card.toReference))));
     });
     test('adds the card\'s effect if it has only one. ', () {
       const card = CowBeamCard(
         id: 2,
         controller: Player.one,
         owner: Player.one,
-        location: Location.hand,
+        location: Location.field,
       );
-      final state = const GameState(
+      final state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          OnCardEnterFieldEvent(card: card),
+          OnCardEnterFieldEvent(card: card.toReference),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
