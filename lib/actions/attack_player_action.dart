@@ -2,9 +2,10 @@ import '../cards/creature.dart';
 import '../events/attack_player_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/enums/location.dart';
-import '../models/enums/player.dart';
 import '../models/enums/turn_phase.dart';
+import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
+import '../models/player_object.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/priority_state_change.dart';
 import '../state_changes/state_change.dart';
@@ -13,10 +14,10 @@ import 'action.dart';
 /// Declares an attack targeting a player.
 class AttackPlayerAction extends Action {
   /// Creature attacking.
-  final Creature attacker;
+  final GameObjectReference attacker;
 
   /// Player being attacked.
-  final Player player;
+  final GameObjectReference player;
 
   /// Causes [attacker] to attack [player].
   const AttackPlayerAction({required this.attacker, required this.player});
@@ -25,9 +26,15 @@ class AttackPlayerAction extends Action {
   bool valid(GameState state) {
     // Get attacker from state.
     final _attacker = state.getCardById(attacker.id);
+    final _player = state.getGameObjectById(player.id);
 
     // Check attacker is a creature.
-    if (!(_attacker is Creature)) {
+    if (_attacker is! Creature) {
+      return false;
+    }
+
+    // Check player is a player.
+    if (_player is! PlayerObject) {
       return false;
     }
 
@@ -52,7 +59,7 @@ class AttackPlayerAction extends Action {
     }
 
     // Can't attack yourself.
-    if (player == state.priorityPlayer) {
+    if (_player.player == state.priorityPlayer) {
       return false;
     }
     // Check attacker can attack players
@@ -78,13 +85,9 @@ class AttackPlayerAction extends Action {
           'AttackPlayerAction Exception: Attack not valid');
     }
 
-    // Get attacker and defender from state.
-    // Creature check done in valid().
-    final _attacker = state.getCardById(attacker.id) as Creature;
-
     return [
       AddEventStateChange(
-          event: AttackPlayerEvent(attacker: _attacker, player: player)),
+          event: AttackPlayerEvent(attacker: attacker, player: player)),
       PriorityStateChange(player: state.activePlayer),
     ];
   }

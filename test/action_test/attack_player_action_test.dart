@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/game_object_reference.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/attack_player_action.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
@@ -29,14 +30,17 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.battle,
       );
-      const action = AttackPlayerAction(attacker: attacker, player: Player.two);
+      final action = AttackPlayerAction(
+          attacker: attacker.toReference,
+          player: GameObjectReference(id: Player.two.index));
       final change = state.generateStateChanges(action);
 
       expect(
           change,
           contains(AddEventStateChange(
-              event:
-                  AttackPlayerEvent(attacker: attacker, player: Player.two))));
+              event: AttackPlayerEvent(
+                  attacker: attacker.toReference,
+                  player: GameObjectReference(id: Player.two.index)))));
     });
   });
 }

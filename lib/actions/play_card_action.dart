@@ -1,7 +1,7 @@
 import '../events/play_card_event.dart';
 import '../exceptions/action_exception.dart';
-import '../models/card_object.dart';
 import '../models/enums/location.dart';
+import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/move_card_state_change.dart';
@@ -12,7 +12,7 @@ import 'action.dart';
 /// Plays the card from your hand.
 class PlayCardAction extends Action {
   /// Card to play.
-  final CardObject card;
+  final GameObjectReference card;
 
   /// Plays [card] from priority player's hand.
   const PlayCardAction({required this.card});
@@ -44,11 +44,9 @@ class PlayCardAction extends Action {
       throw const ActionException('PlayCardAction Exception: invalid argument');
     }
 
-    final _card = state.getCardById(card.id);
-
     return [
-      MoveCardStateChange(card: _card, location: Location.limbo),
-      AddEventStateChange(event: PlayCardEvent(card: _card)),
+      MoveCardStateChange(card: card, location: Location.limbo),
+      AddEventStateChange(event: PlayCardEvent(card: card)),
       PriorityStateChange(player: state.activePlayer),
     ];
   }
