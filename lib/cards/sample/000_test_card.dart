@@ -13,7 +13,9 @@ class TestCard extends CardObject with Spell {
     required Location location,
   }) : super(id: id, owner: owner, controller: controller, location: location);
 
+  @override
   int get setId => 0;
+  @override
   int get cardId => 0;
 
   @override
