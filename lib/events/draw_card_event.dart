@@ -92,7 +92,8 @@ class DrawCardEvent extends Event {
   @override
   List<Object> get props => [player, draws, cardsDrawn, resolved];
 
-  factory DrawCardEvent.fromJson(List<dynamic> json) => DrawCardEvent(
+  /// Create this event from json
+  static DrawCardEvent fromJson(List<dynamic> json) => DrawCardEvent(
       player: Player.fromIndex(json[0] as int),
       draws: json[1] as int,
       cardsDrawn: json[2] as int,

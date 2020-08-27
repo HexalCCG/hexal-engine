@@ -1,4 +1,4 @@
-import '../cards/i_on_enter_field.dart';
+import '../cards/on_enter_field.dart';
 import '../models/enums/location.dart';
 import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
@@ -23,10 +23,11 @@ class PlayCardEvent extends Event {
   final bool resolved;
 
   /// [card] is put into the field.
-  const PlayCardEvent(
-      {required this.card,
-      this.donePutIntoField = false,
-      this.resolved = false});
+  const PlayCardEvent({
+    required this.card,
+    this.donePutIntoField = false,
+    this.resolved = false,
+  });
 
   @override
   bool valid(GameState state) {
@@ -57,7 +58,7 @@ class PlayCardEvent extends Event {
     if (!donePutIntoField) {
       return [
         PutIntoFieldStateChange(card: card),
-        ...(card is IOnEnterField)
+        ...(_card is OnEnterField)
             ? [AddEventStateChange(event: OnCardEnterFieldEvent(card: card))]
             : [],
         ModifyEventStateChange(event: this, newEvent: _copyDonePutIntoField),
@@ -85,7 +86,8 @@ class PlayCardEvent extends Event {
   @override
   List<Object> get props => [card, donePutIntoField, resolved];
 
-  factory PlayCardEvent.fromJson(List<dynamic> json) => PlayCardEvent(
+  /// Create this event from json.
+  static PlayCardEvent fromJson(List<dynamic> json) => PlayCardEvent(
       card: GameObjectReference.fromJson(json[0] as int),
       donePutIntoField: json[1] as bool,
       resolved: json[2] as bool);

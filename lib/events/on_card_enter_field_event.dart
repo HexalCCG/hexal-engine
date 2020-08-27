@@ -1,4 +1,4 @@
-import '../cards/i_on_enter_field.dart';
+import '../cards/on_enter_field.dart';
 import '../models/enums/location.dart';
 import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
@@ -21,8 +21,11 @@ class OnCardEnterFieldEvent extends Event {
 
   /// [Card] is the card entering the field.
   /// [effectIndex] is the effect currently being resolved.
-  const OnCardEnterFieldEvent(
-      {required this.card, this.effectIndex = 0, this.resolved = false});
+  const OnCardEnterFieldEvent({
+    required this.card,
+    this.effectIndex = 0,
+    this.resolved = false,
+  });
 
   @override
   bool valid(GameState state) {
@@ -30,6 +33,10 @@ class OnCardEnterFieldEvent extends Event {
 
     // Card must be in the field.
     if (_card.location != Location.field) {
+      return false;
+    }
+    // Card must have an onEnterField effect
+    if (_card is! OnEnterField) {
       return false;
     }
 
@@ -42,27 +49,19 @@ class OnCardEnterFieldEvent extends Event {
       return [ResolveEventStateChange(event: this)];
     }
 
-    final _card = state.getCardById(card.id);
-
-    // If the card has no enter field effects, resolve this.
-    if (!(_card is IOnEnterField)) {
-      return [ResolveEventStateChange(event: this)];
-    }
+    final _card = state.getCardById(card.id) as OnEnterField;
 
     // If only one effect is left, do it and resolve
-    if (effectIndex ==
-        (_card as IOnEnterField).onEnterFieldEffects.length - 1) {
+    if (effectIndex == _card.onEnterFieldEffects.length - 1) {
       return [
-        AddEventStateChange(
-            event: (_card as IOnEnterField).onEnterFieldEffects[effectIndex]),
+        AddEventStateChange(event: _card.onEnterFieldEffects[effectIndex]),
         ResolveEventStateChange(event: this),
       ];
     }
 
     // Otherwise do the effect and increment
     return [
-      AddEventStateChange(
-          event: (_card as IOnEnterField).onEnterFieldEffects[effectIndex]),
+      AddEventStateChange(event: _card.onEnterFieldEffects[effectIndex]),
       ModifyEventStateChange(event: this, newEvent: _copyIncremented),
     ];
   }
@@ -77,7 +76,8 @@ class OnCardEnterFieldEvent extends Event {
   @override
   List<Object> get props => [card, effectIndex, resolved];
 
-  factory OnCardEnterFieldEvent.fromJson(List<dynamic> json) =>
+  /// Create this event from json.
+  static OnCardEnterFieldEvent fromJson(List<dynamic> json) =>
       OnCardEnterFieldEvent(
           card: GameObjectReference.fromJson(json[0] as int),
           effectIndex: json[1] as int,
