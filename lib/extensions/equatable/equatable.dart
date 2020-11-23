@@ -25,7 +25,7 @@ abstract class Equatable {
   /// The list of properies that will be used to determine whether
   /// two [Equatable]s are equal.
   /// {@endtemplate}
-  List<Object> get props;
+  List<Object?> get props;
 
   /// {@template equatable_stringify}
   /// If set to `true`, the [toString] method will be overridden to output
