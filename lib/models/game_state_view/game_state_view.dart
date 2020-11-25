@@ -12,6 +12,9 @@ import 'card_object_view.dart';
 /// Immutable view of a game state.
 @immutable
 class GameStateView extends Equatable {
+  /// Which player the viewing client is.
+  final Player? clientPlayer;
+
   /// The player whose turn it currently is.
   final Player activePlayer;
 
@@ -35,6 +38,7 @@ class GameStateView extends Equatable {
 
   /// Represents a single moment snapshot of a game.
   const GameStateView({
+    this.clientPlayer,
     required this.activePlayer,
     required this.priorityPlayer,
     required this.turnPhase,
@@ -47,7 +51,8 @@ class GameStateView extends Equatable {
   /// Create a view of a game state.
   GameStateView.fromGameState(GameState gameState,
       {bool showHidden = false, Player? viewer})
-      : activePlayer = gameState.activePlayer,
+      : clientPlayer = viewer,
+        activePlayer = gameState.activePlayer,
         priorityPlayer = gameState.priorityPlayer,
         turnPhase = gameState.turnPhase,
         cards = showHidden
@@ -88,7 +93,10 @@ class GameStateView extends Equatable {
 
   /// Create a GameState from its JSON encoding.
   GameStateView.fromJson(Map<String, dynamic> json)
-      : activePlayer = Player.fromIndex(json['activePlayer'] as int),
+      : clientPlayer = (json['clientPlayer'] == null)
+            ? null
+            : Player.fromIndex(json['clientPlayer'] as int),
+        activePlayer = Player.fromIndex(json['activePlayer'] as int),
         priorityPlayer = Player.fromIndex(json['priorityPlayer'] as int),
         turnPhase = TurnPhase.fromIndex(json['turnPhase'] as int),
         cards = (json['cards'] as List<dynamic>)
@@ -103,6 +111,7 @@ class GameStateView extends Equatable {
 
   /// Encode this GameState as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
+        if (clientPlayer != null) 'clientPlayer': clientPlayer?.index,
         'activePlayer': activePlayer.index,
         'priorityPlayer': priorityPlayer.index,
         'turnPhase': turnPhase.index,

@@ -73,7 +73,7 @@ class CardObjectView extends Equatable {
 
   /// Create a Card view from its JSON form.
   CardObjectView.fromJson(Map<String, dynamic> json)
-      : id = json['set'] as int?,
+      : id = json['id'] as int?,
         owner = Player.fromIndex(json['owner'] as int),
         controller = Player.fromIndex(json['controller'] as int),
         location = Location.fromIndex(json['location'] as int),
@@ -93,7 +93,7 @@ class CardObjectView extends Equatable {
         'permanent': permanent,
         'setId': setId,
         'cardId': cardId,
-        'cardType': cardType?.index,
+        if (cardType != null) 'cardType': cardType?.index,
       };
 
   @override
