@@ -18,7 +18,7 @@ class AttackPlayerEvent extends Event {
   final GameObjectReference attacker;
 
   /// Player being attacked.
-  final GameObjectReference player;
+  final Player player;
 
   /// Should the attacker be exhausted?
   final bool exhaustAttacker;
@@ -42,7 +42,7 @@ class AttackPlayerEvent extends Event {
   @override
   bool valid(GameState state) {
     final _attacker = state.getGameObjectById(attacker.id);
-    final _player = state.getGameObjectById(player.id);
+    final _player = state.getGameObjectById(player.index);
 
     // Check if attacker is valid
     if (!(_attacker is Creature) || _attacker.location != Location.field) {
@@ -64,7 +64,7 @@ class AttackPlayerEvent extends Event {
 
     // Casts safe because of valid check above.
     final _attacker = state.getGameObjectById(attacker.id) as Creature;
-    final _player = Player.fromIndex(player.id);
+    final _player = Player.fromIndex(player.index);
 
     return [
       AddEventStateChange(
@@ -94,7 +94,7 @@ class AttackPlayerEvent extends Event {
   /// Create this event from json.
   static AttackPlayerEvent fromJson(List<dynamic> json) => AttackPlayerEvent(
       attacker: GameObjectReference.fromJson(json[0] as int),
-      player: GameObjectReference.fromJson(json[1] as int),
+      player: Player.fromIndex(json[1] as int),
       exhaustAttacker: json[2] as bool,
       enableCounter: json[3] as bool,
       resolved: json[4] as bool);
