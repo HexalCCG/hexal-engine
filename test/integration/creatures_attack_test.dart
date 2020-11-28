@@ -50,8 +50,7 @@ void main() {
 
     expect(
         () => state.applyAction(AttackPlayerAction(
-            attacker: attacker1.toReference,
-            player: GameObjectReference(id: Player.two.index))),
+            attacker: attacker1.toReference, player: Player.two)),
         throwsA(isA<ActionException>()));
 
     state = state.applyAction(AttackAction(

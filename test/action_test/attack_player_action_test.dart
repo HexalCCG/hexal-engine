@@ -31,16 +31,14 @@ void main() {
         turnPhase: TurnPhase.battle,
       );
       final action = AttackPlayerAction(
-          attacker: attacker.toReference,
-          player: GameObjectReference(id: Player.two.index));
+          attacker: attacker.toReference, player: Player.two);
       final change = state.generateStateChanges(action);
 
       expect(
           change,
           contains(AddEventStateChange(
               event: AttackPlayerEvent(
-                  attacker: attacker.toReference,
-                  player: GameObjectReference(id: Player.two.index)))));
+                  attacker: attacker.toReference, player: Player.two))));
     });
   });
 }
