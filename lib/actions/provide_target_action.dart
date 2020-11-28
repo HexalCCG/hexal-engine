@@ -59,9 +59,8 @@ class ProvideTargetAction extends Action {
   /// Create from json.
   static ProvideTargetAction fromJson(List<dynamic> json) =>
       ProvideTargetAction(
-        targets: (json[0] as List<int>?)
-                ?.map((id) => GameObjectReference.fromJson(id))
-                .toList() ??
-            const [],
+        targets: (json[0] as List<dynamic>)
+            .map((dynamic id) => GameObjectReference.fromJson(id as int))
+            .toList(),
       );
 }
