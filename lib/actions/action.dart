@@ -1,3 +1,4 @@
+import 'package:hexal_engine/exceptions/json_format_exception.dart';
 import 'package:meta/meta.dart';
 
 import '../extensions/equatable/equatable.dart';
@@ -39,7 +40,11 @@ abstract class Action extends Equatable {
       throw ArgumentError('Invalid event type: $type');
     }
 
-    return builder(data);
+    try {
+      return builder(data);
+    } catch (e) {
+      throw JsonFormatException('Action incorrectly formatted.');
+    }
   }
 
   /// Encode this card as JSON.
