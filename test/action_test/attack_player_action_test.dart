@@ -1,4 +1,3 @@
-import 'package:hexal_engine/models/game_object_reference.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/attack_player_action.dart';
 import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
