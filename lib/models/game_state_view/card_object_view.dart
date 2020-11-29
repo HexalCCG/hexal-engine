@@ -2,7 +2,6 @@ import 'package:meta/meta.dart';
 
 import '../../extensions/equatable/equatable.dart';
 import '../card_object.dart';
-import '../enums/card_type_view.dart';
 import '../enums/location.dart';
 import '../enums/player.dart';
 
@@ -30,9 +29,6 @@ class CardObjectView extends Equatable {
   /// ID of this card within its set.
   final int? cardId;
 
-  /// View representation of this card's type.
-  final CardTypeView? cardType;
-
   /// [id] uniquely identifies this card.
   const CardObjectView({
     required this.id,
@@ -42,7 +38,6 @@ class CardObjectView extends Equatable {
     required this.permanent,
     required this.setId,
     required this.cardId,
-    required this.cardType,
   });
 
   /// Hidden card object view.
@@ -53,8 +48,7 @@ class CardObjectView extends Equatable {
   })   : id = null,
         permanent = null,
         setId = null,
-        cardId = null,
-        cardType = null;
+        cardId = null;
 
   /// View of this card with properties hidden.
   CardObjectView get hiddenView => CardObjectView.hidden(
@@ -68,8 +62,7 @@ class CardObjectView extends Equatable {
         location = cardObject.location,
         permanent = cardObject.permanent,
         setId = cardObject.setId,
-        cardId = cardObject.cardId,
-        cardType = CardTypeView.fromCardObject(cardObject);
+        cardId = cardObject.cardId;
 
   /// Create a Card view from its JSON form.
   CardObjectView.fromJson(Map<String, dynamic> json)
@@ -79,10 +72,7 @@ class CardObjectView extends Equatable {
         location = Location.fromIndex(json['location'] as int),
         permanent = json['permanent'] as bool?,
         setId = json['setId'] as int?,
-        cardId = json['cardId'] as int?,
-        cardType = json['cardType'] == null
-            ? null
-            : CardTypeView.fromIndex(json['cardType'] as int);
+        cardId = json['cardId'] as int?;
 
   /// Encode this card as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -93,10 +83,9 @@ class CardObjectView extends Equatable {
         'permanent': permanent,
         'setId': setId,
         'cardId': cardId,
-        if (cardType != null) 'cardType': cardType?.index,
       };
 
   @override
   List<Object?> get props =>
-      [id, owner, controller, location, permanent, setId, cardId, cardType];
+      [id, owner, controller, location, permanent, setId, cardId];
 }
