@@ -20,9 +20,6 @@ class CardObjectView extends Equatable {
   /// Which zone this is in.
   final Location location;
 
-  /// Whether this card survives on board after the play event resolves.
-  final bool? permanent;
-
   /// ID of this card's set.
   final int? setId;
 
@@ -35,7 +32,6 @@ class CardObjectView extends Equatable {
     required this.owner,
     required this.controller,
     required this.location,
-    required this.permanent,
     required this.setId,
     required this.cardId,
   });
@@ -46,7 +42,6 @@ class CardObjectView extends Equatable {
     required this.controller,
     required this.location,
   })   : id = null,
-        permanent = null,
         setId = null,
         cardId = null;
 
@@ -60,7 +55,6 @@ class CardObjectView extends Equatable {
         owner = cardObject.owner,
         controller = cardObject.controller,
         location = cardObject.location,
-        permanent = cardObject.permanent,
         setId = cardObject.setId,
         cardId = cardObject.cardId;
 
@@ -70,7 +64,6 @@ class CardObjectView extends Equatable {
         owner = Player.fromIndex(json['owner'] as int),
         controller = Player.fromIndex(json['controller'] as int),
         location = Location.fromIndex(json['location'] as int),
-        permanent = json['permanent'] as bool?,
         setId = json['setId'] as int?,
         cardId = json['cardId'] as int?;
 
@@ -80,12 +73,10 @@ class CardObjectView extends Equatable {
         'owner': owner.index,
         'controller': controller.index,
         'location': location.index,
-        'permanent': permanent,
         'setId': setId,
         'cardId': cardId,
       };
 
   @override
-  List<Object?> get props =>
-      [id, owner, controller, location, permanent, setId, cardId];
+  List<Object?> get props => [id, owner, controller, location, setId, cardId];
 }
