@@ -1,3 +1,5 @@
+import 'package:hexal_engine/exceptions/json_format_exception.dart';
+
 import '../events/event.dart';
 import '../models/enums/player.dart';
 import 'effect_index.dart';
@@ -26,6 +28,10 @@ abstract class Effect extends Event {
       throw ArgumentError('Builder missing from index: $type');
     }
 
-    return builder(data);
+    try {
+      return builder(data);
+    } catch (e) {
+      throw JsonFormatException('Effect incorrectly formatted.');
+    }
   }
 }
