@@ -1,6 +1,6 @@
-import 'package:hexal_engine/exceptions/json_format_exception.dart';
 import 'package:meta/meta.dart';
 
+import '../exceptions/json_format_exception.dart';
 import '../extensions/equatable/equatable.dart';
 import '../models/game_state.dart';
 import '../state_changes/state_change.dart';

@@ -1,6 +1,5 @@
-import 'package:hexal_engine/exceptions/json_format_exception.dart';
-
 import '../events/event.dart';
+import '../exceptions/json_format_exception.dart';
 import '../models/enums/player.dart';
 import 'effect_index.dart';
 
