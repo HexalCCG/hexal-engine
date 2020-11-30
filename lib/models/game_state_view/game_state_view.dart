@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../actions/action.dart';
 import '../../events/event.dart';
 import '../../extensions/equatable/equatable.dart';
 import '../enums/game_over_state.dart';
@@ -71,6 +72,26 @@ class GameStateView extends Equatable {
         stack = gameState.stack,
         gameOverState = gameState.gameOverState,
         counterAvailable = gameState.counterAvailable;
+
+  /// Returns an estimate of this view as a game state. Unknown cards are
+  /// replaced with empty card representations.
+  GameState get asGameState {
+    return GameState(
+      activePlayer: activePlayer,
+      priorityPlayer: priorityPlayer,
+      turnPhase: turnPhase,
+      gameOverState: gameOverState,
+      counterAvailable: counterAvailable,
+      stack: stack,
+      cards:
+          cards.map((cardObjectView) => cardObjectView.asCardObject).toList(),
+    );
+  }
+
+  /// Checks whether an action is valid on the current state.
+  bool actionValid(Action action) {
+    return action.valid(asGameState);
+  }
 
   // GETTERS
 

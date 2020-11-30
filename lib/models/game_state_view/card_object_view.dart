@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../cards/hidden_card.dart';
 import '../../extensions/equatable/equatable.dart';
 import '../card_object.dart';
 import '../enums/location.dart';
@@ -57,6 +58,16 @@ class CardObjectView extends Equatable {
         location = cardObject.location,
         setId = cardObject.setId,
         cardId = cardObject.cardId;
+
+  /// Returns a CardObject representation of this.
+  CardObject get asCardObject {
+    if (id == null) {
+      return HiddenCard(
+          owner: owner, controller: controller, location: location);
+    } else {
+      return CardObject.fromJson(toJson());
+    }
+  }
 
   /// Create a Card view from its JSON form.
   CardObjectView.fromJson(Map<String, dynamic> json)
