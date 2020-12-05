@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:test/test.dart';
-import 'package:hexal_engine/events/draw_card_event.dart';
-import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
+import 'package:hexal_engine/events/draw_cards_event.dart';
+import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/models/enums/game_over_state.dart';
@@ -23,14 +23,14 @@ void main() {
         damage: 0,
       )
     ],
-    stack: [DrawCardEvent(player: Player.one, draws: 1)],
+    stack: [DrawCardsEvent(player: Player.one, draws: 1)],
     activePlayer: Player.one,
     priorityPlayer: Player.one,
     turnPhase: TurnPhase.battle,
   );
   const string =
       // ignore: lines_longer_than_80_chars
-      '{"activePlayer":0,"priorityPlayer":0,"turnPhase":3,"cards":[{"set":0,"number":1,"data":[2,0,0,3,false,false,0]}],"stack":[{"type":"DrawCardEvent","data":[0,1,0,false]}],"gameOverState":0,"counterAvailable":false}';
+      '{"activePlayer":0,"priorityPlayer":0,"turnPhase":3,"cards":[{"set":0,"number":1,"data":[2,0,0,3,false,false,0]}],"stack":[{"type":"DrawCardsEvent","data":[0,1,0,false]}],"gameOverState":0,"counterAvailable":false}';
 
   test('Serialization works properly. ', () {
     expect(

@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
-import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
+import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/models/enums/game_over_state.dart';
@@ -9,7 +9,7 @@ import 'package:hexal_engine/models/game_state.dart';
 import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
-  group('Card test S.001', () {
+  group('Card test S0.001', () {
     test('enters the field when played.', () {
       const card = CowCreatureCard(
         id: 2,

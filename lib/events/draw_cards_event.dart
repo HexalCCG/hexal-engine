@@ -11,7 +11,7 @@ import '../state_changes/state_change.dart';
 import 'event.dart';
 
 /// Event that draws cards for a player.
-class DrawCardEvent extends Event {
+class DrawCardsEvent extends Event {
   /// Player to draw.
   final Player player;
 
@@ -25,7 +25,7 @@ class DrawCardEvent extends Event {
   final bool resolved;
 
   /// [Player] draws [draws] cards, one at a time.
-  const DrawCardEvent({
+  const DrawCardsEvent({
     required this.player,
     required this.draws,
     this.cardsDrawn = 0,
@@ -78,7 +78,7 @@ class DrawCardEvent extends Event {
     }
   }
 
-  DrawCardEvent get _copyIncremented => DrawCardEvent(
+  DrawCardsEvent get _copyIncremented => DrawCardsEvent(
         player: player,
         draws: draws,
         cardsDrawn: cardsDrawn + 1,
@@ -86,14 +86,14 @@ class DrawCardEvent extends Event {
       );
 
   @override
-  DrawCardEvent get copyResolved => DrawCardEvent(
+  DrawCardsEvent get copyResolved => DrawCardsEvent(
       player: player, draws: draws, cardsDrawn: cardsDrawn, resolved: true);
 
   @override
   List<Object> get props => [player, draws, cardsDrawn, resolved];
 
   /// Create this event from json
-  static DrawCardEvent fromJson(List<dynamic> json) => DrawCardEvent(
+  static DrawCardsEvent fromJson(List<dynamic> json) => DrawCardsEvent(
       player: Player.fromIndex(json[0] as int),
       draws: json[1] as int,
       cardsDrawn: json[2] as int,

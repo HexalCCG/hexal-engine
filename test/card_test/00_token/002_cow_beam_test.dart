@@ -3,11 +3,11 @@ import 'package:test/test.dart';
 import 'package:hexal_engine/effects/targeted_effect.dart';
 import 'package:hexal_engine/actions/provide_target_action.dart';
 import 'package:hexal_engine/cards/creature.dart';
-import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
+import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/on_card_enter_field_event.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
-import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
+import 'package:hexal_engine/cards/00_token/002_cow_beam_card.dart';
 import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/models/enums/game_over_state.dart';
@@ -15,7 +15,7 @@ import 'package:hexal_engine/models/game_state.dart';
 import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
-  group('Card test S.002', () {
+  group('Card test S2.002', () {
     test('enters the field when played.', () {
       const card = CowBeamCard(
         id: 2,

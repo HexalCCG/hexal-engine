@@ -1,9 +1,9 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/models/card_object.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/cards/sample/000_test_card.dart';
+import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/events/draw_card_event.dart';
+import 'package:hexal_engine/events/draw_cards_event.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/state_changes/game_over_state_change.dart';
 import 'package:hexal_engine/state_changes/move_card_state_change.dart';
@@ -24,7 +24,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DrawCardEvent(player: Player.one, draws: 1),
+          DrawCardsEvent(player: Player.one, draws: 1),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -55,7 +55,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card1, card2],
         stack: [
-          DrawCardEvent(player: Player.one, draws: 2),
+          DrawCardsEvent(player: Player.one, draws: 2),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -78,7 +78,7 @@ void main() {
       final state = const GameState(
         gameOverState: GameOverState.playing,
         cards: [],
-        stack: [DrawCardEvent(player: Player.one, draws: 1)],
+        stack: [DrawCardsEvent(player: Player.one, draws: 1)],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,

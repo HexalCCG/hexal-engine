@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:hexal_engine/cards/sample/000_test_card.dart';
-import 'package:hexal_engine/cards/sample/002_cow_beam_card.dart';
+import 'package:hexal_engine/cards/00_token/000_test_card.dart';
+import 'package:hexal_engine/cards/00_token/002_cow_beam_card.dart';
 import 'package:hexal_engine/events/on_card_enter_field_event.dart';
 import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/state_changes/add_event_state_change.dart';

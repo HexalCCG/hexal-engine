@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/attack_action.dart';
-import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
+import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/attack_event.dart';
 import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:hexal_engine/models/enums/location.dart';

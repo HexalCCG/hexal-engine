@@ -30,7 +30,7 @@ mixin Creature on CardObject {
   bool get canAttack => !enteredFieldThisTurn && !exhausted;
 
   /// Allowed to attack players?
-  bool get canAttackPlayer => canAttack;
+  bool get canAttackPlayer => !enteredFieldThisTurn && !exhausted;
 
   /// Whether this can be targeted by attacks, and whether this blocks.
   bool get canBeAttacked => true;

@@ -2,18 +2,22 @@ import '../../models/card_object.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 import '../creature.dart';
+import '../ready.dart';
 
-/// 2/2 Vanilla Creature.
-class CowCreatureCard extends CardObject with Creature {
+/// 1/2 vanilla creature.
+class CarnivorousFern extends CardObject with Creature, Ready {
   @override
-  final bool exhausted;
+  int get setId => 1;
   @override
-  final bool enteredFieldThisTurn;
+  int get cardId => 3;
+
   @override
-  final int damage;
+  int get baseAttack => 2;
+  @override
+  int get baseHealth => 1;
 
   /// [id] must be unique. [owner] cannot be changed.
-  const CowCreatureCard({
+  const CarnivorousFern({
     required int id,
     required Player owner,
     required Player controller,
@@ -29,23 +33,20 @@ class CowCreatureCard extends CardObject with Creature {
         );
 
   @override
-  int get setId => 0;
+  final bool exhausted;
   @override
-  int get cardId => 1;
+  final bool enteredFieldThisTurn;
+  @override
+  final int damage;
 
   @override
-  int get baseAttack => 2;
-  @override
-  int get baseHealth => 2;
-
-  @override
-  CowCreatureCard copyWith({
+  CarnivorousFern copyWith({
     int? id,
     Player? owner,
     Player? controller,
     Location? location,
   }) =>
-      CowCreatureCard(
+      CarnivorousFern(
         id: id ?? this.id,
         owner: owner ?? this.owner,
         controller: controller ?? this.controller,
@@ -56,12 +57,12 @@ class CowCreatureCard extends CardObject with Creature {
       );
 
   @override
-  CowCreatureCard copyWithCreature({
+  CarnivorousFern copyWithCreature({
     bool? exhausted,
     bool? enteredFieldThisTurn,
     int? damage,
   }) =>
-      CowCreatureCard(
+      CarnivorousFern(
         id: id,
         owner: owner,
         controller: controller,
@@ -72,7 +73,7 @@ class CowCreatureCard extends CardObject with Creature {
       );
 
   /// Create from json.
-  static CowCreatureCard fromJson(List<dynamic> json) => CowCreatureCard(
+  static CarnivorousFern fromJson(List<dynamic> json) => CarnivorousFern(
         id: json[0] as int,
         owner: Player.fromIndex(json[1] as int),
         controller: Player.fromIndex(json[2] as int),

@@ -1,5 +1,5 @@
 import '../effects/targeted_effect.dart';
-import '../events/draw_card_event.dart';
+import '../events/draw_cards_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/enums/turn_phase.dart';
 import '../models/game_state.dart';
@@ -85,7 +85,7 @@ class PassAction extends Action {
       case TurnPhase.start:
         return [
           AddEventStateChange(
-              event: DrawCardEvent(draws: 1, player: state.activePlayer)),
+              event: DrawCardsEvent(draws: 1, player: state.activePlayer)),
           const PhaseStateChange(phase: TurnPhase.draw),
           PriorityStateChange(player: state.activePlayer),
         ];

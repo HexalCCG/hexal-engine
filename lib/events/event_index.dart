@@ -4,7 +4,7 @@ import 'attack_player_event.dart';
 import 'damage_creature_event.dart';
 import 'damage_player_event.dart';
 import 'destroy_card_event.dart';
-import 'draw_card_event.dart';
+import 'draw_cards_event.dart';
 import 'event.dart';
 import 'on_card_enter_field_event.dart';
 import 'play_card_event.dart';
@@ -16,7 +16,7 @@ Map<Type, Event Function(List<dynamic>)> eventBuilders = {
   DamageCreatureEvent: DamageCreatureEvent.fromJson,
   DamagePlayerEvent: DamagePlayerEvent.fromJson,
   DestroyCardEvent: DestroyCardEvent.fromJson,
-  DrawCardEvent: DrawCardEvent.fromJson,
+  DrawCardsEvent: DrawCardsEvent.fromJson,
   OnCardEnterFieldEvent: OnCardEnterFieldEvent.fromJson,
   PlayCardEvent: PlayCardEvent.fromJson,
   ...effectBuilders,

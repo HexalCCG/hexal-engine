@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/end_turn_clear_state_change.dart';
-import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
+import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/models/enums/game_over_state.dart';
 import 'package:hexal_engine/models/game_state.dart';
 import 'package:hexal_engine/models/enums/location.dart';

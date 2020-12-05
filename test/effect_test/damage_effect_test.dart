@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:hexal_engine/cards/sample/001_cow_creature_card.dart';
+import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/effects/damage_effect.dart';
 import 'package:hexal_engine/effects/target/creature_target.dart';
 import 'package:hexal_engine/events/damage_creature_event.dart';
