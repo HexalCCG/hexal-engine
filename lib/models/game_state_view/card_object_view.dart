@@ -27,15 +27,18 @@ class CardObjectView extends Equatable {
   /// ID of this card within its set.
   final int? cardId;
 
+  /// Optional list of json data for this card.
+  final List<Object>? data;
+
   /// [id] uniquely identifies this card.
-  const CardObjectView({
-    required this.id,
-    required this.owner,
-    required this.controller,
-    required this.location,
-    required this.setId,
-    required this.cardId,
-  });
+  const CardObjectView(
+      {this.id,
+      required this.owner,
+      required this.controller,
+      required this.location,
+      this.setId,
+      this.cardId,
+      this.data});
 
   /// Hidden card object view.
   CardObjectView.hidden({
@@ -44,7 +47,8 @@ class CardObjectView extends Equatable {
     required this.location,
   })   : id = null,
         setId = null,
-        cardId = null;
+        cardId = null,
+        data = null;
 
   /// View of this card with properties hidden.
   CardObjectView get hiddenView => CardObjectView.hidden(
@@ -57,7 +61,8 @@ class CardObjectView extends Equatable {
         controller = cardObject.controller,
         location = cardObject.location,
         setId = cardObject.setId,
-        cardId = cardObject.cardId;
+        cardId = cardObject.cardId,
+        data = cardObject.jsonProps;
 
   /// Returns a CardObject representation of this.
   CardObject get asCardObject {
@@ -65,7 +70,11 @@ class CardObjectView extends Equatable {
       return HiddenCard(
           owner: owner, controller: controller, location: location);
     } else {
-      return CardObject.fromJson(toJson());
+      return CardObject.fromJson(<String, dynamic>{
+        'set': setId,
+        'number': cardId,
+        'data': data,
+      });
     }
   }
 
@@ -76,7 +85,8 @@ class CardObjectView extends Equatable {
         controller = Player.fromIndex(json['controller'] as int),
         location = Location.fromIndex(json['location'] as int),
         setId = json['setId'] as int?,
-        cardId = json['cardId'] as int?;
+        cardId = json['cardId'] as int?,
+        data = json['data'] as List<Object>?;
 
   /// Encode this card as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
