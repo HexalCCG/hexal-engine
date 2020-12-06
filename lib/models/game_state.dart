@@ -1,7 +1,10 @@
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
+import '../actions/attack_action.dart';
+import '../actions/attack_player_action.dart';
 import '../actions/pass_action.dart';
+import '../actions/play_card_action.dart';
 import '../events/event.dart';
 import '../exceptions/game_state_exception.dart';
 import '../extensions/equatable/equatable.dart';
@@ -106,6 +109,37 @@ class GameState extends Equatable {
     } else {
       return (deck..shuffle()).first;
     }
+  }
+
+  /// Get a list of all possible actions for this state.
+  List<Action> get allActions {
+    final list = <Action>[];
+    // Pass action
+    list.add(PassAction());
+    // Attack action
+    for (var attacker in getCardsByLocation(priorityPlayer, Location.field)) {
+      final attackerReference = attacker.toReference;
+      for (var defender
+          in getCardsByLocation(notPriorityPlayer, Location.field)) {
+        list.add(AttackAction(
+            attacker: attackerReference, defender: defender.toReference));
+      }
+    }
+    // Attack player action
+    for (var attacker in getCardsByLocation(priorityPlayer, Location.field)) {
+      list.add(AttackPlayerAction(
+          attacker: attacker.toReference, player: notPriorityPlayer));
+    }
+    // Play card action
+    for (var card in getCardsByLocation(priorityPlayer, Location.hand)) {
+      list.add(PlayCardAction(card: card.toReference));
+    }
+    return list;
+  }
+
+  /// Get a list of possible actions filtered by validity.
+  List<Action> get validActions {
+    return allActions.where((action) => action.valid(this)).toList();
   }
 
   // MODIFICATION
