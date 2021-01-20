@@ -1,8 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../actions/action.dart';
 import '../../events/event.dart';
-import '../../extensions/equatable/equatable.dart';
 import '../enums/game_over_state.dart';
 import '../enums/location.dart';
 import '../enums/player.dart';

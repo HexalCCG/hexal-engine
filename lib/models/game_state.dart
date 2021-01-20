@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
@@ -7,7 +8,6 @@ import '../actions/pass_action.dart';
 import '../actions/play_card_action.dart';
 import '../events/event.dart';
 import '../exceptions/game_state_exception.dart';
-import '../extensions/equatable/equatable.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/remove_event_state_change.dart';
 import '../state_changes/state_change.dart';

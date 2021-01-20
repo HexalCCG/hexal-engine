@@ -1,6 +1,6 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../extensions/equatable/equatable.dart';
 import 'game_object_reference.dart';
 
 /// GameObjects represent anything in the game that can be targeted by effects.

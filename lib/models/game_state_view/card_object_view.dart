@@ -1,7 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../cards/hidden_card.dart';
-import '../../extensions/equatable/equatable.dart';
 import '../card_object.dart';
 import '../enums/location.dart';
 import '../enums/player.dart';

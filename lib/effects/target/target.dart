@@ -1,4 +1,5 @@
-import '../../extensions/equatable/equatable.dart';
+import 'package:equatable/equatable.dart';
+
 import '../../models/enums/player.dart';
 import '../../models/game_object_reference.dart';
 import '../../models/game_state.dart';
