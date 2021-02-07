@@ -42,7 +42,7 @@ abstract class Action extends Equatable {
 
     try {
       return builder(data);
-    } catch (e) {
+    } on FormatException {
       throw JsonFormatException('Action incorrectly formatted.');
     }
   }

@@ -45,7 +45,7 @@ abstract class Event extends Equatable {
 
     try {
       return builder(data);
-    } catch (e) {
+    } on FormatException {
       throw JsonFormatException('Effect incorrectly formatted.');
     }
   }

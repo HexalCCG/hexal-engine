@@ -29,7 +29,7 @@ abstract class Effect extends Event {
 
     try {
       return builder(data);
-    } catch (e) {
+    } on FormatException {
       throw JsonFormatException('Effect incorrectly formatted.');
     }
   }

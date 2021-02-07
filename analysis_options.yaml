@@ -36,7 +36,8 @@ linter:
     unawaited_futures: true
     unnecessary_null_in_if_null_operators: true
     use_function_type_syntax_for_parameters: true
-    avoid_catches_without_on_clauses: false
+    #avoid_catches_without_on_clauses: false
+    flutter_style_todos: true
 
 analyzer:
   #   exclude:
