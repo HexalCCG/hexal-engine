@@ -1,7 +1,5 @@
 {
   "configurations": [
-
-
     {
       "name": "Dart",
       "type": "dart",
@@ -13,15 +11,6 @@
       "type": "dart",
       "request": "launch",
       "program": "./test/",
-    },
-    {
-      "name": "Dart: Test Coverage",
-      "type": "dart",
-      "request": "launch",
-      "program": "./test/",
-      "vmAdditionalArgs": [
-        "--coverage coverage",
-      ],
     },
   ]
 }
