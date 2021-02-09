@@ -15,7 +15,6 @@ import 'enums/game_over_state.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
 import 'enums/turn_phase.dart';
-import 'game_object.dart';
 
 /// Represents a single moment snapshot of a game.
 class GameState extends Equatable {
@@ -80,11 +79,6 @@ class GameState extends Equatable {
       throw GameStateException('Card not found in state');
     }
     return cards.firstWhere((element) => element.id == id);
-  }
-
-  /// Gets a game object from this state by its id.
-  GameObject getGameObjectById(int id) {
-    return getCardById(id);
   }
 
   /// Gets this state's version of the provided event.
