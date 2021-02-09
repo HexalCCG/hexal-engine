@@ -34,8 +34,8 @@ void main() {
 
       expect(
           changes,
-          contains(MoveCardStateChange(
-              card: card.toReference, location: Location.hand)));
+          contains(
+              MoveCardStateChange(card: card.id, location: Location.hand)));
     });
 
     test('can draw multiple cards sequentially. ', () {

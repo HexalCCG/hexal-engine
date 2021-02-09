@@ -27,15 +27,14 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
       );
-      final action = PlayCardAction(card: card.toReference);
+      final action = PlayCardAction(card: card.id);
       final change = state.generateStateChanges(action);
 
       expect(
         ((change.firstWhere((element) => element is AddEventStateChange)
                     as AddEventStateChange)
                 .event as PlayCardEvent)
-            .card
-            .id,
+            .card,
         card.id,
       );
     });
@@ -54,7 +53,7 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
       );
-      final action = PlayCardAction(card: card.toReference);
+      final action = PlayCardAction(card: card.id);
 
       expect(
         () => state.generateStateChanges(action),
@@ -76,7 +75,7 @@ void main() {
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.main1,
       );
-      final action = PlayCardAction(card: card.toReference);
+      final action = PlayCardAction(card: card.id);
 
       expect(
         () => state.generateStateChanges(action),

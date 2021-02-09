@@ -3,7 +3,6 @@ import '../events/attack_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/enums/location.dart';
 import '../models/enums/turn_phase.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/priority_state_change.dart';
@@ -13,10 +12,10 @@ import 'action.dart';
 /// Declares an attack targeting a creature.
 class AttackAction extends Action {
   /// Creature attacking.
-  final GameObjectReference attacker;
+  final int attacker;
 
   /// Creature defending.
-  final GameObjectReference defender;
+  final int defender;
 
   /// Causes [attacker] to attack [defender].
   const AttackAction({required this.attacker, required this.defender});
@@ -29,8 +28,8 @@ class AttackAction extends Action {
     }
 
     // Get attacker and defender from state.
-    final _attacker = state.getCardById(attacker.id);
-    final _defender = state.getCardById(defender.id);
+    final _attacker = state.getCardById(attacker);
+    final _defender = state.getCardById(defender);
 
     // Check attacker and defender are creatures.
     if (!(_attacker is Creature && _defender is Creature)) {
@@ -125,7 +124,7 @@ class AttackAction extends Action {
 
   /// Create from json.
   static AttackAction fromJson(List<dynamic> json) => AttackAction(
-        attacker: GameObjectReference.fromJson(json[0] as int),
-        defender: GameObjectReference.fromJson(json[1] as int),
+        attacker: int.parse(json[0].toString()),
+        defender: int.parse(json[1].toString()),
       );
 }

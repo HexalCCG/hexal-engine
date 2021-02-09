@@ -34,8 +34,8 @@ void main() {
 
       expect(
           changes,
-          contains(MoveCardStateChange(
-              card: card.toReference, location: Location.exile)));
+          contains(
+              MoveCardStateChange(card: card.id, location: Location.exile)));
     });
     test('deals 1 damage and resolves if damage is 1. ', () {
       const card1 = TestCard(

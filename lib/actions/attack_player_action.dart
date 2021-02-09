@@ -4,7 +4,6 @@ import '../exceptions/action_exception.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
 import '../models/enums/turn_phase.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/priority_state_change.dart';
@@ -14,7 +13,7 @@ import 'action.dart';
 /// Declares an attack targeting a player.
 class AttackPlayerAction extends Action {
   /// Creature attacking.
-  final GameObjectReference attacker;
+  final int attacker;
 
   /// Player being attacked.
   final Player player;
@@ -25,7 +24,7 @@ class AttackPlayerAction extends Action {
   @override
   bool valid(GameState state) {
     // Get attacker from state.
-    final _attacker = state.getCardById(attacker.id);
+    final _attacker = state.getCardById(attacker);
 
     // Check attacker is a creature.
     if (_attacker is! Creature) {
@@ -91,7 +90,7 @@ class AttackPlayerAction extends Action {
 
   /// Create from json.
   static AttackPlayerAction fromJson(List<dynamic> json) => AttackPlayerAction(
-        attacker: GameObjectReference.fromJson(json[0] as int),
+        attacker: int.parse(json[0].toString()),
         player: Player.fromIndex(json[1] as int),
       );
 }

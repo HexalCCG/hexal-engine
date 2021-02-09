@@ -29,15 +29,15 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.battle,
       );
-      final action = AttackPlayerAction(
-          attacker: attacker.toReference, player: Player.two);
+      final action =
+          AttackPlayerAction(attacker: attacker.id, player: Player.two);
       final change = state.generateStateChanges(action);
 
       expect(
           change,
           contains(AddEventStateChange(
               event: AttackPlayerEvent(
-                  attacker: attacker.toReference, player: Player.two))));
+                  attacker: attacker.id, player: Player.two))));
     });
   });
 }

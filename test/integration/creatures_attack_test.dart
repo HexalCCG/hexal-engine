@@ -48,12 +48,12 @@ void main() {
     );
 
     expect(
-        () => state.applyAction(AttackPlayerAction(
-            attacker: attacker1.toReference, player: Player.two)),
+        () => state.applyAction(
+            AttackPlayerAction(attacker: attacker1.id, player: Player.two)),
         throwsA(isA<ActionException>()));
 
-    state = state.applyAction(AttackAction(
-        attacker: attacker2.toReference, defender: defender.toReference));
+    state = state.applyAction(
+        AttackAction(attacker: attacker2.id, defender: defender.id));
     state = state.testPassUntilEmpty();
   });
 }

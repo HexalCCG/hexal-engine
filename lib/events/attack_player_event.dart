@@ -1,7 +1,6 @@
 import '../cards/creature.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/exhaust_creature_state_change.dart';
@@ -14,7 +13,7 @@ import 'event.dart';
 /// Event for a creature attacking a player.
 class AttackPlayerEvent extends Event {
   /// Creature attacking.
-  final GameObjectReference attacker;
+  final int attacker;
 
   /// Player being attacked.
   final Player player;
@@ -40,7 +39,7 @@ class AttackPlayerEvent extends Event {
 
   @override
   bool valid(GameState state) {
-    final _attacker = state.getCardById(attacker.id);
+    final _attacker = state.getCardById(attacker);
 
     // Check if attacker is valid
     if (!(_attacker is Creature) || _attacker.location != Location.field) {
@@ -57,7 +56,7 @@ class AttackPlayerEvent extends Event {
     }
 
     // Casts safe because of valid check above.
-    final _attacker = state.getCardById(attacker.id) as Creature;
+    final _attacker = state.getCardById(attacker) as Creature;
     final _player = Player.fromIndex(player.index);
 
     return [
@@ -87,7 +86,7 @@ class AttackPlayerEvent extends Event {
 
   /// Create this event from json.
   static AttackPlayerEvent fromJson(List<dynamic> json) => AttackPlayerEvent(
-      attacker: GameObjectReference.fromJson(json[0] as int),
+      attacker: int.parse(json[0].toString()),
       player: Player.fromIndex(json[1] as int),
       exhaustAttacker: json[2] as bool,
       enableCounter: json[3] as bool,

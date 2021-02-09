@@ -28,9 +28,8 @@ void main() {
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
       );
-      state = state.applyStateChanges([
-        DamageCreatureStateChange(creature: creature.toReference, damage: 1)
-      ]);
+      state = state.applyStateChanges(
+          [DamageCreatureStateChange(creature: creature.id, damage: 1)]);
       expect((state.cards.first as Creature).damage, 1);
     });
   });

@@ -1,4 +1,3 @@
-import '../models/game_object_reference.dart';
 import 'effect.dart';
 import 'target/target.dart';
 
@@ -11,8 +10,8 @@ mixin TargetedEffect on Effect {
   bool get targetFilled;
 
   /// Result of requesting a target from the player.
-  List<GameObjectReference> get targets;
+  List<int> get targets;
 
   /// Copies this effect with [targets] set to this.
-  TargetedEffect copyFilled(List<GameObjectReference> targets);
+  TargetedEffect copyFilled(List<int> targets);
 }

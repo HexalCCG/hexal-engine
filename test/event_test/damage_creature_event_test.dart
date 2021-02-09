@@ -24,7 +24,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DamageCreatureEvent(creature: card.toReference, damage: 1),
+          DamageCreatureEvent(creature: card.id, damage: 1),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -32,10 +32,8 @@ void main() {
       );
       final changes = state.resolveTopStackEvent();
 
-      expect(
-          changes,
-          contains(DamageCreatureStateChange(
-              creature: card.toReference, damage: 1)));
+      expect(changes,
+          contains(DamageCreatureStateChange(creature: card.id, damage: 1)));
     });
   });
 }

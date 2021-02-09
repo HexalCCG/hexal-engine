@@ -27,7 +27,7 @@ void main() {
           damage: 1,
           target: CreatureTarget(controller: Player.one),
           targetFilled: true,
-          targets: [card.toReference]);
+          targets: [card.id]);
       final state = GameState(
         gameOverState: GameOverState.playing,
         cards: [card],
@@ -41,7 +41,7 @@ void main() {
       expect(
           changes,
           contains(AddEventStateChange(
-            event: DamageCreatureEvent(creature: card.toReference, damage: 1),
+            event: DamageCreatureEvent(creature: card.id, damage: 1),
           )));
     });
   });

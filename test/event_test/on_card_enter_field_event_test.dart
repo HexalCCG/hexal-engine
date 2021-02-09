@@ -24,7 +24,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          OnCardEnterFieldEvent(card: card.toReference),
+          OnCardEnterFieldEvent(card: card.id),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -35,7 +35,7 @@ void main() {
       expect(
           changes,
           contains(ResolveEventStateChange(
-              event: OnCardEnterFieldEvent(card: card.toReference))));
+              event: OnCardEnterFieldEvent(card: card.id))));
     });
     test('adds the card\'s effect if it has only one. ', () {
       const card = CowBeamCard(
@@ -48,7 +48,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          OnCardEnterFieldEvent(card: card.toReference),
+          OnCardEnterFieldEvent(card: card.id),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,

@@ -1,7 +1,6 @@
 import '../models/enums/game_over_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/game_over_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
@@ -72,7 +71,7 @@ class DamagePlayerEvent extends Event implements DamageEvent {
       ];
     } else {
       final _card = (deck..shuffle()).first;
-      final _reference = GameObjectReference(id: _card.id);
+      final _reference = _card.id;
 
       return [
         MoveCardStateChange(card: _reference, location: Location.exile),

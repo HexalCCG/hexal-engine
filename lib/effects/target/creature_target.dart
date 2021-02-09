@@ -1,7 +1,6 @@
 import '../../cards/creature.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
-import '../../models/game_object_reference.dart';
 import '../../models/game_state.dart';
 import 'target.dart';
 
@@ -19,17 +18,17 @@ class CreatureTarget extends Target {
   });
 
   @override
-  bool targetValid(GameState state, List<GameObjectReference> targets) {
+  bool targetValid(GameState state, List<int> targets) {
     if (targets.length != 1) {
       return false;
     }
-    final _target = state.getCardById(targets.first.id);
+    final _target = state.getCardById(targets.first);
     return (_target is Creature) && (_target.location == Location.field);
   }
 
   @override
   bool anyValid(GameState state) {
-    return state.cards.any((card) => targetValid(state, [card.toReference]));
+    return state.cards.any((card) => targetValid(state, [card.id]));
   }
 
   @override

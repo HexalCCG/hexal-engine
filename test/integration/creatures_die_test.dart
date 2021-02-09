@@ -40,7 +40,7 @@ void main() {
     );
     // Game starts in player 1's main phase 1, and player 1 has priority.
     // Player 1 plays their Cow Beam.
-    state = state.applyAction(PlayCardAction(card: card.toReference));
+    state = state.applyAction(PlayCardAction(card: card.id));
 
     // Cow Beam moves into limbo and priority passes.
     expect(state.getCardsByLocation(Player.one, Location.limbo),
@@ -68,9 +68,8 @@ void main() {
     expect(state.stack.last, isA<TargetedEffect>());
 
     // Player 1 provides a target.
-    state = state.applyAction(ProvideTargetAction(targets: [
-      state.cards.firstWhere((element) => element.id == 3).toReference
-    ]));
+    state = state.applyAction(ProvideTargetAction(
+        targets: [state.cards.firstWhere((element) => element.id == 3).id]));
 
     // Target added to target request & folded into DamageEvent.
     state = state.applyAction(PassAction());

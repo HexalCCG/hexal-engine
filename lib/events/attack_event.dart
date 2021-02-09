@@ -1,6 +1,5 @@
 import '../cards/creature.dart';
 import '../models/enums/location.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/exhaust_creature_state_change.dart';
@@ -13,10 +12,10 @@ import 'event.dart';
 /// Event representing one creature attacking another.
 class AttackEvent extends Event {
   /// Creature that is attacking.
-  final GameObjectReference attacker;
+  final int attacker;
 
   /// Creature being attacked.
-  final GameObjectReference defender;
+  final int defender;
 
   /// Should the attacker be exhausted?
   final bool exhaustAttacker;
@@ -40,8 +39,8 @@ class AttackEvent extends Event {
   @override
   bool valid(GameState state) {
     // Get cards from state
-    final _attacker = state.getCardById(attacker.id);
-    final _defender = state.getCardById(defender.id);
+    final _attacker = state.getCardById(attacker);
+    final _defender = state.getCardById(defender);
 
     // Check cards are creatures.
     if (!(_attacker is Creature) || !(_defender is Creature)) {
@@ -64,8 +63,8 @@ class AttackEvent extends Event {
     }
 
     // Get cards from state
-    final _attacker = state.getCardById(attacker.id) as Creature;
-    final _defender = state.getCardById(defender.id) as Creature;
+    final _attacker = state.getCardById(attacker) as Creature;
+    final _defender = state.getCardById(defender) as Creature;
 
     return [
       AddEventStateChange(
@@ -98,8 +97,8 @@ class AttackEvent extends Event {
 
   /// Create this event from json.
   static AttackEvent fromJson(List<dynamic> json) => AttackEvent(
-      attacker: GameObjectReference.fromJson(json[0] as int),
-      defender: GameObjectReference.fromJson(json[1] as int),
+      attacker: int.parse(json[0].toString()),
+      defender: int.parse(json[1].toString()),
       exhaustAttacker: json[2] as bool,
       enableCounter: json[3] as bool,
       resolved: json[4] as bool);

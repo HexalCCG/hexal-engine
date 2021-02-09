@@ -1,5 +1,4 @@
 import '../models/enums/location.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/move_card_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
@@ -9,7 +8,7 @@ import 'event.dart';
 /// Event that destroys a card.
 class DestroyCardEvent extends Event {
   /// Card to destroy.
-  final GameObjectReference card;
+  final int card;
 
   @override
   final bool resolved;
@@ -22,7 +21,7 @@ class DestroyCardEvent extends Event {
 
   @override
   bool valid(GameState state) {
-    final _card = state.getCardById(card.id);
+    final _card = state.getCardById(card);
 
     // Card must be on field
     if (_card.location != Location.field) {
@@ -47,6 +46,7 @@ class DestroyCardEvent extends Event {
 
   /// Create this event from json
   static DestroyCardEvent fromJson(List<dynamic> json) => DestroyCardEvent(
-      card: GameObjectReference.fromJson(json[0] as int),
-      resolved: json[1] as bool);
+        card: int.parse(json[0].toString()),
+        resolved: json[1] as bool,
+      );
 }

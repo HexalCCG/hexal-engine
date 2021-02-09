@@ -1,4 +1,3 @@
-import 'package:hexal_engine/models/game_object_reference.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/effects/targeted_effect.dart';
 import 'package:hexal_engine/actions/provide_target_action.dart';
@@ -34,7 +33,7 @@ void main() {
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // They have one First Creature in hand.
       // Player 1 plays their First Creature.
-      state = state.applyAction(PlayCardAction(card: card.toReference));
+      state = state.applyAction(PlayCardAction(card: card.id));
 
       // First Creature moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo).first,
@@ -78,7 +77,7 @@ void main() {
       );
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // Player 1 plays their Cow Beam.
-      state = state.applyAction(PlayCardAction(card: card.toReference));
+      state = state.applyAction(PlayCardAction(card: card.id));
 
       // Cow Beam moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo),
@@ -109,9 +108,7 @@ void main() {
       expect(state.stack.last, isA<TargetedEffect>());
 
       // Player 1 provides a target.
-      state = state.applyAction(ProvideTargetAction(targets: [
-        GameObjectReference(id: 3),
-      ]));
+      state = state.applyAction(ProvideTargetAction(targets: [3]));
 
       // Target added to target request & folded into DamageEvent.
       state = state.applyAction(PassAction());
