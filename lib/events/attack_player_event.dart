@@ -3,7 +3,6 @@ import '../models/enums/location.dart';
 import '../models/enums/player.dart';
 import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
-import '../models/player_object.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/exhaust_creature_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
@@ -42,14 +41,9 @@ class AttackPlayerEvent extends Event {
   @override
   bool valid(GameState state) {
     final _attacker = state.getGameObjectById(attacker.id);
-    final _player = state.getGameObjectById(player.index);
 
     // Check if attacker is valid
     if (!(_attacker is Creature) || _attacker.location != Location.field) {
-      return false;
-    }
-    // Check if player is valid
-    if (!(_player is PlayerObject)) {
       return false;
     }
 
