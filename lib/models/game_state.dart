@@ -16,7 +16,6 @@ import 'enums/location.dart';
 import 'enums/player.dart';
 import 'enums/turn_phase.dart';
 import 'game_object.dart';
-import 'player_object.dart';
 
 /// Represents a single moment snapshot of a game.
 class GameState extends Equatable {
@@ -85,13 +84,7 @@ class GameState extends Equatable {
 
   /// Gets a game object from this state by its id.
   GameObject getGameObjectById(int id) {
-    if (id == 0) {
-      return PlayerObject(player: Player.one);
-    } else if (id == 1) {
-      return PlayerObject(player: Player.two);
-    } else {
-      return getCardById(id);
-    }
+    return getCardById(id);
   }
 
   /// Gets this state's version of the provided event.

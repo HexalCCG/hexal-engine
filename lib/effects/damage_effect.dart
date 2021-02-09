@@ -4,7 +4,6 @@ import '../events/damage_player_event.dart';
 import '../models/enums/player.dart';
 import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
-import '../models/player_object.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
@@ -93,17 +92,22 @@ class DamageEffect extends Effect with TargetedEffect {
 
   StateChange _generateStateChange(
       GameState state, GameObjectReference reference) {
-    final _object = state.getGameObjectById(reference.id);
+    // If target is a player.
+    if (reference.id < 2) {
+      return AddEventStateChange(
+          event: DamagePlayerEvent(
+              player: Player.fromIndex(reference.id), damage: damage));
+    } else {
+      final _object = state.getGameObjectById(reference.id);
 
-    if (_object is Creature) {
-      return AddEventStateChange(
-          event: DamageCreatureEvent(creature: reference, damage: damage));
+      if (_object is Creature) {
+        return AddEventStateChange(
+            event: DamageCreatureEvent(creature: reference, damage: damage));
+      } else {
+        throw ArgumentError(
+            'ID provided to damage effect was not a player or creature.');
+      }
     }
-    if (_object is PlayerObject) {
-      return AddEventStateChange(
-          event: DamagePlayerEvent(player: _object.player, damage: damage));
-    }
-    throw ArgumentError();
   }
 
   @override

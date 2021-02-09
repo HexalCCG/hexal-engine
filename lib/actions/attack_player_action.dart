@@ -6,7 +6,6 @@ import '../models/enums/player.dart';
 import '../models/enums/turn_phase.dart';
 import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
-import '../models/player_object.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/priority_state_change.dart';
 import '../state_changes/state_change.dart';
@@ -27,15 +26,9 @@ class AttackPlayerAction extends Action {
   bool valid(GameState state) {
     // Get attacker from state.
     final _attacker = state.getCardById(attacker.id);
-    final _player = state.getGameObjectById(player.index);
 
     // Check attacker is a creature.
     if (_attacker is! Creature) {
-      return false;
-    }
-
-    // Check player is a player.
-    if (_player is! PlayerObject) {
       return false;
     }
 
@@ -60,7 +53,7 @@ class AttackPlayerAction extends Action {
     }
 
     // Can't attack yourself.
-    if (_player.player == state.priorityPlayer) {
+    if (player == state.priorityPlayer) {
       return false;
     }
     // Check attacker can attack players
