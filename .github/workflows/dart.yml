@@ -2,9 +2,9 @@ name: Dart
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
     # available. See https://hub.docker.com/r/google/dart/ for the available
     # images.
     container:
-      image:  google/dart:dev
+      image: google/dart:dev
 
     steps:
       - uses: actions/checkout@v2
@@ -37,15 +37,18 @@ jobs:
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
-      #- name: Run tests
-      #  run: dart test
-      
+      - name: Run tests
+        run: dart test
+
       #- name: Dart Full Coverage
       #  uses: stelynx/dart-full-coverage@v1.0.3
       #  with:
       #    package: hexal_engine
-          
-      - run: dart test --coverage .
+
+      - name: Code coverage
+      - run: pub run test_coverage
+
+      - name: Upload coverage to codecov
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
