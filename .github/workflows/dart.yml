@@ -44,3 +44,5 @@ jobs:
         uses: stelynx/dart-full-coverage@v1.0.3
         with:
           package: hexal_engine
+          
+      - run: dart test --coverage .
