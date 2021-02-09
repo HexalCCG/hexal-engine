@@ -40,7 +40,7 @@ class AttackPlayerEvent extends Event {
 
   @override
   bool valid(GameState state) {
-    final _attacker = state.getGameObjectById(attacker.id);
+    final _attacker = state.getCardById(attacker.id);
 
     // Check if attacker is valid
     if (!(_attacker is Creature) || _attacker.location != Location.field) {
@@ -57,7 +57,7 @@ class AttackPlayerEvent extends Event {
     }
 
     // Casts safe because of valid check above.
-    final _attacker = state.getGameObjectById(attacker.id) as Creature;
+    final _attacker = state.getCardById(attacker.id) as Creature;
     final _player = Player.fromIndex(player.index);
 
     return [

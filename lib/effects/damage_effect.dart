@@ -49,7 +49,7 @@ class DamageEffect extends Effect with TargetedEffect {
 
     // Check all targets exist in state.
     for (final ref in targets) {
-      state.getGameObjectById(ref.id);
+      state.getCardById(ref.id);
     }
 
     return true;
@@ -98,7 +98,7 @@ class DamageEffect extends Effect with TargetedEffect {
           event: DamagePlayerEvent(
               player: Player.fromIndex(reference.id), damage: damage));
     } else {
-      final _object = state.getGameObjectById(reference.id);
+      final _object = state.getCardById(reference.id);
 
       if (_object is Creature) {
         return AddEventStateChange(
