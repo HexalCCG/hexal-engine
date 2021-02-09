@@ -1,12 +1,9 @@
-import 'package:meta/meta.dart';
-
 import '../cards/card_index.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
 import 'game_object.dart';
 
 /// Card represent single cards.
-@immutable
 abstract class Card extends GameObject {
   /// Player who owns this card.
   final Player owner;
