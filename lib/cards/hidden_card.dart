@@ -1,10 +1,10 @@
-import '../models/card_object.dart';
+import '../models/card.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
 
 /// Representation of a hidden card in a game state. ID is -1. Game states
 /// containing this should not be iterated.
-class HiddenCard extends CardObject {
+class HiddenCard extends Card {
   /// Representation of a hidden card in a game state. ID is -1. Game states
   /// containing this should not be iterated.
   const HiddenCard({
@@ -23,7 +23,7 @@ class HiddenCard extends CardObject {
   int get setId => -1;
 
   @override
-  CardObject copyWith(
+  Card copyWith(
       {int? id, Player? owner, Player? controller, Location? location}) {
     if (id != null && id != -1) {
       throw ArgumentError('Hidden card ID must be -1.');

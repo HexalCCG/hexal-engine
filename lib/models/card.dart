@@ -7,7 +7,7 @@ import 'game_object.dart';
 
 /// Card represent single cards.
 @immutable
-abstract class CardObject extends GameObject {
+abstract class Card extends GameObject {
   /// Player who owns this card.
   final Player owner;
 
@@ -27,7 +27,7 @@ abstract class CardObject extends GameObject {
   int get cardId;
 
   /// [id] must be unique and cannot be changed. [owner] cannot be changed.
-  const CardObject({
+  const Card({
     required int id,
     required this.owner,
     required this.controller,
@@ -35,11 +35,10 @@ abstract class CardObject extends GameObject {
   }) : super(id: id);
 
   @override
-  CardObject copyWith(
-      {int id, Player owner, Player controller, Location location});
+  Card copyWith({int id, Player owner, Player controller, Location location});
 
   /// Create a Card from its JSON form.
-  factory CardObject.fromJson(Map<String, dynamic> json) {
+  factory Card.fromJson(Map<String, dynamic> json) {
     final cardSet = json['set'] as int;
     final cardId = json['number'] as int;
     final data = json['data'] as List<dynamic>;

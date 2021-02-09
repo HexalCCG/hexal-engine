@@ -8,7 +8,7 @@ import '../enums/location.dart';
 import '../enums/player.dart';
 import '../enums/turn_phase.dart';
 import '../game_state.dart';
-import 'card_object_view.dart';
+import 'card_view.dart';
 
 /// Immutable view of a game state.
 @immutable
@@ -26,7 +26,7 @@ class GameStateView extends Equatable {
   final TurnPhase turnPhase;
 
   /// All cards held in the state.
-  final List<CardObjectView> cards;
+  final List<CardView> cards;
 
   /// Stack of events resolved top-first.
   final List<Event> stack;
@@ -57,17 +57,14 @@ class GameStateView extends Equatable {
         priorityPlayer = gameState.priorityPlayer,
         turnPhase = gameState.turnPhase,
         cards = showHidden
-            ? gameState.cards
-                .map((cardObject) => CardObjectView.fromCardObject(cardObject))
-                .toList()
+            ? gameState.cards.map((card) => CardView.fromCard(card)).toList()
             : gameState.cards
-                .map((cardObject) => CardObjectView.fromCardObject(cardObject))
-                .map((cardObjectView) =>
-                    (cardObjectView.location == Location.hand &&
-                                cardObjectView.controller != viewer) ||
-                            cardObjectView.location == Location.deck
-                        ? cardObjectView.hiddenView
-                        : cardObjectView)
+                .map((card) => CardView.fromCard(card))
+                .map((cardView) => (cardView.location == Location.hand &&
+                            cardView.controller != viewer) ||
+                        cardView.location == Location.deck
+                    ? cardView.hiddenView
+                    : cardView)
                 .toList(),
         stack = gameState.stack,
         gameOverState = gameState.gameOverState,
@@ -83,8 +80,7 @@ class GameStateView extends Equatable {
       gameOverState: gameOverState,
       counterAvailable: counterAvailable,
       stack: stack,
-      cards:
-          cards.map((cardObjectView) => cardObjectView.asCardObject).toList(),
+      cards: cards.map((cardView) => cardView.asCard).toList(),
     );
   }
 
@@ -104,7 +100,7 @@ class GameStateView extends Equatable {
       (activePlayer == Player.one) ? Player.two : Player.one;
 
   /// Returns cards in the specified zone.
-  List<CardObjectView> getCardsByLocation(Player player, Location location) {
+  List<CardView> getCardsByLocation(Player player, Location location) {
     return cards
         .where((card) => card.controller == player && card.location == location)
         .toList();
@@ -122,7 +118,7 @@ class GameStateView extends Equatable {
         turnPhase = TurnPhase.fromIndex(json['turnPhase'] as int),
         cards = (json['cards'] as List<dynamic>)
             .map((dynamic data) =>
-                CardObjectView.fromJson(data as Map<String, dynamic>))
+                CardView.fromJson(data as Map<String, dynamic>))
             .toList(),
         stack = (json['stack'] as List<dynamic>)
             .map((dynamic data) => Event.fromJson(data as Map<String, dynamic>))
