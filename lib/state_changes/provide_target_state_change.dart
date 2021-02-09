@@ -1,7 +1,6 @@
 import '../effects/targeted_effect.dart';
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
@@ -11,7 +10,7 @@ class ProvideTargetStateChange extends StateChange {
   final TargetedEffect request;
 
   /// Targets to input.
-  final List<GameObjectReference> targets;
+  final List<int> targets;
 
   /// Fills a target request.
   const ProvideTargetStateChange(

@@ -103,21 +103,21 @@ class GameState extends Equatable {
     list.add(PassAction());
     // Attack action
     for (var attacker in getCardsByLocation(priorityPlayer, Location.field)) {
-      final attackerReference = attacker.toReference;
+      final attackerReference = attacker.id;
       for (var defender
           in getCardsByLocation(notPriorityPlayer, Location.field)) {
-        list.add(AttackAction(
-            attacker: attackerReference, defender: defender.toReference));
+        list.add(
+            AttackAction(attacker: attackerReference, defender: defender.id));
       }
     }
     // Attack player action
     for (var attacker in getCardsByLocation(priorityPlayer, Location.field)) {
-      list.add(AttackPlayerAction(
-          attacker: attacker.toReference, player: notPriorityPlayer));
+      list.add(
+          AttackPlayerAction(attacker: attacker.id, player: notPriorityPlayer));
     }
     // Play card action
     for (var card in getCardsByLocation(priorityPlayer, Location.hand)) {
-      list.add(PlayCardAction(card: card.toReference));
+      list.add(PlayCardAction(card: card.id));
     }
     return list;
   }

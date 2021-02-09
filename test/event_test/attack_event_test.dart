@@ -35,7 +35,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card1, card2],
         stack: [
-          AttackEvent(attacker: card1.toReference, defender: card2.toReference),
+          AttackEvent(attacker: card1.id, defender: card2.id),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -48,10 +48,10 @@ void main() {
           containsAll(<StateChange>[
             AddEventStateChange(
                 event: DamageCreatureEvent(
-                    creature: card1.toReference, damage: card2.attack)),
+                    creature: card1.id, damage: card2.attack)),
             AddEventStateChange(
                 event: DamageCreatureEvent(
-                    creature: card2.toReference, damage: card1.attack))
+                    creature: card2.id, damage: card1.attack))
           ]));
     });
   });

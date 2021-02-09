@@ -23,7 +23,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          DestroyCardEvent(card: card.toReference),
+          DestroyCardEvent(card: card.id),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,

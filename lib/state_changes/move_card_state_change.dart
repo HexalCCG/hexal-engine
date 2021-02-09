@@ -1,14 +1,13 @@
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
 import '../models/enums/location.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
 /// StateChange to move a card.
 class MoveCardStateChange extends StateChange {
   /// Card to move.
-  final GameObjectReference card;
+  final int card;
 
   /// Location to move the card to.
   final Location location;
@@ -18,10 +17,10 @@ class MoveCardStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    if (!state.containsCardWithId(card.id)) {
+    if (!state.containsCardWithId(card)) {
       throw (StateChangeException('Card with that id not found in state.'));
     }
-    final oldCard = state.getCardById(card.id);
+    final oldCard = state.getCardById(card);
     final newCard = oldCard.copyWith(location: location);
 
     return state.copyWith(cards: state.cards.replaceSingle(oldCard, newCard));

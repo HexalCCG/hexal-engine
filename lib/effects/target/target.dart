@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 import '../../models/enums/player.dart';
-import '../../models/game_object_reference.dart';
 import '../../models/game_state.dart';
 import 'target_index.dart';
 
@@ -17,7 +16,7 @@ abstract class Target extends Equatable {
   const Target();
 
   /// Checks if a given target list is valid.
-  bool targetValid(GameState state, List<GameObjectReference> targets);
+  bool targetValid(GameState state, List<int> targets);
 
   /// Checks if any targets are valid for the state.
   bool anyValid(GameState state);

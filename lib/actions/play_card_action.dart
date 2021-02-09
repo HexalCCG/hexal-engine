@@ -1,7 +1,6 @@
 import '../events/play_card_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/enums/location.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/move_card_state_change.dart';
@@ -12,14 +11,14 @@ import 'action.dart';
 /// Plays the card from your hand.
 class PlayCardAction extends Action {
   /// Card to play.
-  final GameObjectReference card;
+  final int card;
 
   /// Plays [card] from priority player's hand.
   const PlayCardAction({required this.card});
 
   @override
   bool valid(GameState state) {
-    final _card = state.getCardById(card.id);
+    final _card = state.getCardById(card);
 
     if (state.stack.isNotEmpty) {
       // Cannot play cards if stack is not empty.
@@ -56,6 +55,6 @@ class PlayCardAction extends Action {
 
   /// Create from json.
   static PlayCardAction fromJson(List<dynamic> json) => PlayCardAction(
-        card: GameObjectReference.fromJson(json[0] as int),
+        card: int.parse(json[0].toString()),
       );
 }

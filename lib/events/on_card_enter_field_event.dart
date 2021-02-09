@@ -1,6 +1,5 @@
 import '../cards/on_enter_field.dart';
 import '../models/enums/location.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
@@ -11,7 +10,7 @@ import 'event.dart';
 /// Effect caused by a card entering the field.
 class OnCardEnterFieldEvent extends Event {
   /// Card whose effects are being applied.
-  final GameObjectReference card;
+  final int card;
 
   /// Index of effect currently being applied.
   final int effectIndex;
@@ -29,7 +28,7 @@ class OnCardEnterFieldEvent extends Event {
 
   @override
   bool valid(GameState state) {
-    final _card = state.getCardById(card.id);
+    final _card = state.getCardById(card);
 
     // Card must be in the field.
     if (_card.location != Location.field) {
@@ -49,7 +48,7 @@ class OnCardEnterFieldEvent extends Event {
       return [ResolveEventStateChange(event: this)];
     }
 
-    final _card = state.getCardById(card.id) as OnEnterField;
+    final _card = state.getCardById(card) as OnEnterField;
 
     // If only one effect is left, do it and resolve
     if (effectIndex == _card.onEnterFieldEffects.length - 1) {
@@ -79,7 +78,7 @@ class OnCardEnterFieldEvent extends Event {
   /// Create this event from json.
   static OnCardEnterFieldEvent fromJson(List<dynamic> json) =>
       OnCardEnterFieldEvent(
-          card: GameObjectReference.fromJson(json[0] as int),
+          card: int.parse(json[0].toString()),
           effectIndex: json[1] as int,
           resolved: json[2] as bool);
 }

@@ -7,12 +7,12 @@ import 'package:hexal_engine/state_changes/active_player_state_change.dart';
 
 void main() {
   group('Active player state change changes from.', () {
-    test('player 1 to player 2.', () {
+    test('player 2 to player 1.', () {
       final state = const GameState(
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
-        activePlayer: Player.one,
+        activePlayer: Player.two,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
       );

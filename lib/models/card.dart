@@ -50,7 +50,7 @@ abstract class Card extends GameObject {
   }
 
   /// Properties packaged into json.
-  List<Object> get jsonProps => props;
+  List<Object?> get jsonProps => props;
 
   /// Encode this card as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{

@@ -2,7 +2,6 @@ import '../cards/creature.dart';
 import '../events/damage_creature_event.dart';
 import '../events/damage_player_event.dart';
 import '../models/enums/player.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
@@ -22,7 +21,7 @@ class DamageEffect extends Effect with TargetedEffect {
   @override
   final bool targetFilled;
   @override
-  final List<GameObjectReference> targets;
+  final List<int> targets;
 
   @override
   final Player controller;
@@ -49,7 +48,7 @@ class DamageEffect extends Effect with TargetedEffect {
 
     // Check all targets exist in state.
     for (final ref in targets) {
-      state.getCardById(ref.id);
+      state.getCardById(ref);
     }
 
     return true;
@@ -90,15 +89,14 @@ class DamageEffect extends Effect with TargetedEffect {
     ];
   }
 
-  StateChange _generateStateChange(
-      GameState state, GameObjectReference reference) {
+  StateChange _generateStateChange(GameState state, int reference) {
     // If target is a player.
-    if (reference.id < 2) {
+    if (reference < 2) {
       return AddEventStateChange(
           event: DamagePlayerEvent(
-              player: Player.fromIndex(reference.id), damage: damage));
+              player: Player.fromIndex(reference), damage: damage));
     } else {
-      final _object = state.getCardById(reference.id);
+      final _object = state.getCardById(reference);
 
       if (_object is Creature) {
         return AddEventStateChange(
@@ -111,7 +109,7 @@ class DamageEffect extends Effect with TargetedEffect {
   }
 
   @override
-  DamageEffect copyFilled(List<GameObjectReference> _targets) => DamageEffect(
+  DamageEffect copyFilled(List<int> _targets) => DamageEffect(
       damage: damage,
       target: target,
       targetFilled: true,
@@ -144,7 +142,7 @@ class DamageEffect extends Effect with TargetedEffect {
       target: Target.fromJson(json[1] as Map<String, dynamic>),
       targetFilled: json[2] as bool,
       targets: (json[3] as List<dynamic>)
-          .map((dynamic e) => GameObjectReference.fromJson(e as int))
+          .map((dynamic e) => int.parse(e.toString()))
           .toList(),
       controller: Player.fromIndex(json[4] as int),
       resolved: json[5] as bool);

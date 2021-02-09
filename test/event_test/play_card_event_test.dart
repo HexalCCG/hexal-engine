@@ -28,7 +28,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [
-          PlayCardEvent(card: card.toReference),
+          PlayCardEvent(card: card.id),
         ],
         activePlayer: Player.one,
         priorityPlayer: Player.one,
@@ -39,7 +39,7 @@ void main() {
       expect(
           changes,
           containsAll(<StateChange>[
-            PutIntoFieldStateChange(card: card.toReference),
+            PutIntoFieldStateChange(card: card.id),
           ]));
     });
     test('does not destroy a played permanent.', () {
@@ -62,7 +62,7 @@ void main() {
       );
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // Player 1 plays their creature.
-      state = state.applyAction(PlayCardAction(card: creature.toReference));
+      state = state.applyAction(PlayCardAction(card: creature.id));
 
       // Cow moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo),
@@ -107,7 +107,7 @@ void main() {
       );
       // Game starts in player 1's main phase 1, and player 1 has priority.
       // Player 1 plays their creature.
-      state = state.applyAction(PlayCardAction(card: spell.toReference));
+      state = state.applyAction(PlayCardAction(card: spell.id));
 
       // Cow moves into limbo and priority passes.
       expect(state.getCardsByLocation(Player.one, Location.limbo),

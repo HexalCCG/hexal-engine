@@ -2,24 +2,23 @@ import '../cards/creature.dart';
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
 import '../models/enums/location.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
 /// StateChange to put a card into the field.
 class PutIntoFieldStateChange extends StateChange {
   /// Card to put into field.
-  final GameObjectReference card;
+  final int card;
 
   /// Puts [card] into the field.
   const PutIntoFieldStateChange({required this.card});
 
   @override
   GameState apply(GameState state) {
-    if (!state.containsCardWithId(card.id)) {
+    if (!state.containsCardWithId(card)) {
       throw (StateChangeException('Card with that id not found in state.'));
     }
-    final oldCard = state.getCardById(card.id);
+    final oldCard = state.getCardById(card);
     var newCard = oldCard.copyWith(location: Location.field);
 
     if (newCard is Creature) {

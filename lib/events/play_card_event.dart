@@ -1,6 +1,5 @@
 import '../cards/on_enter_field.dart';
 import '../models/enums/location.dart';
-import '../models/game_object_reference.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
@@ -14,7 +13,7 @@ import 'on_card_enter_field_event.dart';
 /// Event to play a card from hand.
 class PlayCardEvent extends Event {
   /// Card to play.
-  final GameObjectReference card;
+  final int card;
 
   /// Whether the card has been put into the field yet.
   final bool donePutIntoField;
@@ -32,7 +31,7 @@ class PlayCardEvent extends Event {
   @override
   bool valid(GameState state) {
     // Check card exists and isn't a player.
-    final _card = state.getCardById(card.id);
+    final _card = state.getCardById(card);
 
     // Before put into field card must be in limbo.
     if (!donePutIntoField && _card.location != Location.limbo) {
@@ -52,7 +51,7 @@ class PlayCardEvent extends Event {
       return [ResolveEventStateChange(event: this)];
     }
 
-    final _card = state.getCardById(card.id);
+    final _card = state.getCardById(card);
 
     // If card hasn't been put into field yet, do that.
     if (!donePutIntoField) {
@@ -88,7 +87,7 @@ class PlayCardEvent extends Event {
 
   /// Create this event from json.
   static PlayCardEvent fromJson(List<dynamic> json) => PlayCardEvent(
-      card: GameObjectReference.fromJson(json[0] as int),
+      card: int.parse(json[0].toString()),
       donePutIntoField: json[1] as bool,
       resolved: json[2] as bool);
 }
