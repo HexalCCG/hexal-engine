@@ -1,10 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import 'game_object_reference.dart';
 
 /// GameObjects represent anything in the game that can be targeted by effects.
-@immutable
 abstract class GameObject extends Equatable {
   /// Unique identifying number.
   final int id;

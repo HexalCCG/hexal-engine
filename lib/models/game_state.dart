@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../actions/action.dart';
 import '../actions/attack_action.dart';
@@ -20,7 +19,6 @@ import 'game_object.dart';
 import 'player_object.dart';
 
 /// Represents a single moment snapshot of a game.
-@immutable
 class GameState extends Equatable {
   /// The player whose turn it currently is.
   final Player activePlayer;
