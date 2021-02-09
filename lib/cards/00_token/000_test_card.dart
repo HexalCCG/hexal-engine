@@ -1,10 +1,10 @@
-import '../../models/card_object.dart';
+import '../../models/card.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 import '../spell.dart';
 
 /// Test spell with no effects or cost.
-class TestCard extends CardObject with Spell {
+class TestCard extends Card with Spell {
   @override
   int get setId => 0;
   @override

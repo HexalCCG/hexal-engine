@@ -1,10 +1,10 @@
-import '../../models/card_object.dart';
+import '../../models/card.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 import '../creature.dart';
 
 /// 2/2 Vanilla Creature.
-class CowCreatureCard extends CardObject with Creature {
+class CowCreatureCard extends Card with Creature {
   @override
   int get setId => 0;
   @override

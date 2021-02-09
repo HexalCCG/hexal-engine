@@ -1,13 +1,13 @@
 import '../../effects/draw_cards_effect.dart';
 import '../../effects/effect.dart';
-import '../../models/card_object.dart';
+import '../../models/card.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 import '../creature.dart';
 import '../on_enter_field.dart';
 
 /// 1/2 vanilla creature.
-class PeachSapling extends CardObject with Creature, OnEnterField {
+class PeachSapling extends Card with Creature, OnEnterField {
   @override
   int get setId => 1;
   @override

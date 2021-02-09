@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/models/card_object.dart';
+import 'package:hexal_engine/models/card.dart';
 import 'package:hexal_engine/state_changes/game_over_state_change.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/events/damage_player_event.dart';
@@ -67,7 +67,7 @@ void main() {
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
       // Expect player 1 to have exiled two cards from their deck.
-      expect(state.cards, <CardObject>[
+      expect(state.cards, <Card>[
         card1.copyWith(location: Location.exile),
         card2.copyWith(location: Location.exile),
       ]);

@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:hexal_engine/models/card_object.dart';
+import 'package:hexal_engine/models/card.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/models/enums/player.dart';
@@ -68,7 +68,7 @@ void main() {
       state = state.applyAction(PassAction());
       state = state.applyAction(PassAction());
 
-      expect(state.cards, <CardObject>[
+      expect(state.cards, <Card>[
         card1.copyWith(location: Location.hand),
         card2.copyWith(location: Location.hand),
       ]);

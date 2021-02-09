@@ -1,13 +1,13 @@
 import '../cards/creature.dart';
 import '../extensions/list_replace.dart';
-import '../models/card_object.dart';
+import '../models/card.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
 /// Clears single-turn flags from a card.
 class EndTurnClearStateChange extends StateChange {
   /// Card to clear flags from.
-  final CardObject card;
+  final Card card;
 
   /// Clear single-turn flags from [card].
   const EndTurnClearStateChange({required this.card});

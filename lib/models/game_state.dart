@@ -11,7 +11,7 @@ import '../exceptions/game_state_exception.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/remove_event_state_change.dart';
 import '../state_changes/state_change.dart';
-import 'card_object.dart';
+import 'card.dart';
 import 'enums/game_over_state.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
@@ -32,7 +32,7 @@ class GameState extends Equatable {
   final TurnPhase turnPhase;
 
   /// All cards held in the state.
-  final List<CardObject> cards;
+  final List<Card> cards;
 
   /// Stack of events resolved top-first.
   final List<Event> stack;
@@ -65,7 +65,7 @@ class GameState extends Equatable {
       (activePlayer == Player.one) ? Player.two : Player.one;
 
   /// Returns cards in the specified zone.
-  List<CardObject> getCardsByLocation(Player player, Location location) {
+  List<Card> getCardsByLocation(Player player, Location location) {
     return cards
         .where((card) => card.controller == player && card.location == location)
         .toList();
@@ -75,7 +75,7 @@ class GameState extends Equatable {
   bool containsCardWithId(int id) => cards.any((card) => card.id == id);
 
   /// Gets a card from this state by its id.
-  CardObject getCardById(int id) {
+  Card getCardById(int id) {
     if (id < 2) {
       throw GameStateException('Cannot get card with player ID');
     }
@@ -102,7 +102,7 @@ class GameState extends Equatable {
 
   /// Get the top card of the provided player's deck.
   /// Returns null if deck is empty.
-  CardObject? getTopCardOfDeck(Player player) {
+  Card? getTopCardOfDeck(Player player) {
     final deck = getCardsByLocation(player, Location.deck);
     if (deck.isEmpty) {
       return null;
@@ -192,8 +192,7 @@ class GameState extends Equatable {
         priorityPlayer = Player.fromIndex(json['priorityPlayer'] as int),
         turnPhase = TurnPhase.fromIndex(json['turnPhase'] as int),
         cards = (json['cards'] as List<dynamic>)
-            .map((dynamic data) =>
-                CardObject.fromJson(data as Map<String, dynamic>))
+            .map((dynamic data) => Card.fromJson(data as Map<String, dynamic>))
             .toList(),
         stack = (json['stack'] as List<dynamic>)
             .map((dynamic data) => Event.fromJson(data as Map<String, dynamic>))
@@ -217,7 +216,7 @@ class GameState extends Equatable {
     Player? activePlayer,
     Player? priorityPlayer,
     TurnPhase? turnPhase,
-    List<CardObject>? cards,
+    List<Card>? cards,
     List<Event>? stack,
     GameOverState? gameOverState,
     bool? counterAvailable,

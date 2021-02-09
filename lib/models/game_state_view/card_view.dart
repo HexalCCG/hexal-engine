@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../cards/hidden_card.dart';
-import '../card_object.dart';
+import '../card.dart';
 import '../enums/location.dart';
 import '../enums/player.dart';
 
 /// Card represent single cards.
 @immutable
-class CardObjectView extends Equatable {
+class CardView extends Equatable {
   /// Unique identifier for this card.
   final int? id;
 
@@ -31,7 +31,7 @@ class CardObjectView extends Equatable {
   final List<Object>? data;
 
   /// [id] uniquely identifies this card.
-  const CardObjectView(
+  const CardView(
       {this.id,
       required this.owner,
       required this.controller,
@@ -41,7 +41,7 @@ class CardObjectView extends Equatable {
       this.data});
 
   /// Hidden card object view.
-  CardObjectView.hidden({
+  CardView.hidden({
     required this.owner,
     required this.controller,
     required this.location,
@@ -51,26 +51,26 @@ class CardObjectView extends Equatable {
         data = null;
 
   /// View of this card with properties hidden.
-  CardObjectView get hiddenView => CardObjectView.hidden(
-      owner: owner, controller: controller, location: location);
+  CardView get hiddenView =>
+      CardView.hidden(owner: owner, controller: controller, location: location);
 
-  /// Create a CardObjectView from a CardObject.
-  CardObjectView.fromCardObject(CardObject cardObject)
-      : id = cardObject.id,
-        owner = cardObject.owner,
-        controller = cardObject.controller,
-        location = cardObject.location,
-        setId = cardObject.setId,
-        cardId = cardObject.cardId,
-        data = cardObject.jsonProps;
+  /// Create a CardView from a Card.
+  CardView.fromCard(Card card)
+      : id = card.id,
+        owner = card.owner,
+        controller = card.controller,
+        location = card.location,
+        setId = card.setId,
+        cardId = card.cardId,
+        data = card.jsonProps;
 
-  /// Returns a CardObject representation of this.
-  CardObject get asCardObject {
+  /// Returns a Card representation of this.
+  Card get asCard {
     if (id == null) {
       return HiddenCard(
           owner: owner, controller: controller, location: location);
     } else {
-      return CardObject.fromJson(<String, dynamic>{
+      return Card.fromJson(<String, dynamic>{
         'set': setId,
         'number': cardId,
         'data': data,
@@ -79,7 +79,7 @@ class CardObjectView extends Equatable {
   }
 
   /// Create a Card view from its JSON form.
-  CardObjectView.fromJson(Map<String, dynamic> json)
+  CardView.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int?,
         owner = Player.fromIndex(json['owner'] as int),
         controller = Player.fromIndex(json['controller'] as int),

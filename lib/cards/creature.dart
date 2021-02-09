@@ -1,7 +1,7 @@
-import '../models/card_object.dart';
+import '../models/card.dart';
 
 /// Permanent card with stats that can attack and block attacks.
-mixin Creature on CardObject {
+mixin Creature on Card {
   @override
   bool get permanent => true;
 
@@ -36,7 +36,7 @@ mixin Creature on CardObject {
   bool get canBeAttacked => true;
 
   /// Copy this with creature fields modified.
-  CardObject copyWithCreature({
+  Card copyWithCreature({
     bool? exhausted,
     bool? enteredFieldThisTurn,
     int? damage,
