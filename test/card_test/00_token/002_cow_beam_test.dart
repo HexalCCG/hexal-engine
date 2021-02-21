@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:hexal_engine/effects/targeted_effect.dart';
 import 'package:hexal_engine/actions/provide_target_action.dart';
-import 'package:hexal_engine/cards/creature.dart';
+import 'package:hexal_engine/card/creature.dart';
 import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/on_card_enter_field_event.dart';
 import 'package:hexal_engine/actions/pass_action.dart';

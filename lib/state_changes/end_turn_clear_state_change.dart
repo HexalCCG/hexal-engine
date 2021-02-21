@@ -1,4 +1,4 @@
-import '../cards/creature.dart';
+import '../card/creature.dart';
 import '../extensions/list_replace.dart';
 import '../models/card.dart';
 import '../models/game_state.dart';

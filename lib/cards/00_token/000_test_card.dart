@@ -1,7 +1,7 @@
+import '../../card/spell.dart';
 import '../../models/card.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
-import '../spell.dart';
 
 /// Test spell with no effects or cost.
 class TestCard extends Card with Spell {

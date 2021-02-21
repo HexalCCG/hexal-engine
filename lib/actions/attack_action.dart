@@ -1,4 +1,4 @@
-import '../cards/creature.dart';
+import '../card/creature.dart';
 import '../events/attack_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/enums/location.dart';

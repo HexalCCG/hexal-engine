@@ -1,4 +1,4 @@
-import '../../cards/creature.dart';
+import '../../card/creature.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 import '../../models/game_state.dart';
