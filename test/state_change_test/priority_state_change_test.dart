@@ -22,16 +22,16 @@ void main() {
         Player.two,
       );
     });
-    test('player 1 to player 2.', () {
+    test('player 2 to player 1.', () {
       final state = const GameState(
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
         activePlayer: Player.one,
-        priorityPlayer: Player.one,
+        priorityPlayer: Player.two,
         turnPhase: TurnPhase.start,
       );
-      final stateChange = PriorityStateChange(player: Player.two);
+      final stateChange = PriorityStateChange(player: Player.one);
       expect(
         state.applyStateChanges([stateChange]).priorityPlayer,
         Player.two,
