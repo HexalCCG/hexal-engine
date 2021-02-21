@@ -1,4 +1,4 @@
-import '../cards/on_enter_field.dart';
+import '../card/on_enter_field.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';

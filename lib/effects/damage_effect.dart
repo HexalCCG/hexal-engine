@@ -1,4 +1,4 @@
-import '../cards/creature.dart';
+import '../card/creature.dart';
 import '../events/damage_creature_event.dart';
 import '../events/damage_player_event.dart';
 import '../models/enums/player.dart';

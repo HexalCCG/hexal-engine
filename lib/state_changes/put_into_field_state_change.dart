@@ -1,4 +1,4 @@
-import '../cards/creature.dart';
+import '../card/creature.dart';
 import '../exceptions/state_change_exception.dart';
 import '../extensions/list_replace.dart';
 import '../models/enums/location.dart';

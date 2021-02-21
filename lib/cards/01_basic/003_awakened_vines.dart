@@ -1,7 +1,7 @@
+import '../../card/creature.dart';
 import '../../models/card.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
-import '../creature.dart';
 
 /// 1/2 vanilla creature.
 class AwakenedVines extends Card with Creature {

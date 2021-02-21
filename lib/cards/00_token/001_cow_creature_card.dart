@@ -1,7 +1,7 @@
+import '../../card/creature.dart';
 import '../../models/card.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
-import '../creature.dart';
 
 /// 2/2 Vanilla Creature.
 class CowCreatureCard extends Card with Creature {

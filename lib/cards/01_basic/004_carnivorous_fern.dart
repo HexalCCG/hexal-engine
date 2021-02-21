@@ -1,8 +1,8 @@
+import '../../card/creature.dart';
+import '../../card/ready.dart';
 import '../../models/card.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
-import '../creature.dart';
-import '../ready.dart';
 
 /// 1/2 vanilla creature.
 class CarnivorousFern extends Card with Creature, Ready {
