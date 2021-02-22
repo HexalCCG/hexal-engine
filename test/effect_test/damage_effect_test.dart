@@ -25,7 +25,7 @@ void main() {
       final effect = DamageEffect(
           controller: Player.one,
           damage: 1,
-          target: CreatureTarget(controller: Player.one),
+          target: const CreatureTarget(controller: Player.one),
           targetFilled: true,
           targets: [card.id]);
       final state = GameState(

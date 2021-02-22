@@ -18,7 +18,7 @@ class ModifyEventStateChange extends StateChange {
   @override
   GameState apply(GameState state) {
     if (!state.stack.contains(event)) {
-      throw (StateChangeException('Event not found in stack.'));
+      throw (const StateChangeException('Event not found in stack.'));
     }
 
     final newStack = state.stack.replaceSingle(event, newEvent);

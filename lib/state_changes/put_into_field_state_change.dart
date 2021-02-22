@@ -16,7 +16,8 @@ class PutIntoFieldStateChange extends StateChange {
   @override
   GameState apply(GameState state) {
     if (!state.containsCardWithId(card)) {
-      throw (StateChangeException('Card with that id not found in state.'));
+      throw (const StateChangeException(
+          'Card with that id not found in state.'));
     }
     final oldCard = state.getCardById(card);
     var newCard = oldCard.copyWith(location: Location.field);

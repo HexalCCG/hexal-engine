@@ -18,7 +18,8 @@ class MoveCardStateChange extends StateChange {
   @override
   GameState apply(GameState state) {
     if (!state.containsCardWithId(card)) {
-      throw (StateChangeException('Card with that id not found in state.'));
+      throw (const StateChangeException(
+          'Card with that id not found in state.'));
     }
     final oldCard = state.getCardById(card);
     final newCard = oldCard.copyWith(location: location);

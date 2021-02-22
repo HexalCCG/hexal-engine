@@ -15,14 +15,15 @@ class ExhaustCreatureStateChange extends StateChange {
   @override
   GameState apply(GameState state) {
     if (!state.containsCardWithId(creature)) {
-      throw (StateChangeException('Card with that id not found in state.'));
+      throw (const StateChangeException(
+          'Card with that id not found in state.'));
     }
     final oldCard = state.getCardById(creature);
     var newCard = oldCard;
     if (newCard is Creature) {
       newCard = newCard.copyWithCreature(exhausted: true);
     } else {
-      throw (StateChangeException(
+      throw (const StateChangeException(
           'Exhaust creature provided with non-creature.'));
     }
 

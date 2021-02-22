@@ -73,10 +73,10 @@ class GameState extends Equatable {
   /// Gets a card from this state by its id.
   Card getCardById(int id) {
     if (id < 2) {
-      throw GameStateException('Cannot get card with player ID');
+      throw const GameStateException('Cannot get card with player ID');
     }
     if (!containsCardWithId(id)) {
-      throw GameStateException('Card not found in state');
+      throw const GameStateException('Card not found in state');
     }
     return cards.firstWhere((element) => element.id == id);
   }
@@ -100,7 +100,7 @@ class GameState extends Equatable {
   List<Action> get allActions {
     final list = <Action>[];
     // Pass action
-    list.add(PassAction());
+    list.add(const PassAction());
     // Attack action
     for (var attacker in getCardsByLocation(priorityPlayer, Location.field)) {
       final attackerReference = attacker.id;
@@ -164,7 +164,7 @@ class GameState extends Equatable {
   GameState testPassUntilEmpty() {
     var state = this;
     while (state.stack.isNotEmpty) {
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
     }
     return state;
   }

@@ -15,7 +15,7 @@ class ResolveEventStateChange extends StateChange {
   @override
   GameState apply(GameState state) {
     if (!state.stack.contains(event)) {
-      throw (StateChangeException('Event not found in stack.'));
+      throw (const StateChangeException('Event not found in stack.'));
     }
 
     final newEvent = state.getEvent(event).copyResolved;

@@ -42,23 +42,23 @@ void main() {
       // Player 1 keeps priority after playing a card as they are active.
       // They pass, moving priority to player 2.
 
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
       // Player 2 passes. Top item of stack is resolved.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
 
       expect(state.getCardsByLocation(Player.one, Location.field).first,
           isA<PeachSapling>());
       expect(state.priorityPlayer, Player.one);
 
       // Card entered field so it should add draw card to stack.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
       // Player 2 passes. Top item of stack is resolved.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
 
       // Resolve draw cards effect adding draw cards event to stack.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
       // Player 2 passes. Top item of stack is resolved.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
 
       expect(state.stack.last, isA<DrawCardsEvent>());
       expect((state.stack.last as DrawCardsEvent).draws, 1);

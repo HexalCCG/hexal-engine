@@ -61,11 +61,11 @@ void main() {
         turnPhase: TurnPhase.draw,
       );
       // Both players pass for first damage
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       // Both players pass for second damage
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       // Expect player 1 to have exiled two cards from their deck.
       expect(state.cards, <Card>[
         card1.copyWith(location: Location.exile),
@@ -87,8 +87,8 @@ void main() {
 
       expect(
           changes,
-          contains(
-              GameOverStateChange(gameOverState: GameOverState.player2Win)));
+          contains(const GameOverStateChange(
+              gameOverState: GameOverState.player2Win)));
     });
   });
 }

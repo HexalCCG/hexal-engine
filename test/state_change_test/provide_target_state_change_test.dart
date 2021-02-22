@@ -12,7 +12,7 @@ void main() {
       const target = CreatureTarget(optional: true, controller: Player.one);
       const effect =
           DamageEffect(controller: Player.one, damage: 1, target: target);
-      var state = GameState(
+      var state = const GameState(
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
@@ -20,7 +20,7 @@ void main() {
         stack: [effect],
       );
       state = state.applyStateChanges(
-          [ProvideTargetStateChange(request: effect, targets: [])]);
+          [const ProvideTargetStateChange(request: effect, targets: [])]);
       expect((state.stack.last as DamageEffect).targetFilled, true);
       expect((state.stack.last as DamageEffect).targets, isEmpty);
     });

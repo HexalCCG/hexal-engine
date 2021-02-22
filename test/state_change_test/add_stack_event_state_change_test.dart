@@ -8,7 +8,7 @@ import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   test('Add stack event state change adds event to stack.', () {
-    final event = DrawCardsEvent(player: Player.one, draws: 1);
+    final event = const DrawCardsEvent(player: Player.one, draws: 1);
     final state = const GameState(
       gameOverState: GameOverState.playing,
       cards: [],

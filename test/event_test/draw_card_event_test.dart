@@ -62,11 +62,11 @@ void main() {
         turnPhase: TurnPhase.draw,
       );
       // Both players pass both draws
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       expect(state.cards, <Card>[
         card1.copyWith(location: Location.hand),
@@ -87,8 +87,8 @@ void main() {
 
       expect(
           changes,
-          contains(
-              GameOverStateChange(gameOverState: GameOverState.player2Win)));
+          contains(const GameOverStateChange(
+              gameOverState: GameOverState.player2Win)));
     });
   });
 }
