@@ -30,7 +30,7 @@ void main() {
   );
   const string =
       // ignore: lines_longer_than_80_chars
-      '{"activePlayer":0,"priorityPlayer":0,"turnPhase":3,"cards":[{"set":0,"number":1,"data":[2,0,0,3,false,false,0]}],"stack":[{"type":"DrawCardsEvent","data":[0,1,0,false]}],"gameOverState":0,"counterAvailable":false}';
+      '{"activePlayer":0,"priorityPlayer":0,"turnPhase":3,"cards":[{"identity":[0,1],"data":[2,0,0,3,false,false,0]}],"stack":[{"type":"DrawCardsEvent","data":[0,1,0,false]}],"gameOverState":0,"counterAvailable":false}';
 
   test('Serialization works properly. ', () {
     expect(

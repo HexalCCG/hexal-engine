@@ -37,7 +37,7 @@ void main() {
           contains(
               MoveCardStateChange(card: card.id, location: Location.exile)));
     });
-    test('deals 1 damage and resolves if damage is 1. ', () {
+    test('deals 2 damage and resolves when damage is 1. ', () {
       const card1 = TestCard(
         id: 2,
         controller: Player.one,
