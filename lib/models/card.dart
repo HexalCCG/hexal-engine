@@ -1,4 +1,5 @@
 import '../cards/card_index.dart';
+import 'card_identity.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
 import 'game_object.dart';
@@ -17,11 +18,8 @@ abstract class Card extends GameObject {
   /// Whether this card survives on board after the play event resolves.
   bool get permanent;
 
-  /// ID of this card's set.
-  int get setId;
-
-  /// ID of this card within its set.
-  int get cardId;
+  /// Identity of this card.
+  CardIdentity get identity;
 
   /// [id] must be unique and cannot be changed. [owner] cannot be changed.
   const Card({
@@ -36,14 +34,13 @@ abstract class Card extends GameObject {
 
   /// Create a Card from its JSON form.
   factory Card.fromJson(Map<String, dynamic> json) {
-    final cardSet = json['set'] as int;
-    final cardId = json['number'] as int;
+    final identity = CardIdentity.fromJson(json['identity'] as List<int>);
     final data = json['data'] as List<dynamic>;
 
-    final builder = setBuilders[cardSet]?[cardId];
+    final builder = setBuilders[identity.setId]?[identity.cardId];
 
     if (builder == null) {
-      throw ArgumentError('Invalid card ID: $cardSet:$cardId');
+      throw ArgumentError('Invalid card ID: $identity');
     }
 
     return builder(data);
@@ -54,8 +51,7 @@ abstract class Card extends GameObject {
 
   /// Encode this card as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'set': setId,
-        'number': cardId,
+        'identity': identity,
         'data': jsonProps,
       };
 }

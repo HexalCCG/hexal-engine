@@ -1,15 +1,14 @@
 import '../../card/creature.dart';
 import '../../card/ready.dart';
 import '../../models/card.dart';
+import '../../models/card_identity.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
 /// 1/2 vanilla creature.
 class CarnivorousFern extends Card with Creature, Ready {
   @override
-  int get setId => 1;
-  @override
-  int get cardId => 3;
+  CardIdentity get identity => const CardIdentity(1, 4);
 
   @override
   int get baseAttack => 2;

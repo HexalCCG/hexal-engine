@@ -4,15 +4,14 @@ import '../../effects/damage_effect.dart';
 import '../../effects/effect.dart';
 import '../../effects/target/creature_target.dart';
 import '../../models/card.dart';
+import '../../models/card_identity.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
 /// 0 cost spell. Deal 1 damage to a creature.
 class CowBeamCard extends Card with Spell, OnEnterField {
   @override
-  int get setId => 0;
-  @override
-  int get cardId => 2;
+  CardIdentity get identity => const CardIdentity(0, 2);
 
   /// [id] must be unique. [owner] cannot be changed.
   const CowBeamCard({
