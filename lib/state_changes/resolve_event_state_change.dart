@@ -1,6 +1,6 @@
 import '../events/event.dart';
 import '../exceptions/state_change_exception.dart';
-import '../extensions/list_replace.dart';
+import '../extensions/replace_single.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
@@ -19,7 +19,7 @@ class ResolveEventStateChange extends StateChange {
     }
 
     final newEvent = state.getEvent(event).copyResolved;
-    final newStack = state.stack.replaceSingle(event, newEvent);
+    final newStack = state.stack.replaceSingle(event, newEvent).toList();
     return state.copyWith(stack: newStack);
   }
 

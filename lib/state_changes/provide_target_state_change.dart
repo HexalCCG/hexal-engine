@@ -1,6 +1,6 @@
 import '../effects/targeted_effect.dart';
 import '../exceptions/state_change_exception.dart';
-import '../extensions/list_replace.dart';
+import '../extensions/replace_single.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
@@ -22,8 +22,9 @@ class ProvideTargetStateChange extends StateChange {
       throw (const StateChangeException('Event not found in stack.'));
     }
 
-    final newStack =
-        state.stack.replaceSingle(request, request.copyFilled(targets));
+    final newStack = state.stack
+        .replaceSingle(request, request.copyFilled(targets))
+        .toList();
     return state.copyWith(stack: newStack);
   }
 

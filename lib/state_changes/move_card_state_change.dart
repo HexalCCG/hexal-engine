@@ -1,5 +1,5 @@
 import '../exceptions/state_change_exception.dart';
-import '../extensions/list_replace.dart';
+import '../extensions/replace_single.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
@@ -24,7 +24,8 @@ class MoveCardStateChange extends StateChange {
     final oldCard = state.getCardById(card);
     final newCard = oldCard.copyWith(location: location);
 
-    return state.copyWith(cards: state.cards.replaceSingle(oldCard, newCard));
+    return state.copyWith(
+        cards: state.cards.replaceSingle(oldCard, newCard).toList());
   }
 
   @override

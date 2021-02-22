@@ -1,6 +1,6 @@
 import '../card/creature.dart';
 import '../exceptions/state_change_exception.dart';
-import '../extensions/list_replace.dart';
+import '../extensions/replace_single.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
 
@@ -27,7 +27,8 @@ class ExhaustCreatureStateChange extends StateChange {
           'Exhaust creature provided with non-creature.'));
     }
 
-    return state.copyWith(cards: state.cards.replaceSingle(oldCard, newCard));
+    return state.copyWith(
+        cards: state.cards.replaceSingle(oldCard, newCard).toList());
   }
 
   @override
