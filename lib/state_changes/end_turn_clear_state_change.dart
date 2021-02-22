@@ -1,5 +1,5 @@
 import '../card/creature.dart';
-import '../extensions/list_replace.dart';
+import '../extensions/replace_single.dart';
 import '../models/card.dart';
 import '../models/game_state.dart';
 import 'state_change.dart';
@@ -25,7 +25,8 @@ class EndTurnClearStateChange extends StateChange {
         damage: 0,
       );
     }
-    return state.copyWith(cards: state.cards.replaceSingle(oldCard, newCard));
+    return state.copyWith(
+        cards: state.cards.replaceSingle(oldCard, newCard).toList());
   }
 
   @override
