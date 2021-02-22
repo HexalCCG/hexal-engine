@@ -34,7 +34,7 @@ void main() {
       final stateChange = const PriorityStateChange(player: Player.one);
       expect(
         state.applyStateChanges([stateChange]).priorityPlayer,
-        Player.two,
+        Player.one,
       );
     });
   });

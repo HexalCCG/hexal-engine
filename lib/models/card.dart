@@ -34,8 +34,7 @@ abstract class Card extends GameObject {
 
   /// Create a Card from its JSON form.
   factory Card.fromJson(Map<String, dynamic> json) {
-    final identity = CardIdentity.fromJson(json['identity'] as List<int>);
-    final data = json['data'] as List<dynamic>;
+    final identity = CardIdentity.fromJson(json['identity'] as List<dynamic>);
 
     final builder = setBuilders[identity.setId]?[identity.cardId];
 
@@ -43,7 +42,7 @@ abstract class Card extends GameObject {
       throw ArgumentError('Invalid card ID: $identity');
     }
 
-    return builder(data);
+    return builder(json['data'] as List<dynamic>);
   }
 
   /// Properties packaged into json.

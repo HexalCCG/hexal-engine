@@ -12,9 +12,9 @@ class CardIdentity extends Equatable {
   const CardIdentity(this.setId, this.cardId);
 
   /// Create a card identity from list of information.
-  CardIdentity.fromJson(List<int> json)
-      : setId = json[0],
-        cardId = json[1];
+  CardIdentity.fromJson(List<dynamic> json)
+      : setId = int.parse(json[0].toString()),
+        cardId = int.parse(json[1].toString());
 
   /// Convert to json.
   List<int> toJson() => [setId, cardId];
