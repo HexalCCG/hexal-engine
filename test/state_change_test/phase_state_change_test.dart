@@ -15,7 +15,7 @@ void main() {
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
     );
-    final stateChange = PhaseStateChange(phase: TurnPhase.draw);
+    final stateChange = const PhaseStateChange(phase: TurnPhase.draw);
     expect(
       state.applyStateChanges([stateChange]).turnPhase,
       TurnPhase.draw,
@@ -30,7 +30,7 @@ void main() {
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
     );
-    final stateChange = PhaseStateChange(phase: TurnPhase.draw);
+    final stateChange = const PhaseStateChange(phase: TurnPhase.draw);
     expect(
       state.applyStateChanges([stateChange]).priorityPlayer,
       Player.two,

@@ -49,9 +49,9 @@ void main() {
 
     // Player 1 keeps priority after playing a card as they are active.
     // They pass, moving priority to player 2.
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
     // Player 2 passes. Top item of stack is resolved.
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
 
     // Cow Beam moves into the field.
     expect(state.getCardsByLocation(Player.one, Location.field),
@@ -61,8 +61,8 @@ void main() {
     // Player 1 has priority again after the last effect resolved.
     // They pass, moving priority to player 2.
     // Resolves the onenterfield effect creating a damage effect
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
 
     // Cow Beam requests a target for its damage.
     expect(state.stack.last, isA<TargetedEffect>());
@@ -72,29 +72,29 @@ void main() {
         targets: [state.cards.firstWhere((element) => element.id == 3).id]));
 
     // Target added to target request & folded into DamageEvent.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
     // Resolved target request removed.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
     // DamageEvent creates a damage creature event.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
     // DamageCreature event damages the creature.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
     // DamageCreature is removed.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
     // DamageEffect is removed.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
     // OnCardEnterField is removed.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
     // PlayCard event is removed.
-    state = state.applyAction(PassAction());
-    state = state.applyAction(PassAction());
+    state = state.applyAction(const PassAction());
+    state = state.applyAction(const PassAction());
 
     expect(
         (state.cards.firstWhere((element) => element.id == 3) as Creature)

@@ -60,7 +60,7 @@ void main() {
       expect(
           () => state.applyStateChanges([
                 MoveCardStateChange(
-                    card: TestCard(
+                    card: const TestCard(
                             id: 2,
                             controller: Player.one,
                             location: Location.deck,

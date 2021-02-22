@@ -28,7 +28,7 @@ void main() {
         turnPhase: TurnPhase.draw,
       );
       final result = state.applyStateChanges([
-        EndTurnClearStateChange(card: card),
+        const EndTurnClearStateChange(card: card),
       ]);
 
       expect(

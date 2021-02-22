@@ -19,7 +19,7 @@ class ProvideTargetStateChange extends StateChange {
   @override
   GameState apply(GameState state) {
     if (!state.stack.contains(request)) {
-      throw (StateChangeException('Event not found in stack.'));
+      throw (const StateChangeException('Event not found in stack.'));
     }
 
     final newStack =

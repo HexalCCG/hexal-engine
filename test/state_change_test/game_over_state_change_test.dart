@@ -17,7 +17,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       final stateChange =
-          GameOverStateChange(gameOverState: GameOverState.player1Win);
+          const GameOverStateChange(gameOverState: GameOverState.player1Win);
       expect(
         state.applyStateChanges([stateChange]).gameOverState,
         GameOverState.player1Win,
@@ -33,7 +33,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       final stateChange =
-          GameOverStateChange(gameOverState: GameOverState.player2Win);
+          const GameOverStateChange(gameOverState: GameOverState.player2Win);
       expect(
         state.applyStateChanges([stateChange]).gameOverState,
         GameOverState.player2Win,
@@ -49,7 +49,7 @@ void main() {
         turnPhase: TurnPhase.start,
       );
       final stateChange =
-          GameOverStateChange(gameOverState: GameOverState.draw);
+          const GameOverStateChange(gameOverState: GameOverState.draw);
       expect(
         state.applyStateChanges([stateChange]).gameOverState,
         GameOverState.draw,
@@ -65,7 +65,8 @@ void main() {
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.start,
     );
-    final stateChange = GameOverStateChange(gameOverState: GameOverState.draw);
+    final stateChange =
+        const GameOverStateChange(gameOverState: GameOverState.draw);
     expect(
       state.applyStateChanges([stateChange]),
       const GameState(

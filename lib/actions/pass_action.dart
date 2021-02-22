@@ -135,5 +135,5 @@ class PassAction extends Action {
   List<Object> get props => [];
 
   /// Create from json.
-  static PassAction fromJson(List<dynamic> json) => PassAction();
+  static PassAction fromJson(List<dynamic> json) => const PassAction();
 }

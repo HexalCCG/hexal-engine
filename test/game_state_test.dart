@@ -29,6 +29,6 @@ void main() {
     );
     final changes = state.resolveTopStackEvent();
 
-    expect(changes, contains(ResolveEventStateChange(event: event)));
+    expect(changes, contains(const ResolveEventStateChange(event: event)));
   });
 }

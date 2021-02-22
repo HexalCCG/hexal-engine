@@ -71,9 +71,9 @@ void main() {
 
       // Player 1 keeps priority after playing a card as they are active.
       // They pass, moving priority to player 2.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
       // Player 2 passes. Top item of stack is resolved.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
 
       // Cow moves into the field.
       expect(state.getCardsByLocation(Player.one, Location.field),
@@ -81,10 +81,10 @@ void main() {
       expect(state.stack.last, isA<PlayCardEvent>());
 
       // Resolve and remove the play effect
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       expect(state.stack, isEmpty);
       expect(state.getCardsByLocation(Player.one, Location.field),
@@ -116,9 +116,9 @@ void main() {
 
       // Player 1 keeps priority after playing a card as they are active.
       // They pass, moving priority to player 2.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
       // Player 2 passes. Top item of stack is resolved.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
 
       // Cow moves into the field.
       expect(state.getCardsByLocation(Player.one, Location.field),
@@ -128,11 +128,11 @@ void main() {
       // Player 1 has priority again after the last effect resolved.
       // They pass, moving priority to player 2.
       // Resolves the onenterfield effect
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       // Resolve the play effect
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       // Cow Beam requests a target for its damage.
       expect(state.stack.last, isA<TargetedEffect>());
@@ -140,36 +140,36 @@ void main() {
           contains(isA<CowBeamCard>()));
 
       // Player 1 fails to provide a target.
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
 
       // Target added to target request & folded into DamageEvent.
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       // DamageEffect resolves with EmptyTargetResult and is removed
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       // OnCardEnterField is removed
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       // PlayCardEvent destroys spell
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       // DestroyCardEvent removed
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       // PlayCardEvent removed
-      state = state.applyAction(PassAction());
-      state = state.applyAction(PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
 
       expect((state.stack), isEmpty);
       expect((state.cards.firstWhere((element) => element.id == 2).location),
