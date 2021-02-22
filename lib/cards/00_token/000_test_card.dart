@@ -1,14 +1,13 @@
 import '../../card/spell.dart';
 import '../../models/card.dart';
+import '../../models/card_identity.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
 /// Test spell with no effects or cost.
 class TestCard extends Card with Spell {
   @override
-  int get setId => 0;
-  @override
-  int get cardId => 0;
+  CardIdentity get identity => const CardIdentity(0, 0);
 
   /// [id] must be unique. [owner] cannot be changed.
   const TestCard({

@@ -3,15 +3,14 @@ import '../../card/on_enter_field.dart';
 import '../../effects/draw_cards_effect.dart';
 import '../../effects/effect.dart';
 import '../../models/card.dart';
+import '../../models/card_identity.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
 /// 1/2 vanilla creature.
 class PeachSapling extends Card with Creature, OnEnterField {
   @override
-  int get setId => 1;
-  @override
-  int get cardId => 7;
+  CardIdentity get identity => const CardIdentity(1, 7);
 
   @override
   int get baseAttack => 1;

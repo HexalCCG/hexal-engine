@@ -11,6 +11,14 @@ class CardIdentity extends Equatable {
   /// Identifies a type of card by set and number.
   const CardIdentity(this.setId, this.cardId);
 
+  /// Create a card identity from list of information.
+  CardIdentity.fromJson(List<int> json)
+      : setId = json[0],
+        cardId = json[1];
+
+  /// Convert to json.
+  List<int> toJson() => [setId, cardId];
+
   @override
   List<Object?> get props => [setId, cardId];
 }

@@ -1,14 +1,13 @@
 import '../../card/creature.dart';
 import '../../models/card.dart';
+import '../../models/card_identity.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
 /// 2/2 Vanilla Creature.
 class CowCreatureCard extends Card with Creature {
   @override
-  int get setId => 0;
-  @override
-  int get cardId => 1;
+  CardIdentity get identity => const CardIdentity(0, 1);
 
   @override
   int get baseAttack => 2;
