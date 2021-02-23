@@ -1,11 +1,15 @@
+import 'package:equatable/equatable.dart';
+
 import '../cards/card_index.dart';
 import 'card_identity.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
-import 'game_object.dart';
 
 /// Card represent single cards.
-abstract class Card extends GameObject {
+abstract class Card extends Equatable {
+  /// Unique identifier for this card constant over time.
+  final int id;
+
   /// Player who owns this card.
   final Player owner;
 
@@ -23,13 +27,13 @@ abstract class Card extends GameObject {
 
   /// [id] must be unique and cannot be changed. [owner] cannot be changed.
   const Card({
-    required int id,
+    required this.id,
     required this.owner,
     required this.controller,
     required this.location,
-  }) : super(id: id);
+  });
 
-  @override
+  /// Returns a copy of this object with the changes applied.
   Card copyWith({int id, Player owner, Player controller, Location location});
 
   /// Create a Card from its JSON form.
