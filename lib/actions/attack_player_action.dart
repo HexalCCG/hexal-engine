@@ -56,7 +56,7 @@ class AttackPlayerAction extends Action {
       return false;
     }
     // Check attacker can attack players
-    if (!_attacker.canAttackPlayer) {
+    if (!_attacker.canAttackPlayer(state)) {
       return false;
     }
 

@@ -19,8 +19,6 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.hand,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       final effect = DamageEffect(

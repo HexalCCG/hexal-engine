@@ -19,8 +19,6 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       const defender = CowCreatureCard(
@@ -28,8 +26,6 @@ void main() {
         controller: Player.two,
         owner: Player.two,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       final state = const GameState(
@@ -56,8 +52,6 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
-        enteredFieldThisTurn: true,
-        exhausted: false,
         damage: 0,
       );
       const defender = CowCreatureCard(
@@ -65,15 +59,13 @@ void main() {
         controller: Player.two,
         owner: Player.two,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,
         cards: [attacker, defender],
         stack: [],
-        history: History.empty(),
+        history: History(attackedThisTurn: {2}, enteredFieldThisTurn: {}),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.battle,

@@ -1,6 +1,6 @@
 import 'package:hexal_engine/models/history.dart';
+import 'package:hexal_engine/state_changes/clear_all_damage_state_change.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/state_changes/end_turn_clear_state_change.dart';
 import 'package:hexal_engine/state_changes/state_change.dart';
 import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/draw_cards_event.dart';
@@ -80,8 +80,6 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       final state = const GameState(
@@ -99,7 +97,7 @@ void main() {
       expect(
           change,
           contains(
-            const EndTurnClearStateChange(card: card),
+            const ClearAllDamageStateChange(),
           ));
     });
     test('adds a draw event to the stack when entering the draw phase.', () {

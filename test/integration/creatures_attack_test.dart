@@ -17,8 +17,6 @@ void main() {
       controller: Player.one,
       owner: Player.one,
       location: Location.field,
-      enteredFieldThisTurn: false,
-      exhausted: false,
       damage: 0,
     );
     const attacker2 = CowCreatureCard(
@@ -26,8 +24,6 @@ void main() {
       controller: Player.one,
       owner: Player.one,
       location: Location.field,
-      enteredFieldThisTurn: false,
-      exhausted: false,
       damage: 0,
     );
     const defender = CowCreatureCard(
@@ -35,8 +31,6 @@ void main() {
       controller: Player.two,
       owner: Player.two,
       location: Location.field,
-      enteredFieldThisTurn: false,
-      exhausted: false,
       damage: 0,
     );
     var state = const GameState(

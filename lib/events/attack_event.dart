@@ -2,7 +2,7 @@ import '../card/creature.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
-import '../state_changes/exhaust_creature_state_change.dart';
+import '../state_changes/history_attacked_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
 import '../state_changes/set_counter_available_state_change.dart';
 import '../state_changes/state_change.dart';
@@ -17,21 +17,16 @@ class AttackEvent extends Event {
   /// Creature being attacked.
   final int defender;
 
-  /// Should the attacker be exhausted?
-  final bool exhaustAttacker;
-
   /// Should this enable counterattacks this turn?
   final bool enableCounter;
 
   @override
   final bool resolved;
 
-  /// [attacker] attacks [defender]. Exhausts attacker if [exhaustAttacker].
-  /// Enables counterattacks this turn if [enableCounter].
+  /// [attacker] attacks [defender].
   const AttackEvent({
     required this.attacker,
     required this.defender,
-    this.exhaustAttacker = true,
     this.enableCounter = true,
     this.resolved = false,
   });
@@ -73,12 +68,11 @@ class AttackEvent extends Event {
       AddEventStateChange(
           event: DamageCreatureEvent(
               creature: defender, damage: _attacker.attack)),
-      ...exhaustAttacker
-          ? [ExhaustCreatureStateChange(creature: attacker)]
-          : [],
       ...enableCounter
           ? [const SetCounterAvailableStateChange(enabled: true)]
           : [],
+      // Add this attack to the history.
+      HistoryAttackedStateChange(creature: attacker),
       ResolveEventStateChange(event: this),
     ];
   }
@@ -87,19 +81,16 @@ class AttackEvent extends Event {
   AttackEvent get copyResolved => AttackEvent(
       attacker: attacker,
       defender: defender,
-      exhaustAttacker: exhaustAttacker,
       enableCounter: enableCounter,
       resolved: true);
 
   @override
-  List<Object> get props =>
-      [attacker, defender, exhaustAttacker, enableCounter, resolved];
+  List<Object> get props => [attacker, defender, enableCounter, resolved];
 
   /// Create this event from json.
   static AttackEvent fromJson(List<dynamic> json) => AttackEvent(
       attacker: int.parse(json[0].toString()),
       defender: int.parse(json[1].toString()),
-      exhaustAttacker: json[2] as bool,
-      enableCounter: json[3] as bool,
-      resolved: json[4] as bool);
+      enableCounter: json[2] as bool,
+      resolved: json[3] as bool);
 }

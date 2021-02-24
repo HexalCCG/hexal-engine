@@ -1,4 +1,5 @@
 import '../models/card.dart';
+import '../models/game_state.dart';
 
 /// Permanent card with stats that can attack and block attacks.
 mixin Creature on Card {
@@ -7,12 +8,6 @@ mixin Creature on Card {
 
   /// Damage taken this turn.
   int get damage;
-
-  /// Determines what attacks are valid this turn.
-  bool get enteredFieldThisTurn;
-
-  /// Whether this already attacked this turn.
-  bool get exhausted;
 
   /// Health written on the card.
   int get baseHealth;
@@ -27,18 +22,20 @@ mixin Creature on Card {
   int get attack => baseAttack;
 
   /// Allowed to attack creatures?
-  bool get canAttack => !enteredFieldThisTurn && !exhausted;
+  bool canAttack(GameState state) =>
+      !state.history.enteredFieldThisTurn.contains(id) &&
+      !state.history.attackedThisTurn.contains(id);
 
   /// Allowed to attack players?
-  bool get canAttackPlayer => !enteredFieldThisTurn && !exhausted;
+  bool canAttackPlayer(GameState state) =>
+      !state.history.enteredFieldThisTurn.contains(id) &&
+      !state.history.attackedThisTurn.contains(id);
 
   /// Whether this can be targeted by attacks, and whether this blocks.
   bool get canBeAttacked => true;
 
   /// Copy this with creature fields modified.
   Card copyWithCreature({
-    bool? exhausted,
-    bool? enteredFieldThisTurn,
     int? damage,
   });
 }
