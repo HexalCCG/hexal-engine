@@ -1,3 +1,4 @@
+import 'package:hexal_engine/card/creature.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:hexal_engine/state_changes/clear_all_damage_state_change.dart';
 import 'package:test/test.dart';
@@ -46,12 +47,7 @@ void main() {
       const action = PassAction();
       final change = state.generateStateChanges(action);
 
-      expect(
-          change,
-          containsAll(const <StateChange>[
-            PhaseStateChange(phase: TurnPhase.draw),
-            PriorityStateChange(player: Player.one),
-          ]));
+      expect(state.applyStateChanges(change).turnPhase, TurnPhase.draw);
     });
     test('changes active player when used in the end phase.', () {
       final state = const GameState(
@@ -66,21 +62,15 @@ void main() {
       const action = PassAction();
       final change = state.generateStateChanges(action);
 
-      expect(
-          change,
-          containsAll(const <StateChange>[
-            PhaseStateChange(phase: TurnPhase.start),
-            ActivePlayerStateChange(player: Player.two),
-            PriorityStateChange(player: Player.two),
-          ]));
+      expect(state.applyStateChanges(change).activePlayer, Player.two);
     });
-    test('adds a heal all creatures state change when end phase ends.', () {
+    test('heals all creatures when end phase ends.', () {
       const card = CowCreatureCard(
         id: 2,
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
-        damage: 0,
+        damage: 1,
       );
       final state = const GameState(
         gameOverState: GameOverState.playing,
@@ -95,10 +85,8 @@ void main() {
       final change = state.generateStateChanges(action);
 
       expect(
-          change,
-          contains(
-            const ClearAllDamageStateChange(),
-          ));
+          (state.applyStateChanges(change).getCardById(2) as Creature).damage,
+          0);
     });
     test('adds a draw event to the stack when entering the draw phase.', () {
       final state = const GameState(
@@ -114,11 +102,9 @@ void main() {
       final change = state.generateStateChanges(action);
 
       expect(
-          change,
-          contains(
-            const AddEventStateChange(
-                event: DrawCardsEvent(draws: 1, player: Player.one)),
-          ));
+        state.applyStateChanges(change).stack,
+        contains(const DrawCardsEvent(draws: 1, player: Player.one)),
+      );
     });
   });
 }
