@@ -1,19 +1,14 @@
 import 'package:hexal_engine/card/creature.dart';
 import 'package:hexal_engine/models/history.dart';
-import 'package:hexal_engine/state_changes/clear_all_damage_state_change.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/state_changes/state_change.dart';
 import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/draw_cards_event.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/state_changes/add_event_state_change.dart';
 import 'package:hexal_engine/models/enums/game_over_state.dart';
 import 'package:hexal_engine/models/game_state.dart';
 import 'package:hexal_engine/models/enums/turn_phase.dart';
-import 'package:hexal_engine/state_changes/active_player_state_change.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/state_changes/phase_state_change.dart';
 import 'package:hexal_engine/state_changes/priority_state_change.dart';
 
 void main() {
