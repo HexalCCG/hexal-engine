@@ -1,4 +1,5 @@
 import 'package:hexal_engine/effects/targeted_effect.dart';
+import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/state_change.dart';
@@ -144,34 +145,7 @@ void main() {
       // Player 1 fails to provide a target.
       state = state.applyAction(const PassAction());
 
-      // Target added to target request & folded into DamageEvent.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-
-      // DamageEffect resolves with EmptyTargetResult and is removed
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-
-      // OnCardEnterField is removed
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-
-      // PlayCardEvent destroys spell
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-
-      // DestroyCardEvent removed
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // PlayCardEvent removed
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
+      state = GameStateTestFunctions.passUntilEmpty(state);
 
       expect((state.stack), isEmpty);
       expect((state.cards.firstWhere((element) => element.id == 2).location),
