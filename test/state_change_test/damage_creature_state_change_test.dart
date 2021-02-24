@@ -17,8 +17,6 @@ void main() {
         owner: Player.one,
         controller: Player.one,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       var state = const GameState(

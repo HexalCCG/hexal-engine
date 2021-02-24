@@ -50,7 +50,7 @@ class AttackAction extends Action {
       }
 
       // Check if attacker can attack.
-      if (!_attacker.canAttack) {
+      if (!_attacker.canAttack(state)) {
         return false;
       }
 
@@ -80,7 +80,7 @@ class AttackAction extends Action {
       }
 
       // Check if attacker can attack.
-      if (!_attacker.canAttack) {
+      if (!_attacker.canAttack(state)) {
         return false;
       }
 

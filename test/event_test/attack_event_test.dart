@@ -19,8 +19,6 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       const card2 = CowCreatureCard(
@@ -28,8 +26,6 @@ void main() {
         controller: Player.two,
         owner: Player.two,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       final state = GameState(

@@ -16,8 +16,6 @@ void main() {
         controller: Player.one,
         owner: Player.one,
         location: Location.field,
-        enteredFieldThisTurn: false,
-        exhausted: false,
         damage: 0,
       );
       var state = GameState(
@@ -40,8 +38,6 @@ void main() {
             controller: Player.one,
             owner: Player.one,
             location: Location.mana,
-            enteredFieldThisTurn: false,
-            exhausted: false,
             damage: 0,
           ));
     });

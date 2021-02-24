@@ -3,7 +3,6 @@ import '../models/enums/location.dart';
 import '../models/enums/player.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
-import '../state_changes/exhaust_creature_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
 import '../state_changes/set_counter_available_state_change.dart';
 import '../state_changes/state_change.dart';
@@ -18,9 +17,6 @@ class AttackPlayerEvent extends Event {
   /// Player being attacked.
   final Player player;
 
-  /// Should the attacker be exhausted?
-  final bool exhaustAttacker;
-
   /// Should this enable counterattacks this turn?
   final bool enableCounter;
 
@@ -32,7 +28,6 @@ class AttackPlayerEvent extends Event {
   const AttackPlayerEvent({
     required this.attacker,
     required this.player,
-    this.exhaustAttacker = true,
     this.enableCounter = true,
     this.resolved = false,
   });
@@ -62,9 +57,6 @@ class AttackPlayerEvent extends Event {
     return [
       AddEventStateChange(
           event: DamagePlayerEvent(player: _player, damage: _attacker.attack)),
-      ...exhaustAttacker
-          ? [ExhaustCreatureStateChange(creature: attacker)]
-          : [],
       ...enableCounter
           ? [const SetCounterAvailableStateChange(enabled: true)]
           : [],
@@ -76,19 +68,16 @@ class AttackPlayerEvent extends Event {
   AttackPlayerEvent get copyResolved => AttackPlayerEvent(
       attacker: attacker,
       player: player,
-      exhaustAttacker: exhaustAttacker,
       enableCounter: enableCounter,
       resolved: true);
 
   @override
-  List<Object> get props =>
-      [attacker, player, exhaustAttacker, enableCounter, resolved];
+  List<Object> get props => [attacker, player, enableCounter, resolved];
 
   /// Create this event from json.
   static AttackPlayerEvent fromJson(List<dynamic> json) => AttackPlayerEvent(
       attacker: int.parse(json[0].toString()),
       player: Player.fromIndex(json[1] as int),
-      exhaustAttacker: json[2] as bool,
-      enableCounter: json[3] as bool,
-      resolved: json[4] as bool);
+      enableCounter: json[2] as bool,
+      resolved: json[3] as bool);
 }

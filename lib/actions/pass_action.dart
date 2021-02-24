@@ -5,7 +5,8 @@ import '../models/enums/turn_phase.dart';
 import '../models/game_state.dart';
 import '../state_changes/active_player_state_change.dart';
 import '../state_changes/add_event_state_change.dart';
-import '../state_changes/end_turn_clear_state_change.dart';
+import '../state_changes/clear_all_damage_state_change.dart';
+import '../state_changes/clear_history_state_change.dart';
 import '../state_changes/phase_state_change.dart';
 import '../state_changes/priority_state_change.dart';
 import '../state_changes/provide_target_state_change.dart';
@@ -13,9 +14,9 @@ import '../state_changes/set_counter_available_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'action.dart';
 
-/// Do nothing.
+/// Pass the current action. Contains logic for changing turn phase and moving to the next turn.
 class PassAction extends Action {
-  /// Do nothing.
+  /// Pass the current action. Contains logic for changing turn phase and moving to the next turn.
   const PassAction();
 
   @override
@@ -120,11 +121,15 @@ class PassAction extends Action {
       // Move on to the next turn
       case TurnPhase.end:
         return [
+          // Toggle the active player and give them priority.
           ActivePlayerStateChange(player: state.notActivePlayer),
-          const PhaseStateChange(phase: TurnPhase.start),
           PriorityStateChange(player: state.notActivePlayer),
-          // Clear single-turn card variables
-          ...state.cards.map((card) => EndTurnClearStateChange(card: card)),
+          // Reset the turn phase.
+          const PhaseStateChange(phase: TurnPhase.start),
+          // Clear all damage on cards.
+          const ClearAllDamageStateChange(),
+          // Clear the turn history.
+          const ClearHistory(),
         ];
       default:
         throw FallThroughError();
