@@ -49,12 +49,9 @@ abstract class Card extends Equatable {
     return builder(json['data'] as List<dynamic>);
   }
 
-  /// Properties packaged into json.
-  List<Object?> get jsonProps => props;
-
   /// Encode this card as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
         'identity': identity,
-        'data': jsonProps,
+        'data': props,
       };
 }
