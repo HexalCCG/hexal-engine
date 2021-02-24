@@ -1,16 +1,9 @@
 import '../effects/targeted_effect.dart';
-import '../events/draw_cards_event.dart';
 import '../exceptions/action_exception.dart';
-import '../models/enums/turn_phase.dart';
 import '../models/game_state.dart';
-import '../state_changes/active_player_state_change.dart';
-import '../state_changes/add_event_state_change.dart';
-import '../state_changes/clear_all_damage_state_change.dart';
-import '../state_changes/clear_history_state_change.dart';
-import '../state_changes/phase_state_change.dart';
+import '../state_changes/next_phase_state_change.dart';
 import '../state_changes/priority_state_change.dart';
 import '../state_changes/provide_target_state_change.dart';
-import '../state_changes/set_counter_available_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'action.dart';
 
@@ -60,7 +53,7 @@ class PassAction extends Action {
         PriorityStateChange(player: state.activePlayer)
       ];
     } else {
-      return _nextPhase(state);
+      return [const NextPhaseStateChange()];
     }
   }
 
@@ -77,62 +70,6 @@ class PassAction extends Action {
     } else {
       throw const ActionException(
           'PassAction Exception: Cannot pass non-optional target request.');
-    }
-  }
-
-  List<StateChange> _nextPhase(GameState state) {
-    switch (state.turnPhase) {
-      // Entering draw phase so add draw a card
-      case TurnPhase.start:
-        return [
-          AddEventStateChange(
-              event: DrawCardsEvent(draws: 1, player: state.activePlayer)),
-          const PhaseStateChange(phase: TurnPhase.draw),
-          PriorityStateChange(player: state.activePlayer),
-        ];
-      case TurnPhase.draw:
-        return [
-          const PhaseStateChange(phase: TurnPhase.main1),
-          PriorityStateChange(player: state.activePlayer),
-        ];
-      case TurnPhase.main1:
-        return [
-          const PhaseStateChange(phase: TurnPhase.battle),
-          const SetCounterAvailableStateChange(enabled: false),
-          PriorityStateChange(player: state.activePlayer),
-        ];
-      case TurnPhase.battle:
-        return [
-          state.counterAvailable
-              ? const PhaseStateChange(phase: TurnPhase.counter)
-              : const PhaseStateChange(phase: TurnPhase.main2),
-          PriorityStateChange(player: state.activePlayer),
-        ];
-      case TurnPhase.counter:
-        return [
-          const PhaseStateChange(phase: TurnPhase.main2),
-          PriorityStateChange(player: state.activePlayer),
-        ];
-      case TurnPhase.main2:
-        return [
-          const PhaseStateChange(phase: TurnPhase.end),
-          PriorityStateChange(player: state.activePlayer),
-        ];
-      // Move on to the next turn
-      case TurnPhase.end:
-        return [
-          // Toggle the active player and give them priority.
-          ActivePlayerStateChange(player: state.notActivePlayer),
-          PriorityStateChange(player: state.notActivePlayer),
-          // Reset the turn phase.
-          const PhaseStateChange(phase: TurnPhase.start),
-          // Clear all damage on cards.
-          const ClearAllDamageStateChange(),
-          // Clear the turn history.
-          const ClearHistory(),
-        ];
-      default:
-        throw FallThroughError();
     }
   }
 
