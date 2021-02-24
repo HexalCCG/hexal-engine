@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
@@ -24,6 +25,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,

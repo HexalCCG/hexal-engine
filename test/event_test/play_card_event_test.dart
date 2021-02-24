@@ -1,4 +1,5 @@
 import 'package:hexal_engine/effects/targeted_effect.dart';
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/state_change.dart';
 import 'package:hexal_engine/state_changes/put_into_field_state_change.dart';
@@ -30,6 +31,7 @@ void main() {
         stack: [
           PlayCardEvent(card: card.id),
         ],
+        history: const History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
@@ -56,6 +58,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [creature],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
@@ -101,6 +104,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [spell],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,

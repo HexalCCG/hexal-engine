@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/end_turn_clear_state_change.dart';
 import 'package:hexal_engine/state_changes/state_change.dart';
@@ -21,6 +22,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
@@ -36,6 +38,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.start,
@@ -55,6 +58,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.end,
@@ -84,6 +88,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.end,
@@ -102,6 +107,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.start,

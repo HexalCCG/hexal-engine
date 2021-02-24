@@ -1,4 +1,5 @@
 import 'package:hexal_engine/exceptions/state_change_exception.dart';
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/modify_event_state_change.dart';
 import 'package:hexal_engine/events/draw_cards_event.dart';
@@ -16,6 +17,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [event1],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,
@@ -35,6 +37,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [],
         stack: [event1],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,

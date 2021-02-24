@@ -12,10 +12,19 @@ class History extends Equatable {
   const History(
       {required this.enteredFieldThisTurn, required this.attackedThisTurn});
 
+  /// Empty history.
+  const History.empty()
+      : enteredFieldThisTurn = const [],
+        attackedThisTurn = const [];
+
   /// Create a Card from its JSON form.
   History.fromJson(List<dynamic> json)
-      : enteredFieldThisTurn = json[0] as List<int>,
-        attackedThisTurn = json[1] as List<int>;
+      : enteredFieldThisTurn = (json[0] as List<dynamic>)
+            .map((dynamic i) => int.parse(i.toString()))
+            .toList(),
+        attackedThisTurn = (json[1] as List<dynamic>)
+            .map((dynamic i) => int.parse(i.toString()))
+            .toList();
 
   @override
   List<Object> get props => [enteredFieldThisTurn, attackedThisTurn];

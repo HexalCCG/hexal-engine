@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/effects/damage_effect.dart';
 import 'package:hexal_engine/effects/target/creature_target.dart';
@@ -18,6 +19,7 @@ void main() {
         turnPhase: TurnPhase.main1,
         cards: [],
         stack: [effect],
+        history: History.empty(),
       );
       state = state.applyStateChanges(
           [const ProvideTargetStateChange(request: effect, targets: [])]);

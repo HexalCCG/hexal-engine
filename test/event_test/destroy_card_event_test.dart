@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/destroy_card_event.dart';
@@ -25,6 +26,7 @@ void main() {
         stack: [
           DestroyCardEvent(card: card.id),
         ],
+        history: const History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,

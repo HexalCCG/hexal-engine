@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/state_change.dart';
 import 'package:hexal_engine/events/attack_event.dart';
@@ -37,6 +38,7 @@ void main() {
         stack: [
           AttackEvent(attacker: card1.id, defender: card2.id),
         ],
+        history: const History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.battle,
