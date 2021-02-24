@@ -163,17 +163,6 @@ class GameState extends Equatable {
     return stack.last.apply(this);
   }
 
-  // TEST ONLY
-
-  /// Test only - submits pass actions until the stack is empty.
-  GameState testPassUntilEmpty() {
-    var state = this;
-    while (state.stack.isNotEmpty) {
-      state = state.applyAction(const PassAction());
-    }
-    return state;
-  }
-
   // SERIALIZATION
 
   /// Create a GameState from its JSON encoding.

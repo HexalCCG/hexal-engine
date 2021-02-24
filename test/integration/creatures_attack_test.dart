@@ -1,3 +1,4 @@
+import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/attack_action.dart';
@@ -50,6 +51,6 @@ void main() {
 
     state = state.applyAction(
         AttackAction(attacker: attacker2.id, defender: defender.id));
-    state = state.testPassUntilEmpty();
+    state = GameStateTestFunctions.passUntilEmpty(state);
   });
 }
