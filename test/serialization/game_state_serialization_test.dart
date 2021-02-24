@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/events/draw_cards_event.dart';
 import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
@@ -24,26 +25,15 @@ void main() {
       )
     ],
     stack: [DrawCardsEvent(player: Player.one, draws: 1)],
+    history: History.empty(),
     activePlayer: Player.one,
     priorityPlayer: Player.one,
     turnPhase: TurnPhase.battle,
   );
-  const string =
-      // ignore: lines_longer_than_80_chars
-      '{"activePlayer":0,"priorityPlayer":0,"turnPhase":3,"cards":[{"identity":[0,1],"data":[2,0,0,3,false,false,0]}],"stack":[{"type":"DrawCardsEvent","data":[0,1,0,false]}],"gameOverState":0,"counterAvailable":false}';
 
-  test('Serialization works properly. ', () {
-    expect(
-      json.encode(state),
-      string,
-    );
-  });
-
-  test('Deserialization works properly.', () {
-    final jsonMap = json.decode(string) as Map<String, dynamic>;
-
-    final decodedState = GameState.fromJson(jsonMap);
-
-    expect(decodedState, state);
+  test('Game state preserved through serialisation. ', () {
+    final result = GameState.fromJson(
+        json.decode(json.encode(state)) as Map<String, dynamic>);
+    expect(result, state);
   });
 }

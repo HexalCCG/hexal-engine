@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/models/enums/game_over_state.dart';
@@ -11,6 +12,7 @@ void main() {
       gameOverState: GameOverState.playing,
       cards: [],
       stack: [],
+      history: History.empty(),
       activePlayer: Player.one,
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,
@@ -26,6 +28,7 @@ void main() {
       gameOverState: GameOverState.playing,
       cards: [],
       stack: [],
+      history: History.empty(),
       activePlayer: Player.one,
       priorityPlayer: Player.two,
       turnPhase: TurnPhase.start,

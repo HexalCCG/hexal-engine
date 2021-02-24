@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/effects/damage_effect.dart';
@@ -32,6 +33,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [effect],
+        history: const History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,

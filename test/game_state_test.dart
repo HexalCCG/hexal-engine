@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/state_changes/resolve_event_state_change.dart';
@@ -23,6 +24,7 @@ void main() {
         )
       ],
       stack: [event],
+      history: History.empty(),
       activePlayer: Player.one,
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.draw,

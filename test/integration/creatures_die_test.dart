@@ -1,4 +1,5 @@
 import 'package:hexal_engine/effects/targeted_effect.dart';
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/provide_target_action.dart';
 import 'package:hexal_engine/card/creature.dart';
@@ -34,6 +35,7 @@ void main() {
       gameOverState: GameOverState.playing,
       cards: [creature, card],
       stack: [],
+      history: History.empty(),
       activePlayer: Player.one,
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.main1,

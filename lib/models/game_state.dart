@@ -15,6 +15,7 @@ import 'enums/game_over_state.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
 import 'enums/turn_phase.dart';
+import 'history.dart';
 
 /// Represents a single moment snapshot of a game.
 class GameState extends Equatable {
@@ -39,6 +40,9 @@ class GameState extends Equatable {
   /// Whether a counter phase will occur this turn.
   final bool counterAvailable;
 
+  /// Card events that occurred this turn.
+  final History history;
+
   /// Represents a single moment snapshot of a game.
   const GameState({
     required this.activePlayer,
@@ -46,6 +50,7 @@ class GameState extends Equatable {
     required this.turnPhase,
     required this.cards,
     required this.stack,
+    required this.history,
     this.gameOverState = GameOverState.playing,
     this.counterAvailable = false,
   });
@@ -182,6 +187,7 @@ class GameState extends Equatable {
         stack = (json['stack'] as List<dynamic>)
             .map((dynamic data) => Event.fromJson(data as Map<String, dynamic>))
             .toList(),
+        history = History.fromJson(json['history'] as List<dynamic>),
         gameOverState = GameOverState.fromIndex(json['gameOverState'] as int),
         counterAvailable = json['counterAvailable'] as bool;
 
@@ -192,6 +198,7 @@ class GameState extends Equatable {
         'turnPhase': turnPhase.index,
         'cards': cards,
         'stack': stack,
+        'history': history,
         'gameOverState': gameOverState.index,
         'counterAvailable': counterAvailable,
       };
@@ -203,6 +210,7 @@ class GameState extends Equatable {
     TurnPhase? turnPhase,
     List<Card>? cards,
     List<Event>? stack,
+    History? history,
     GameOverState? gameOverState,
     bool? counterAvailable,
   }) {
@@ -212,6 +220,7 @@ class GameState extends Equatable {
       turnPhase: turnPhase ?? this.turnPhase,
       cards: cards ?? this.cards,
       stack: stack ?? this.stack,
+      history: history ?? this.history,
       gameOverState: gameOverState ?? this.gameOverState,
       counterAvailable: counterAvailable ?? this.counterAvailable,
     );
@@ -227,6 +236,7 @@ class GameState extends Equatable {
         turnPhase,
         cards,
         stack,
+        history,
         gameOverState,
         counterAvailable,
       ];

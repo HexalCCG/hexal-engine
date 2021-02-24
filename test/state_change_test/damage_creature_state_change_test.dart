@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/card/creature.dart';
 import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
@@ -24,6 +25,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [creature],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.start,

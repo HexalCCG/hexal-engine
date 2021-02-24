@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
@@ -23,6 +24,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
@@ -49,6 +51,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.main1,
@@ -71,6 +74,7 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [card],
         stack: [],
+        history: History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.two,
         turnPhase: TurnPhase.main1,

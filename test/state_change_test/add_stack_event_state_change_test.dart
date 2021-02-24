@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/events/draw_cards_event.dart';
 import 'package:hexal_engine/models/enums/player.dart';
@@ -13,6 +14,7 @@ void main() {
       gameOverState: GameOverState.playing,
       cards: [],
       stack: [],
+      history: History.empty(),
       activePlayer: Player.one,
       priorityPlayer: Player.one,
       turnPhase: TurnPhase.start,

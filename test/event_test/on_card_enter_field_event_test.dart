@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/cards/00_token/002_cow_beam_card.dart';
@@ -26,6 +27,7 @@ void main() {
         stack: [
           OnCardEnterFieldEvent(card: card.id),
         ],
+        history: const History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
@@ -50,6 +52,7 @@ void main() {
         stack: [
           OnCardEnterFieldEvent(card: card.id),
         ],
+        history: const History.empty(),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.draw,
