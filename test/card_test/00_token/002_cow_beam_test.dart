@@ -1,3 +1,4 @@
+import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/effects/targeted_effect.dart';
@@ -111,30 +112,7 @@ void main() {
       // Player 1 provides a target.
       state = state.applyAction(const ProvideTargetAction(targets: [3]));
 
-      // Target added to target request & folded into DamageEvent.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // Resolved target request removed.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // DamageEvent creates a damage creature event.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // DamageCreature event damages the creature.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // DamageCreature is removed.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // DamageEffect is removed.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // OnCardEnterField is removed.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // PlayCard event is removed.
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
+      state = GameStateTestFunctions.passUntilEmpty(state);
 
       expect(
           (state.cards.firstWhere((element) => element.id == 3) as Creature)
