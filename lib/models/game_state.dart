@@ -7,7 +7,6 @@ import '../actions/pass_action.dart';
 import '../actions/play_card_action.dart';
 import '../events/event.dart';
 import '../exceptions/game_state_exception.dart';
-import '../state_changes/add_event_state_change.dart';
 import '../state_changes/remove_event_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'card.dart';
@@ -145,12 +144,6 @@ class GameState extends Equatable {
   GameState applyAction(Action action) {
     assert(gameOverState == GameOverState.playing);
     return applyStateChanges(generateStateChanges(action));
-  }
-
-  /// Generates then applies state changes for provided event.
-  GameState addAndResolveEvent(Event event) {
-    var state = applyStateChanges([AddEventStateChange(event: event)]);
-    return state.applyStateChanges(state.resolveTopStackEvent());
   }
 
   /// Attempts to resolve the top stack event.
