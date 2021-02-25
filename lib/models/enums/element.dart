@@ -13,23 +13,34 @@ class Element {
   @override
   String toString() => index.toString();
 
-  static const List<Element> _all = [fire, earth, air, water, spirit, any];
+  static const List<Element> _all = [
+    neutral,
+    fire,
+    earth,
+    air,
+    water,
+    spirit,
+    any
+  ];
 
-  /// Fire.
-  static const Element fire = Element._(0);
+  /// Neutral element. (0)
+  static const Element neutral = Element._(0);
 
-  /// Earth.
-  static const Element earth = Element._(1);
+  /// Fire. (1)
+  static const Element fire = Element._(1);
 
-  /// Air.
-  static const Element air = Element._(2);
+  /// Earth. (2)
+  static const Element earth = Element._(2);
 
-  /// Water.
-  static const Element water = Element._(3);
+  /// Air. (3)
+  static const Element air = Element._(3);
 
-  /// Spirit.
-  static const Element spirit = Element._(4);
+  /// Water. (4)
+  static const Element water = Element._(4);
 
-  /// Any element.
-  static const Element any = Element._(5);
+  /// Spirit. (5)
+  static const Element spirit = Element._(5);
+
+  /// Any element. (6)
+  static const Element any = Element._(6);
 }
