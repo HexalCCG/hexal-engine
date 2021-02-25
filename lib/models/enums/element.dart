@@ -20,7 +20,7 @@ class Element {
     air,
     water,
     spirit,
-    any
+    wild
   ];
 
   /// Neutral element. (0)
@@ -42,5 +42,5 @@ class Element {
   static const Element spirit = Element._(5);
 
   /// Any element. (6)
-  static const Element any = Element._(6);
+  static const Element wild = Element._(6);
 }
