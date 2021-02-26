@@ -124,7 +124,7 @@ class AttackAction extends Action {
 
   /// Create from json.
   static AttackAction fromJson(List<dynamic> json) => AttackAction(
-        attacker: int.parse(json[0].toString()),
-        defender: int.parse(json[1].toString()),
+        attacker: json[0] as int,
+        defender: json[1] as int,
       );
 }

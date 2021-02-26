@@ -90,7 +90,7 @@ class AttackPlayerAction extends Action {
 
   /// Create from json.
   static AttackPlayerAction fromJson(List<dynamic> json) => AttackPlayerAction(
-        attacker: int.parse(json[0].toString()),
+        attacker: json[0] as int,
         player: Player.fromIndex(json[1] as int),
       );
 }

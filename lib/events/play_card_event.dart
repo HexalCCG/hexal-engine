@@ -87,7 +87,7 @@ class PlayCardEvent extends Event {
 
   /// Create this event from json.
   static PlayCardEvent fromJson(List<dynamic> json) => PlayCardEvent(
-      card: int.parse(json[0].toString()),
+      card: json[0] as int,
       donePutIntoField: json[1] as bool,
       resolved: json[2] as bool);
 }

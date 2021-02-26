@@ -55,6 +55,6 @@ class PlayCardAction extends Action {
 
   /// Create from json.
   static PlayCardAction fromJson(List<dynamic> json) => PlayCardAction(
-        card: int.parse(json[0].toString()),
+        card: json[0] as int,
       );
 }

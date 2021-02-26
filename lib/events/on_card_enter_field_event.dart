@@ -78,7 +78,7 @@ class OnCardEnterFieldEvent extends Event {
   /// Create this event from json.
   static OnCardEnterFieldEvent fromJson(List<dynamic> json) =>
       OnCardEnterFieldEvent(
-          card: int.parse(json[0].toString()),
+          card: json[0] as int,
           effectIndex: json[1] as int,
           resolved: json[2] as bool);
 }
