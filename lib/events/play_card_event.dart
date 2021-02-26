@@ -1,6 +1,7 @@
 import '../card/on_enter_field.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
+import '../models/mana_amount.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
 import '../state_changes/put_into_field_state_change.dart';
@@ -9,14 +10,27 @@ import '../state_changes/state_change.dart';
 import 'destroy_card_event.dart';
 import 'event.dart';
 import 'on_card_enter_field_event.dart';
+import 'require_mana_event.dart';
+
+/// Stages the play card event processes.
+enum PlayCardEventStage {
+  /// Before requesting mana or entering field.
+  init,
+
+  /// After mana is requested but before entering field.
+  doneRequestMana,
+
+  /// After mana and entering field are done.
+  donePutIntoField,
+}
 
 /// Event to play a card from hand.
 class PlayCardEvent extends Event {
   /// Card to play.
   final int card;
 
-  /// Whether the card has been put into the field yet.
-  final bool donePutIntoField;
+  /// Stage of playing the card to process.
+  final PlayCardEventStage stage;
 
   @override
   final bool resolved;
@@ -24,7 +38,7 @@ class PlayCardEvent extends Event {
   /// [card] is put into the field.
   const PlayCardEvent({
     required this.card,
-    this.donePutIntoField = false,
+    this.stage = PlayCardEventStage.init,
     this.resolved = false,
   });
 
@@ -34,11 +48,13 @@ class PlayCardEvent extends Event {
     final _card = state.getCardById(card);
 
     // Before put into field card must be in limbo.
-    if (!donePutIntoField && _card.location != Location.limbo) {
+    if (stage != PlayCardEventStage.donePutIntoField &&
+        _card.location != Location.limbo) {
       return false;
     }
     // After put into field card must be in field.
-    if (donePutIntoField && _card.location != Location.field) {
+    if (stage == PlayCardEventStage.donePutIntoField &&
+        _card.location != Location.field) {
       return false;
     }
 
@@ -52,42 +68,57 @@ class PlayCardEvent extends Event {
     }
 
     final _card = state.getCardById(card);
+    final _cardRequiresMana = _card.manaCost != const ManaAmount.zero();
+
+    // If we haven't requested mana and we need to, do that.
+    if (stage == PlayCardEventStage.init && _cardRequiresMana) {
+      return [
+        AddEventStateChange(
+            event: RequireManaEvent(card: card, cost: _card.manaCost)),
+        ModifyEventStateChange(
+            event: this,
+            newEvent: _copyAtStage(PlayCardEventStage.doneRequestMana)),
+      ];
+    }
 
     // If card hasn't been put into field yet, do that.
-    if (!donePutIntoField) {
+    if (stage != PlayCardEventStage.donePutIntoField) {
       return [
         PutIntoFieldStateChange(card: card),
         ...(_card is OnEnterField)
             ? [AddEventStateChange(event: OnCardEnterFieldEvent(card: card))]
             : [],
-        ModifyEventStateChange(event: this, newEvent: _copyDonePutIntoField),
+        ModifyEventStateChange(
+            event: this,
+            newEvent: _copyAtStage(PlayCardEventStage.donePutIntoField)),
       ];
-      // If it's in play, destroy it if it's not permanent
+    }
+
+    // If it's in play, destroy it if it's not permanent
+    // Regardless, resolve.
+    if (_card.permanent) {
+      return [ResolveEventStateChange(event: this)];
     } else {
-      if (_card.permanent) {
-        return [ResolveEventStateChange(event: this)];
-      } else {
-        return [
-          AddEventStateChange(event: DestroyCardEvent(card: card)),
-          ResolveEventStateChange(event: this),
-        ];
-      }
+      return [
+        AddEventStateChange(event: DestroyCardEvent(card: card)),
+        ResolveEventStateChange(event: this),
+      ];
     }
   }
 
-  PlayCardEvent get _copyDonePutIntoField =>
-      PlayCardEvent(card: card, donePutIntoField: true, resolved: resolved);
+  PlayCardEvent _copyAtStage(PlayCardEventStage stage) =>
+      PlayCardEvent(card: card, stage: stage, resolved: resolved);
 
   @override
-  PlayCardEvent get copyResolved => PlayCardEvent(
-      card: card, donePutIntoField: donePutIntoField, resolved: true);
+  PlayCardEvent get copyResolved =>
+      PlayCardEvent(card: card, stage: stage, resolved: true);
 
   @override
-  List<Object> get props => [card, donePutIntoField, resolved];
+  List<Object> get props => [card, stage, resolved];
 
   /// Create this event from json.
   static PlayCardEvent fromJson(List<dynamic> json) => PlayCardEvent(
       card: json[0] as int,
-      donePutIntoField: json[1] as bool,
+      stage: PlayCardEventStage.values[json[1] as int],
       resolved: json[2] as bool);
 }
