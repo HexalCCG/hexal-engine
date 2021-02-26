@@ -13,8 +13,8 @@ class CardIdentity extends Equatable {
 
   /// Create a card identity from list of information.
   CardIdentity.fromJson(List<dynamic> json)
-      : setId = int.parse(json[0].toString()),
-        cardId = int.parse(json[1].toString());
+      : setId = json[0] as int,
+        cardId = json[1] as int;
 
   /// Convert to json.
   List<int> toJson() => [setId, cardId];

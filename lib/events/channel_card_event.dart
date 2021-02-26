@@ -5,16 +5,16 @@ import '../state_changes/resolve_event_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'event.dart';
 
-/// Event that destroys a card.
-class DestroyCardEvent extends Event {
-  /// Card to destroy.
+/// Event that channels a card.
+class ChannelCardEvent extends Event {
+  /// Card to channel.
   final int card;
 
   @override
   final bool resolved;
 
-  /// Destroys [card].
-  const DestroyCardEvent({
+  /// Event that channels [card].
+  const ChannelCardEvent({
     required this.card,
     this.resolved = false,
   });
@@ -38,14 +38,14 @@ class DestroyCardEvent extends Event {
       ];
 
   @override
-  DestroyCardEvent get copyResolved =>
-      DestroyCardEvent(card: card, resolved: true);
+  ChannelCardEvent get copyResolved =>
+      ChannelCardEvent(card: card, resolved: true);
 
   @override
   List<Object> get props => [card, resolved];
 
   /// Create this event from json
-  static DestroyCardEvent fromJson(List<dynamic> json) => DestroyCardEvent(
+  static ChannelCardEvent fromJson(List<dynamic> json) => ChannelCardEvent(
         card: json[0] as int,
         resolved: json[1] as bool,
       );

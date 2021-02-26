@@ -31,5 +31,5 @@ class ProvideManaAction extends Action {
 
   /// Create from json.
   static ProvideManaAction fromJson(List<dynamic> json) =>
-      ProvideManaAction(card: int.parse(json[0].toString()));
+      ProvideManaAction(card: json[0] as int);
 }

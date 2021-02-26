@@ -76,7 +76,7 @@ class AttackPlayerEvent extends Event {
 
   /// Create this event from json.
   static AttackPlayerEvent fromJson(List<dynamic> json) => AttackPlayerEvent(
-      attacker: int.parse(json[0].toString()),
+      attacker: json[0] as int,
       player: Player.fromIndex(json[1] as int),
       enableCounter: json[2] as bool,
       resolved: json[3] as bool);

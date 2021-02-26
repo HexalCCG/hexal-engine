@@ -76,7 +76,7 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   /// Create this event from json.
   static DamageCreatureEvent fromJson(List<dynamic> json) =>
       DamageCreatureEvent(
-          creature: int.parse(json[0].toString()),
+          creature: json[0] as int,
           damage: json[1] as int,
           resolved: json[2] as bool);
 }
