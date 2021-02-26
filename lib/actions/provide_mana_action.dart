@@ -1,10 +1,9 @@
-import 'package:hexal_engine/state_changes/priority_state_change.dart';
-
 import '../events/channel_card_event.dart';
 import '../events/require_mana_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
+import '../state_changes/priority_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'action.dart';
 

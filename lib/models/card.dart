@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/models/mana_amount.dart';
 
 import '../cards/card_index.dart';
 import 'card_identity.dart';
+import 'enums/element.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';
+import 'mana_amount.dart';
 
 /// Card represent single cards.
 abstract class Card extends Equatable {
@@ -23,8 +24,11 @@ abstract class Card extends Equatable {
   /// Whether this card survives on board after the play event resolves.
   bool get permanent;
 
+  /// Element of this card.
+  Element get element;
+
   /// Amount of mana this provides.
-  ManaAmount get providesMana;
+  ManaAmount get providesMana => element.asMana;
 
   /// Identity of this card.
   CardIdentity get identity;

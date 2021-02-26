@@ -1,6 +1,7 @@
 import '../../card/creature.dart';
 import '../../models/card.dart';
 import '../../models/card_identity.dart';
+import '../../models/enums/element.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
@@ -8,6 +9,9 @@ import '../../models/enums/player.dart';
 class CowCreatureCard extends Card with Creature {
   @override
   CardIdentity get identity => const CardIdentity(0, 1);
+
+  @override
+  Element get element => Element.earth;
 
   @override
   int get baseAttack => 2;
