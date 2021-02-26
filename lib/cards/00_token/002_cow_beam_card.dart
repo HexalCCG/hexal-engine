@@ -5,6 +5,7 @@ import '../../effects/effect.dart';
 import '../../effects/target/creature_target.dart';
 import '../../models/card.dart';
 import '../../models/card_identity.dart';
+import '../../models/enums/element.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
@@ -12,6 +13,9 @@ import '../../models/enums/player.dart';
 class CowBeamCard extends Card with Spell, OnEnterField {
   @override
   CardIdentity get identity => const CardIdentity(0, 2);
+
+  @override
+  Element get element => Element.earth;
 
   /// [id] must be unique. [owner] cannot be changed.
   const CowBeamCard({

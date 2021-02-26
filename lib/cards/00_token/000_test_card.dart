@@ -1,6 +1,7 @@
 import '../../card/spell.dart';
 import '../../models/card.dart';
 import '../../models/card_identity.dart';
+import '../../models/enums/element.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
 
@@ -8,6 +9,9 @@ import '../../models/enums/player.dart';
 class TestCard extends Card with Spell {
   @override
   CardIdentity get identity => const CardIdentity(0, 0);
+
+  @override
+  Element get element => Element.neutral;
 
   /// [id] must be unique. [owner] cannot be changed.
   const TestCard({
