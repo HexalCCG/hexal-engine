@@ -53,12 +53,12 @@ void main() {
       expect(
           (state.getCardsByLocation(Player.one, Location.field).first
                   as CarnivorousFern)
-              .canAttack,
+              .canAttack(state),
           true);
       expect(
           (state.getCardsByLocation(Player.one, Location.field).first
                   as CarnivorousFern)
-              .canAttackPlayer,
+              .canAttackPlayer(state),
           false);
     });
   });
