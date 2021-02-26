@@ -21,8 +21,8 @@ void main() {
         stack: [effect],
         history: History.empty(),
       );
-      state = state.applyStateChanges(
-          [const ProvideTargetStateChange(request: effect, targets: [])]);
+      state = state
+          .applyStateChanges([const ProvideTargetStateChange(targets: [])]);
       expect((state.stack.last as DamageEffect).targetFilled, true);
       expect((state.stack.last as DamageEffect).targets, isEmpty);
     });
