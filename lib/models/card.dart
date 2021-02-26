@@ -27,6 +27,9 @@ abstract class Card extends Equatable {
   /// Element of this card.
   Element get element;
 
+  /// Cost of this card.
+  ManaAmount get manaCost => const ManaAmount.zero();
+
   /// Amount of mana this provides.
   ManaAmount get providesMana => element.asMana;
 
