@@ -64,7 +64,7 @@ class PassAction extends Action {
 
     if (event.target.optional || !event.target.anyValid(state)) {
       return [
-        ProvideTargetStateChange(request: event, targets: []),
+        const ProvideTargetStateChange(targets: []),
         PriorityStateChange(player: state.notPriorityPlayer),
       ];
     } else {

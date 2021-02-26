@@ -45,7 +45,6 @@ class ProvideTargetAction extends Action {
 
     return [
       ProvideTargetStateChange(
-        request: state.stack.last as TargetedEffect,
         targets: targets,
       ),
       PriorityStateChange(player: state.notPriorityPlayer),
