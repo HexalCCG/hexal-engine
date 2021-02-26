@@ -48,13 +48,14 @@ class RequireManaEvent extends Event {
     }
 
     if (cost.isFilledBy(provided)) {
+      // Cost was paid.
+      return [ResolveEventStateChange(event: this)];
+    } else {
       // Exile summoning card.
       return [
         MoveCardStateChange(card: card, location: Location.exile),
         ResolveEventStateChange(event: this)
       ];
-    } else {
-      return [ResolveEventStateChange(event: this)];
     }
   }
 
