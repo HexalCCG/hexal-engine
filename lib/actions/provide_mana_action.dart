@@ -25,7 +25,7 @@ class ProvideManaAction extends Action {
     }
 
     // Make sure the mana require event is still going.
-    if (event.resolved == false && event.valid(state)) {
+    if (event.resolved || !event.valid(state)) {
       return false;
     }
 
@@ -36,7 +36,7 @@ class ProvideManaAction extends Action {
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
       throw const ActionException(
-          'ProvideTargetAction Exception: invalid argument');
+          'ProvideManaAction Exception: invalid argument');
     }
 
     return [
