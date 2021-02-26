@@ -1,5 +1,10 @@
+import 'package:hexal_engine/state_changes/priority_state_change.dart';
+
+import '../events/channel_card_event.dart';
+import '../events/require_mana_event.dart';
 import '../exceptions/action_exception.dart';
 import '../models/game_state.dart';
+import '../state_changes/add_event_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'action.dart';
 
@@ -13,7 +18,19 @@ class ProvideManaAction extends Action {
 
   @override
   bool valid(GameState state) {
-    return false;
+    final event = state.stack.last;
+
+    // Top stack event must be a require mana event.
+    if (event is! RequireManaEvent) {
+      return false;
+    }
+
+    // Make sure the mana require event is still going.
+    if (event.resolved == false && event.valid(state)) {
+      return false;
+    }
+
+    return true;
   }
 
   @override
@@ -23,7 +40,16 @@ class ProvideManaAction extends Action {
           'ProvideTargetAction Exception: invalid argument');
     }
 
-    return [];
+    return [
+      AddEventStateChange(
+        event: ChannelCardEvent(
+          card: card,
+          controller: state.priorityPlayer,
+          targetCard: (state.stack.last as RequireManaEvent).card,
+        ),
+      ),
+      PriorityStateChange(player: state.notPriorityPlayer),
+    ];
   }
 
   @override
