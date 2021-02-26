@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/models/mana_amount.dart';
 
 import '../cards/card_index.dart';
 import 'card_identity.dart';
@@ -21,6 +22,9 @@ abstract class Card extends Equatable {
 
   /// Whether this card survives on board after the play event resolves.
   bool get permanent;
+
+  /// Amount of mana this provides.
+  ManaAmount get providesMana;
 
   /// Identity of this card.
   CardIdentity get identity;
