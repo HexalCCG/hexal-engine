@@ -28,7 +28,7 @@ class HivequeenNgaat extends Card with OnTrigger {
         TriggeredEffect(
           trigger: onSummonFriendlyElementalCreature(this, Element.earth, 0),
           effectBuilder: (state) =>
-              DrawCardsEffect(draws: 2, player: controller),
+              DrawCardsEffect(draws: 1, player: controller),
           historyBuilder:
               onSummonFriendlyElementalCreatureHistory(this, Element.earth, 0),
           optional: false,
