@@ -1,5 +1,11 @@
+import '../../models/game_state.dart';
 import '../effect.dart';
-import 'trigger.dart';
+
+/// Activator for a triggered effect.
+typedef Trigger = bool Function(GameState state);
+
+/// Builder for the triggered effect.
+typedef EffectBuilder = Effect Function(GameState state);
 
 /// Effect activated when trigger occurs.
 class TriggeredEffect {
@@ -7,12 +13,15 @@ class TriggeredEffect {
   final Trigger trigger;
 
   /// Effect to add.
-  final Effect effect;
+  final EffectBuilder effectBuilder;
 
   /// Whether this effect can be skipped.
   final bool optional;
 
   /// Effect activated when trigger occurs.
-  const TriggeredEffect(
-      {required this.trigger, required this.effect, this.optional = true});
+  const TriggeredEffect({
+    required this.trigger,
+    required this.effectBuilder,
+    this.optional = true,
+  });
 }

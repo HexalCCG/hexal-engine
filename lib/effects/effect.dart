@@ -1,15 +1,11 @@
 import '../events/event.dart';
 import '../exceptions/json_format_exception.dart';
-import '../models/enums/player.dart';
 import 'effect_index.dart';
 
 /// Empty effect.
 abstract class Effect extends Event {
   /// Empty effect.
   const Effect({required int id}) : super(id: id);
-
-  /// Player that controls this effect and will provide targets.
-  Player get controller;
 
   /// Create an Event from its JSON form.
   factory Effect.fromJson(Map<String, dynamic> json) {

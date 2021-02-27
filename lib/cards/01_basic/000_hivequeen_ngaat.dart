@@ -1,13 +1,15 @@
-import '../../models/mana_amount.dart';
-
+import '../../card/on_trigger.dart';
+import '../../effects/draw_cards_effect.dart';
+import '../../effects/trigger/triggered_effect.dart';
 import '../../models/card.dart';
 import '../../models/card_identity.dart';
 import '../../models/enums/element.dart';
 import '../../models/enums/location.dart';
 import '../../models/enums/player.dart';
+import '../../models/mana_amount.dart';
 
 /// Earth Hero. "When you summon an [Earth] creature, draw a card".
-class HivequeenNgaat extends Card {
+class HivequeenNgaat extends Card with OnTrigger {
   @override
   CardIdentity get identity => const CardIdentity(1, 0);
 
@@ -19,6 +21,15 @@ class HivequeenNgaat extends Card {
 
   @override
   ManaAmount get manaCost => const ManaAmount(earth: 4);
+
+  @override
+  List<TriggeredEffect> get onTriggerEffects => [
+        TriggeredEffect(
+          trigger: (state) => false,
+          effectBuilder: (state) =>
+              DrawCardsEffect(draws: 2, player: controller),
+        )
+      ];
 
   /// Earth Hero. "When you summon an [Earth] creature, draw a card".
   const HivequeenNgaat({
