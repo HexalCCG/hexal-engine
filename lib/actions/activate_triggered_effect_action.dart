@@ -1,10 +1,9 @@
-import 'package:hexal_engine/state_changes/priority_state_change.dart';
-
 import '../card/on_trigger.dart';
 import '../exceptions/action_exception.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/history_triggered_effect_state_change.dart';
+import '../state_changes/priority_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'action.dart';
 
@@ -23,44 +22,44 @@ class ActivateTriggeredEffectAction extends Action {
   });
 
   @override
-  bool valid(GameState state) {
+  void validate(GameState state) {
     final _card = state.getCardById(card);
 
     // Check we control the card
     if (_card.controller != state.priorityPlayer) {
-      return false;
+      throw const ActionException(
+          'ActivateTriggeredEffectAction: Card not controlled by priority player.');
     }
 
     // Check card has a triggered effect.
     if (_card is! OnTrigger) {
-      return false;
+      throw const ActionException(
+          'ActivateTriggeredEffectAction: Card does not implement OnTrigger.');
     }
     // Check effect index is in range.
     if (effectIndex > _card.onTriggerEffects.length - 1) {
-      return false;
+      throw const ActionException(
+          'ActivateTriggeredEffectAction: Effect index is out of range.');
     }
 
     final _effect = _card.onTriggerEffects[effectIndex];
     // Check effect has triggered.
     if (!_effect.trigger(state)) {
-      return false;
+      throw const ActionException(
+          'ActivateTriggeredEffectAction: Effect trigger is not active.');
     }
     // Check effect hasn't already happened for this trigger.
     if (_effect.historyBuilder != null &&
         state.history.triggeredEffects
             .contains(_effect.historyBuilder!(state))) {
-      return false;
+      throw const ActionException(
+          'ActivateTriggeredEffectAction: Effect is already in history.');
     }
-
-    return true;
   }
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {
-      throw const ActionException(
-          'Activate triggered effect failed: Invalid argument');
-    }
+    validate(state);
 
     final _card = state.getCardById(card) as OnTrigger;
     final _effect = _card.onTriggerEffects[effectIndex];

@@ -17,31 +17,28 @@ class PlayCardAction extends Action {
   const PlayCardAction({required this.card});
 
   @override
-  bool valid(GameState state) {
+  void validate(GameState state) {
     final _card = state.getCardById(card);
 
     if (state.stack.isNotEmpty) {
       // Cannot play cards if stack is not empty.
-      return false;
+      throw const ActionException(
+          'PlayCardAction: Cannot play cards if stack is not empty.');
     }
-    if (!state
-        .getCardsByLocation(state.priorityPlayer, Location.hand)
-        .contains(_card)) {
+    if (_card.location != Location.hand) {
       // Card not found in hand.
-      return false;
+      throw const ActionException('PlayCardAction: Card not in hand.');
     }
     if (state.activePlayer != state.priorityPlayer) {
       // Cannot play card on opponent's turn.
-      return false;
+      throw const ActionException(
+          'PlayCardAction: Inactive player cannot play cards.');
     }
-    return true;
   }
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {
-      throw const ActionException('PlayCardAction Exception: invalid argument');
-    }
+    validate(state);
 
     return [
       MoveCardStateChange(card: card, location: Location.limbo),

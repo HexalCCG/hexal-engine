@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:meta/meta.dart';
 
 import '../exceptions/json_format_exception.dart';
@@ -13,7 +14,17 @@ abstract class Action extends Equatable {
   const Action();
 
   /// Whether this action is valid on the provided state.
-  bool valid(GameState state);
+  bool valid(GameState state) {
+    try {
+      validate(state);
+    } on ActionException {
+      return false;
+    }
+    return true;
+  }
+
+  /// Check validity and throw exceptions on failures.
+  void validate(GameState state);
 
   /// Generate state changes representing this action's effects on the state.
   List<StateChange> apply(GameState state);

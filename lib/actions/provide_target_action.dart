@@ -15,33 +15,33 @@ class ProvideTargetAction extends Action {
   const ProvideTargetAction({required this.targets});
 
   @override
-  bool valid(GameState state) {
+  void validate(GameState state) {
     // Check stack isn't empty.
     if (state.stack.isEmpty || state.stack.last is! TargetedEffect) {
-      return false;
+      throw const ActionException(
+          'ProvideTargetAction: Top event in stack is not a TargetedEffect.');
     }
     final _request = state.stack.last as TargetedEffect;
     // Request must not be filled.
     if (_request.targetFilled) {
-      return false;
+      throw const ActionException(
+          'ProvideTargetAction: Target has already been provided.');
     }
     // Check request belongs to the priority player.
     if (_request.target.controller != state.priorityPlayer) {
-      return false;
+      throw const ActionException(
+          'ProvideTargetAction: TargetedEffect is not controlled by the priority player.');
     }
     // Check provided targets are valid.
     if (!(_request.target.targetValid(state, targets))) {
-      return false;
+      throw const ActionException(
+          'ProvideTargetAction: Provided target is not valid.');
     }
-    return true;
   }
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {
-      throw const ActionException(
-          'ProvideTargetAction Exception: invalid argument');
-    }
+    validate(state);
 
     return [
       ProvideTargetStateChange(
