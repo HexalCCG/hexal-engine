@@ -109,7 +109,6 @@ void main() {
 
       // Cow Beam requests a target for its damage.
       expect(state.stack.last, isA<TargetedEffect>());
-      expect(state.stack.last.resolved, false);
       expect(state.priorityPlayer, Player.one);
 
       // Player 1 provides a target.

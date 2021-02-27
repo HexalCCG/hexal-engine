@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import '../actions/action.dart';
 import '../events/event.dart';
 import '../exceptions/game_state_exception.dart';
-import '../state_changes/remove_event_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'card.dart';
 import 'enums/game_over_state.dart';

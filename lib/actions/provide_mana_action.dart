@@ -25,7 +25,7 @@ class ProvideManaAction extends Action {
     }
 
     // Make sure the mana require event is still going.
-    if (event.resolved || !event.valid(state)) {
+    if (!event.valid(state)) {
       return false;
     }
 
