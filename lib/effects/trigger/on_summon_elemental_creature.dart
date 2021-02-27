@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/enums/location.dart';
+
 import '../../events/cast_card_event.dart';
 import '../../models/card.dart';
 import '../../models/enums/element.dart';
@@ -9,6 +11,11 @@ import 'triggered_effect.dart';
 Trigger onSummonFriendlyElementalCreature(
     Card card, Element element, int effectId) {
   bool function(GameState state) {
+    // Check the effect holder is in the field.
+    if (card.location != Location.field) {
+      return false;
+    }
+
     // Check the top stack event is a summon creature event.
     final topEvent = state.stack.last;
     if (topEvent is! CastCardEvent || !topEvent.donePutIntoField) {
