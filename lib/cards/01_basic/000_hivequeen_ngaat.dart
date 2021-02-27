@@ -1,3 +1,4 @@
+import '../../card/hero.dart';
 import '../../card/on_trigger.dart';
 import '../../effects/draw_cards_effect.dart';
 import '../../effects/trigger/on_summon_elemental_creature.dart';
@@ -10,12 +11,9 @@ import '../../models/enums/player.dart';
 import '../../models/mana_amount.dart';
 
 /// Earth Hero. "When you summon an [Earth] creature, draw a card".
-class HivequeenNgaat extends Card with OnTrigger {
+class HivequeenNgaat extends Card with Hero, OnTrigger {
   @override
   CardIdentity get identity => const CardIdentity(1, 0);
-
-  @override
-  bool get permanent => true;
 
   @override
   Element get element => Element.earth;
