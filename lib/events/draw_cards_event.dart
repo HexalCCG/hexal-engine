@@ -22,12 +22,11 @@ class DrawCardsEvent extends Event {
 
   /// [Player] draws [draws] cards, one at a time.
   const DrawCardsEvent({
+    int id = 0,
     required this.player,
     required this.draws,
     this.cardsDrawn = 0,
-    int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -80,33 +79,24 @@ class DrawCardsEvent extends Event {
         player: player,
         draws: draws,
         cardsDrawn: cardsDrawn + 1,
-        resolved: resolved,
       );
 
   @override
   DrawCardsEvent copyWithId(int id) => DrawCardsEvent(
-      id: id,
-      player: player,
-      draws: draws,
-      cardsDrawn: cardsDrawn,
-      resolved: resolved);
+        id: id,
+        player: player,
+        draws: draws,
+        cardsDrawn: cardsDrawn,
+      );
 
   @override
-  DrawCardsEvent get copyResolved => DrawCardsEvent(
-      id: id,
-      player: player,
-      draws: draws,
-      cardsDrawn: cardsDrawn,
-      resolved: true);
-
-  @override
-  List<Object> get props => [id, player, draws, cardsDrawn, resolved];
+  List<Object> get props => [id, player, draws, cardsDrawn];
 
   /// Create this event from json
   static DrawCardsEvent fromJson(List<dynamic> json) => DrawCardsEvent(
-      id: json[0] as int,
-      player: Player.fromIndex(json[1] as int),
-      draws: json[2] as int,
-      cardsDrawn: json[3] as int,
-      resolved: json[4] as bool);
+        id: json[0] as int,
+        player: Player.fromIndex(json[1] as int),
+        draws: json[2] as int,
+        cardsDrawn: json[3] as int,
+      );
 }

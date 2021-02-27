@@ -35,8 +35,7 @@ class DamageEffect extends Effect with TargetedEffect {
     this.targetFilled = false,
     this.targets = const [],
     required this.controller,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -78,12 +77,12 @@ class DamageEffect extends Effect with TargetedEffect {
       ModifyEventStateChange(
         event: this,
         newEvent: DamageEffect(
-            damage: damage,
-            target: target,
-            targetFilled: targetFilled,
-            targets: targets.skip(1).toList(),
-            controller: controller,
-            resolved: resolved),
+          damage: damage,
+          target: target,
+          targetFilled: targetFilled,
+          targets: targets.skip(1).toList(),
+          controller: controller,
+        ),
       ),
     ];
   }
@@ -109,31 +108,22 @@ class DamageEffect extends Effect with TargetedEffect {
 
   @override
   DamageEffect copyWithId(int id) => DamageEffect(
-      id: id,
-      damage: damage,
-      target: target,
-      targetFilled: targetFilled,
-      targets: targets,
-      controller: controller,
-      resolved: resolved);
+        id: id,
+        damage: damage,
+        target: target,
+        targetFilled: targetFilled,
+        targets: targets,
+        controller: controller,
+      );
 
   @override
   DamageEffect copyFilled(List<int> _targets) => DamageEffect(
-      damage: damage,
-      target: target,
-      targetFilled: true,
-      targets: _targets,
-      controller: controller,
-      resolved: resolved);
-
-  @override
-  DamageEffect get copyResolved => DamageEffect(
-      damage: damage,
-      target: target,
-      targetFilled: targetFilled,
-      targets: targets,
-      controller: controller,
-      resolved: true);
+        damage: damage,
+        target: target,
+        targetFilled: true,
+        targets: _targets,
+        controller: controller,
+      );
 
   @override
   List<Object> get props => [
@@ -142,15 +132,15 @@ class DamageEffect extends Effect with TargetedEffect {
         targetFilled,
         targets,
         controller,
-        resolved,
       ];
 
   /// Create this effect from json.
   static DamageEffect fromJson(List<dynamic> json) => DamageEffect(
-      damage: json[0] as int,
-      target: Target.fromJson(json[1] as Map<String, dynamic>),
-      targetFilled: json[2] as bool,
-      targets: (json[3] as List<dynamic>).map((dynamic e) => e as int).toList(),
-      controller: Player.fromIndex(json[4] as int),
-      resolved: json[5] as bool);
+        damage: json[0] as int,
+        target: Target.fromJson(json[1] as Map<String, dynamic>),
+        targetFilled: json[2] as bool,
+        targets:
+            (json[3] as List<dynamic>).map((dynamic e) => e as int).toList(),
+        controller: Player.fromIndex(json[4] as int),
+      );
 }

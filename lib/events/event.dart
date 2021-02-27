@@ -12,11 +12,8 @@ abstract class Event extends Equatable {
   /// Unique id for this event.
   final int id;
 
-  /// Whether this event should be removed.
-  final bool resolved;
-
   /// Events are items placed on the stack to resolve.
-  const Event({required this.id, required this.resolved});
+  const Event({required this.id});
 
   /// Whether this event is valid on the provided state.
   bool valid(GameState state);
@@ -26,12 +23,6 @@ abstract class Event extends Equatable {
 
   /// A copy of this event with provided id.
   Event copyWithId(int id);
-
-  /// A copy of this event with resolved set to true.
-  Event get copyResolved;
-
-  @override
-  List<Object> get props;
 
   /// Create an Event from its JSON form.
   factory Event.fromJson(Map<String, dynamic> json) {

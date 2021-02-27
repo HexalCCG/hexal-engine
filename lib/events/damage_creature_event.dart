@@ -19,11 +19,10 @@ class DamageCreatureEvent extends Event implements DamageEvent {
 
   /// [creature] is dealt [damage] damage.
   const DamageCreatureEvent({
+    int id = 0,
     required this.creature,
     required this.damage,
-    int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -65,21 +64,17 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   }
 
   @override
-  DamageCreatureEvent copyWithId(int id) => DamageCreatureEvent(
-      id: id, creature: creature, damage: damage, resolved: resolved);
+  DamageCreatureEvent copyWithId(int id) =>
+      DamageCreatureEvent(id: id, creature: creature, damage: damage);
 
   @override
-  DamageCreatureEvent get copyResolved => DamageCreatureEvent(
-      id: id, creature: creature, damage: damage, resolved: true);
-
-  @override
-  List<Object> get props => [id, creature, damage, resolved];
+  List<Object> get props => [id, creature, damage];
 
   /// Create this event from json.
   static DamageCreatureEvent fromJson(List<dynamic> json) =>
       DamageCreatureEvent(
-          id: json[0] as int,
-          creature: json[0] as int,
-          damage: json[1] as int,
-          resolved: json[2] as bool);
+        id: json[0] as int,
+        creature: json[0] as int,
+        damage: json[1] as int,
+      );
 }

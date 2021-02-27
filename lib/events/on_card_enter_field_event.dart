@@ -18,11 +18,10 @@ class OnCardEnterFieldEvent extends Event {
   /// [Card] is the card entering the field.
   /// [effectIndex] is the effect currently being resolved.
   const OnCardEnterFieldEvent({
+    int id = 0,
     required this.card,
     this.effectIndex = 0,
-    int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -63,25 +62,21 @@ class OnCardEnterFieldEvent extends Event {
     ];
   }
 
-  OnCardEnterFieldEvent get _copyIncremented => OnCardEnterFieldEvent(
-      id: id, card: card, effectIndex: effectIndex + 1, resolved: resolved);
+  OnCardEnterFieldEvent get _copyIncremented =>
+      OnCardEnterFieldEvent(id: id, card: card, effectIndex: effectIndex + 1);
 
   @override
-  OnCardEnterFieldEvent copyWithId(int id) => OnCardEnterFieldEvent(
-      id: id, card: card, effectIndex: effectIndex, resolved: resolved);
+  OnCardEnterFieldEvent copyWithId(int id) =>
+      OnCardEnterFieldEvent(id: id, card: card, effectIndex: effectIndex);
 
   @override
-  OnCardEnterFieldEvent get copyResolved => OnCardEnterFieldEvent(
-      id: id, card: card, effectIndex: effectIndex, resolved: true);
-
-  @override
-  List<Object> get props => [id, card, effectIndex, resolved];
+  List<Object> get props => [id, card, effectIndex];
 
   /// Create this event from json.
   static OnCardEnterFieldEvent fromJson(List<dynamic> json) =>
       OnCardEnterFieldEvent(
-          id: json[0] as int,
-          card: json[1] as int,
-          effectIndex: json[2] as int,
-          resolved: json[3] as bool);
+        id: json[0] as int,
+        card: json[1] as int,
+        effectIndex: json[2] as int,
+      );
 }

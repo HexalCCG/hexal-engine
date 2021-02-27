@@ -19,11 +19,10 @@ class CastCardEvent extends Event {
 
   /// Spell to cast.
   const CastCardEvent({
+    int id = 0,
     required this.card,
     this.donePutIntoField = false,
-    int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -63,15 +62,6 @@ class CastCardEvent extends Event {
         id: id,
         card: card,
         donePutIntoField: donePutIntoField,
-        resolved: resolved,
-      );
-
-  @override
-  CastCardEvent get copyResolved => CastCardEvent(
-        id: id,
-        card: card,
-        donePutIntoField: donePutIntoField,
-        resolved: true,
       );
 
   /// Returns a copy of this with donePutIntoField set to true.
@@ -79,16 +69,15 @@ class CastCardEvent extends Event {
         id: id,
         card: card,
         donePutIntoField: true,
-        resolved: resolved,
       );
 
   @override
-  List<Object> get props => [id, card, donePutIntoField, resolved];
+  List<Object> get props => [id, card, donePutIntoField];
 
   /// Create this event from json.
   static CastCardEvent fromJson(List<dynamic> json) => CastCardEvent(
-      id: json[0] as int,
-      card: json[1] as int,
-      donePutIntoField: json[2] as bool,
-      resolved: json[3] as bool);
+        id: json[0] as int,
+        card: json[1] as int,
+        donePutIntoField: json[2] as bool,
+      );
 }
