@@ -1,9 +1,8 @@
-import 'package:hexal_engine/card/creature.dart';
-import 'package:hexal_engine/models/enums/location.dart';
-
+import '../../card/creature.dart';
 import '../../events/cast_card_event.dart';
 import '../../models/card.dart';
 import '../../models/enums/element.dart';
+import '../../models/enums/location.dart';
 import '../../models/game_state.dart';
 import '../../models/history_triggered_effect.dart';
 import 'triggered_effect.dart';

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/exceptions/action_exception.dart';
 import 'package:meta/meta.dart';
 
+import '../exceptions/action_exception.dart';
 import '../exceptions/json_format_exception.dart';
 import '../models/game_state.dart';
 import '../state_changes/state_change.dart';
