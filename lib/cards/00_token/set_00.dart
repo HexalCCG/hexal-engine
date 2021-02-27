@@ -1,10 +1,9 @@
-import 'package:hexal_engine/cards/00_token/003_expensive_cow.dart';
-
 import '../../models/card.dart';
 import '../../models/card_identity.dart';
 import '000_test_card.dart';
 import '001_cow_creature_card.dart';
 import '002_cow_beam_card.dart';
+import '003_expensive_cow.dart';
 
 /// 00 Sample Cards
 final Map<CardIdentity, Card Function(List<dynamic>)> set_00 = {
