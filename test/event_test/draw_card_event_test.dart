@@ -1,3 +1,5 @@
+import 'package:hexal_engine/cards/01_basic/003_awakened_vines.dart';
+import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/models/card.dart';
@@ -93,6 +95,75 @@ void main() {
           changes,
           contains(const GameOverStateChange(
               gameOverState: GameOverState.player2Win)));
+    });
+
+    test('draws 1 card when given 1 draw.', () {
+      var state = const GameState(
+        gameOverState: GameOverState.playing,
+        cards: [
+          AwakenedVines(
+              id: 2,
+              owner: Player.one,
+              controller: Player.one,
+              location: Location.deck,
+              damage: 0),
+          AwakenedVines(
+              id: 3,
+              owner: Player.one,
+              controller: Player.one,
+              location: Location.deck,
+              damage: 0),
+          AwakenedVines(
+              id: 4,
+              owner: Player.one,
+              controller: Player.one,
+              location: Location.deck,
+              damage: 0),
+          AwakenedVines(
+              id: 5,
+              owner: Player.one,
+              controller: Player.one,
+              location: Location.deck,
+              damage: 0),
+        ],
+        stack: [DrawCardsEvent(player: Player.one, draws: 1)],
+        history: History.empty(),
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.main1,
+      );
+
+      expect(state.getCardsByLocation(Player.one, Location.hand).length, 0);
+
+      state = GameStateTestFunctions.passUntilEmpty(state);
+
+      expect(state.getCardsByLocation(Player.one, Location.hand).length, 1);
+    });
+
+    test('draws the last card in a deck without ending the game.', () {
+      var state = const GameState(
+        gameOverState: GameOverState.playing,
+        cards: [
+          AwakenedVines(
+              id: 2,
+              owner: Player.one,
+              controller: Player.one,
+              location: Location.deck,
+              damage: 0),
+        ],
+        stack: [DrawCardsEvent(player: Player.one, draws: 1)],
+        history: History.empty(),
+        activePlayer: Player.one,
+        priorityPlayer: Player.one,
+        turnPhase: TurnPhase.main1,
+      );
+
+      expect(state.getCardsByLocation(Player.one, Location.hand).length, 0);
+
+      state = GameStateTestFunctions.passUntilEmpty(state);
+
+      expect(state.getCardsByLocation(Player.one, Location.hand).length, 1);
+      expect(state.gameOverState, GameOverState.playing);
     });
   });
 }

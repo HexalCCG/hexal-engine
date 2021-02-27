@@ -1,3 +1,4 @@
+import 'package:hexal_engine/card/creature.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 
 import '../../events/cast_card_event.dart';
@@ -22,13 +23,21 @@ Trigger onSummonFriendlyElementalCreature(
       return false;
     }
 
-    final _card = state.getCardById(topEvent.card);
+    final _creature = state.getCardById(topEvent.card);
+    // Check the card is a creature
+    if (_creature is! Creature) {
+      return false;
+    }
     // Check the card element matches.
-    if (_card.element != element) {
+    if (_creature.element != element) {
       return false;
     }
     // Check the creature is friendly.
-    if (_card.controller != card.controller) {
+    if (_creature.controller != card.controller) {
+      return false;
+    }
+    // Check the creature isn't the thing with the effect!
+    if (_creature.id == card.id) {
       return false;
     }
 
