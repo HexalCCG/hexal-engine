@@ -11,15 +11,15 @@ class DrawCardsEffect extends Effect {
   /// Number of cards to draw.
   final int draws;
 
-  @override
-  final Player controller;
+  /// Player who draws the cards.
+  final Player player;
 
   /// [target] is target to request. [targetResult] returns from the request.
   /// [targetIndex] counts through list of targets to apply damage.
   const DrawCardsEffect({
     int id = 0,
     required this.draws,
-    required this.controller,
+    required this.player,
   }) : super(id: id);
 
   @override
@@ -40,27 +40,26 @@ class DrawCardsEffect extends Effect {
 
     // Replace this with a draw cards event.
     return [
-      AddEventStateChange(
-          event: DrawCardsEvent(player: controller, draws: draws)),
+      AddEventStateChange(event: DrawCardsEvent(player: player, draws: draws)),
       ResolveEventStateChange(event: this)
     ];
   }
 
   @override
   DrawCardsEffect copyWithId(int id) =>
-      DrawCardsEffect(id: id, draws: draws, controller: controller);
+      DrawCardsEffect(id: id, draws: draws, player: player);
 
   @override
   List<Object> get props => [
         id,
         draws,
-        controller,
+        player,
       ];
 
   /// Create this effect from json.
   static DrawCardsEffect fromJson(List<dynamic> json) => DrawCardsEffect(
         id: json[0] as int,
         draws: json[1] as int,
-        controller: Player.fromIndex(json[2] as int),
+        player: Player.fromIndex(json[2] as int),
       );
 }

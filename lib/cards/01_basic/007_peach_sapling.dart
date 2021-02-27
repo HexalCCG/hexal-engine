@@ -22,7 +22,7 @@ class PeachSapling extends Card with Creature, OnEnterField {
 
   @override
   List<Effect> get onEnterFieldEffects =>
-      [DrawCardsEffect(controller: controller, draws: 1)];
+      [DrawCardsEffect(player: controller, draws: 1)];
 
   /// [id] must be unique. [owner] cannot be changed.
   const PeachSapling({

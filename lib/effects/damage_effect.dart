@@ -16,6 +16,9 @@ class DamageEffect extends Effect with TargetedEffect {
   /// Amount of damage to deal.
   final int damage;
 
+  // Fields overridden from targeted effect
+  @override
+  final Player controller;
   @override
   final Target target;
   @override
@@ -23,18 +26,15 @@ class DamageEffect extends Effect with TargetedEffect {
   @override
   final List<int> targets;
 
-  @override
-  final Player controller;
-
   /// [target] is target to request. [targetResult] returns from the request.
   /// [targetIndex] counts through list of targets to apply damage.
   const DamageEffect({
     int id = 0,
+    required this.controller,
     required this.damage,
     required this.target,
     this.targetFilled = false,
     this.targets = const [],
-    required this.controller,
   }) : super(id: id);
 
   @override
@@ -118,6 +118,7 @@ class DamageEffect extends Effect with TargetedEffect {
 
   @override
   DamageEffect copyFilled(List<int> _targets) => DamageEffect(
+        id: id,
         damage: damage,
         target: target,
         targetFilled: true,
@@ -127,6 +128,7 @@ class DamageEffect extends Effect with TargetedEffect {
 
   @override
   List<Object> get props => [
+        id,
         damage,
         target,
         targetFilled,
@@ -136,11 +138,12 @@ class DamageEffect extends Effect with TargetedEffect {
 
   /// Create this effect from json.
   static DamageEffect fromJson(List<dynamic> json) => DamageEffect(
-        damage: json[0] as int,
-        target: Target.fromJson(json[1] as Map<String, dynamic>),
-        targetFilled: json[2] as bool,
+        id: json[0] as int,
+        damage: json[1] as int,
+        target: Target.fromJson(json[2] as Map<String, dynamic>),
+        targetFilled: json[3] as bool,
         targets:
-            (json[3] as List<dynamic>).map((dynamic e) => e as int).toList(),
-        controller: Player.fromIndex(json[4] as int),
+            (json[4] as List<dynamic>).map((dynamic e) => e as int).toList(),
+        controller: Player.fromIndex(json[5] as int),
       );
 }
