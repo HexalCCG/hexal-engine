@@ -1,3 +1,4 @@
+import '../card/on_trigger.dart';
 import '../effects/targeted_effect.dart';
 import '../exceptions/action_exception.dart';
 import '../models/game_state.dart';
@@ -28,11 +29,28 @@ class PassAction extends Action {
         return false;
       }
     }
+
+    // If triggered effects are available
+    final effects = state.cards
+        .whereType<OnTrigger>()
+        .map((card) => card.onTriggerEffects)
+        .expand((i) => i);
+
+    if (effects.any((effect) => !effect.optional && effect.trigger(state))) {
+      // Not allowed to pass non-optional triggered effects.
+      return false;
+    }
+
+    // All checks passed!!
     return true;
   }
 
   @override
   List<StateChange> apply(GameState state) {
+    if (!valid(state)) {
+      throw const ActionException(
+          'PassAction Exception: Non-optional action pending.');
+    }
     // Check if the top event is an unfilled request.
     if (state.stack.isNotEmpty) {
       final _event = state.stack.last;
