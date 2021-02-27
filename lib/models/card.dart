@@ -51,10 +51,10 @@ abstract class Card extends Equatable {
   factory Card.fromJson(Map<String, dynamic> json) {
     final identity = CardIdentity.fromJson(json['identity'] as List<dynamic>);
 
-    final builder = setBuilders[identity.setId]?[identity.cardId];
+    final builder = cardBuilders[identity];
 
     if (builder == null) {
-      throw ArgumentError('Invalid card ID: $identity');
+      throw ArgumentError('Invalid card identity: $identity');
     }
 
     return builder(json['data'] as List<dynamic>);
