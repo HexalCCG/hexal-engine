@@ -38,6 +38,9 @@ class GameState extends Equatable {
   /// Card events that occurred this turn.
   final History history;
 
+  /// Next event id.
+  final int nextEventId;
+
   /// Represents a single moment snapshot of a game.
   const GameState({
     required this.activePlayer,
@@ -48,6 +51,7 @@ class GameState extends Equatable {
     required this.history,
     this.gameOverState = GameOverState.playing,
     this.counterAvailable = false,
+    this.nextEventId = 0,
   });
 
   // GETTERS
@@ -136,7 +140,8 @@ class GameState extends Equatable {
             .toList(),
         history = History.fromJson(json['history'] as List<dynamic>),
         gameOverState = GameOverState.fromIndex(json['gameOverState'] as int),
-        counterAvailable = json['counterAvailable'] as bool;
+        counterAvailable = json['counterAvailable'] as bool,
+        nextEventId = json['nextEventId'] as int;
 
   /// Encode this GameState as JSON.
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -148,6 +153,7 @@ class GameState extends Equatable {
         'history': history,
         'gameOverState': gameOverState.index,
         'counterAvailable': counterAvailable,
+        'nextEventId': nextEventId,
       };
 
   /// Return a copy of this state with the provided fields replaced.
@@ -160,6 +166,7 @@ class GameState extends Equatable {
     History? history,
     GameOverState? gameOverState,
     bool? counterAvailable,
+    int? nextEventId,
   }) {
     return GameState(
       activePlayer: activePlayer ?? this.activePlayer,
@@ -170,6 +177,7 @@ class GameState extends Equatable {
       history: history ?? this.history,
       gameOverState: gameOverState ?? this.gameOverState,
       counterAvailable: counterAvailable ?? this.counterAvailable,
+      nextEventId: nextEventId ?? this.nextEventId,
     );
   }
 
@@ -186,5 +194,6 @@ class GameState extends Equatable {
         history,
         gameOverState,
         counterAvailable,
+        nextEventId,
       ];
 }
