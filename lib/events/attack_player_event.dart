@@ -63,19 +63,29 @@ class AttackPlayerEvent extends Event {
   }
 
   @override
+  AttackPlayerEvent copyWithId(int id) => AttackPlayerEvent(
+      id: id,
+      attacker: attacker,
+      player: player,
+      enableCounter: enableCounter,
+      resolved: resolved);
+
+  @override
   AttackPlayerEvent get copyResolved => AttackPlayerEvent(
+      id: id,
       attacker: attacker,
       player: player,
       enableCounter: enableCounter,
       resolved: true);
 
   @override
-  List<Object> get props => [attacker, player, enableCounter, resolved];
+  List<Object> get props => [id, attacker, player, enableCounter, resolved];
 
   /// Create this event from json.
   static AttackPlayerEvent fromJson(List<dynamic> json) => AttackPlayerEvent(
-      attacker: json[0] as int,
-      player: Player.fromIndex(json[1] as int),
-      enableCounter: json[2] as bool,
-      resolved: json[3] as bool);
+      id: json[0] as int,
+      attacker: json[1] as int,
+      player: Player.fromIndex(json[2] as int),
+      enableCounter: json[3] as bool,
+      resolved: json[4] as bool);
 }

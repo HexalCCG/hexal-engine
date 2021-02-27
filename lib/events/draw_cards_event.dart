@@ -76,6 +76,7 @@ class DrawCardsEvent extends Event {
   }
 
   DrawCardsEvent get _copyIncremented => DrawCardsEvent(
+        id: id,
         player: player,
         draws: draws,
         cardsDrawn: cardsDrawn + 1,
@@ -83,16 +84,29 @@ class DrawCardsEvent extends Event {
       );
 
   @override
-  DrawCardsEvent get copyResolved => DrawCardsEvent(
-      player: player, draws: draws, cardsDrawn: cardsDrawn, resolved: true);
+  DrawCardsEvent copyWithId(int id) => DrawCardsEvent(
+      id: id,
+      player: player,
+      draws: draws,
+      cardsDrawn: cardsDrawn,
+      resolved: resolved);
 
   @override
-  List<Object> get props => [player, draws, cardsDrawn, resolved];
+  DrawCardsEvent get copyResolved => DrawCardsEvent(
+      id: id,
+      player: player,
+      draws: draws,
+      cardsDrawn: cardsDrawn,
+      resolved: true);
+
+  @override
+  List<Object> get props => [id, player, draws, cardsDrawn, resolved];
 
   /// Create this event from json
   static DrawCardsEvent fromJson(List<dynamic> json) => DrawCardsEvent(
-      player: Player.fromIndex(json[0] as int),
-      draws: json[1] as int,
-      cardsDrawn: json[2] as int,
-      resolved: json[3] as bool);
+      id: json[0] as int,
+      player: Player.fromIndex(json[1] as int),
+      draws: json[2] as int,
+      cardsDrawn: json[3] as int,
+      resolved: json[4] as bool);
 }

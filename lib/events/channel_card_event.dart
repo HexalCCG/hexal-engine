@@ -74,7 +74,17 @@ class ChannelCardEvent extends Event {
   }
 
   @override
+  ChannelCardEvent copyWithId(int id) => ChannelCardEvent(
+        id: id,
+        card: card,
+        targetCard: targetCard,
+        controller: controller,
+        resolved: resolved,
+      );
+
+  @override
   ChannelCardEvent get copyResolved => ChannelCardEvent(
+        id: id,
         card: card,
         targetCard: targetCard,
         controller: controller,
@@ -82,13 +92,14 @@ class ChannelCardEvent extends Event {
       );
 
   @override
-  List<Object> get props => [card, targetCard, controller, resolved];
+  List<Object> get props => [id, card, targetCard, controller, resolved];
 
   /// Create this event from json
   static ChannelCardEvent fromJson(List<dynamic> json) => ChannelCardEvent(
-        card: json[0] as int,
-        targetCard: json[1] as int,
-        controller: Player.fromIndex(json[2] as int),
-        resolved: json[3] as bool,
+        id: json[0] as int,
+        card: json[1] as int,
+        targetCard: json[2] as int,
+        controller: Player.fromIndex(json[3] as int),
+        resolved: json[4] as bool,
       );
 }

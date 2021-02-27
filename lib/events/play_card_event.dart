@@ -100,18 +100,23 @@ class PlayCardEvent extends Event {
   }
 
   PlayCardEvent _copyAtStage(PlayCardEventStage stage) =>
-      PlayCardEvent(card: card, stage: stage, resolved: resolved);
+      PlayCardEvent(id: id, card: card, stage: stage, resolved: resolved);
+
+  @override
+  PlayCardEvent copyWithId(int id) =>
+      PlayCardEvent(id: id, card: card, stage: stage, resolved: resolved);
 
   @override
   PlayCardEvent get copyResolved =>
-      PlayCardEvent(card: card, stage: stage, resolved: true);
+      PlayCardEvent(id: id, card: card, stage: stage, resolved: true);
 
   @override
-  List<Object> get props => [card, stage, resolved];
+  List<Object> get props => [id, card, stage, resolved];
 
   /// Create this event from json.
   static PlayCardEvent fromJson(List<dynamic> json) => PlayCardEvent(
-      card: json[0] as int,
-      stage: PlayCardEventStage.values[json[1] as int],
-      resolved: json[2] as bool);
+      id: json[0] as int,
+      card: json[1] as int,
+      stage: PlayCardEventStage.values[json[2] as int],
+      resolved: json[3] as bool);
 }

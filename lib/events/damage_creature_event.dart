@@ -65,15 +65,20 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   }
 
   @override
-  DamageCreatureEvent get copyResolved =>
-      DamageCreatureEvent(creature: creature, damage: damage, resolved: true);
+  DamageCreatureEvent copyWithId(int id) => DamageCreatureEvent(
+      id: id, creature: creature, damage: damage, resolved: resolved);
 
   @override
-  List<Object> get props => [creature, damage, resolved];
+  DamageCreatureEvent get copyResolved => DamageCreatureEvent(
+      id: id, creature: creature, damage: damage, resolved: true);
+
+  @override
+  List<Object> get props => [id, creature, damage, resolved];
 
   /// Create this event from json.
   static DamageCreatureEvent fromJson(List<dynamic> json) =>
       DamageCreatureEvent(
+          id: json[0] as int,
           creature: json[0] as int,
           damage: json[1] as int,
           resolved: json[2] as bool);

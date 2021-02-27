@@ -78,6 +78,7 @@ class DamagePlayerEvent extends Event implements DamageEvent {
   }
 
   DamagePlayerEvent get _copyIncremented => DamagePlayerEvent(
+        id: id,
         player: player,
         damage: damage,
         damageDealt: damageDealt + 1,
@@ -85,7 +86,17 @@ class DamagePlayerEvent extends Event implements DamageEvent {
       );
 
   @override
+  DamagePlayerEvent copyWithId(int id) => DamagePlayerEvent(
+        id: id,
+        player: player,
+        damage: damage,
+        damageDealt: damageDealt,
+        resolved: resolved,
+      );
+
+  @override
   DamagePlayerEvent get copyResolved => DamagePlayerEvent(
+        id: id,
         player: player,
         damage: damage,
         damageDealt: damageDealt,
@@ -93,12 +104,13 @@ class DamagePlayerEvent extends Event implements DamageEvent {
       );
 
   @override
-  List<Object> get props => [player, damage, damageDealt, resolved];
+  List<Object> get props => [id, player, damage, damageDealt, resolved];
 
   /// Create this event from json.
   static DamagePlayerEvent fromJson(List<dynamic> json) => DamagePlayerEvent(
-      player: Player.fromIndex(json[0] as int),
-      damage: json[1] as int,
-      damageDealt: json[2] as int,
-      resolved: json[3] as bool);
+      id: json[0] as int,
+      player: Player.fromIndex(json[1] as int),
+      damage: json[2] as int,
+      damageDealt: json[3] as int,
+      resolved: json[4] as bool);
 }
