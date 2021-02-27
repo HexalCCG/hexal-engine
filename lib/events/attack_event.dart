@@ -22,10 +22,10 @@ class AttackEvent extends Event {
 
   /// [attacker] attacks [defender].
   const AttackEvent({
+    int id = 0,
     required this.attacker,
     required this.defender,
     this.enableCounter = true,
-    int id = 0,
     bool resolved = false,
   }) : super(id: id, resolved: resolved);
 
