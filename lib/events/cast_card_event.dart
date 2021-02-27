@@ -17,15 +17,13 @@ class CastCardEvent extends Event {
   /// Has the card been put into field.
   final bool donePutIntoField;
 
-  @override
-  final bool resolved;
-
   /// Spell to cast.
   const CastCardEvent({
     required this.card,
     this.donePutIntoField = false,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {

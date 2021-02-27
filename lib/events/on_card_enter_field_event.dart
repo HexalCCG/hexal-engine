@@ -15,16 +15,14 @@ class OnCardEnterFieldEvent extends Event {
   /// Index of effect currently being applied.
   final int effectIndex;
 
-  @override
-  final bool resolved;
-
   /// [Card] is the card entering the field.
   /// [effectIndex] is the effect currently being resolved.
   const OnCardEnterFieldEvent({
     required this.card,
     this.effectIndex = 0,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {

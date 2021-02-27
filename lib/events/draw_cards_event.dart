@@ -20,16 +20,14 @@ class DrawCardsEvent extends Event {
   /// Cards already drawn.
   final int cardsDrawn;
 
-  @override
-  final bool resolved;
-
   /// [Player] draws [draws] cards, one at a time.
   const DrawCardsEvent({
     required this.player,
     required this.draws,
     this.cardsDrawn = 0,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {

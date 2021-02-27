@@ -10,14 +10,12 @@ class DestroyCardEvent extends Event {
   /// Card to destroy.
   final int card;
 
-  @override
-  final bool resolved;
-
   /// Destroys [card].
   const DestroyCardEvent({
     required this.card,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {
