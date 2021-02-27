@@ -10,7 +10,7 @@ import 'package:hexal_engine/models/game_state.dart';
 import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
-  group('Card test S0.001', () {
+  group('Card test [00.001]', () {
     test('enters the field when played.', () {
       const card = CowCreatureCard(
         id: 2,

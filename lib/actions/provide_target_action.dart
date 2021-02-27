@@ -47,7 +47,7 @@ class ProvideTargetAction extends Action {
       ProvideTargetStateChange(
         targets: targets,
       ),
-      PriorityStateChange(player: state.notPriorityPlayer),
+      PriorityStateChange(player: state.activePlayer),
     ];
   }
 

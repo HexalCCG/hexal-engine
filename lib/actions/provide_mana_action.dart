@@ -47,7 +47,7 @@ class ProvideManaAction extends Action {
           targetCard: (state.stack.last as RequireManaEvent).card,
         ),
       ),
-      PriorityStateChange(player: state.notPriorityPlayer),
+      PriorityStateChange(player: state.activePlayer),
     ];
   }
 
