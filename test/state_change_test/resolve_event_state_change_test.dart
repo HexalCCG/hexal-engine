@@ -9,10 +9,8 @@ import 'package:hexal_engine/models/enums/turn_phase.dart';
 
 void main() {
   group('Resolve event state change', () {
-    test('modifies the event to be resolved.', () {
+    test('removes the event from the stack.', () {
       const event = DrawCardsEvent(player: Player.one, draws: 1);
-      const resolvedEvent =
-          DrawCardsEvent(player: Player.one, draws: 1, resolved: true);
       final state = const GameState(
         gameOverState: GameOverState.playing,
         cards: [],
@@ -24,8 +22,8 @@ void main() {
       );
       const stateChange = ResolveEventStateChange(event: event);
       expect(
-        state.applyStateChanges([stateChange]).stack,
-        [resolvedEvent],
+        state.applyStateChanges([stateChange]).stack.contains(event),
+        isFalse,
       );
     });
   });

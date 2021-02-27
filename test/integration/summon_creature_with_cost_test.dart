@@ -51,15 +51,7 @@ void main() {
 
     state = state.applyAction(const ProvideManaAction(card: 2));
 
-    // Both players pass to channel card.
-    state = state.applyAction(const PassAction());
-    state = state.applyAction(const PassAction());
-
     expect(state.stack.last, isA<ChannelCardEvent>());
-
-    // Resolve channel card event
-    state = state.applyAction(const PassAction());
-    state = state.applyAction(const PassAction());
 
     // Pass until empty.
     state = GameStateTestFunctions.passUntilEmpty(state);
