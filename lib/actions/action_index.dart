@@ -1,6 +1,5 @@
-import 'package:hexal_engine/actions/activate_triggered_effect_action.dart';
-
 import 'action.dart';
+import 'activate_triggered_effect_action.dart';
 import 'attack_action.dart';
 import 'attack_player_action.dart';
 import 'pass_action.dart';
