@@ -9,17 +9,23 @@ import 'event_index.dart';
 /// Events are items placed on the stack to resolve.
 @immutable
 abstract class Event extends Equatable {
-  /// Events are items placed on the stack to resolve.
-  const Event();
+  /// Unique id for this event.
+  final int id;
 
   /// Whether this event should be removed.
-  bool get resolved;
+  final bool resolved;
+
+  /// Events are items placed on the stack to resolve.
+  const Event({required this.id, required this.resolved});
 
   /// Whether this event is valid on the provided state.
   bool valid(GameState state);
 
   /// Resultant StateChanges of resolving this event.
   List<StateChange> apply(GameState state);
+
+  /// A copy of this event with provided id.
+  Event copyWithId(int id);
 
   /// A copy of this event with resolved set to true.
   Event get copyResolved;

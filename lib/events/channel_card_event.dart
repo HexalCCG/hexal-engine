@@ -19,16 +19,14 @@ class ChannelCardEvent extends Event {
   /// Controller of the channelling.
   final Player controller;
 
-  @override
-  final bool resolved;
-
   /// Event that channels [card].
   const ChannelCardEvent({
     required this.card,
     required this.targetCard,
     required this.controller,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {

@@ -17,15 +17,13 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   /// Amount of damage to deal.
   final int damage;
 
-  @override
-  final bool resolved;
-
   /// [creature] is dealt [damage] damage.
   const DamageCreatureEvent({
     required this.creature,
     required this.damage,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {

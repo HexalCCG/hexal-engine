@@ -21,16 +21,14 @@ class DamagePlayerEvent extends Event implements DamageEvent {
   /// Which point of damage is currently being resolved.
   final int damageDealt;
 
-  @override
-  final bool resolved;
-
   /// Deals [damage] damage to [player] one point at a time.
   const DamagePlayerEvent({
     required this.player,
     required this.damage,
     this.damageDealt = 0,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {

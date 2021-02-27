@@ -30,15 +30,13 @@ class PlayCardEvent extends Event {
   /// Stage of playing the card to process.
   final PlayCardEventStage stage;
 
-  @override
-  final bool resolved;
-
   /// [card] is put into the field.
   const PlayCardEvent({
     required this.card,
     this.stage = PlayCardEventStage.init,
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {

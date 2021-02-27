@@ -17,16 +17,14 @@ class RequireManaEvent extends Event {
   /// Card this requirement is for.
   final int card;
 
-  @override
-  final bool resolved;
-
   /// Require mana for a card.
   const RequireManaEvent({
     required this.cost,
     required this.card,
     this.provided = const ManaAmount.zero(),
-    this.resolved = false,
-  });
+    int id = 0,
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {
