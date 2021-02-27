@@ -6,7 +6,8 @@ import 'effect_index.dart';
 /// Empty effect.
 abstract class Effect extends Event {
   /// Empty effect.
-  const Effect();
+  const Effect({required int id, required bool resolved})
+      : super(id: id, resolved: resolved);
 
   /// Player that controls this effect and will provide targets.
   Player get controller;

@@ -25,19 +25,18 @@ class DamageEffect extends Effect with TargetedEffect {
 
   @override
   final Player controller;
-  @override
-  final bool resolved;
 
   /// [target] is target to request. [targetResult] returns from the request.
   /// [targetIndex] counts through list of targets to apply damage.
   const DamageEffect({
+    int id = 0,
     required this.damage,
     required this.target,
     this.targetFilled = false,
     this.targets = const [],
     required this.controller,
-    this.resolved = false,
-  });
+    bool resolved = false,
+  }) : super(id: id, resolved: resolved);
 
   @override
   bool valid(GameState state) {
@@ -107,6 +106,16 @@ class DamageEffect extends Effect with TargetedEffect {
       }
     }
   }
+
+  @override
+  DamageEffect copyWithId(int id) => DamageEffect(
+      id: id,
+      damage: damage,
+      target: target,
+      targetFilled: targetFilled,
+      targets: targets,
+      controller: controller,
+      resolved: resolved);
 
   @override
   DamageEffect copyFilled(List<int> _targets) => DamageEffect(
