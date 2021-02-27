@@ -77,4 +77,12 @@ class RequireManaEvent extends Event {
 
   @override
   List<Object> get props => [id, cost, provided, card, resolved];
+
+  /// Create this event from json.
+  static RequireManaEvent fromJson(List<dynamic> json) => RequireManaEvent(
+      id: json[0] as int,
+      cost: ManaAmount.fromJson(json[1] as List<dynamic>),
+      provided: ManaAmount.fromJson(json[2] as List<dynamic>),
+      card: json[3] as int,
+      resolved: json[4] as bool);
 }

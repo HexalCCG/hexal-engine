@@ -123,4 +123,18 @@ class ManaAmount extends Equatable {
 
   @override
   List<Object?> get props => [neutral, fire, earth, air, water, spirit, wild];
+
+  /// Encode this mana amount as json.
+  List<int> toJson() => [neutral, fire, earth, air, water, spirit, wild];
+
+  /// Make a mana amount from json.
+  static ManaAmount fromJson(List<dynamic> json) => ManaAmount(
+        neutral: json[0] as int,
+        fire: json[1] as int,
+        earth: json[2] as int,
+        air: json[3] as int,
+        water: json[4] as int,
+        spirit: json[5] as int,
+        wild: json[6] as int,
+      );
 }
