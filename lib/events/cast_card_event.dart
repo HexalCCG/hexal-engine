@@ -59,13 +59,36 @@ class CastCardEvent extends Event {
   }
 
   @override
-  CastCardEvent get copyResolved => CastCardEvent(
-      card: card, donePutIntoField: donePutIntoField, resolved: true);
-
-  /// Returns a copy of this with donePutIntoField set to true.
-  CastCardEvent get copyDonePutIntoField =>
-      CastCardEvent(card: card, donePutIntoField: true, resolved: resolved);
+  CastCardEvent copyWithId(int id) => CastCardEvent(
+        id: id,
+        card: card,
+        donePutIntoField: donePutIntoField,
+        resolved: resolved,
+      );
 
   @override
-  List<Object> get props => [card, donePutIntoField, resolved];
+  CastCardEvent get copyResolved => CastCardEvent(
+        id: id,
+        card: card,
+        donePutIntoField: donePutIntoField,
+        resolved: true,
+      );
+
+  /// Returns a copy of this with donePutIntoField set to true.
+  CastCardEvent get copyDonePutIntoField => CastCardEvent(
+        id: id,
+        card: card,
+        donePutIntoField: true,
+        resolved: resolved,
+      );
+
+  @override
+  List<Object> get props => [id, card, donePutIntoField, resolved];
+
+  /// Create this event from json.
+  static CastCardEvent fromJson(List<dynamic> json) => CastCardEvent(
+      id: json[0] as int,
+      card: json[1] as int,
+      donePutIntoField: json[2] as bool,
+      resolved: json[3] as bool);
 }

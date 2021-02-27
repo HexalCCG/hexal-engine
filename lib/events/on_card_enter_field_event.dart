@@ -64,19 +64,24 @@ class OnCardEnterFieldEvent extends Event {
   }
 
   OnCardEnterFieldEvent get _copyIncremented => OnCardEnterFieldEvent(
-      card: card, effectIndex: effectIndex + 1, resolved: resolved);
+      id: id, card: card, effectIndex: effectIndex + 1, resolved: resolved);
+
+  @override
+  OnCardEnterFieldEvent copyWithId(int id) => OnCardEnterFieldEvent(
+      id: id, card: card, effectIndex: effectIndex, resolved: resolved);
 
   @override
   OnCardEnterFieldEvent get copyResolved => OnCardEnterFieldEvent(
-      card: card, effectIndex: effectIndex, resolved: true);
+      id: id, card: card, effectIndex: effectIndex, resolved: true);
 
   @override
-  List<Object> get props => [card, effectIndex, resolved];
+  List<Object> get props => [id, card, effectIndex, resolved];
 
   /// Create this event from json.
   static OnCardEnterFieldEvent fromJson(List<dynamic> json) =>
       OnCardEnterFieldEvent(
-          card: json[0] as int,
-          effectIndex: json[1] as int,
-          resolved: json[2] as bool);
+          id: json[0] as int,
+          card: json[1] as int,
+          effectIndex: json[2] as int,
+          resolved: json[3] as bool);
 }

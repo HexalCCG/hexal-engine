@@ -36,15 +36,20 @@ class DestroyCardEvent extends Event {
       ];
 
   @override
-  DestroyCardEvent get copyResolved =>
-      DestroyCardEvent(card: card, resolved: true);
+  DestroyCardEvent copyWithId(int id) =>
+      DestroyCardEvent(id: id, card: card, resolved: resolved);
 
   @override
-  List<Object> get props => [card, resolved];
+  DestroyCardEvent get copyResolved =>
+      DestroyCardEvent(id: id, card: card, resolved: true);
+
+  @override
+  List<Object> get props => [id, card, resolved];
 
   /// Create this event from json
   static DestroyCardEvent fromJson(List<dynamic> json) => DestroyCardEvent(
-        card: json[0] as int,
-        resolved: json[1] as bool,
+        id: json[0] as int,
+        card: json[1] as int,
+        resolved: json[2] as bool,
       );
 }

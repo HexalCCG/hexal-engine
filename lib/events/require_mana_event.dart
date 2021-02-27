@@ -60,6 +60,7 @@ class RequireManaEvent extends Event {
   /// Copy this event with the provided mana added.
   RequireManaEvent copyWithProvided(ManaAmount manaProvided) =>
       RequireManaEvent(
+        id: id,
         cost: cost,
         provided: provided + manaProvided,
         card: card,
@@ -67,9 +68,13 @@ class RequireManaEvent extends Event {
       );
 
   @override
-  Event get copyResolved => RequireManaEvent(
-      cost: cost, provided: provided, card: card, resolved: true);
+  RequireManaEvent copyWithId(int id) => RequireManaEvent(
+      id: id, cost: cost, provided: provided, card: card, resolved: resolved);
 
   @override
-  List<Object> get props => [cost, provided, card, resolved];
+  RequireManaEvent get copyResolved => RequireManaEvent(
+      id: id, cost: cost, provided: provided, card: card, resolved: true);
+
+  @override
+  List<Object> get props => [id, cost, provided, card, resolved];
 }
