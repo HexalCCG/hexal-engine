@@ -1,15 +1,13 @@
-import '../card/on_enter_field.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../models/mana_amount.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
-import '../state_changes/put_into_field_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
 import '../state_changes/state_change.dart';
+import 'cast_card_event.dart';
 import 'destroy_card_event.dart';
 import 'event.dart';
-import 'on_card_enter_field_event.dart';
 import 'require_mana_event.dart';
 
 /// Stages the play card event processes.
@@ -84,10 +82,7 @@ class PlayCardEvent extends Event {
     // If card hasn't been put into field yet, do that.
     if (stage != PlayCardEventStage.donePutIntoField) {
       return [
-        PutIntoFieldStateChange(card: card),
-        ...(_card is OnEnterField)
-            ? [AddEventStateChange(event: OnCardEnterFieldEvent(card: card))]
-            : [],
+        AddEventStateChange(event: CastCardEvent(card: card)),
         ModifyEventStateChange(
             event: this,
             newEvent: _copyAtStage(PlayCardEventStage.donePutIntoField)),

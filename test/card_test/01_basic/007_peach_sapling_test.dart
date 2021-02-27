@@ -46,6 +46,9 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(const PassAction());
 
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+
       expect(state.getCardsByLocation(Player.one, Location.field).first,
           isA<PeachSapling>());
       expect(state.priorityPlayer, Player.one);

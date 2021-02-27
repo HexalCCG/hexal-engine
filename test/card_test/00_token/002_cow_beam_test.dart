@@ -47,7 +47,8 @@ void main() {
       // They pass, moving priority to player 2.
 
       state = state.applyAction(const PassAction());
-      // Player 2 passes. Top item of stack is resolved.
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
 
       expect(state.getCardsByLocation(Player.one, Location.field).first,
@@ -92,6 +93,9 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(const PassAction());
 
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+
       // Cow Beam moves into the field .
       expect(state.getCardById(2), isA<CowBeamCard>());
 
@@ -102,12 +106,11 @@ void main() {
       // Resolves the onenterfield effect creating a damage effect
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
-      // Resolve the damage effect creating
-      // state = state.applyAction(PassAction());
-      // state = state.applyAction(PassAction());
 
       // Cow Beam requests a target for its damage.
       expect(state.stack.last, isA<TargetedEffect>());
+      expect(state.stack.last.resolved, false);
+      expect(state.priorityPlayer, Player.one);
 
       // Player 1 provides a target.
       state = state.applyAction(const ProvideTargetAction(targets: [3]));
