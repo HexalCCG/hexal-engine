@@ -1,11 +1,8 @@
-import 'package:hexal_engine/effects/targeted_effect.dart';
 import 'package:hexal_engine/events/cast_card_event.dart';
 import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:hexal_engine/state_changes/add_event_state_change.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/state_changes/state_change.dart';
-import 'package:hexal_engine/state_changes/put_into_field_state_change.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/cards/00_token/002_cow_beam_card.dart';
 import 'package:hexal_engine/actions/play_card_action.dart';

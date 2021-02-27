@@ -1,4 +1,4 @@
-import 'package:hexal_engine/models/mana_amount.dart';
+import '../../models/mana_amount.dart';
 
 import '../../models/card.dart';
 import '../../models/card_identity.dart';
