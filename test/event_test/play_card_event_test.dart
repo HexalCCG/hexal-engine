@@ -1,6 +1,8 @@
 import 'package:hexal_engine/effects/targeted_effect.dart';
+import 'package:hexal_engine/events/cast_card_event.dart';
 import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
+import 'package:hexal_engine/state_changes/add_event_state_change.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/state_changes/state_change.dart';
 import 'package:hexal_engine/state_changes/put_into_field_state_change.dart';
@@ -41,9 +43,9 @@ void main() {
 
       expect(
           changes,
-          containsAll(<StateChange>[
-            PutIntoFieldStateChange(card: card.id),
-          ]));
+          contains(
+            AddEventStateChange(event: CastCardEvent(card: card.id)),
+          ));
     });
     test('does not destroy a played permanent.', () {
       const creature = CowCreatureCard(
@@ -71,22 +73,20 @@ void main() {
           contains(isA<CowCreatureCard>()));
       expect(state.priorityPlayer, Player.one);
 
-      // Player 1 keeps priority after playing a card as they are active.
-      // They pass, moving priority to player 2.
-      state = state.applyAction(const PassAction());
-      // Player 2 passes. Top item of stack is resolved.
-      state = state.applyAction(const PassAction());
-
-      // Cow moves into the field.
-      expect(state.getCardsByLocation(Player.one, Location.field),
-          contains(isA<CowCreatureCard>()));
       expect(state.stack.last, isA<PlayCardEvent>());
 
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+
+      expect(state.getCardsByLocation(Player.one, Location.field),
+          contains(isA<CowCreatureCard>()));
+      expect(state.stack.last, isA<CastCardEvent>());
+
       // Resolve and remove the play effect
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
+      state = GameStateTestFunctions.passUntilEmpty(state);
 
       expect(state.stack, isEmpty);
       expect(state.getCardsByLocation(Player.one, Location.field),
@@ -123,27 +123,13 @@ void main() {
       // Player 2 passes. Top item of stack is resolved.
       state = state.applyAction(const PassAction());
 
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+
       // Cow moves into the field.
-      expect(state.getCardsByLocation(Player.one, Location.field),
-          contains(isA<CowBeamCard>()));
+      expect(state.getCardById(2).location, Location.field);
       expect(state.stack.last, isA<OnCardEnterFieldEvent>());
-
-      // Player 1 has priority again after the last effect resolved.
-      // They pass, moving priority to player 2.
-      // Resolves the onenterfield effect
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-      // Resolve the play effect
-      state = state.applyAction(const PassAction());
-      state = state.applyAction(const PassAction());
-
-      // Cow Beam requests a target for its damage.
-      expect(state.stack.last, isA<TargetedEffect>());
-      expect(state.getCardsByLocation(Player.one, Location.field),
-          contains(isA<CowBeamCard>()));
-
-      // Player 1 fails to provide a target.
-      state = state.applyAction(const PassAction());
 
       state = GameStateTestFunctions.passUntilEmpty(state);
 

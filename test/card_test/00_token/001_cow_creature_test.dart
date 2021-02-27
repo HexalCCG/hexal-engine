@@ -1,3 +1,4 @@
+import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
@@ -41,9 +42,7 @@ void main() {
       // Player 1 keeps priority after playing a card as they are active.
       // They pass, moving priority to player 2.
 
-      state = state.applyAction(const PassAction());
-      // Player 2 passes. Top item of stack is resolved.
-      state = state.applyAction(const PassAction());
+      state = GameStateTestFunctions.passUntilEmpty(state);
 
       expect(state.getCardsByLocation(Player.one, Location.field).first,
           isA<CowCreatureCard>());

@@ -11,7 +11,8 @@ class Location {
   int toJson() => index;
 
   @override
-  String toString() => index.toString();
+  String toString() =>
+      ['Deck', 'Hand', 'Mana', 'Field', 'Exile', 'Limbo'][index];
 
   static const List<Location> _all = [
     deck,
