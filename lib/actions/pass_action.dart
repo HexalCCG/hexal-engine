@@ -19,7 +19,8 @@ class PassAction extends Action {
     if (state.stack.isNotEmpty &&
         state.stack.last is TargetedEffect &&
         (state.stack.last as TargetedEffect).target.controller ==
-            state.priorityPlayer) {
+            state.priorityPlayer &&
+        !(state.stack.last as TargetedEffect).targetFilled) {
       if (((state.stack.last as TargetedEffect).target.optional ||
           !(state.stack.last as TargetedEffect).target.anyValid(state))) {
         // Allowed to pass if target is optional or no targets are valid
@@ -33,6 +34,7 @@ class PassAction extends Action {
     // If triggered effects are available
     final effects = state.cards
         .whereType<OnTrigger>()
+        .where((card) => card.controller == state.priorityPlayer)
         .map((card) => card.onTriggerEffects)
         .expand((i) => i);
 
