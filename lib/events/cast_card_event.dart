@@ -1,11 +1,8 @@
-import 'package:hexal_engine/state_changes/put_into_field_state_change.dart';
-
 import '../card/on_enter_field.dart';
-import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
-import '../state_changes/move_card_state_change.dart';
+import '../state_changes/put_into_field_state_change.dart';
 import '../state_changes/resolve_event_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'destroy_card_event.dart';
