@@ -16,28 +16,29 @@ class ProvideManaAction extends Action {
   const ProvideManaAction({required this.card});
 
   @override
-  bool valid(GameState state) {
+  void validate(GameState state) {
+    if (state.stack.isEmpty) {
+      throw const ActionException('ProvideManaAction: Stack is empty.');
+    }
+
     final event = state.stack.last;
 
     // Top stack event must be a require mana event.
     if (event is! RequireManaEvent) {
-      return false;
+      throw const ActionException(
+          'ProvideManaAction: Top event in stack is not a RequireManaEvent.');
     }
 
     // Make sure the mana require event is still going.
     if (!event.valid(state)) {
-      return false;
+      throw const ActionException(
+          'ProvideManaAction: RequireManaEvent is not valid.');
     }
-
-    return true;
   }
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {
-      throw const ActionException(
-          'ProvideManaAction Exception: invalid argument');
-    }
+    validate(state);
 
     return [
       AddEventStateChange(

@@ -21,10 +21,11 @@ class AttackAction extends Action {
   const AttackAction({required this.attacker, required this.defender});
 
   @override
-  bool valid(GameState state) {
+  void validate(GameState state) {
     // Attack cannot be a reaction.
     if (state.stack.isNotEmpty) {
-      return false;
+      throw const ActionException(
+          'AttackAction: Attack cannot be a reaction (stack is not empty).');
     }
 
     // Get attacker and defender from state.
@@ -32,85 +33,63 @@ class AttackAction extends Action {
     final _defender = state.getCardById(defender);
 
     // Check attacker and defender are creatures.
-    if (!(_attacker is Creature && _defender is Creature)) {
-      return false;
+    if (_attacker is! Creature) {
+      throw const ActionException(
+          'AttackAction: Attacker does not implement Creature.');
+    }
+    if (_defender is! Creature) {
+      throw const ActionException(
+          'AttackAction: Defender does not implement Creature. (Did you mean AttackPlayerAction?)');
     }
 
     // Check attacker is valid
     // Cannot control opponent's creatures.
     if (_attacker.controller != state.priorityPlayer) {
-      return false;
+      throw const ActionException(
+          'AttackAction: Attacker is not controller by priority player.');
+    }
+    // Check if attacker can attack.
+    if (!_attacker.canAttack(state)) {
+      throw const ActionException('AttackAction: Attacker cannot attack.');
+    }
+    // Cannot attack your own creatures
+    if (_defender.controller == state.priorityPlayer) {
+      throw const ActionException(
+          'AttackAction: Defender controlled by priority player.');
+    }
+    // Check if creature is being protected.
+    if (!_defender.canBeAttacked) {
+      throw const ActionException('AttackAction: Defender cannot be attacked.');
+    }
+    // Cannot attack creatures not in field.
+    if (_defender.location != Location.field) {
+      throw const ActionException('AttackAction: Defender not in field.');
     }
 
-    // Normal attack.
-    if (state.turnPhase == TurnPhase.battle) {
-      // Can't attack on your opponent's turn.
-      if (_attacker.controller != state.activePlayer) {
-        return false;
-      }
-
-      // Check if attacker can attack.
-      if (!_attacker.canAttack(state)) {
-        return false;
-      }
-
-      // Cannot attack your own creatures
-      if (_defender.controller == state.activePlayer) {
-        return false;
-      }
-
-      // Check if creature is being protected.
-      if (!_defender.canBeAttacked) {
-        return false;
-      }
-
-      // Cannot attack creatures not in field.
-      if (_defender.location != Location.field) {
-        return false;
-      }
-
-      return true;
-    }
-
+    // Check phase.
     // Counterattack.
+    // Can't counter on your turn.
     if (state.turnPhase == TurnPhase.counter) {
-      // Can't counter on your turn.
-      if (_attacker.controller != state.notActivePlayer) {
-        return false;
+      if (state.priorityPlayer == state.activePlayer) {
+        throw const ActionException(
+            'AttackAction: Active player cannot counter.');
       }
-
-      // Check if attacker can attack.
-      if (!_attacker.canAttack(state)) {
-        return false;
-      }
-
-      // Check if creature is being protected.
-      if (!_defender.canBeAttacked) {
-        return false;
-      }
-
-      // Cannot attack your own creatures
-      if (_defender.controller == state.activePlayer) {
-        return false;
-      }
-
-      // Cannot attack creatures not in field.
-      if (_defender.location != Location.field) {
-        return false;
-      }
-
-      return true;
     }
-
-    // Not in the correct phase.
-    return false;
+    // Normal attack.
+    // Can't attack if not active player.
+    else if (state.turnPhase == TurnPhase.battle) {
+      if (state.priorityPlayer == state.notActivePlayer) {
+        throw const ActionException(
+            'AttackAction: Inactive player cannot attack.');
+      }
+    } else {
+      throw const ActionException('AttackAction: Incorrect phase.');
+    }
   }
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {
-      throw const ActionException('AttackAction Exception: Attack not valid');
-    }
+    validate(state);
 
     return [
       AddEventStateChange(

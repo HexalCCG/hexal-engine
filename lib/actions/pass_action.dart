@@ -14,20 +14,22 @@ class PassAction extends Action {
   const PassAction();
 
   @override
-  bool valid(GameState state) {
+  void validate(GameState state) {
     // If the top stack event is our request
-    if (state.stack.isNotEmpty &&
-        state.stack.last is TargetedEffect &&
-        (state.stack.last as TargetedEffect).target.controller ==
-            state.priorityPlayer &&
-        !(state.stack.last as TargetedEffect).targetFilled) {
-      if (((state.stack.last as TargetedEffect).target.optional ||
-          !(state.stack.last as TargetedEffect).target.anyValid(state))) {
-        // Allowed to pass if target is optional or no targets are valid
-        return true;
-      } else {
-        // Not allowed to pass required request
-        return false;
+    // And it's not been filled already
+    if (state.stack.isNotEmpty && state.stack.last is TargetedEffect) {
+      final _event = state.stack.last as TargetedEffect;
+
+      if ( // If event belongs to us
+          _event.target.controller == state.priorityPlayer &&
+              // And is not filled already
+              !_event.targetFilled &&
+              // And is not optional
+              !_event.target.optional &&
+              // And has valid targets
+              _event.target.anyValid(state)) {
+        throw const ActionException(
+            'PassAction: Could not pass filling non-optional target request.');
       }
     }
 
@@ -40,19 +42,15 @@ class PassAction extends Action {
 
     if (effects.any((effect) => !effect.optional && effect.trigger(state))) {
       // Not allowed to pass non-optional triggered effects.
-      return false;
+      throw const ActionException(
+          'PassAction: Could not pass non-optional triggered effect.');
     }
-
-    // All checks passed!!
-    return true;
   }
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {
-      throw const ActionException(
-          'PassAction Exception: Non-optional action pending.');
-    }
+    validate(state);
+
     // Check if the top event is an unfilled request.
     if (state.stack.isNotEmpty) {
       final _event = state.stack.last;

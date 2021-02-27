@@ -22,42 +22,49 @@ class AttackPlayerAction extends Action {
   const AttackPlayerAction({required this.attacker, required this.player});
 
   @override
-  bool valid(GameState state) {
+  void validate(GameState state) {
     // Get attacker from state.
     final _attacker = state.getCardById(attacker);
 
     // Check attacker is a creature.
     if (_attacker is! Creature) {
-      return false;
+      throw const ActionException(
+          'AttackPlayerAction: Attacker does not implement Creature.');
     }
 
     // Attack cannot be a reaction.
     if (state.stack.isNotEmpty) {
-      return false;
+      throw const ActionException(
+          'AttackPlayerAction: Attack cannot be a reaction (stack is not empty).');
     }
 
     // Check attacker is valid
     // Cannot control opponent's creatures.
     if (_attacker.controller != state.priorityPlayer) {
-      return false;
+      throw const ActionException(
+          'AttackPlayerAction: Attacker not controlled by priority player.');
+    }
+    // Can't attack on your opponent's turn.
+    if (state.priorityPlayer != state.activePlayer) {
+      throw const ActionException(
+          'AttackPlayerAction: Priority player is not active');
     }
 
     // Can't attack players outside of battle phase.
     if (state.turnPhase != TurnPhase.battle) {
-      return false;
-    }
-    // Can't attack on your opponent's turn.
-    if (_attacker.controller != state.activePlayer) {
-      return false;
+      throw const ActionException(
+          'AttackPlayerAction: Cannot attack players outside of main battle phase.');
     }
 
     // Can't attack yourself.
     if (player == state.priorityPlayer) {
-      return false;
+      throw const ActionException(
+          'AttackPlayerAction: Cannot attack yourself.');
     }
     // Check attacker can attack players
     if (!_attacker.canAttackPlayer(state)) {
-      return false;
+      throw const ActionException(
+          'AttackPlayerAction: Attacker cannot attack players.');
     }
 
     // Check opponent's board has no valid targets
@@ -65,18 +72,14 @@ class AttackPlayerAction extends Action {
         .getCardsByLocation(state.notPriorityPlayer, Location.field)
         .where((card) => (card is Creature) && card.canBeAttacked)
         .isNotEmpty) {
-      return false;
+      throw const ActionException(
+          'AttackPlayerAction: Attack is blocked by one or more creatures.');
     }
-
-    return true;
   }
 
   @override
   List<StateChange> apply(GameState state) {
-    if (!valid(state)) {
-      throw const ActionException(
-          'AttackPlayerAction Exception: Attack not valid');
-    }
+    validate(state);
 
     return [
       AddEventStateChange(
