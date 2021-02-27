@@ -23,12 +23,11 @@ class DamagePlayerEvent extends Event implements DamageEvent {
 
   /// Deals [damage] damage to [player] one point at a time.
   const DamagePlayerEvent({
+    int id = 0,
     required this.player,
     required this.damage,
     this.damageDealt = 0,
-    int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -82,7 +81,6 @@ class DamagePlayerEvent extends Event implements DamageEvent {
         player: player,
         damage: damage,
         damageDealt: damageDealt + 1,
-        resolved: resolved,
       );
 
   @override
@@ -91,26 +89,16 @@ class DamagePlayerEvent extends Event implements DamageEvent {
         player: player,
         damage: damage,
         damageDealt: damageDealt,
-        resolved: resolved,
       );
 
   @override
-  DamagePlayerEvent get copyResolved => DamagePlayerEvent(
-        id: id,
-        player: player,
-        damage: damage,
-        damageDealt: damageDealt,
-        resolved: true,
-      );
-
-  @override
-  List<Object> get props => [id, player, damage, damageDealt, resolved];
+  List<Object> get props => [id, player, damage, damageDealt];
 
   /// Create this event from json.
   static DamagePlayerEvent fromJson(List<dynamic> json) => DamagePlayerEvent(
-      id: json[0] as int,
-      player: Player.fromIndex(json[1] as int),
-      damage: json[2] as int,
-      damageDealt: json[3] as int,
-      resolved: json[4] as bool);
+        id: json[0] as int,
+        player: Player.fromIndex(json[1] as int),
+        damage: json[2] as int,
+        damageDealt: json[3] as int,
+      );
 }

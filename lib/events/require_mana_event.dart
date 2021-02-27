@@ -19,12 +19,11 @@ class RequireManaEvent extends Event {
 
   /// Require mana for a card.
   const RequireManaEvent({
+    int id = 0,
     required this.cost,
     required this.card,
     this.provided = const ManaAmount.zero(),
-    int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -64,25 +63,20 @@ class RequireManaEvent extends Event {
         cost: cost,
         provided: provided + manaProvided,
         card: card,
-        resolved: resolved,
       );
 
   @override
-  RequireManaEvent copyWithId(int id) => RequireManaEvent(
-      id: id, cost: cost, provided: provided, card: card, resolved: resolved);
+  RequireManaEvent copyWithId(int id) =>
+      RequireManaEvent(id: id, cost: cost, provided: provided, card: card);
 
   @override
-  RequireManaEvent get copyResolved => RequireManaEvent(
-      id: id, cost: cost, provided: provided, card: card, resolved: true);
-
-  @override
-  List<Object> get props => [id, cost, provided, card, resolved];
+  List<Object> get props => [id, cost, provided, card];
 
   /// Create this event from json.
   static RequireManaEvent fromJson(List<dynamic> json) => RequireManaEvent(
-      id: json[0] as int,
-      cost: ManaAmount.fromJson(json[1] as List<dynamic>),
-      provided: ManaAmount.fromJson(json[2] as List<dynamic>),
-      card: json[3] as int,
-      resolved: json[4] as bool);
+        id: json[0] as int,
+        cost: ManaAmount.fromJson(json[1] as List<dynamic>),
+        provided: ManaAmount.fromJson(json[2] as List<dynamic>),
+        card: json[3] as int,
+      );
 }

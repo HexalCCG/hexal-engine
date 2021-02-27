@@ -21,12 +21,11 @@ class ChannelCardEvent extends Event {
 
   /// Event that channels [card].
   const ChannelCardEvent({
+    int id = 0,
     required this.card,
     required this.targetCard,
     required this.controller,
-    int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -79,20 +78,10 @@ class ChannelCardEvent extends Event {
         card: card,
         targetCard: targetCard,
         controller: controller,
-        resolved: resolved,
       );
 
   @override
-  ChannelCardEvent get copyResolved => ChannelCardEvent(
-        id: id,
-        card: card,
-        targetCard: targetCard,
-        controller: controller,
-        resolved: true,
-      );
-
-  @override
-  List<Object> get props => [id, card, targetCard, controller, resolved];
+  List<Object> get props => [id, card, targetCard, controller];
 
   /// Create this event from json
   static ChannelCardEvent fromJson(List<dynamic> json) => ChannelCardEvent(
@@ -100,6 +89,5 @@ class ChannelCardEvent extends Event {
         card: json[1] as int,
         targetCard: json[2] as int,
         controller: Player.fromIndex(json[3] as int),
-        resolved: json[4] as bool,
       );
 }

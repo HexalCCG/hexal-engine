@@ -26,8 +26,7 @@ class AttackEvent extends Event {
     required this.attacker,
     required this.defender,
     this.enableCounter = true,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -77,28 +76,20 @@ class AttackEvent extends Event {
 
   @override
   Event copyWithId(int id) => AttackEvent(
-      id: id,
-      attacker: attacker,
-      defender: defender,
-      enableCounter: enableCounter,
-      resolved: resolved);
+        id: id,
+        attacker: attacker,
+        defender: defender,
+        enableCounter: enableCounter,
+      );
 
   @override
-  AttackEvent get copyResolved => AttackEvent(
-      id: id,
-      attacker: attacker,
-      defender: defender,
-      enableCounter: enableCounter,
-      resolved: true);
-
-  @override
-  List<Object> get props => [id, attacker, defender, enableCounter, resolved];
+  List<Object> get props => [id, attacker, defender, enableCounter];
 
   /// Create this event from json.
   static AttackEvent fromJson(List<dynamic> json) => AttackEvent(
-      id: json[0] as int,
-      attacker: json[1] as int,
-      defender: json[2] as int,
-      enableCounter: json[3] as bool,
-      resolved: json[4] as bool);
+        id: json[0] as int,
+        attacker: json[1] as int,
+        defender: json[2] as int,
+        enableCounter: json[3] as bool,
+      );
 }

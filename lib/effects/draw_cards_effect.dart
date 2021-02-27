@@ -20,8 +20,7 @@ class DrawCardsEffect extends Effect {
     int id = 0,
     required this.draws,
     required this.controller,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -48,25 +47,20 @@ class DrawCardsEffect extends Effect {
   }
 
   @override
-  DrawCardsEffect copyWithId(int id) => DrawCardsEffect(
-      id: id, draws: draws, controller: controller, resolved: resolved);
-
-  @override
-  DrawCardsEffect get copyResolved => DrawCardsEffect(
-      id: id, draws: draws, controller: controller, resolved: true);
+  DrawCardsEffect copyWithId(int id) =>
+      DrawCardsEffect(id: id, draws: draws, controller: controller);
 
   @override
   List<Object> get props => [
         id,
         draws,
         controller,
-        resolved,
       ];
 
   /// Create this effect from json.
   static DrawCardsEffect fromJson(List<dynamic> json) => DrawCardsEffect(
-      id: json[0] as int,
-      draws: json[1] as int,
-      controller: Player.fromIndex(json[2] as int),
-      resolved: json[3] as bool);
+        id: json[0] as int,
+        draws: json[1] as int,
+        controller: Player.fromIndex(json[2] as int),
+      );
 }

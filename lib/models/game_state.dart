@@ -117,10 +117,13 @@ class GameState extends Equatable {
 
   /// Attempts to resolve the top stack event.
   List<StateChange> resolveTopStackEvent() {
+    // Resolved events are removed automatically now:
+    /*
     // If the top event has been resolved, remove it and check for input again.
     if (stack.last.resolved) {
       return [RemoveEventStateChange(event: stack.last)];
     }
+    */
     // If the top event still needs to be resolved, iterate it.
     return stack.last.apply(this);
   }

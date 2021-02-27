@@ -12,10 +12,9 @@ class DestroyCardEvent extends Event {
 
   /// Destroys [card].
   const DestroyCardEvent({
-    required this.card,
     int id = 0,
-    bool resolved = false,
-  }) : super(id: id, resolved: resolved);
+    required this.card,
+  }) : super(id: id);
 
   @override
   bool valid(GameState state) {
@@ -36,20 +35,14 @@ class DestroyCardEvent extends Event {
       ];
 
   @override
-  DestroyCardEvent copyWithId(int id) =>
-      DestroyCardEvent(id: id, card: card, resolved: resolved);
+  DestroyCardEvent copyWithId(int id) => DestroyCardEvent(id: id, card: card);
 
   @override
-  DestroyCardEvent get copyResolved =>
-      DestroyCardEvent(id: id, card: card, resolved: true);
-
-  @override
-  List<Object> get props => [id, card, resolved];
+  List<Object> get props => [id, card];
 
   /// Create this event from json
   static DestroyCardEvent fromJson(List<dynamic> json) => DestroyCardEvent(
         id: json[0] as int,
         card: json[1] as int,
-        resolved: json[2] as bool,
       );
 }
