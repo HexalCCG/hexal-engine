@@ -65,7 +65,11 @@ void main() {
         gameOverState: GameOverState.playing,
         cards: [attacker, defender],
         stack: [],
-        history: History(attackedThisTurn: {2}, enteredFieldThisTurn: {}),
+        history: History(
+          attackedThisTurn: {2},
+          enteredFieldThisTurn: {},
+          triggeredEffects: {},
+        ),
         activePlayer: Player.one,
         priorityPlayer: Player.one,
         turnPhase: TurnPhase.battle,
