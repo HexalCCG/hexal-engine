@@ -1,3 +1,5 @@
+import 'package:hexal_engine/state_changes/priority_state_change.dart';
+
 import '../card/on_trigger.dart';
 import '../exceptions/action_exception.dart';
 import '../models/game_state.dart';
@@ -23,6 +25,11 @@ class ActivateTriggeredEffectAction extends Action {
   @override
   bool valid(GameState state) {
     final _card = state.getCardById(card);
+
+    // Check we control the card
+    if (_card.controller != state.priorityPlayer) {
+      return false;
+    }
 
     // Check card has a triggered effect.
     if (_card is! OnTrigger) {
@@ -63,6 +70,7 @@ class ActivateTriggeredEffectAction extends Action {
       if (_effect.historyBuilder != null)
         HistoryTriggeredEffectStateChange(
             historyTriggeredEffect: _effect.historyBuilder!(state)),
+      PriorityStateChange(player: state.activePlayer),
     ];
   }
 
