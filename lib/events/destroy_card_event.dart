@@ -31,10 +31,17 @@ class DestroyCardEvent extends Event {
   }
 
   @override
-  List<StateChange> apply(GameState state) => [
-        MoveCardStateChange(card: card, location: Location.mana),
-        ResolveEventStateChange(event: this),
+  List<StateChange> apply(GameState state) {
+    if (!valid(state)) {
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
       ];
+    }
+    return [
+      MoveCardStateChange(card: card, location: Location.mana),
+      ResolveEventStateChange(event: this, eventState: EventState.succeeded),
+    ];
+  }
 
   @override
   DestroyCardEvent copyWith({int? id, EventState? state}) => DestroyCardEvent(
