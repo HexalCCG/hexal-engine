@@ -1,3 +1,4 @@
+import 'package:hexal_engine/models/enums/event_state.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
@@ -37,7 +38,9 @@ void main() {
       expect(
           changes,
           contains(ResolveEventStateChange(
-              event: OnCardEnterFieldEvent(card: card.id))));
+            event: OnCardEnterFieldEvent(card: card.id),
+            eventState: EventState.succeeded,
+          )));
     });
     test('adds the card\'s effect if it has only one. ', () {
       const card = CowBeamCard(

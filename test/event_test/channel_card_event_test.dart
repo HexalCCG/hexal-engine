@@ -1,6 +1,7 @@
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/events/channel_card_event.dart';
 import 'package:hexal_engine/events/require_mana_event.dart';
+import 'package:hexal_engine/models/enums/event_state.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:hexal_engine/models/mana_amount.dart';
 import 'package:hexal_engine/state_changes/move_card_state_change.dart';
@@ -45,8 +46,10 @@ void main() {
 
       expect(changes, const [
         ResolveEventStateChange(
-            event: ChannelCardEvent(
-                card: 2, controller: Player.one, targetCard: 3))
+          event:
+              ChannelCardEvent(card: 2, controller: Player.one, targetCard: 3),
+          eventState: EventState.failed,
+        )
       ]);
     });
     test('fizzles if card is controlled by opponent.', () {
@@ -81,7 +84,8 @@ void main() {
       expect(changes, const [
         ResolveEventStateChange(
             event: ChannelCardEvent(
-                card: 2, controller: Player.one, targetCard: 3))
+                card: 2, controller: Player.one, targetCard: 3),
+            eventState: EventState.failed)
       ]);
     });
     test('exiles channel card if situation is valid.', () {
