@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/enums/event_state.dart';
+
 import '../events/channel_card_event.dart';
 import '../events/require_mana_event.dart';
 import '../exceptions/action_exception.dart';
@@ -30,6 +32,10 @@ class ProvideManaAction extends Action {
     }
 
     // Make sure the mana require event is still going.
+    if (event.state != EventState.unresolved) {
+      throw const ActionException(
+          'ProvideManaAction: RequireManaEvent has resolved.');
+    }
     if (!event.valid(state)) {
       throw const ActionException(
           'ProvideManaAction: RequireManaEvent is not valid.');

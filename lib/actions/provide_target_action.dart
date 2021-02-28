@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/enums/event_state.dart';
+
 import '../effects/targeted_effect.dart';
 import '../exceptions/action_exception.dart';
 import '../models/game_state.dart';
@@ -26,6 +28,11 @@ class ProvideTargetAction extends Action {
     if (_request.targetFilled) {
       throw const ActionException(
           'ProvideTargetAction: Target has already been provided.');
+    }
+    // Check request is still unresolved.
+    if (_request.state != EventState.unresolved) {
+      throw const ActionException(
+          'ProvideTargetAction: TargetedEffect has already resolved.');
     }
     // Check request belongs to the priority player.
     if (_request.target.controller != state.priorityPlayer) {
