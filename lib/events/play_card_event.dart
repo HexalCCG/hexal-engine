@@ -61,7 +61,9 @@ class PlayCardEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     final _card = state.getCardById(card);
@@ -91,11 +93,13 @@ class PlayCardEvent extends Event {
     // If it's in play, destroy it if it's not permanent
     // Regardless, resolve.
     if (_card.permanent) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded)
+      ];
     } else {
       return [
         AddEventStateChange(event: DestroyCardEvent(card: card)),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
       ];
     }
   }

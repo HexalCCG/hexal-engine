@@ -46,7 +46,9 @@ class AttackPlayerEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     // Casts safe because of valid check above.
@@ -59,7 +61,7 @@ class AttackPlayerEvent extends Event {
       ...enableCounter
           ? [const SetCounterAvailableStateChange(enabled: true)]
           : [],
-      ResolveEventStateChange(event: this),
+      ResolveEventStateChange(event: this, eventState: EventState.succeeded),
     ];
   }
 

@@ -53,7 +53,9 @@ class AttackEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     // Get cards from state
@@ -72,7 +74,7 @@ class AttackEvent extends Event {
           : [],
       // Add this attack to the history.
       HistoryAttackedStateChange(creature: attacker),
-      ResolveEventStateChange(event: this),
+      ResolveEventStateChange(event: this, eventState: EventState.succeeded),
     ];
   }
 

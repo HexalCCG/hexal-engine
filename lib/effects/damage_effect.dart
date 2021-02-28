@@ -58,19 +58,23 @@ class DamageEffect extends Event with Effect, TargetedEffect {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     if (targets.isEmpty) {
       // If there are no targets, resolve this.
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     // If only one target is left, do it and resolve
     if (targets.length == 1) {
       return [
         _generateStateChange(state, targets.first),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
       ];
     }
 

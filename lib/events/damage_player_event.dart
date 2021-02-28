@@ -40,7 +40,9 @@ class DamagePlayerEvent extends Event implements DamageEvent {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     if (damageDealt < damage - 1) {
@@ -53,7 +55,7 @@ class DamagePlayerEvent extends Event implements DamageEvent {
       // Deal the last point of damage and resolve.
       return [
         ..._dealDamage(state),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
       ];
     }
   }
