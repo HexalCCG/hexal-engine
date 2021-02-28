@@ -1,4 +1,5 @@
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
+import 'package:hexal_engine/models/enums/event_state.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/events/require_mana_event.dart';
 import 'package:hexal_engine/models/history.dart';
@@ -44,6 +45,7 @@ void main() {
                   cost: ManaAmount(neutral: 1),
                   provided: ManaAmount(air: 1),
                 ),
+                eventState: EventState.succeeded,
               )),
           true);
       expect(
@@ -76,12 +78,12 @@ void main() {
       );
       expect(
           state.resolveTopStackEvent().contains(const ResolveEventStateChange(
-                event: RequireManaEvent(
-                  card: 2,
-                  cost: ManaAmount(neutral: 1),
-                  provided: ManaAmount(),
-                ),
-              )),
+              event: RequireManaEvent(
+                card: 2,
+                cost: ManaAmount(neutral: 1),
+                provided: ManaAmount(),
+              ),
+              eventState: EventState.failed)),
           true);
       expect(
           state.resolveTopStackEvent().contains(
