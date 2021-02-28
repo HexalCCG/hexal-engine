@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/models/enums/event_state.dart';
+import 'package:hexal_engine/state_changes/remove_event_state_change.dart';
 
 import '../actions/action.dart';
 import '../events/event.dart';
@@ -116,13 +118,11 @@ class GameState extends Equatable {
 
   /// Attempts to resolve the top stack event.
   List<StateChange> resolveTopStackEvent() {
-    // Resolved events are removed automatically now:
-    /*
     // If the top event has been resolved, remove it and check for input again.
-    if (stack.last.resolved) {
+    if (stack.last.state != EventState.unresolved) {
       return [RemoveEventStateChange(event: stack.last)];
     }
-    */
+
     // If the top event still needs to be resolved, iterate it.
     return stack.last.apply(this);
   }
