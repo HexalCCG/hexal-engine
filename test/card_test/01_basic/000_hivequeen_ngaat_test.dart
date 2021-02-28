@@ -69,13 +69,21 @@ void main() {
       state = state.applyAction(const ProvideManaAction(card: 5));
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const ProvideManaAction(card: 4));
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       state = state.applyAction(const ProvideManaAction(card: 3));
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const ProvideManaAction(card: 2));
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       // All mana provided so we can resolve RequireManaEvent
@@ -140,14 +148,20 @@ void main() {
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
 
-      // Provide four earth mana
+      // Provide three earth mana
       state = state.applyAction(const ProvideManaAction(card: 5));
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       state = state.applyAction(const ProvideManaAction(card: 4));
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const ProvideManaAction(card: 3));
+      state = state.applyAction(const PassAction());
+      state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       state = state.applyAction(const PassAction());
       // All mana provided so we can resolve RequireManaEvent
