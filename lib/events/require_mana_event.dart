@@ -1,3 +1,4 @@
+import '../models/enums/event_state.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../models/mana_amount.dart';
@@ -20,10 +21,11 @@ class RequireManaEvent extends Event {
   /// Require mana for a card.
   const RequireManaEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.cost,
     required this.card,
     this.provided = const ManaAmount.zero(),
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -66,17 +68,23 @@ class RequireManaEvent extends Event {
       );
 
   @override
-  RequireManaEvent copyWithId(int id) =>
-      RequireManaEvent(id: id, cost: cost, provided: provided, card: card);
+  RequireManaEvent copyWith({int? id, EventState? state}) => RequireManaEvent(
+        id: id ?? this.id,
+        state: state ?? this.state,
+        cost: cost,
+        provided: provided,
+        card: card,
+      );
 
   @override
-  List<Object> get props => [id, cost, provided, card];
+  List<Object> get props => [id, state, cost, provided, card];
 
   /// Create this event from json.
   static RequireManaEvent fromJson(List<dynamic> json) => RequireManaEvent(
         id: json[0] as int,
-        cost: ManaAmount.fromJson(json[1] as List<dynamic>),
-        provided: ManaAmount.fromJson(json[2] as List<dynamic>),
-        card: json[3] as int,
+        state: EventState.fromIndex(json[1] as int),
+        cost: ManaAmount.fromJson(json[2] as List<dynamic>),
+        provided: ManaAmount.fromJson(json[3] as List<dynamic>),
+        card: json[4] as int,
       );
 }

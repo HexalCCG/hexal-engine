@@ -1,4 +1,5 @@
 import '../card/on_enter_field.dart';
+import '../models/enums/event_state.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
 import '../state_changes/modify_event_state_change.dart';
@@ -20,9 +21,10 @@ class CastCardEvent extends Event {
   /// Spell to cast.
   const CastCardEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.card,
     this.donePutIntoField = false,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -58,8 +60,9 @@ class CastCardEvent extends Event {
   }
 
   @override
-  CastCardEvent copyWithId(int id) => CastCardEvent(
-        id: id,
+  CastCardEvent copyWith({int? id, EventState? state}) => CastCardEvent(
+        id: id ?? this.id,
+        state: state ?? this.state,
         card: card,
         donePutIntoField: donePutIntoField,
       );
@@ -72,12 +75,13 @@ class CastCardEvent extends Event {
       );
 
   @override
-  List<Object> get props => [id, card, donePutIntoField];
+  List<Object> get props => [id, state, card, donePutIntoField];
 
   /// Create this event from json.
   static CastCardEvent fromJson(List<dynamic> json) => CastCardEvent(
         id: json[0] as int,
-        card: json[1] as int,
-        donePutIntoField: json[2] as bool,
+        state: EventState.fromIndex(json[1] as int),
+        card: json[2] as int,
+        donePutIntoField: json[3] as bool,
       );
 }

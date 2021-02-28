@@ -1,4 +1,5 @@
 import '../card/creature.dart';
+import '../models/enums/event_state.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
@@ -20,9 +21,10 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   /// [creature] is dealt [damage] damage.
   const DamageCreatureEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.creature,
     required this.damage,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -64,17 +66,22 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   }
 
   @override
-  DamageCreatureEvent copyWithId(int id) =>
-      DamageCreatureEvent(id: id, creature: creature, damage: damage);
+  DamageCreatureEvent copyWith({int? id, EventState? state}) =>
+      DamageCreatureEvent(
+          id: id ?? this.id,
+          state: state ?? this.state,
+          creature: creature,
+          damage: damage);
 
   @override
-  List<Object> get props => [id, creature, damage];
+  List<Object> get props => [id, state, creature, damage];
 
   /// Create this event from json.
   static DamageCreatureEvent fromJson(List<dynamic> json) =>
       DamageCreatureEvent(
         id: json[0] as int,
-        creature: json[0] as int,
-        damage: json[1] as int,
+        state: EventState.fromIndex(json[1] as int),
+        creature: json[2] as int,
+        damage: json[3] as int,
       );
 }

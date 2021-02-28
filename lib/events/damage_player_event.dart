@@ -1,3 +1,4 @@
+import '../models/enums/event_state.dart';
 import '../models/enums/game_over_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
@@ -24,10 +25,11 @@ class DamagePlayerEvent extends Event implements DamageEvent {
   /// Deals [damage] damage to [player] one point at a time.
   const DamagePlayerEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.player,
     required this.damage,
     this.damageDealt = 0,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -84,21 +86,23 @@ class DamagePlayerEvent extends Event implements DamageEvent {
       );
 
   @override
-  DamagePlayerEvent copyWithId(int id) => DamagePlayerEvent(
-        id: id,
+  DamagePlayerEvent copyWith({int? id, EventState? state}) => DamagePlayerEvent(
+        id: id ?? this.id,
+        state: state ?? this.state,
         player: player,
         damage: damage,
         damageDealt: damageDealt,
       );
 
   @override
-  List<Object> get props => [id, player, damage, damageDealt];
+  List<Object> get props => [id, state, player, damage, damageDealt];
 
   /// Create this event from json.
   static DamagePlayerEvent fromJson(List<dynamic> json) => DamagePlayerEvent(
         id: json[0] as int,
-        player: Player.fromIndex(json[1] as int),
-        damage: json[2] as int,
-        damageDealt: json[3] as int,
+        state: EventState.fromIndex(json[1] as int),
+        player: Player.fromIndex(json[2] as int),
+        damage: json[3] as int,
+        damageDealt: json[4] as int,
       );
 }

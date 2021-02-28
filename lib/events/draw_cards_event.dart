@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/enums/event_state.dart';
+
 import '../models/enums/game_over_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
@@ -23,10 +25,11 @@ class DrawCardsEvent extends Event {
   /// [Player] draws [draws] cards, one at a time.
   const DrawCardsEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.player,
     required this.draws,
     this.cardsDrawn = 0,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -82,21 +85,23 @@ class DrawCardsEvent extends Event {
       );
 
   @override
-  DrawCardsEvent copyWithId(int id) => DrawCardsEvent(
-        id: id,
+  DrawCardsEvent copyWith({int? id, EventState? state}) => DrawCardsEvent(
+        id: id ?? this.id,
+        state: state ?? this.state,
         player: player,
         draws: draws,
         cardsDrawn: cardsDrawn,
       );
 
   @override
-  List<Object> get props => [id, player, draws, cardsDrawn];
+  List<Object> get props => [id, state, player, draws, cardsDrawn];
 
   /// Create this event from json
   static DrawCardsEvent fromJson(List<dynamic> json) => DrawCardsEvent(
         id: json[0] as int,
-        player: Player.fromIndex(json[1] as int),
-        draws: json[2] as int,
-        cardsDrawn: json[3] as int,
+        state: EventState.fromIndex(json[1] as int),
+        player: Player.fromIndex(json[2] as int),
+        draws: json[3] as int,
+        cardsDrawn: json[4] as int,
       );
 }

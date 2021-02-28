@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../exceptions/json_format_exception.dart';
+import '../models/enums/event_state.dart';
 import '../models/game_state.dart';
 import '../state_changes/state_change.dart';
 import 'event_index.dart';
@@ -12,8 +13,11 @@ abstract class Event extends Equatable {
   /// Unique id for this event.
   final int id;
 
+  /// State this event is in.
+  final EventState state;
+
   /// Events are items placed on the stack to resolve.
-  const Event({required this.id});
+  const Event({required this.id, required this.state});
 
   /// Whether this event is valid on the provided state.
   bool valid(GameState state);
@@ -22,7 +26,7 @@ abstract class Event extends Equatable {
   List<StateChange> apply(GameState state);
 
   /// A copy of this event with provided id.
-  Event copyWithId(int id);
+  Event copyWith({int? id, EventState? state});
 
   /// Create an Event from its JSON form.
   factory Event.fromJson(Map<String, dynamic> json) {

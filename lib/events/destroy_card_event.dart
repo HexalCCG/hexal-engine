@@ -1,3 +1,4 @@
+import '../models/enums/event_state.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../state_changes/move_card_state_change.dart';
@@ -13,8 +14,9 @@ class DestroyCardEvent extends Event {
   /// Destroys [card].
   const DestroyCardEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.card,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -35,14 +37,16 @@ class DestroyCardEvent extends Event {
       ];
 
   @override
-  DestroyCardEvent copyWithId(int id) => DestroyCardEvent(id: id, card: card);
+  DestroyCardEvent copyWith({int? id, EventState? state}) => DestroyCardEvent(
+      id: id ?? this.id, state: state ?? this.state, card: card);
 
   @override
-  List<Object> get props => [id, card];
+  List<Object> get props => [id, state, card];
 
   /// Create this event from json
   static DestroyCardEvent fromJson(List<dynamic> json) => DestroyCardEvent(
         id: json[0] as int,
-        card: json[1] as int,
+        state: EventState.fromIndex(json[1] as int),
+        card: json[2] as int,
       );
 }

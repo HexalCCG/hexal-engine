@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/enums/event_state.dart';
+
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
 import '../models/game_state.dart';
@@ -22,10 +24,11 @@ class ChannelCardEvent extends Event {
   /// Event that channels [card].
   const ChannelCardEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.card,
     required this.targetCard,
     required this.controller,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -73,21 +76,23 @@ class ChannelCardEvent extends Event {
   }
 
   @override
-  ChannelCardEvent copyWithId(int id) => ChannelCardEvent(
-        id: id,
+  ChannelCardEvent copyWith({int? id, EventState? state}) => ChannelCardEvent(
+        id: id ?? this.id,
+        state: state ?? this.state,
         card: card,
         targetCard: targetCard,
         controller: controller,
       );
 
   @override
-  List<Object> get props => [id, card, targetCard, controller];
+  List<Object> get props => [id, state, card, targetCard, controller];
 
   /// Create this event from json
   static ChannelCardEvent fromJson(List<dynamic> json) => ChannelCardEvent(
         id: json[0] as int,
-        card: json[1] as int,
-        targetCard: json[2] as int,
-        controller: Player.fromIndex(json[3] as int),
+        state: EventState.fromIndex(json[1] as int),
+        card: json[2] as int,
+        targetCard: json[3] as int,
+        controller: Player.fromIndex(json[4] as int),
       );
 }
