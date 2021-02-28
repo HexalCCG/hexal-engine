@@ -1,3 +1,5 @@
+import 'package:hexal_engine/models/enums/event_state.dart';
+
 import '../card/on_trigger.dart';
 import '../effects/targeted_effect.dart';
 import '../exceptions/action_exception.dart';
@@ -22,6 +24,8 @@ class PassAction extends Action {
 
       if ( // If event belongs to us
           _event.target.controller == state.priorityPlayer &&
+              // And has not resolved
+              _event.state == EventState.unresolved &&
               // And is not filled already
               !_event.targetFilled &&
               // And is not optional
