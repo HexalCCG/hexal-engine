@@ -55,7 +55,9 @@ class ChannelCardEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     final _card = state.getCardById(card);
@@ -70,7 +72,7 @@ class ChannelCardEvent extends Event {
     return [
       MoveCardStateChange(card: card, location: Location.exile),
       ModifyEventStateChange(event: event, newEvent: newEvent),
-      ResolveEventStateChange(event: this),
+      ResolveEventStateChange(event: this, eventState: EventState.succeeded),
     ];
   }
 

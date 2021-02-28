@@ -39,7 +39,9 @@ class DrawCardsEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     if (cardsDrawn < draws - 1) {
@@ -52,7 +54,7 @@ class DrawCardsEvent extends Event {
       // Deal the last point of damage and resolve.
       return [
         ..._drawOnce(state),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
       ];
     }
   }

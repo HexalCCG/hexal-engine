@@ -46,7 +46,9 @@ class DamageCreatureEvent extends Event implements DamageEvent {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     final _creature = state.getCardById(creature) as Creature;
@@ -54,13 +56,13 @@ class DamageCreatureEvent extends Event implements DamageEvent {
     if (_creature.damage + damage > _creature.health) {
       return [
         DamageCreatureStateChange(creature: _creature.id, damage: damage),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
         AddEventStateChange(event: DestroyCardEvent(card: creature)),
       ];
     } else {
       return [
         DamageCreatureStateChange(creature: creature, damage: damage),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
       ];
     }
   }

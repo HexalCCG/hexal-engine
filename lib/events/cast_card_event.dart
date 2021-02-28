@@ -38,7 +38,9 @@ class CastCardEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     final _card = state.getCardById(card);
@@ -54,7 +56,7 @@ class CastCardEvent extends Event {
       return [
         if (!_card.permanent)
           AddEventStateChange(event: DestroyCardEvent(card: card)),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
       ];
     }
   }

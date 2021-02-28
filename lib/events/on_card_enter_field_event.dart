@@ -44,7 +44,9 @@ class OnCardEnterFieldEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     final _card = state.getCardById(card) as OnEnterField;
@@ -53,7 +55,7 @@ class OnCardEnterFieldEvent extends Event {
     if (effectIndex == _card.onEnterFieldEffects.length - 1) {
       return [
         AddEventStateChange(event: _card.onEnterFieldEffects[effectIndex]),
-        ResolveEventStateChange(event: this),
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded),
       ];
     }
 

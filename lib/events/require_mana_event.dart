@@ -43,17 +43,21 @@ class RequireManaEvent extends Event {
   @override
   List<StateChange> apply(GameState state) {
     if (!valid(state)) {
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
+      ];
     }
 
     if (cost.isFilledBy(provided)) {
       // Cost was paid.
-      return [ResolveEventStateChange(event: this)];
+      return [
+        ResolveEventStateChange(event: this, eventState: EventState.succeeded)
+      ];
     } else {
       // Exile summoning card.
       return [
         MoveCardStateChange(card: card, location: Location.exile),
-        ResolveEventStateChange(event: this)
+        ResolveEventStateChange(event: this, eventState: EventState.failed)
       ];
     }
   }
