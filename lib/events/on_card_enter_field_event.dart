@@ -1,4 +1,5 @@
 import '../card/on_enter_field.dart';
+import '../models/enums/event_state.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
@@ -19,9 +20,10 @@ class OnCardEnterFieldEvent extends Event {
   /// [effectIndex] is the effect currently being resolved.
   const OnCardEnterFieldEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.card,
     this.effectIndex = 0,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -66,17 +68,22 @@ class OnCardEnterFieldEvent extends Event {
       OnCardEnterFieldEvent(id: id, card: card, effectIndex: effectIndex + 1);
 
   @override
-  OnCardEnterFieldEvent copyWithId(int id) =>
-      OnCardEnterFieldEvent(id: id, card: card, effectIndex: effectIndex);
+  OnCardEnterFieldEvent copyWith({int? id, EventState? state}) =>
+      OnCardEnterFieldEvent(
+          id: id ?? this.id,
+          state: state ?? this.state,
+          card: card,
+          effectIndex: effectIndex);
 
   @override
-  List<Object> get props => [id, card, effectIndex];
+  List<Object> get props => [id, state, card, effectIndex];
 
   /// Create this event from json.
   static OnCardEnterFieldEvent fromJson(List<dynamic> json) =>
       OnCardEnterFieldEvent(
         id: json[0] as int,
-        card: json[1] as int,
-        effectIndex: json[2] as int,
+        state: EventState.fromIndex(json[1] as int),
+        card: json[2] as int,
+        effectIndex: json[3] as int,
       );
 }

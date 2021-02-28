@@ -1,3 +1,4 @@
+import '../models/enums/event_state.dart';
 import '../models/enums/location.dart';
 import '../models/game_state.dart';
 import '../models/mana_amount.dart';
@@ -33,9 +34,10 @@ class PlayCardEvent extends Event {
   /// [card] is put into the field.
   const PlayCardEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.card,
     this.stage = PlayCardEventStage.init,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -102,16 +104,17 @@ class PlayCardEvent extends Event {
       PlayCardEvent(id: id, card: card, stage: stage);
 
   @override
-  PlayCardEvent copyWithId(int id) =>
-      PlayCardEvent(id: id, card: card, stage: stage);
+  PlayCardEvent copyWith({int? id, EventState? state}) => PlayCardEvent(
+      id: id ?? this.id, state: state ?? this.state, card: card, stage: stage);
 
   @override
-  List<Object> get props => [id, card, stage];
+  List<Object> get props => [id, state, card, stage];
 
   /// Create this event from json.
   static PlayCardEvent fromJson(List<dynamic> json) => PlayCardEvent(
         id: json[0] as int,
-        card: json[1] as int,
-        stage: PlayCardEventStage.values[json[2] as int],
+        state: EventState.fromIndex(json[1] as int),
+        card: json[2] as int,
+        stage: PlayCardEventStage.values[json[3] as int],
       );
 }

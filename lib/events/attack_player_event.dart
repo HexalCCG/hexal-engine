@@ -1,4 +1,5 @@
 import '../card/creature.dart';
+import '../models/enums/event_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';
 import '../models/game_state.dart';
@@ -24,10 +25,11 @@ class AttackPlayerEvent extends Event {
   /// Enables counterattacks this turn if [enableCounter].
   const AttackPlayerEvent({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.attacker,
     required this.player,
     this.enableCounter = true,
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -62,21 +64,23 @@ class AttackPlayerEvent extends Event {
   }
 
   @override
-  AttackPlayerEvent copyWithId(int id) => AttackPlayerEvent(
-        id: id,
+  AttackPlayerEvent copyWith({int? id, EventState? state}) => AttackPlayerEvent(
+        id: id ?? this.id,
+        state: state ?? this.state,
         attacker: attacker,
         player: player,
         enableCounter: enableCounter,
       );
 
   @override
-  List<Object> get props => [id, attacker, player, enableCounter];
+  List<Object> get props => [id, state, attacker, player, enableCounter];
 
   /// Create this event from json.
   static AttackPlayerEvent fromJson(List<dynamic> json) => AttackPlayerEvent(
         id: json[0] as int,
-        attacker: json[1] as int,
-        player: Player.fromIndex(json[2] as int),
-        enableCounter: json[3] as bool,
+        state: EventState.fromIndex(json[1] as int),
+        attacker: json[2] as int,
+        player: Player.fromIndex(json[3] as int),
+        enableCounter: json[4] as bool,
       );
 }
