@@ -1,3 +1,6 @@
+import 'package:hexal_engine/events/event.dart';
+import 'package:hexal_engine/models/enums/event_state.dart';
+
 import '../card/creature.dart';
 import '../events/damage_creature_event.dart';
 import '../events/damage_player_event.dart';
@@ -12,7 +15,7 @@ import 'target/target.dart';
 import 'targeted_effect.dart';
 
 /// Deals damage to a target.
-class DamageEffect extends Effect with TargetedEffect {
+class DamageEffect extends Event with Effect, TargetedEffect {
   /// Amount of damage to deal.
   final int damage;
 
@@ -30,12 +33,13 @@ class DamageEffect extends Effect with TargetedEffect {
   /// [targetIndex] counts through list of targets to apply damage.
   const DamageEffect({
     int id = 0,
+    EventState state = EventState.unresolved,
     required this.controller,
     required this.damage,
     required this.target,
     this.targetFilled = false,
     this.targets = const [],
-  }) : super(id: id);
+  }) : super(id: id, state: state);
 
   @override
   bool valid(GameState state) {
@@ -107,8 +111,9 @@ class DamageEffect extends Effect with TargetedEffect {
   }
 
   @override
-  DamageEffect copyWithId(int id) => DamageEffect(
-        id: id,
+  DamageEffect copyWith({int? id, EventState? state}) => DamageEffect(
+        id: id ?? this.id,
+        state: state ?? this.state,
         damage: damage,
         target: target,
         targetFilled: targetFilled,
@@ -129,6 +134,7 @@ class DamageEffect extends Effect with TargetedEffect {
   @override
   List<Object> get props => [
         id,
+        state,
         damage,
         target,
         targetFilled,
@@ -139,11 +145,12 @@ class DamageEffect extends Effect with TargetedEffect {
   /// Create this effect from json.
   static DamageEffect fromJson(List<dynamic> json) => DamageEffect(
         id: json[0] as int,
-        damage: json[1] as int,
-        target: Target.fromJson(json[2] as Map<String, dynamic>),
-        targetFilled: json[3] as bool,
+        state: EventState.fromIndex(json[1] as int),
+        damage: json[2] as int,
+        target: Target.fromJson(json[3] as Map<String, dynamic>),
+        targetFilled: json[4] as bool,
         targets:
-            (json[4] as List<dynamic>).map((dynamic e) => e as int).toList(),
-        controller: Player.fromIndex(json[5] as int),
+            (json[5] as List<dynamic>).map((dynamic e) => e as int).toList(),
+        controller: Player.fromIndex(json[6] as int),
       );
 }
