@@ -1,4 +1,4 @@
-import 'package:hexal_engine/events/event.dart';
+import '../events/event.dart';
 
 /// Empty effect.
 mixin Effect on Event {}

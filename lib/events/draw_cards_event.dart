@@ -1,5 +1,4 @@
-import 'package:hexal_engine/models/enums/event_state.dart';
-
+import '../models/enums/event_state.dart';
 import '../models/enums/game_over_state.dart';
 import '../models/enums/location.dart';
 import '../models/enums/player.dart';

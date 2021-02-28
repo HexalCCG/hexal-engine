@@ -1,9 +1,8 @@
-import 'package:hexal_engine/events/event.dart';
-import 'package:hexal_engine/models/enums/event_state.dart';
-
 import '../card/creature.dart';
 import '../events/damage_creature_event.dart';
 import '../events/damage_player_event.dart';
+import '../events/event.dart';
+import '../models/enums/event_state.dart';
 import '../models/enums/player.dart';
 import '../models/game_state.dart';
 import '../state_changes/add_event_state_change.dart';
