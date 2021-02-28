@@ -12,7 +12,7 @@ class AddEventStateChange extends StateChange {
 
   @override
   GameState apply(GameState state) {
-    final idEvent = event.copyWithId(state.nextEventId);
+    final idEvent = event.copyWith(id: state.nextEventId);
     return state.copyWith(
         stack: [...state.stack, idEvent], nextEventId: state.nextEventId + 1);
   }
