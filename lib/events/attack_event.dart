@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import '../card/creature.dart';
 import '../models/enums/event_state.dart';
 import '../models/enums/location.dart';
