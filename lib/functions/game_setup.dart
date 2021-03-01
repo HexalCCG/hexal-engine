@@ -24,8 +24,8 @@ class GameSetup {
       ...cards1.skip(3),
     ];
     cards2 = [
-      ...cards1.take(4).map((card) => card.copyWith(location: Location.hand)),
-      ...cards1.skip(4),
+      ...cards2.take(4).map((card) => card.copyWith(location: Location.hand)),
+      ...cards2.skip(4),
     ];
 
     return GameState(
