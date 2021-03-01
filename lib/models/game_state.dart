@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
-import 'package:hexal_engine/models/enums/event_state.dart';
-import 'package:hexal_engine/state_changes/remove_event_state_change.dart';
 
 import '../actions/action.dart';
 import '../events/event.dart';
 import '../exceptions/game_state_exception.dart';
+import '../state_changes/remove_event_state_change.dart';
 import '../state_changes/state_change.dart';
 import 'card.dart';
+import 'enums/event_state.dart';
 import 'enums/game_over_state.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';

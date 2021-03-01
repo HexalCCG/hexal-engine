@@ -1,8 +1,7 @@
-import 'package:hexal_engine/models/enums/event_state.dart';
-
 import '../card/on_trigger.dart';
 import '../effects/targeted_effect.dart';
 import '../exceptions/action_exception.dart';
+import '../models/enums/event_state.dart';
 import '../models/game_state.dart';
 import '../state_changes/next_phase_state_change.dart';
 import '../state_changes/priority_state_change.dart';
