@@ -19,10 +19,10 @@ class CowBeamCard extends Card with Spell, OnEnterField {
 
   /// [id] must be unique. [owner] cannot be changed.
   const CowBeamCard({
-    required int id,
-    required Player owner,
-    required Player controller,
-    required Location location,
+    int id = 0,
+    Player owner = Player.one,
+    Player controller = Player.one,
+    Location location = Location.deck,
   }) : super(id: id, owner: owner, controller: controller, location: location);
 
   // OnEnterField
@@ -45,15 +45,4 @@ class CowBeamCard extends Card with Spell, OnEnterField {
           owner: owner ?? this.owner,
           controller: controller ?? this.controller,
           location: location ?? this.location);
-
-  /// Create from json.
-  static CowBeamCard fromJson(List<dynamic> json) => CowBeamCard(
-        id: json[0] as int,
-        owner: Player.fromIndex(json[1] as int),
-        controller: Player.fromIndex(json[2] as int),
-        location: Location.fromIndex(json[3] as int),
-      );
-
-  @override
-  List<Object> get props => [id, owner, controller, location];
 }

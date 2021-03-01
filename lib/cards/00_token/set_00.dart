@@ -6,9 +6,9 @@ import '002_cow_beam_card.dart';
 import '003_expensive_cow.dart';
 
 /// 00 Sample Cards
-final Map<CardIdentity, Card Function(List<dynamic>)> set_00 = {
-  const CardIdentity(0, 0): TestCard.fromJson,
-  const CardIdentity(0, 1): CowCreatureCard.fromJson,
-  const CardIdentity(0, 2): CowBeamCard.fromJson,
-  const CardIdentity(0, 3): ExpensiveCowCard.fromJson,
+final Map<CardIdentity, Card> set_00 = {
+  const CardIdentity(0, 0): const TestCard(),
+  const CardIdentity(0, 1): const CowCreatureCard(),
+  const CardIdentity(0, 2): const CowBeamCard(),
+  const CardIdentity(0, 3): const ExpensiveCowCard(),
 };

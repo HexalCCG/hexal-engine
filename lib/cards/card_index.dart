@@ -4,7 +4,7 @@ import '../models/card.dart';
 import '../models/card_identity.dart';
 
 /// Container for functions creating cards from json.
-final Map<CardIdentity, Card Function(List<dynamic>)> cardBuilders = {
+final Map<CardIdentity, Card> cardBuilders = {
   ...set_00,
   ...set_01,
 };

@@ -10,13 +10,13 @@ import '016_armoured_crocodile.dart';
 import '019_protector_of_the_forest.dart';
 
 /// 01 Basic Set
-final Map<CardIdentity, Card Function(List<dynamic>)> set_01 = {
-  const CardIdentity(1, 0): HivequeenNgaat.fromJson,
-  const CardIdentity(1, 3): AwakenedVines.fromJson,
-  const CardIdentity(1, 4): CarnivorousFern.fromJson,
-  const CardIdentity(1, 7): PeachSapling.fromJson,
-  const CardIdentity(1, 9): LargeWorm.fromJson,
-  const CardIdentity(1, 15): AshElemental.fromJson,
-  const CardIdentity(1, 16): ArmouredCrocodile.fromJson,
-  const CardIdentity(1, 19): ProtectorOfTheForest.fromJson,
+final Map<CardIdentity, Card> set_01 = {
+  const CardIdentity(1, 0): const HivequeenNgaat(),
+  const CardIdentity(1, 3): const AwakenedVines(),
+  const CardIdentity(1, 4): const CarnivorousFern(),
+  const CardIdentity(1, 7): const PeachSapling(),
+  const CardIdentity(1, 9): const LargeWorm(),
+  const CardIdentity(1, 15): const AshElemental(),
+  const CardIdentity(1, 16): const ArmouredCrocodile(),
+  const CardIdentity(1, 19): const ProtectorOfTheForest(),
 };

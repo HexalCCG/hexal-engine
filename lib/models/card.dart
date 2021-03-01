@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../card/creature.dart';
 import '../cards/card_index.dart';
 import 'card_identity.dart';
 import 'enums/element.dart';
@@ -45,24 +46,74 @@ abstract class Card extends Equatable {
   });
 
   /// Returns a copy of this object with the changes applied.
-  Card copyWith({int id, Player owner, Player controller, Location location});
+  Card copyWith(
+      {int? id, Player? owner, Player? controller, Location? location});
 
   /// Create a Card from its JSON form.
   factory Card.fromJson(Map<String, dynamic> json) {
     final identity = CardIdentity.fromJson(json['identity'] as List<dynamic>);
 
-    final builder = cardBuilders[identity];
+    var card = cardBuilders[identity];
 
-    if (builder == null) {
+    if (card == null) {
       throw ArgumentError('Invalid card identity: $identity');
     }
 
-    return builder(json['data'] as List<dynamic>);
+    card = card.copyWith(
+      id: json['data']['id'] as int,
+      owner: Player.fromIndex(json['data']['owner'] as int),
+      controller: Player.fromIndex(json['data']['controller'] as int),
+      location: Location.fromIndex(json['data']['location'] as int),
+    );
+
+    if (card is Creature) {
+      card = card.copyWithCreature(
+        damage: json['data']['damage'] as int,
+      );
+    }
+
+    return card;
+  }
+
+  factory Card.fromIdentity(CardIdentity identity, int id) {
+    var card = cardBuilders[identity];
+
+    if (card == null) {
+      throw ArgumentError('Invalid card identity: $identity');
+    }
+
+    return card.copyWith(id: id);
   }
 
   /// Encode this card as JSON.
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'identity': identity,
-        'data': props,
-      };
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{
+      'id': id,
+      'owner': owner,
+      'controller': controller,
+      'location': location,
+    };
+
+    if (this is Creature) {
+      data.addAll(
+        <String, dynamic>{
+          'damage': (this as Creature).damage,
+        },
+      );
+    }
+
+    return <String, dynamic>{
+      'identity': identity,
+      'data': data,
+    };
+  }
+
+  @override
+  List<Object?> get props {
+    final data = [id, owner, controller, location];
+    if (this is Creature) {
+      data.add((this as Creature).damage);
+    }
+    return data;
+  }
 }

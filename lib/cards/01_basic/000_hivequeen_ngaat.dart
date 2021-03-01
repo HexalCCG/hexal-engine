@@ -35,10 +35,10 @@ class HivequeenNgaat extends Card with Hero, OnTrigger {
 
   /// Earth Hero. "When you summon an [Earth] creature, draw a card".
   const HivequeenNgaat({
-    required int id,
-    required Player owner,
-    required Player controller,
-    required Location location,
+    int id = 0,
+    Player owner = Player.one,
+    Player controller = Player.one,
+    Location location = Location.deck,
   }) : super(
           id: id,
           owner: owner,
@@ -59,15 +59,4 @@ class HivequeenNgaat extends Card with Hero, OnTrigger {
         controller: controller ?? this.controller,
         location: location ?? this.location,
       );
-
-  /// Create from json.
-  static HivequeenNgaat fromJson(List<dynamic> json) => HivequeenNgaat(
-        id: json[0] as int,
-        owner: Player.fromIndex(json[1] as int),
-        controller: Player.fromIndex(json[2] as int),
-        location: Location.fromIndex(json[3] as int),
-      );
-
-  @override
-  List<Object> get props => [id, owner, controller, location];
 }

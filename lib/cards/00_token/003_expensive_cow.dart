@@ -24,11 +24,11 @@ class ExpensiveCowCard extends Card with Creature {
 
   /// [id] must be unique. [owner] cannot be changed.
   const ExpensiveCowCard({
-    required int id,
-    required Player owner,
-    required Player controller,
-    required Location location,
-    required this.damage,
+    int id = 0,
+    Player owner = Player.one,
+    Player controller = Player.one,
+    Location location = Location.deck,
+    this.damage = 0,
   }) : super(
           id: id,
           owner: owner,
@@ -67,16 +67,4 @@ class ExpensiveCowCard extends Card with Creature {
         location: location,
         damage: damage ?? this.damage,
       );
-
-  /// Create from json.
-  static ExpensiveCowCard fromJson(List<dynamic> json) => ExpensiveCowCard(
-        id: json[0] as int,
-        owner: Player.fromIndex(json[1] as int),
-        controller: Player.fromIndex(json[2] as int),
-        location: Location.fromIndex(json[3] as int),
-        damage: json[4] as int,
-      );
-
-  @override
-  List<Object> get props => [id, owner, controller, location, damage];
 }
