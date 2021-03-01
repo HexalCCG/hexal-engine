@@ -1,12 +1,17 @@
-import 'package:hexal_engine/models/card.dart';
-
+import 'card.dart';
 import 'card_identity.dart';
+import 'enums/location.dart';
+import 'enums/player.dart';
 
+/// List of cards.
 class Deck {
+  /// Card identities.
   final List<CardIdentity> identities;
 
+  /// List of cards.
   const Deck({required this.identities});
 
+  /// Convert this deck to a code.
   String toCode() {
     return identities
         .map((identity) =>
@@ -14,6 +19,7 @@ class Deck {
         .join(',');
   }
 
+  /// Create a deck from its code.
   static Deck fromCode(String code) {
     final identities = code.split(',').map((cardCode) {
       final list = cardCode.split('.');
@@ -22,5 +28,17 @@ class Deck {
     return Deck(identities: identities);
   }
 
-  //List<Card> toCards(int startingId) {}
+  /// Convert this list to card objects.
+  List<Card> toCards(int startingId, Player player) {
+    var id = startingId;
+
+    final shuffled = identities.toList()..shuffle();
+
+    return shuffled.map((identity) {
+      var card = Card.fromIdentity(identity, id).copyWith();
+      id++;
+      return card.copyWith(
+          owner: player, controller: player, location: Location.deck);
+    }).toList();
+  }
 }

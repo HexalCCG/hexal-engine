@@ -75,6 +75,7 @@ abstract class Card extends Equatable {
     return card;
   }
 
+  /// Create a card from its identity.
   factory Card.fromIdentity(CardIdentity identity, int id) {
     var card = cardBuilders[identity];
 
