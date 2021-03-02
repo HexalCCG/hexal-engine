@@ -1,12 +1,11 @@
-import 'package:hexal_engine/actions/provide_mana_action.dart';
-import 'package:hexal_engine/models/game_state.dart';
-
+import '../models/game_state.dart';
 import 'action.dart';
 import 'activate_triggered_effect_action.dart';
 import 'attack_action.dart';
 import 'attack_player_action.dart';
 import 'pass_action.dart';
 import 'play_card_action.dart';
+import 'provide_mana_action.dart';
 import 'provide_target_action.dart';
 
 /// Container for functions creating cards from json.
