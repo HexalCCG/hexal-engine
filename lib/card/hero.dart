@@ -1,4 +1,4 @@
-import '../models/card.dart';
+import 'card.dart';
 
 /// Permanent card with stats that can attack and block attacks.
 mixin Hero on Card {

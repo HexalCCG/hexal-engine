@@ -2,7 +2,7 @@ import 'package:hexal_engine/cards/01_basic/003_awakened_vines.dart';
 import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/models/card.dart';
+import 'package:hexal_engine/card/card.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/models/enums/player.dart';

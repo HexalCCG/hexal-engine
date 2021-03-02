@@ -1,4 +1,4 @@
-import '../models/card.dart';
+import 'card.dart';
 import '../models/enums/element.dart';
 import '../models/mana_amount.dart';
 

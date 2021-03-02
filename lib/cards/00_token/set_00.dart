@@ -1,4 +1,4 @@
-import '../../models/card.dart';
+import '../../card/card.dart';
 import '../../models/card_identity.dart';
 import '000_test_card.dart';
 import '001_cow_creature_card.dart';

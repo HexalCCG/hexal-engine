@@ -1,5 +1,5 @@
 import '../../card/spell.dart';
-import '../../models/card.dart';
+import '../../card/card.dart';
 import '../../models/card_identity.dart';
 import '../../models/enums/element.dart';
 import '../../models/enums/location.dart';

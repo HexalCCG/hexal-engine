@@ -1,4 +1,4 @@
-import '../models/card.dart';
+import 'card.dart';
 
 /// Card with no stats that provides an effect.
 mixin Spell on Card {

@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/models/game_state.dart';
 
-import '../card/creature.dart';
+import 'creature.dart';
 import '../cards/card_index.dart';
-import 'card_identity.dart';
-import 'enums/element.dart';
-import 'enums/location.dart';
-import 'enums/player.dart';
-import 'mana_amount.dart';
+import '../models/card_identity.dart';
+import '../models/enums/element.dart';
+import '../models/enums/location.dart';
+import '../models/enums/player.dart';
+import '../models/mana_amount.dart';
 
 /// Card represent single cards.
 abstract class Card extends Equatable {
@@ -36,6 +37,17 @@ abstract class Card extends Equatable {
 
   /// Identity of this card.
   CardIdentity get identity;
+
+  bool canPlay(GameState state) {
+    // Cannot play cards if stack is not empty.
+    if (state.stack.isNotEmpty) {
+      return false;
+    }
+    // Cannot play card on opponent's turn.
+    if (state.activePlayer != state.priorityPlayer) {
+      return false;
+    }
+  }
 
   /// [id] must be unique and cannot be changed. [owner] cannot be changed.
   const Card({

@@ -1,7 +1,7 @@
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/models/card.dart';
+import 'package:hexal_engine/card/card.dart';
 import 'package:hexal_engine/state_changes/game_over_state_change.dart';
 import 'package:hexal_engine/cards/00_token/000_test_card.dart';
 import 'package:hexal_engine/events/damage_player_event.dart';

@@ -1,5 +1,5 @@
 import '../effects/trigger/triggered_effect.dart';
-import '../models/card.dart';
+import 'card.dart';
 
 /// Has an onTrigger effect.
 mixin OnTrigger on Card {

@@ -3,7 +3,7 @@ import '../../card/on_trigger.dart';
 import '../../effects/draw_cards_effect.dart';
 import '../../effects/trigger/on_summon_elemental_creature.dart';
 import '../../effects/trigger/triggered_effect.dart';
-import '../../models/card.dart';
+import '../../card/card.dart';
 import '../../models/card_identity.dart';
 import '../../models/enums/element.dart';
 import '../../models/enums/location.dart';

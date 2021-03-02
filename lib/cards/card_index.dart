@@ -1,6 +1,6 @@
 import '../cards/00_token/set_00.dart';
 import '../cards/01_basic/set_01.dart';
-import '../models/card.dart';
+import '../card/card.dart';
 import '../models/card_identity.dart';
 
 /// Container for functions creating cards from json.

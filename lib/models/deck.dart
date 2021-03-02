@@ -1,4 +1,4 @@
-import 'card.dart';
+import '../card/card.dart';
 import 'card_identity.dart';
 import 'enums/location.dart';
 import 'enums/player.dart';

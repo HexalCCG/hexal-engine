@@ -20,19 +20,14 @@ class PlayCardAction extends Action {
   void validate(GameState state) {
     final _card = state.getCardById(card);
 
-    if (state.stack.isNotEmpty) {
-      // Cannot play cards if stack is not empty.
-      throw const ActionException(
-          'PlayCardAction: Cannot play cards if stack is not empty.');
-    }
     if (_card.location != Location.hand) {
       // Card not found in hand.
       throw const ActionException('PlayCardAction: Card not in hand.');
     }
-    if (state.activePlayer != state.priorityPlayer) {
-      // Cannot play card on opponent's turn.
+
+    if (!_card.canPlay(state)) {
       throw const ActionException(
-          'PlayCardAction: Inactive player cannot play cards.');
+          'PlayCardAction: Cannot play that card at this time.');
     }
   }
 

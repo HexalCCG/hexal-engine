@@ -1,4 +1,4 @@
-import '../../models/card.dart';
+import '../../card/card.dart';
 import '../../models/card_identity.dart';
 import '000_hivequeen_ngaat.dart';
 import '003_awakened_vines.dart';
