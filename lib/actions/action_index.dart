@@ -1,3 +1,5 @@
+import 'package:hexal_engine/actions/provide_mana_action.dart';
+
 import 'action.dart';
 import 'activate_triggered_effect_action.dart';
 import 'attack_action.dart';
@@ -13,5 +15,6 @@ Map<Type, Action Function(List<dynamic>)> actionBuilders = {
   AttackPlayerAction: AttackPlayerAction.fromJson,
   PassAction: PassAction.fromJson,
   PlayCardAction: PlayCardAction.fromJson,
+  ProvideManaAction: ProvideManaAction.fromJson,
   ProvideTargetAction: ProvideTargetAction.fromJson,
 };
