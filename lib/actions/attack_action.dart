@@ -98,6 +98,19 @@ class AttackAction extends Action {
     ];
   }
 
+  /// Whether this action can be auto passed.
+  static bool canAutoPass(GameState state) {
+    if (state.turnPhase == TurnPhase.battle &&
+        state.priorityPlayer == state.activePlayer) {
+      return false;
+    }
+    if (state.turnPhase == TurnPhase.counter &&
+        state.priorityPlayer == state.notActivePlayer) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   List<Object> get props => [attacker, defender];
 

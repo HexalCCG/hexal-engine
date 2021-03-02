@@ -57,6 +57,19 @@ class ProvideManaAction extends Action {
     ];
   }
 
+  /// Whether this action can be auto passed.
+  static bool canAutoPass(GameState state) {
+    if (state.stack.isEmpty) {
+      return true;
+    }
+    final event = state.stack.last;
+    // Top stack event must be a require mana event.
+    if (event is! RequireManaEvent || event.state != EventState.unresolved) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   List<Object> get props => [card];
 

@@ -57,6 +57,21 @@ class ProvideTargetAction extends Action {
     ];
   }
 
+  /// Whether this action can be auto passed.
+  static bool canAutoPass(GameState state) {
+    if (state.stack.isEmpty || state.stack.last is! TargetedEffect) {
+      return true;
+    }
+    final _request = state.stack.last as TargetedEffect;
+    // Request must not be filled.
+    if (_request.targetFilled ||
+        _request.state != EventState.unresolved ||
+        _request.target.controller != state.priorityPlayer) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   List<Object> get props => [targets];
 

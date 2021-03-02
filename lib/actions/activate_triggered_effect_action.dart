@@ -73,6 +73,18 @@ class ActivateTriggeredEffectAction extends Action {
     ];
   }
 
+  /// Whether this action can be auto passed.
+  static bool canAutoPass(GameState state) {
+    return state.cards.every((card) {
+      try {
+        ActivateTriggeredEffectAction(card: card.id).validate(state);
+        return false;
+      } on ActionException {
+        return true;
+      }
+    });
+  }
+
   @override
   List<Object> get props => [card, effectIndex];
 
