@@ -53,7 +53,7 @@ class DamageCreatureEvent extends Event implements DamageEvent {
 
     final _creature = state.getCardById(creature) as Creature;
 
-    if (_creature.damage + damage > _creature.health) {
+    if (_creature.damage + damage >= _creature.health) {
       return [
         DamageCreatureStateChange(creature: _creature.id, damage: damage),
         ResolveEventStateChange(event: this, eventState: EventState.succeeded),
