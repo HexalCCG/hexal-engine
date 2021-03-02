@@ -11,7 +11,7 @@ class TurnPhase {
   int toJson() => index;
 
   @override
-  String toString() => index.toString();
+  String toString() => _toString[index];
 
   static const List<TurnPhase> _all = [
     start,
@@ -21,6 +21,16 @@ class TurnPhase {
     counter,
     main2,
     end,
+  ];
+
+  static const List<String> _toString = [
+    'Start Phase',
+    'Draw Phase',
+    'Main Phase 1',
+    'Battle Phase',
+    'Counter Phase',
+    'Main Phase 2',
+    'End Phase',
   ];
 
   /// First phase of a turn where effects are activated.
