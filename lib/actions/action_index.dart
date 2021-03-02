@@ -1,4 +1,5 @@
 import 'package:hexal_engine/actions/provide_mana_action.dart';
+import 'package:hexal_engine/models/game_state.dart';
 
 import 'action.dart';
 import 'activate_triggered_effect_action.dart';
@@ -18,3 +19,13 @@ Map<Type, Action Function(List<dynamic>)> actionBuilders = {
   ProvideManaAction: ProvideManaAction.fromJson,
   ProvideTargetAction: ProvideTargetAction.fromJson,
 };
+
+/// Whether all actions can be auto passed.
+bool canAutoPass(GameState state) =>
+    ActivateTriggeredEffectAction.canAutoPass(state) &&
+    AttackAction.canAutoPass(state) &&
+    AttackPlayerAction.canAutoPass(state) &&
+    PassAction.canAutoPass(state) &&
+    PlayCardAction.canAutoPass(state) &&
+    ProvideManaAction.canAutoPass(state) &&
+    ProvideTargetAction.canAutoPass(state);

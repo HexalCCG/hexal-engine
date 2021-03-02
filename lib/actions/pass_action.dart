@@ -94,6 +94,22 @@ class PassAction extends Action {
     }
   }
 
+  /// Whether this action can be auto passed.
+  static bool canAutoPass(GameState state) {
+    // Only allow auto pass if passing is valid.
+    // (Shouldn't be necessary as we check all other actions but just in case!)
+    if (!const PassAction().valid(state)) {
+      return false;
+    }
+
+    // Don't allow auto pass to skip phases.
+    if (state.priorityPlayer == state.activePlayer && state.stack.isEmpty) {
+      return false;
+    }
+
+    return true;
+  }
+
   @override
   List<Object> get props => [];
 
