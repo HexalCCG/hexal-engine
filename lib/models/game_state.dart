@@ -1,4 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:hexal_engine/actions/action_index.dart';
+import 'package:hexal_engine/actions/activate_triggered_effect_action.dart';
+import 'package:hexal_engine/actions/attack_action.dart';
+import 'package:hexal_engine/actions/attack_player_action.dart';
+import 'package:hexal_engine/actions/pass_action.dart';
+import 'package:hexal_engine/actions/play_card_action.dart';
+import 'package:hexal_engine/actions/provide_mana_action.dart';
+import 'package:hexal_engine/actions/provide_target_action.dart';
 
 import '../actions/action.dart';
 import '../events/event.dart';
@@ -125,6 +133,19 @@ class GameState extends Equatable {
 
     // If the top event still needs to be resolved, iterate it.
     return stack.last.apply(this);
+  }
+
+  /// Iteratively pass this state until player input is required.
+  GameState autoPass({bool player1 = true, bool player2 = true}) {
+    var state = this;
+    while (canAutoPass(state)) {
+      if (state.priorityPlayer == Player.one && !player1 ||
+          state.priorityPlayer == Player.two && !player2) {
+        break;
+      }
+      state = state.applyAction(const PassAction());
+    }
+    return state;
   }
 
   // SERIALIZATION
