@@ -35,7 +35,7 @@ class GameSetup {
       history: const History.empty(),
       activePlayer: Player.one,
       priorityPlayer: Player.one,
-      turnPhase: TurnPhase.draw,
+      turnPhase: TurnPhase.start,
     );
   }
 }
