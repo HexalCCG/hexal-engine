@@ -12,6 +12,19 @@ import 'on_card_enter_field_event.dart';
 import 'play_card_event.dart';
 import 'require_mana_event.dart';
 
+export 'attack_event.dart';
+export 'attack_player_event.dart';
+export 'cast_card_event.dart';
+export 'channel_card_event.dart';
+export 'damage_creature_event.dart';
+export 'damage_player_event.dart';
+export 'destroy_card_event.dart';
+export 'draw_cards_event.dart';
+export 'event.dart';
+export 'on_card_enter_field_event.dart';
+export 'play_card_event.dart';
+export 'require_mana_event.dart';
+
 /// Container for functions creating cards from json.
 Map<Type, Event Function(List<dynamic>)> eventBuilders = {
   AttackEvent: AttackEvent.fromJson,
