@@ -1,4 +1,4 @@
-import 'package:hexal_engine/cards/01_basic/004_carnivorous_fern.dart';
+import 'package:hexal_engine/card_data/01_basic/004_carnivorous_fern.dart';
 import 'package:hexal_engine/functions/game_state_test_functions.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';

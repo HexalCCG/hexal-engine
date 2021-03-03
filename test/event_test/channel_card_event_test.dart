@@ -1,4 +1,4 @@
-import 'package:hexal_engine/cards/00_token/000_test_card.dart';
+import 'package:hexal_engine/card_data/00_token/000_test_card.dart';
 import 'package:hexal_engine/events/channel_card_event.dart';
 import 'package:hexal_engine/events/require_mana_event.dart';
 import 'package:hexal_engine/models/enums/event_state.dart';

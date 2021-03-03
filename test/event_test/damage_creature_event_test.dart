@@ -1,6 +1,6 @@
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
+import 'package:hexal_engine/card_data/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/damage_creature_event.dart';
 import 'package:hexal_engine/state_changes/damage_creature_state_change.dart';
 import 'package:hexal_engine/models/enums/player.dart';

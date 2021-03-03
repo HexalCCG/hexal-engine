@@ -5,7 +5,7 @@ import 'package:hexal_engine/events/require_mana_event.dart';
 import 'package:hexal_engine/models/history.dart';
 import 'package:hexal_engine/models/mana_amount.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
+import 'package:hexal_engine/card_data/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/models/enums/player.dart';
 import 'package:hexal_engine/models/enums/game_over_state.dart';

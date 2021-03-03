@@ -1,7 +1,7 @@
 import 'package:hexal_engine/models/history.dart';
 import 'package:test/test.dart';
 import 'package:hexal_engine/actions/attack_player_action.dart';
-import 'package:hexal_engine/cards/00_token/001_cow_creature_card.dart';
+import 'package:hexal_engine/card_data/00_token/001_cow_creature_card.dart';
 import 'package:hexal_engine/events/attack_player_event.dart';
 import 'package:hexal_engine/models/enums/location.dart';
 import 'package:hexal_engine/state_changes/add_event_state_change.dart';
