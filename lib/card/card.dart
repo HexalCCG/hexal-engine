@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../cards/card_index.dart';
+import '../card_data/card_index.dart';
 import '../models/card_identity.dart';
 import '../models/enums/element.dart';
 import '../models/enums/location.dart';

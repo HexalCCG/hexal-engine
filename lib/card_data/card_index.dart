@@ -1,5 +1,5 @@
-import '../cards/00_token/set_00.dart';
-import '../cards/01_basic/set_01.dart';
+import '00_token/set_00.dart';
+import '01_basic/set_01.dart';
 import '../card/card.dart';
 import '../models/card_identity.dart';
 
