@@ -26,9 +26,7 @@ class HistoryTriggeredEffect extends Equatable {
       HistoryTriggeredEffect(
         card: json[0] as int,
         triggeredEffectId: json[1] as int,
-        data: (json[2] as List<dynamic>)
-            .map<int>((dynamic e) => e as int)
-            .toList(),
+        data: (json[2] as List<dynamic>).cast<int>().toList(),
       );
 
   @override

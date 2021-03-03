@@ -52,13 +52,11 @@ class History extends Equatable {
 
   /// Create a Card from its JSON form.
   History.fromJson(List<dynamic> json)
-      : enteredFieldThisTurn =
-            (json[0] as List<dynamic>).map((dynamic i) => i as int).toSet(),
-        attackedThisTurn =
-            (json[1] as List<dynamic>).map((dynamic i) => i as int).toSet(),
+      : enteredFieldThisTurn = (json[0] as List<dynamic>).cast<int>().toSet(),
+        attackedThisTurn = (json[1] as List<dynamic>).cast<int>().toSet(),
         triggeredEffects = (json[2] as List<dynamic>)
-            .map((dynamic i) =>
-                HistoryTriggeredEffect.fromJson(i as List<dynamic>))
+            .cast<List<int>>()
+            .map(HistoryTriggeredEffect.fromJson)
             .toSet();
 
   @override

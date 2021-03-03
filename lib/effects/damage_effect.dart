@@ -152,8 +152,7 @@ class DamageEffect extends Event with Effect, TargetedEffect {
         damage: json[2] as int,
         target: Target.fromJson(json[3] as Map<String, dynamic>),
         targetFilled: json[4] as bool,
-        targets:
-            (json[5] as List<dynamic>).map((dynamic e) => e as int).toList(),
+        targets: (json[5] as List<dynamic>).cast<int>().toList(),
         controller: Player.fromIndex(json[6] as int),
       );
 }

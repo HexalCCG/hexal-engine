@@ -78,7 +78,6 @@ class ProvideTargetAction extends Action {
   /// Create from json.
   static ProvideTargetAction fromJson(List<dynamic> json) =>
       ProvideTargetAction(
-        targets:
-            (json[0] as List<dynamic>).map((dynamic id) => id as int).toList(),
+        targets: (json[0] as List<dynamic>).cast<int>().toList(),
       );
 }
