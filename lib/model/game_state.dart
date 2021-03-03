@@ -74,6 +74,14 @@ class GameState extends Equatable {
         .toList();
   }
 
+  /// Returns cards in the specified zones.
+  List<Card> getCardsByLocations(Player player, Iterable<Location> locations) {
+    return cards
+        .where((card) =>
+            card.controller == player && locations.contains(card.location))
+        .toList();
+  }
+
   /// Checks if a card with the provided id exists in the state.
   bool containsCardWithId(int id) => cards.any((card) => card.id == id);
 
