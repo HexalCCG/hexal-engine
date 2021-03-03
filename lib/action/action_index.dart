@@ -1,4 +1,5 @@
 import '../model/game_state.dart';
+
 import 'action.dart';
 import 'activate_triggered_effect_action.dart';
 import 'attack_action.dart';
@@ -7,6 +8,15 @@ import 'pass_action.dart';
 import 'play_card_action.dart';
 import 'provide_mana_action.dart';
 import 'provide_target_action.dart';
+
+export 'action.dart';
+export 'activate_triggered_effect_action.dart';
+export 'attack_action.dart';
+export 'attack_player_action.dart';
+export 'pass_action.dart';
+export 'play_card_action.dart';
+export 'provide_mana_action.dart';
+export 'provide_target_action.dart';
 
 /// Container for functions creating cards from json.
 Map<Type, Action Function(List<dynamic>)> actionBuilders = {
