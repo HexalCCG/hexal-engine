@@ -1,4 +1,4 @@
-import '../effects/trigger/triggered_effect.dart';
+import '../effect/trigger/triggered_effect.dart';
 import 'card.dart';
 
 /// Has an onTrigger effect.

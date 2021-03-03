@@ -1,5 +1,5 @@
 import '../../card/card.dart';
-import '../../models/card_identity.dart';
+import '../../model/card_identity.dart';
 import '000_hivequeen_ngaat.dart';
 import '003_awakened_vines.dart';
 import '004_carnivorous_fern.dart';

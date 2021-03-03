@@ -1,13 +1,13 @@
 import 'package:hexal_engine/card_data/01_basic/004_carnivorous_fern.dart';
 import 'package:hexal_engine/functions/game_state_test_functions.dart';
-import 'package:hexal_engine/models/history.dart';
+import 'package:hexal_engine/model/history.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/actions/play_card_action.dart';
-import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/models/enums/location.dart';
-import 'package:hexal_engine/models/enums/game_over_state.dart';
-import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/enums/turn_phase.dart';
+import 'package:hexal_engine/action/play_card_action.dart';
+import 'package:hexal_engine/model/enums/player.dart';
+import 'package:hexal_engine/model/enums/location.dart';
+import 'package:hexal_engine/model/enums/game_over_state.dart';
+import 'package:hexal_engine/model/game_state.dart';
+import 'package:hexal_engine/model/enums/turn_phase.dart';
 
 void main() {
   group('Card test [01.004]', () {

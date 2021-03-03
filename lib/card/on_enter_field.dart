@@ -1,4 +1,4 @@
-import '../effects/effect.dart';
+import '../effect/effect.dart';
 import 'card.dart';
 
 /// Has an onEnterField effect.

@@ -1,5 +1,5 @@
 import 'card.dart';
-import '../models/game_state.dart';
+import '../model/game_state.dart';
 
 /// Permanent card with stats that can attack and block attacks.
 mixin Creature on Card {

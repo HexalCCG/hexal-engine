@@ -1,4 +1,4 @@
-import '../models/game_state.dart';
+import '../model/game_state.dart';
 import 'creature.dart';
 
 /// Permanent card with stats that can attack and block attacks.

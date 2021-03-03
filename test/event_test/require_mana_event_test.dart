@@ -1,17 +1,17 @@
 import 'package:hexal_engine/card_data/00_token/000_test_card.dart';
-import 'package:hexal_engine/models/enums/event_state.dart';
+import 'package:hexal_engine/model/enums/event_state.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/events/require_mana_event.dart';
-import 'package:hexal_engine/models/history.dart';
-import 'package:hexal_engine/models/mana_amount.dart';
-import 'package:hexal_engine/state_changes/move_card_state_change.dart';
-import 'package:hexal_engine/state_changes/resolve_event_state_change.dart';
-import 'package:hexal_engine/events/play_card_event.dart';
-import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/models/enums/location.dart';
-import 'package:hexal_engine/models/enums/game_over_state.dart';
-import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/enums/turn_phase.dart';
+import 'package:hexal_engine/event/require_mana_event.dart';
+import 'package:hexal_engine/model/history.dart';
+import 'package:hexal_engine/model/mana_amount.dart';
+import 'package:hexal_engine/state_change/move_card_state_change.dart';
+import 'package:hexal_engine/state_change/resolve_event_state_change.dart';
+import 'package:hexal_engine/event/play_card_event.dart';
+import 'package:hexal_engine/model/enums/player.dart';
+import 'package:hexal_engine/model/enums/location.dart';
+import 'package:hexal_engine/model/enums/game_over_state.dart';
+import 'package:hexal_engine/model/game_state.dart';
+import 'package:hexal_engine/model/enums/turn_phase.dart';
 
 void main() {
   group('Require mana event', () {

@@ -1,13 +1,13 @@
 import '../../card/on_enter_field.dart';
 import '../../card/spell.dart';
-import '../../effects/damage_effect.dart';
-import '../../effects/effect.dart';
-import '../../effects/target/creature_target.dart';
+import '../../effect/damage_effect.dart';
+import '../../effect/effect.dart';
+import '../../effect/target/creature_target.dart';
 import '../../card/card.dart';
-import '../../models/card_identity.dart';
-import '../../models/enums/element.dart';
-import '../../models/enums/location.dart';
-import '../../models/enums/player.dart';
+import '../../model/card_identity.dart';
+import '../../model/enums/element.dart';
+import '../../model/enums/location.dart';
+import '../../model/enums/player.dart';
 
 /// 0 cost spell. Deal 1 damage to a creature.
 class CowBeamCard extends Card with Spell, OnEnterField {

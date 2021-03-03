@@ -1,10 +1,10 @@
-import 'package:hexal_engine/models/history.dart';
+import 'package:hexal_engine/model/history.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/models/enums/game_over_state.dart';
-import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/enums/turn_phase.dart';
-import 'package:hexal_engine/state_changes/priority_state_change.dart';
+import 'package:hexal_engine/model/enums/player.dart';
+import 'package:hexal_engine/model/enums/game_over_state.dart';
+import 'package:hexal_engine/model/game_state.dart';
+import 'package:hexal_engine/model/enums/turn_phase.dart';
+import 'package:hexal_engine/state_change/priority_state_change.dart';
 
 void main() {
   group('Priority state change changes from', () {

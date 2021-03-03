@@ -1,12 +1,12 @@
 import 'package:hexal_engine/exceptions/state_change_exception.dart';
-import 'package:hexal_engine/models/history.dart';
+import 'package:hexal_engine/model/history.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/state_changes/modify_event_state_change.dart';
-import 'package:hexal_engine/events/draw_cards_event.dart';
-import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/models/enums/game_over_state.dart';
-import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/enums/turn_phase.dart';
+import 'package:hexal_engine/state_change/modify_event_state_change.dart';
+import 'package:hexal_engine/event/draw_cards_event.dart';
+import 'package:hexal_engine/model/enums/player.dart';
+import 'package:hexal_engine/model/enums/game_over_state.dart';
+import 'package:hexal_engine/model/game_state.dart';
+import 'package:hexal_engine/model/enums/turn_phase.dart';
 
 void main() {
   group('Modify event state change', () {

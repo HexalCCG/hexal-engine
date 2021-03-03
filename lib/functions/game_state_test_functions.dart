@@ -1,5 +1,5 @@
-import '../actions/pass_action.dart';
-import '../models/game_state.dart';
+import '../action/pass_action.dart';
+import '../model/game_state.dart';
 
 /// Functions for use in testing game state.
 class GameStateTestFunctions {

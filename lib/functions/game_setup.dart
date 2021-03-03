@@ -1,10 +1,10 @@
-import '../models/deck.dart';
-import '../models/enums/game_over_state.dart';
-import '../models/enums/location.dart';
-import '../models/enums/player.dart';
-import '../models/enums/turn_phase.dart';
-import '../models/game_state.dart';
-import '../models/history.dart';
+import '../model/deck.dart';
+import '../model/enums/game_over_state.dart';
+import '../model/enums/location.dart';
+import '../model/enums/player.dart';
+import '../model/enums/turn_phase.dart';
+import '../model/game_state.dart';
+import '../model/history.dart';
 
 /// Game setup functions.
 class GameSetup {

@@ -1,13 +1,13 @@
 import '../../card/creature.dart';
 import '../../card/on_enter_field.dart';
-import '../../effects/draw_cards_effect.dart';
-import '../../effects/effect.dart';
+import '../../effect/draw_cards_effect.dart';
+import '../../effect/effect.dart';
 import '../../card/card.dart';
-import '../../models/card_identity.dart';
-import '../../models/enums/element.dart';
-import '../../models/enums/location.dart';
-import '../../models/enums/player.dart';
-import '../../models/mana_amount.dart';
+import '../../model/card_identity.dart';
+import '../../model/enums/element.dart';
+import '../../model/enums/location.dart';
+import '../../model/enums/player.dart';
+import '../../model/mana_amount.dart';
 
 /// 2/3 creature with "When this enters the battlefield, draw a card."
 class AshElemental extends Card with Creature, OnEnterField {

@@ -1,19 +1,19 @@
-import 'package:hexal_engine/effects/targeted_effect.dart';
+import 'package:hexal_engine/effect/targeted_effect.dart';
 import 'package:hexal_engine/functions/game_state_test_functions.dart';
-import 'package:hexal_engine/models/history.dart';
+import 'package:hexal_engine/model/history.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/actions/provide_target_action.dart';
+import 'package:hexal_engine/action/provide_target_action.dart';
 import 'package:hexal_engine/card/creature.dart';
 import 'package:hexal_engine/card_data/00_token/001_cow_creature_card.dart';
-import 'package:hexal_engine/events/on_card_enter_field_event.dart';
-import 'package:hexal_engine/actions/pass_action.dart';
-import 'package:hexal_engine/actions/play_card_action.dart';
+import 'package:hexal_engine/event/on_card_enter_field_event.dart';
+import 'package:hexal_engine/action/pass_action.dart';
+import 'package:hexal_engine/action/play_card_action.dart';
 import 'package:hexal_engine/card_data/00_token/002_cow_beam_card.dart';
-import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/models/enums/location.dart';
-import 'package:hexal_engine/models/enums/game_over_state.dart';
-import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/enums/turn_phase.dart';
+import 'package:hexal_engine/model/enums/player.dart';
+import 'package:hexal_engine/model/enums/location.dart';
+import 'package:hexal_engine/model/enums/game_over_state.dart';
+import 'package:hexal_engine/model/game_state.dart';
+import 'package:hexal_engine/model/enums/turn_phase.dart';
 
 void main() {
   test('Creatures die when they run out of health. ', () {

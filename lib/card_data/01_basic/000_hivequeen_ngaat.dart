@@ -1,14 +1,14 @@
 import '../../card/hero.dart';
 import '../../card/on_trigger.dart';
-import '../../effects/draw_cards_effect.dart';
-import '../../effects/trigger/on_summon_elemental_creature.dart';
-import '../../effects/trigger/triggered_effect.dart';
+import '../../effect/draw_cards_effect.dart';
+import '../../effect/trigger/on_summon_elemental_creature.dart';
+import '../../effect/trigger/triggered_effect.dart';
 import '../../card/card.dart';
-import '../../models/card_identity.dart';
-import '../../models/enums/element.dart';
-import '../../models/enums/location.dart';
-import '../../models/enums/player.dart';
-import '../../models/mana_amount.dart';
+import '../../model/card_identity.dart';
+import '../../model/enums/element.dart';
+import '../../model/enums/location.dart';
+import '../../model/enums/player.dart';
+import '../../model/mana_amount.dart';
 
 /// Earth Hero. "When you summon an [Earth] creature, draw a card".
 class HivequeenNgaat extends Card with Hero, OnTrigger {

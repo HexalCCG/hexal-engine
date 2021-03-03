@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 import '../card_data/card_index.dart';
-import '../models/card_identity.dart';
-import '../models/enums/element.dart';
-import '../models/enums/location.dart';
-import '../models/enums/player.dart';
-import '../models/enums/turn_phase.dart';
-import '../models/game_state.dart';
-import '../models/mana_amount.dart';
+import '../model/card_identity.dart';
+import '../model/enums/element.dart';
+import '../model/enums/location.dart';
+import '../model/enums/player.dart';
+import '../model/enums/turn_phase.dart';
+import '../model/game_state.dart';
+import '../model/mana_amount.dart';
 import 'creature.dart';
 
 /// Card represent single cards.

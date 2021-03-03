@@ -1,12 +1,12 @@
 import '../../card/creature.dart';
 import '../../card/on_enter_field.dart';
-import '../../effects/draw_cards_effect.dart';
-import '../../effects/effect.dart';
+import '../../effect/draw_cards_effect.dart';
+import '../../effect/effect.dart';
 import '../../card/card.dart';
-import '../../models/card_identity.dart';
-import '../../models/enums/element.dart';
-import '../../models/enums/location.dart';
-import '../../models/enums/player.dart';
+import '../../model/card_identity.dart';
+import '../../model/enums/element.dart';
+import '../../model/enums/location.dart';
+import '../../model/enums/player.dart';
 
 /// 1/2 vanilla creature.
 class PeachSapling extends Card with Creature, OnEnterField {

@@ -1,4 +1,4 @@
-import 'package:hexal_engine/models/mana_amount.dart';
+import 'package:hexal_engine/model/mana_amount.dart';
 import 'package:test/test.dart';
 
 void main() {

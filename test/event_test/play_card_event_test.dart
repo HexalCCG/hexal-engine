@@ -1,20 +1,20 @@
-import 'package:hexal_engine/events/cast_card_event.dart';
+import 'package:hexal_engine/event/cast_card_event.dart';
 import 'package:hexal_engine/functions/game_state_test_functions.dart';
-import 'package:hexal_engine/models/history.dart';
-import 'package:hexal_engine/state_changes/add_event_state_change.dart';
+import 'package:hexal_engine/model/history.dart';
+import 'package:hexal_engine/state_change/add_event_state_change.dart';
 import 'package:test/test.dart';
-import 'package:hexal_engine/actions/pass_action.dart';
+import 'package:hexal_engine/action/pass_action.dart';
 import 'package:hexal_engine/card_data/00_token/002_cow_beam_card.dart';
-import 'package:hexal_engine/actions/play_card_action.dart';
+import 'package:hexal_engine/action/play_card_action.dart';
 import 'package:hexal_engine/card_data/00_token/001_cow_creature_card.dart';
-import 'package:hexal_engine/events/on_card_enter_field_event.dart';
+import 'package:hexal_engine/event/on_card_enter_field_event.dart';
 import 'package:hexal_engine/card_data/00_token/000_test_card.dart';
-import 'package:hexal_engine/events/play_card_event.dart';
-import 'package:hexal_engine/models/enums/player.dart';
-import 'package:hexal_engine/models/enums/location.dart';
-import 'package:hexal_engine/models/enums/game_over_state.dart';
-import 'package:hexal_engine/models/game_state.dart';
-import 'package:hexal_engine/models/enums/turn_phase.dart';
+import 'package:hexal_engine/event/play_card_event.dart';
+import 'package:hexal_engine/model/enums/player.dart';
+import 'package:hexal_engine/model/enums/location.dart';
+import 'package:hexal_engine/model/enums/game_over_state.dart';
+import 'package:hexal_engine/model/game_state.dart';
+import 'package:hexal_engine/model/enums/turn_phase.dart';
 
 void main() {
   group('Play card event', () {

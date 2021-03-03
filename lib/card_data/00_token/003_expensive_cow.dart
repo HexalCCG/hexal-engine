@@ -1,10 +1,10 @@
 import '../../card/creature.dart';
 import '../../card/card.dart';
-import '../../models/card_identity.dart';
-import '../../models/enums/element.dart';
-import '../../models/enums/location.dart';
-import '../../models/enums/player.dart';
-import '../../models/mana_amount.dart';
+import '../../model/card_identity.dart';
+import '../../model/enums/element.dart';
+import '../../model/enums/location.dart';
+import '../../model/enums/player.dart';
+import '../../model/mana_amount.dart';
 
 /// 3/3 creature that costs 1 mana.
 class ExpensiveCowCard extends Card with Creature {
