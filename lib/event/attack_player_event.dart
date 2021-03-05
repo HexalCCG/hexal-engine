@@ -4,6 +4,7 @@ import '../model/enums/location.dart';
 import '../model/enums/player.dart';
 import '../model/game_state.dart';
 import '../state_change/add_event_state_change.dart';
+import '../state_change/history_attacked_state_change.dart';
 import '../state_change/resolve_event_state_change.dart';
 import '../state_change/set_counter_available_state_change.dart';
 import '../state_change/state_change.dart';
@@ -61,6 +62,8 @@ class AttackPlayerEvent extends Event {
       ...enableCounter
           ? [const SetCounterAvailableStateChange(enabled: true)]
           : [],
+      // Add this attack to the history.
+      HistoryAttackedStateChange(creature: attacker),
       ResolveEventStateChange(event: this, eventState: EventState.succeeded),
     ];
   }
