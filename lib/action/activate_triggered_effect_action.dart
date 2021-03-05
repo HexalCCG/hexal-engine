@@ -77,7 +77,11 @@ class ActivateTriggeredEffectAction extends Action {
   static bool canAutoPass(GameState state) {
     return state.cards.every((card) {
       try {
-        ActivateTriggeredEffectAction(card: card.id).validate(state);
+        if (card is OnTrigger) {
+          for (var i = 0; i < card.onTriggerEffects.length; i++) {
+            ActivateTriggeredEffectAction(card: card.id).validate(state);
+          }
+        }
         return false;
       } on ActionException {
         return true;
