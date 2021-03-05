@@ -122,7 +122,9 @@ class GameState extends Equatable {
 
   /// Generates then applies state changes for provided action.
   GameState applyAction(Action action) {
-    assert(gameOverState == GameOverState.playing);
+    if (gameOverState != GameOverState.playing) {
+      throw const GameStateException('Game is over.');
+    }
     return applyStateChanges(generateStateChanges(action));
   }
 
