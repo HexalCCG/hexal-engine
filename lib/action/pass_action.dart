@@ -2,6 +2,7 @@ import '../card/on_trigger.dart';
 import '../effect/targeted_effect.dart';
 import '../exceptions/action_exception.dart';
 import '../model/enums/event_state.dart';
+import '../model/enums/turn_phase.dart';
 import '../model/game_state.dart';
 import '../state_change/next_phase_state_change.dart';
 import '../state_change/priority_state_change.dart';
@@ -102,9 +103,16 @@ class PassAction extends Action {
       return false;
     }
 
-    // Don't allow auto pass to skip phases.
-    if (state.priorityPlayer == state.activePlayer && state.stack.isEmpty) {
-      return false;
+    // Don't allow auto pass to skip phases (with priority reversed for counter).
+    if (state.turnPhase == TurnPhase.counter) {
+      if (state.priorityPlayer == state.notActivePlayer &&
+          state.stack.isEmpty) {
+        return false;
+      }
+    } else {
+      if (state.priorityPlayer == state.activePlayer && state.stack.isEmpty) {
+        return false;
+      }
     }
 
     return true;
