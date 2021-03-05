@@ -91,7 +91,8 @@ class AttackPlayerAction extends Action {
   /// Whether this action can be auto passed.
   static bool canAutoPass(GameState state) {
     if (state.turnPhase == TurnPhase.battle &&
-        state.priorityPlayer == state.activePlayer) {
+        state.priorityPlayer == state.activePlayer &&
+        state.stack.isEmpty) {
       return false;
     }
     return true;
