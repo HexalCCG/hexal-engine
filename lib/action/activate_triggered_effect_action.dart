@@ -75,17 +75,18 @@ class ActivateTriggeredEffectAction extends Action {
 
   /// Whether this action can be auto passed.
   static bool canAutoPass(GameState state) {
-    return state.cards.every((card) {
-      try {
-        if (card is OnTrigger) {
-          for (var i = 0; i < card.onTriggerEffects.length; i++) {
-            ActivateTriggeredEffectAction(card: card.id).validate(state);
+    return !state.cards.any((card) {
+      if (card is OnTrigger) {
+        // Check all effects.
+        for (var i = 0; i < card.onTriggerEffects.length; i++) {
+          // If any are valid, return true.
+          if (ActivateTriggeredEffectAction(card: card.id, effectIndex: i)
+              .valid(state)) {
+            return true;
           }
         }
-        return false;
-      } on ActionException {
-        return true;
       }
+      return false;
     });
   }
 
