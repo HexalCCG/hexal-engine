@@ -21,8 +21,8 @@ class NextTurnStateChange extends StateChange {
   List<StateChange> _generateStateChanges(GameState state) {
     return [
       // Toggle the active player and give them priority.
-      ActivePlayerStateChange(player: state.notActivePlayer),
-      PriorityStateChange(player: state.notActivePlayer),
+      ActivePlayerStateChange(player: state.activePlayer.other),
+      PriorityStateChange(player: state.activePlayer.other),
       // Reset the turn phase.
       const PhaseStateChange(phase: TurnPhase.start),
       // Clear all damage on cards.

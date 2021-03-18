@@ -23,4 +23,7 @@ class Player {
 
   /// Player two.
   static const Player two = Player._(1);
+
+  /// Get the other player.
+  Player get other => (this == one) ? two : one;
 }

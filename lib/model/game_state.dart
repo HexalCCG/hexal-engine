@@ -59,14 +59,6 @@ class GameState extends Equatable {
 
   // GETTERS
 
-  /// Player without priorty.
-  Player get notPriorityPlayer =>
-      (priorityPlayer == Player.one) ? Player.two : Player.one;
-
-  /// Player whose turn it isn't.
-  Player get notActivePlayer =>
-      (activePlayer == Player.one) ? Player.two : Player.one;
-
   /// Returns cards in the specified zone.
   List<Card> getCardsByLocation(Player player, Location location) {
     return cards

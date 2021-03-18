@@ -67,7 +67,7 @@ class PassAction extends Action {
 
     if (state.priorityPlayer == state.activePlayer) {
       // Active player has passed so check for non-active response.
-      return [PriorityStateChange(player: state.notPriorityPlayer)];
+      return [PriorityStateChange(player: state.priorityPlayer.other)];
     } else if (state.stack.isNotEmpty) {
       // Non-active player has passed so resolve and switch priority.
       return [
@@ -87,7 +87,7 @@ class PassAction extends Action {
     if (event.target.optional || !event.target.anyValid(state)) {
       return [
         const ProvideTargetStateChange(targets: []),
-        PriorityStateChange(player: state.notPriorityPlayer),
+        PriorityStateChange(player: state.priorityPlayer.other),
       ];
     } else {
       throw const ActionException(
@@ -105,8 +105,7 @@ class PassAction extends Action {
 
     // Don't allow auto pass to skip phases (with priority reversed for counter).
     if (state.turnPhase == TurnPhase.counter) {
-      if (state.priorityPlayer == state.notActivePlayer &&
-          state.stack.isEmpty) {
+      if (state.priorityPlayer != state.activePlayer && state.stack.isEmpty) {
         return false;
       }
     } else {

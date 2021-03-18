@@ -78,7 +78,7 @@ class AttackAction extends Action {
     // Normal attack.
     // Can't attack if not active player.
     else if (state.turnPhase == TurnPhase.battle) {
-      if (state.priorityPlayer == state.notActivePlayer) {
+      if (state.priorityPlayer != state.activePlayer) {
         throw const ActionException(
             'AttackAction: Inactive player cannot attack.');
       }
@@ -106,7 +106,7 @@ class AttackAction extends Action {
       return false;
     }
     if (state.turnPhase == TurnPhase.counter &&
-        state.priorityPlayer == state.notActivePlayer &&
+        state.priorityPlayer != state.activePlayer &&
         state.stack.isEmpty) {
       return false;
     }
