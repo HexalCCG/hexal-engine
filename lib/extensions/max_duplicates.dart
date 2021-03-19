@@ -1,7 +1,6 @@
-/// Provides a method on List to replace a single element in place.
+/// Provides a method on Iterable to count duplicate objects.
 extension MaxDuplicates<T> on Iterable<T> {
-  /// Replaces [toReplace] in the List in place with [replacement] and returns
-  /// a resulting List.
+  /// Returns the count of the most common duplicate in the iterable.
   int maxDuplicates([Object? Function(T)? factor]) {
     late final Iterable<Object?> process;
     if (factor == null) {
