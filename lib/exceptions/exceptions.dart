@@ -1,4 +1,5 @@
 export 'action_exception.dart';
+export 'deck_code_exception.dart';
 export 'event_exception.dart';
 export 'game_state_exception.dart';
 export 'hexal_engine_exception.dart';
