@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../action/action.dart';
-import '../action/action_index.dart';
-import '../action/pass_action.dart';
+import '../action/action_index.dart' as action_index;
 import '../card/card.dart';
 import '../event/event.dart';
 import '../exceptions/game_state_exception.dart';
@@ -131,17 +130,9 @@ class GameState extends Equatable {
     return stack.last.apply(this);
   }
 
-  /// Iteratively pass this state until player input is required.
-  GameState autoPass({bool player1 = true, bool player2 = true}) {
-    var state = this;
-    while (canAutoPass(state)) {
-      if (state.priorityPlayer == Player.one && !player1 ||
-          state.priorityPlayer == Player.two && !player2) {
-        break;
-      }
-      state = state.applyAction(const PassAction());
-    }
-    return state;
+  /// Whether this state can be auto passed safely.
+  bool get canAutoPass {
+    return action_index.canAutoPass(this);
   }
 
   // SERIALIZATION
