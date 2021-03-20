@@ -111,8 +111,9 @@ class PlayCardEvent extends Event {
   PlayCardEvent copyWith({int? id, EventState? state}) => PlayCardEvent(
       id: id ?? this.id, state: state ?? this.state, card: card, stage: stage);
 
+  // Use stage index as dart enums don't have toJson unless we make our own.
   @override
-  List<Object> get props => [id, state, card, stage];
+  List<Object> get props => [id, state, card, stage.index];
 
   /// Create this event from json.
   static PlayCardEvent fromJson(List<dynamic> json) => PlayCardEvent(
